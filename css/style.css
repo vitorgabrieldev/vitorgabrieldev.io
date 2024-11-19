@@ -2326,6 +2326,22 @@ blockquote {
 
 }
 
+::-webkit-scrollbar {
+width: 8px; /* Largura do scroll */
+}
 
+::-webkit-scrollbar-track {
+background: #f1f1f1; /* Cor do fundo do track */
+border-radius: 10px; /* Bordas arredondadas */
+}
 
+::-webkit-scrollbar-thumb {
+background: #565656; /* Cor do "polegar" do scroll */
+border-radius: 10px; /* Bordas arredondadas */
+transition: background 0.3s ease-in-out; /* Transição suave */
+}
 
+::-webkit-scrollbar-thumb:hover {
+background: #3c3c3c; /* Cor do polegar quando hover */
+}
+  

@@ -11137,6 +11137,8 @@ p {
   border: 1px solid #dee2e6;
   overflow: hidden;
   border-radius: 3px;
+  cursor: pointer;
+  border-radius: 12px;
 }
 
 .service-card .body {
@@ -11191,6 +11193,7 @@ p {
   display: block;
   position: relative;
   overflow: hidden;
+  border-radius: 12px;
 }
 
 .portfolio-card .portfolio-card-img {

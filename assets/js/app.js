@@ -95,8 +95,9 @@ $(document).ready(function() {
         },
         skills: ["JavaScript", "Node.js", "React", "CSS", "HTML", "Docker"],
         contact: {
-            email: "vitor@example.com",
-            phone: "+1234567890"
+            email: "vitorgabrieldeoliveiradev@gmail.com",
+            business: "vitorgabrieldeoliveira.business@gmail.com",
+            phone: "+55 43 98487-3807"
         }
     };
     

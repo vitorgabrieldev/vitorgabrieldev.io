@@ -1358,6 +1358,46 @@ pre code {
   text-align: right;
 }
 
+.preety-print {
+  width: 100%;
+  padding: 3px 10px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background-color: #e7e7e7;
+  border-bottom: 1px solid #757575;
+  position: fixed;
+  width: 100%;
+  z-index: 999;
+}
+
+.preety-print label {
+  margin: 0;
+  color: #000;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.preety-print input {
+  cursor: pointer;
+}
+
+.pretty-render {
+  display: none;
+  border-radius: 5px;
+  font-family: monospace;
+  white-space: pre-wrap;
+}
+
+#json-output {
+  padding: 0;
+  margin: 0;
+  background-color: #fff;
+  border: none;
+  padding-left: 20px;
+}
+
+
 @media (min-width: 992px) {
   .col-lg {
     -webkit-flex-basis: 0;

@@ -1395,6 +1395,7 @@ pre code {
   background-color: #fff;
   border: none;
   padding-left: 20px;
+  white-space: break-spaces;
 }
 
 

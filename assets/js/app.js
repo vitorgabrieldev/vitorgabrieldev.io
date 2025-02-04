@@ -28,7 +28,6 @@ $(document).ready(function() {
                 setTimeout(function() {
                     autoScroll = true;
                     $(".preety-print").show();
-                    $("html, body").animate({ scrollTop: 0 }, 1000);
                 }, 2000);
             });
         });

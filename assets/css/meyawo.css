@@ -11240,6 +11240,21 @@ p {
   border-radius: 12px;
 }
 
+.col-md-4 {
+  max-height: 250px;
+}
+
+.col-md-4 a {
+  min-height: 250px;
+  max-height: 250px;
+}
+
+.col-md-4 a img {
+  min-height: 250px;
+  max-height: 250px;
+  object-fit: cover;
+}
+
 .letter {
     display: inline-block;
     transition: all 0.3s ease-in-out;
@@ -11267,6 +11282,7 @@ p {
   height: 0;
   border-radius: 50%;
   overflow: hidden;
+  padding: 10px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -11284,15 +11300,16 @@ p {
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
       transform: translate(-50%, -50%);
-  width: 100%;
+  width: 90%;
 }
 
 .portfolio-card:hover .portfolio-card-overlay {
   opacity: 1;
   visibility: visible;
-  width: 100%;
-  height: 100%;
+  width: 102%;
+  height: 102%;
   border-radius: 0;
+  padding: 20px !important;
 }
 
 @media (max-width: 767.98px) {

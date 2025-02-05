@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    $(".preety-print").hide();
+    $(".preety-print").addClass("hide-top");
 
     let autoScroll = false;
     $("html, body").animate({ scrollTop: 0 }, 1000);
@@ -27,7 +27,7 @@ $(document).ready(function() {
 
                 setTimeout(function() {
                     autoScroll = true;
-                    $(".preety-print").show();
+                    $(".preety-print").removeClass("hide-top");
                 }, 2000);
             });
         });

@@ -15,8 +15,8 @@
 @import url("https://fonts.googleapis.com/css?family=Baloo+Paaji|Open+Sans:300,300i,400,400i,600,600i,700,700i");
 :root {
   --blue: #1e549f;
-  --indigo: #695aa6;
-  --purple: #6f42c1;
+  --indigo: #603ed7;
+  --purple: #603ed7;
   --pink: #e83e8c;
   --red: #ec185d;
   --orange: #ff6d02;
@@ -27,7 +27,7 @@
   --white: #fff;
   --gray: #6c757d;
   --gray-dark: #393e46;
-  --primary: #695aa6;
+  --primary: #603ed7;
   --secondary: #393e46;
   --success: #1bb74f;
   --info: #17a2b8;
@@ -1369,6 +1369,11 @@ pre code {
   position: fixed;
   width: 100%;
   z-index: 999;
+  transition: .33s;
+}
+
+.hide-top {
+  margin-top: -30px;
 }
 
 .preety-print label {
@@ -12274,8 +12279,43 @@ a:hover + .cursor {
   .header {
     background-size: cover;
   }
-  .header-content {
-    padding-left: calc(100% / 5) !important;
+
+  .row {
+    row-gap: 20px;
+  }
+
+  .service-card .body img.icon {
+    margin-top: 5px;
+    width: 45px;
+    margin-bottom: 15px;
+  }
+
+  .service-card .body .subtitle {
+    bottom: 7px;
+    opacity: 1;
+    visibility: visible;
+    padding: 0 15px;
+  }
+
+  .service-card {
+    min-height: 200px;
+  }
+
+  .section {
+    padding: 40px 10px !important;
+  }
+
+  .portfolio-card .portfolio-card-overlay {
+    opacity: 1;
+    visibility: visible;
+    width: 102%;
+    height: 102%;
+    border-radius: 0;
+    padding: 20px !important;
+  }
+
+  .container-offset {
+    text-align: center;
   }
 }
 
@@ -12354,3 +12394,7 @@ a:hover + .cursor {
 .section-lg {
   padding: 100px 0 !important;
 }
+
+
+
+/* Responsive app */

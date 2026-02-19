@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -72,16 +72,7 @@
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
 
 
-  <div class="preety-print">
-    <label for="prety">Pretty-print</label>
-    <input type="checkbox" name="prety" id="prety" />
-  </div>
 
-  <div class="pretty-render">
-    <pre id="json-output"></pre>
-  </div>
-
-  <div class="pretty-none">
     <header id="home" class="header animate__fadeIn">
       <div class="overlay"></div>
       <div class="header-content container">
@@ -90,17 +81,23 @@
           <span class="down"></span>
         </h1>
         <p class="header-subtitle"></p>
-        <a href="https://docs.github.com/en/get-started/exploring-integrations/github-developer-program"
-          target="_blank">
-          <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true"
-            class="octicon octicon-cpu color-fg-muted mr-1">
-            <path
-              d="M6.5.75V2h3V.75a.75.75 0 0 1 1.5 0V2h1.25c.966 0 1.75.784 1.75 1.75V5h1.25a.75.75 0 0 1 0 1.5H14v3h1.25a.75.75 0 0 1 0 1.5H14v1.25A1.75 1.75 0 0 1 12.25 14H11v1.25a.75.75 0 0 1-1.5 0V14h-3v1.25a.75.75 0 0 1-1.5 0V14H3.75A1.75 1.75 0 0 1 2 12.25V11H.75a.75.75 0 0 1 0-1.5H2v-3H.75a.75.75 0 0 1 0-1.5H2V3.75C2 2.784 2.784 2 3.75 2H5V.75a.75.75 0 0 1 1.5 0Zm5.75 11.75a.25.25 0 0 0 .25-.25v-8.5a.25.25 0 0 0-.25-.25h-8.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25ZM5.75 5h4.5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-.75.75h-4.5a.75.75 0 0 1-.75-.75v-4.5A.75.75 0 0 1 5.75 5Zm.75 4.5h3v-3h-3Z">
-            </path>
-          </svg>
-          Developer Program Member | Github
-        </a>
-        <p class="header-subtitle-detail">CTRL + M</p>
+        <div class="header-language-wrap">
+          <a href="https://docs.github.com/en/get-started/exploring-integrations/github-developer-program"
+            target="_blank" class="github-member-link">
+            <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true"
+              class="octicon octicon-cpu color-fg-muted mr-1">
+              <path
+                d="M6.5.75V2h3V.75a.75.75 0 0 1 1.5 0V2h1.25c.966 0 1.75.784 1.75 1.75V5h1.25a.75.75 0 0 1 0 1.5H14v3h1.25a.75.75 0 0 1 0 1.5H14v1.25A1.75 1.75 0 0 1 12.25 14H11v1.25a.75.75 0 0 1-1.5 0V14h-3v1.25a.75.75 0 0 1-1.5 0V14H3.75A1.75 1.75 0 0 1 2 12.25V11H.75a.75.75 0 0 1 0-1.5H2v-3H.75a.75.75 0 0 1 0-1.5H2V3.75C2 2.784 2.784 2 3.75 2H5V.75a.75.75 0 0 1 1.5 0Zm5.75 11.75a.25.25 0 0 0 .25-.25v-8.5a.25.25 0 0 0-.25-.25h-8.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25ZM5.75 5h4.5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-.75.75h-4.5a.75.75 0 0 1-.75-.75v-4.5A.75.75 0 0 1 5.75 5Zm.75 4.5h3v-3h-3Z">
+              </path>
+            </svg>
+            <span class="github-member-text">Developer Program Member | Github</span>
+          </a>
+          <button type="button" id="language-toggle" class="language-toggle" aria-label="Switch language" data-active="en">
+            <span class="language-thumb" aria-hidden="true"></span>
+            <span class="language-option" data-lang="en">EN</span>
+            <span class="language-option" data-lang="pt">PT</span>
+          </button>
+        </div>
       </div>
     </header>
 
@@ -138,42 +135,145 @@
           <div class="about-caption">
             <p class="section-subtitle">Who Am I?</p>
             <h2 class="section-title mb-3">About Me</h2>
-            <p class="">
+            <p class="about-description">
               I am Vitor Gabriel de Oliveira, a passionate Full Stack
               Developer. From a young age, I’ve been driven by the
               possibilities of technology and how it can solve real-world
               problems...
             </p>
-            <a href="assets/pdfs/CV.pdf" target="_blank" class="btn-rounded btn btn-outline-primary mt-4">Download
+            <a href="assets/pdfs/CV.pdf" target="_blank"
+              class="btn-rounded btn btn-outline-primary mt-4 about-download-cv">Download
               CV</a>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section">
-      <ol class="timeline">
+    <section class="section" id="specialties">
+      <div class="container text-center">
+        <p class="section-subtitle">Core Domains</p>
+        <h6 class="section-title mb-6">Specialties</h6>
+        <div class="row specialties-grid">
+          <div class="col-md-4">
+            <article class="specialty-card">
+              <h6 class="title">Frontend</h6>
+              <div class="specialty-levels">
+                <div class="specialty-level" data-level="5y">
+                  <p class="specialty-level-label"><i class="ti-star" aria-hidden="true"></i><span>&gt; 5 anos</span></p>
+                  <ul class="specialty-list">
+                    <li class="specialty-item"><a class="specialty-link" href="https://developer.mozilla.org/docs/Web/HTML" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">HTML</span></a></li>
+                    <li class="specialty-item"><a class="specialty-link" href="https://developer.mozilla.org/docs/Web/CSS" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">CSS</span></a></li>
+                    <li class="specialty-item"><a class="specialty-link" href="https://developer.mozilla.org/docs/Web/JavaScript" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">JavaScript</span></a></li>
+                    <li class="specialty-item"><a class="specialty-link" href="https://api.jquery.com/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">jQuery</span></a></li>
+                  </ul>
+                </div>
+                <div class="specialty-level" data-level="3y">
+                  <p class="specialty-level-label"><i class="ti-layers" aria-hidden="true"></i><span>&gt; 3 anos</span></p>
+                  <ul class="specialty-list">
+                    <li class="specialty-item"><a class="specialty-link" href="https://react.dev/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">React.js</span></a></li>
+                    <li class="specialty-item"><a class="specialty-link" href="https://sass-lang.com/documentation/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">SASS</span></a></li>
+                    <li class="specialty-item"><a class="specialty-link" href="https://sass-lang.com/documentation/syntax/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">SCSS</span></a></li>
+                    <li class="specialty-item"><a class="specialty-link" href="https://vuejs.org/guide/introduction.html" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">Vue.js</span></a></li>
+                    <li class="specialty-item"><a class="specialty-link" href="https://angular.dev/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">Angular</span></a></li>
+                    <li class="specialty-item"><a class="specialty-link" href="https://www.typescriptlang.org/docs/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">TypeScript</span></a></li>
+                  </ul>
+                </div>
+                <div class="specialty-level" data-level="1y">
+                  <p class="specialty-level-label"><i class="ti-rocket" aria-hidden="true"></i><span>&gt; 1 ano</span></p>
+                  <ul class="specialty-list">
+                    <li class="specialty-item"><a class="specialty-link" href="https://nextjs.org/docs" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">Next.js</span></a></li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+          </div>
+          <div class="col-md-4">
+            <article class="specialty-card">
+              <h6 class="title">Backend</h6>
+              <div class="specialty-levels">
+                <div class="specialty-level" data-level="5y">
+                  <p class="specialty-level-label"><i class="ti-star" aria-hidden="true"></i><span>&gt; 5 anos</span></p>
+                  <ul class="specialty-list">
+                    <li class="specialty-item"><a class="specialty-link" href="https://www.php.net/docs.php" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">PHP</span></a></li>
+                    <li class="specialty-item"><a class="specialty-link" href="https://restfulapi.net/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">API REST</span></a></li>
+                  </ul>
+                </div>
+                <div class="specialty-level" data-level="3y">
+                  <p class="specialty-level-label"><i class="ti-layers" aria-hidden="true"></i><span>&gt; 3 anos</span></p>
+                  <ul class="specialty-list">
+                    <li class="specialty-item"><a class="specialty-link" href="https://nodejs.org/docs/latest/api/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">Node.js</span></a></li>
+                    <li class="specialty-item"><a class="specialty-link" href="https://expressjs.com/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">Express.js</span></a></li>
+                    <li class="specialty-item"><a class="specialty-link" href="https://www.apollographql.com/docs/apollo-server/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">Apollo Server</span></a></li>
+                    <li class="specialty-item"><a class="specialty-link" href="https://graphql.org/learn/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">GraphQL</span></a></li>
+                  </ul>
+                </div>
+                <div class="specialty-level" data-level="1y">
+                  <p class="specialty-level-label"><i class="ti-rocket" aria-hidden="true"></i><span>&gt; 1 ano</span></p>
+                  <ul class="specialty-list">
+                    <li class="specialty-item"><a class="specialty-link" href="https://laravel.com/docs" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">Laravel</span></a></li>
+                    <li class="specialty-item"><a class="specialty-link" href="https://www.mongodb.com/docs/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">MongoDB</span></a></li>
+                    <li class="specialty-item"><a class="specialty-link" href="https://jwt.io/introduction" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">JWT</span></a></li>
+                    <li class="specialty-item"><a class="specialty-link" href="https://pm2.keymetrics.io/docs/usage/quick-start/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">PM2</span></a></li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+          </div>
+          <div class="col-md-4">
+            <article class="specialty-card">
+              <h6 class="title">DevOps &amp; Quality</h6>
+              <div class="specialty-levels">
+                <div class="specialty-level" data-level="5y">
+                  <p class="specialty-level-label"><i class="ti-star" aria-hidden="true"></i><span>&gt; 5 anos</span></p>
+                  <ul class="specialty-list">
+                    <li class="specialty-item"><a class="specialty-link" href="https://git-scm.com/doc" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">Git</span></a></li>
+                    <li class="specialty-item"><a class="specialty-link" href="https://docs.github.com/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">GitHub</span></a></li>
+                    <li class="specialty-item"><a class="specialty-link" href="https://jestjs.io/docs/getting-started" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">Testes</span></a></li>
+                    <li class="specialty-item"><a class="specialty-link" href="https://httpd.apache.org/docs/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">Apache</span></a></li>
+                  </ul>
+                </div>
+                <div class="specialty-level" data-level="3y">
+                  <p class="specialty-level-label"><i class="ti-layers" aria-hidden="true"></i><span>&gt; 3 anos</span></p>
+                  <ul class="specialty-list">
+                    <li class="specialty-item"><a class="specialty-link" href="https://docs.gitlab.com/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">GitLab</span></a></li>
+                    <li class="specialty-item"><a class="specialty-link" href="https://docs.github.com/en/actions" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">CI/CD</span></a></li>
+                    <li class="specialty-item"><a class="specialty-link" href="https://docs.docker.com/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">Docker</span></a></li>
+                    <li class="specialty-item"><a class="specialty-link" href="https://www.kernel.org/doc/html/latest/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">Linux</span></a></li>
+                    <li class="specialty-item"><a class="specialty-link" href="https://docs.digitalocean.com/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">DigitalOcean</span></a></li>
+                  </ul>
+                </div>
+                <div class="specialty-level" data-level="1y">
+                  <p class="specialty-level-label"><i class="ti-rocket" aria-hidden="true"></i><span>&gt; 1 ano</span></p>
+                  <ul class="specialty-list">
+                    <li class="specialty-item"><a class="specialty-link" href="https://docs.aws.amazon.com/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">AWS</span></a></li>
+                    <li class="specialty-item"><a class="specialty-link" href="https://nginx.org/en/docs/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">Nginx</span></a></li>
+                    <li class="specialty-item"><a class="specialty-link" href="https://kubernetes.io/docs/home/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">Kubernetes</span></a></li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="timeline-section">
+      <div class="container text-center timeline-section-head">
+        <p class="section-subtitle timeline-section-subtitle">Career Journey</p>
+        <h6 class="section-title mb-6 timeline-section-title">Timeline</h6>
+      </div>
+      <div class="timeline-collapse-wrap">
+        <ol class="timeline is-collapsed" id="career-timeline">
         <li class="timeline-item">
           <div class="timeline-item-description">
             <i class="avatar | small">
               <img src="https://assets.codepen.io/285131/hat-man.png" alt="Blockchain Developer" />
             </i>
-            <span><a href="https://github.com/vitorgabrieldev">Vitor Gabriel</a> started his journey in Front-End
-              development with HTML, CSS, and JavaScript</span>
-            <p>Developing responsive interfaces with HTML5, CSS3, and vanilla JavaScript. Created simple projects
-              focusing on design and usability, applying accessibility concepts.</p>
-          </div>
-        </li>
-
-        <li class="timeline-item">
-          <div class="timeline-item-description">
-            <i class="avatar | small">
-              <img src="https://assets.codepen.io/285131/hat-man.png" alt="Styling Expert" />
-            </i>
-            <span><a href="https://github.com/vitorgabrieldev">Vitor Gabriel</a> started using CSS pre-processors like
-              <a href="#">SCSS</a>, <a href="#">SASS</a>, and <a href="#">LESS</a></span>
-            <p>Using SCSS, SASS, and LESS to organize and modularize CSS, improving scalability for large projects.
-              Learned best practices for code organization, including the use of mixins, functions, and variables.</p>
+            <span>I started Front-End with <a href="https://developer.mozilla.org/docs/Web/HTML">HTML5</a>, <a
+                href="https://developer.mozilla.org/docs/Web/CSS">CSS3</a>, <a
+                href="https://developer.mozilla.org/docs/Web/JavaScript">JavaScript</a>, <a
+                href="https://sass-lang.com/documentation">SCSS/SASS</a> and <a href="https://lesscss.org/">LESS</a></span>
+            <p>I built responsive interfaces and reusable style layers, balancing performance, accessibility and visual consistency.</p>
           </div>
         </li>
 
@@ -182,10 +282,10 @@
             <i class="avatar | small">
               <img src="https://assets.codepen.io/285131/hat-man.png" alt="jQuery Developer" />
             </i>
-            <span><a href="https://github.com/vitorgabrieldev">Vitor Gabriel</a> used <a href="#">jQuery</a> for DOM
-              manipulation and dynamic interaction</span>
-            <p>Using jQuery to simplify DOM manipulation, animations, and AJAX calls in small interactive projects,
-              improving performance and user experience.</p>
+            <span>I worked with <a href="https://api.jquery.com/">jQuery</a> for <a
+                href="https://developer.mozilla.org/docs/Web/API/Document_Object_Model">DOM</a>, <a
+                href="https://developer.mozilla.org/docs/Web/API/XMLHttpRequest_API">AJAX</a> and UI interactions</span>
+            <p>I implemented lightweight interactive flows with faster iteration and maintainable behavior in production pages.</p>
           </div>
         </li>
 
@@ -194,11 +294,10 @@
             <i class="avatar | small">
               <img src="https://assets.codepen.io/285131/hat-man.png" alt="React Developer" />
             </i>
-            <span><a href="https://github.com/vitorgabrieldev">Vitor Gabriel</a> started using <a href="#">React.js</a>
-              to develop interactive user interfaces</span>
-            <p>Creating dynamic and scalable applications with React.js. Using hooks, React Router for navigation, and
-              Context API for state management. Also worked with frameworks like <a href="#">Vue.js</a> and <a
-                href="#">Angular</a> on side projects.</p>
+            <span>I developed interfaces with <a href="https://react.dev/">React.js</a>, <a href="https://vuejs.org/guide/introduction.html">Vue.js</a>,
+              <a href="https://angular.dev/">Angular</a>, <a href="https://docs.npmjs.com/">npm</a> and <a
+                href="https://yarnpkg.com/getting-started">yarn</a></span>
+            <p>I created scalable front-end modules, standardized package workflows and improved delivery speed in projects.</p>
           </div>
         </li>
 
@@ -207,28 +306,13 @@
             <i class="avatar | small">
               <img src="https://assets.codepen.io/285131/hat-man.png" alt="Version Control" />
             </i>
-            <span><a href="https://github.com/vitorgabrieldev">Vitor Gabriel</a> improved his usage of version control
-              tools like <a href="#">Git</a>, <a href="#">GitHub</a>, <a href="#">GitLab</a>, and <a
-                href="#">GitBucket</a></span>
-            <p>Managing source code with Git, performing efficient and collaborative version control. Configuring
-              repositories on GitHub, GitLab, and GitBucket, handling commits and pull requests following best
-              practices.</p>
+            <span>I improved version control with <a href="https://git-scm.com/doc">Git</a>, <a href="https://docs.github.com/">GitHub</a>, <a
+                href="https://docs.gitlab.com/">GitLab</a> and <a href="https://github.com/gitbucket/gitbucket">GitBucket</a></span>
+            <p>I strengthened branch strategy, collaboration routines and review quality for safer releases and better code ownership.</p>
           </div>
         </li>
 
-        <li class="timeline-item">
-          <div class="timeline-item-description">
-            <i class="avatar | small">
-              <img src="https://assets.codepen.io/285131/hat-man.png" alt="Package Manager Expert" />
-            </i>
-            <span><a href="https://github.com/vitorgabrieldev">Vitor Gabriel</a> started using <a href="#">npm</a> and
-              <a href="#">yarn</a> for package management</span>
-            <p>Implementing package management tools with npm and yarn to install, update, and manage dependencies in
-              JavaScript and Node.js projects.</p>
-          </div>
-        </li>
-
-        <li class="timeline-item">
+        <li class="timeline-item timeline-item--career">
           <span class="timeline-item-icon | faded-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="16" viewBox="0 0 18 16" fill="none">
               <path
@@ -240,45 +324,22 @@
             <i class="avatar | small">
               <img src="https://clickweb.com.br/common/default/images/favicon/32x32.png" />
             </i>
-            <span><a href="https://clickweb.com.br">Vitor Gabriel</a> started as a Full Stack Developer intern at <a
-                href="https://clickweb.com.br">Clickweb</a></span>
+            <span>I started as a Full Stack Developer intern at <a href="https://clickweb.com.br">Clickweb</a></span>
+            <p>I worked across front-end and back-end demands while learning business constraints, support flow and delivery discipline.</p>
           </div>
         </li>
 
         <li class="timeline-item">
           <div class="timeline-item-description">
             <i class="avatar | small">
-              <img src="https://assets.codepen.io/285131/hat-man.png" alt="API Developer" />
+              <img src="https://assets.codepen.io/285131/hat-man.png" alt="Backend Developer" />
             </i>
-            <span><a href="https://github.com/vitorgabrieldev">Vitor Gabriel</a> implemented <a href="#">RESTful
-                APIs</a></span>
-            <p>Developing RESTful APIs for system integration, using design best practices, JWT authentication, and
-              input validation with Express.js.</p>
-          </div>
-        </li>
-
-        <li class="timeline-item">
-          <div class="timeline-item-description">
-            <i class="avatar | small">
-              <img src="https://assets.codepen.io/285131/hat-man.png" alt="PHP Developer" />
-            </i>
-            <span><a href="https://github.com/vitorgabrieldev">Vitor Gabriel</a> started working with <a
-                href="#">PHP</a> and <a href="#">Laravel</a></span>
-            <p>Developing web applications with PHP and Laravel, creating robust and scalable solutions using Eloquent
-              ORM, middleware, and integrated authentication.</p>
-          </div>
-        </li>
-
-        <li class="timeline-item">
-          <div class="timeline-item-description">
-            <i class="avatar | small">
-              <img src="https://assets.codepen.io/285131/hat-man.png" alt="Back-End Developer" />
-            </i>
-            <span><a href="https://github.com/vitorgabrieldev">Vitor Gabriel</a> started Back-End development with <a
-                href="#">Node.js</a> and <a href="#">Express.js</a></span>
-            <p>Developing RESTful APIs with Node.js and Express.js, including JWT authentication, user management, and
-              data persistence with MongoDB. Used <a href="#">PM2</a> for process management and implemented CI/CD
-              pipelines.</p>
+            <span>I developed back-end solutions with <a href="https://nodejs.org/docs/latest/api/">Node.js</a>, <a href="https://expressjs.com/">Express.js</a>,
+              <a href="https://restfulapi.net/">RESTful APIs</a>, <a href="https://www.php.net/docs.php">PHP</a>, <a
+                href="https://laravel.com/docs">Laravel</a>, <a href="https://jwt.io/introduction">JWT</a>, <a
+                href="https://www.mongodb.com/docs/">MongoDB</a> and <a
+                href="https://pm2.keymetrics.io/docs/usage/quick-start/">PM2</a></span>
+            <p>I unified API and app development stacks, improving authentication, stability and maintainability in daily releases.</p>
           </div>
         </li>
 
@@ -287,15 +348,14 @@
             <i class="avatar | small">
               <img src="https://assets.codepen.io/285131/hat-man.png" alt="GraphQL & MongoDB Developer" />
             </i>
-            <span><a href="https://github.com/vitorgabrieldev">Vitor Gabriel</a> implemented <a href="#">GraphQL</a> for
-              efficient queries and integrations with MongoDB</span>
-            <p>Creating schemas and resolvers in GraphQL for efficient interactions with the database. Implementing
-              complex queries, mutations, and aggregations in MongoDB, using Apollo Server to optimize communication
-              between client and server.</p>
+            <span>I implemented <a href="https://graphql.org/learn/">GraphQL</a> with <a
+                href="https://www.apollographql.com/docs/apollo-server/">Apollo Server</a> and <a
+                href="https://www.mongodb.com/docs/">MongoDB</a></span>
+            <p>I designed resolvers and query flows for complex data scenarios with better communication between client and server.</p>
           </div>
         </li>
 
-        <li class="timeline-item">
+        <li class="timeline-item timeline-item--career">
           <span class="timeline-item-icon | faded-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="16" viewBox="0 0 18 16" fill="none">
               <path
@@ -307,8 +367,8 @@
             <i class="avatar | small">
               <img src="https://clickweb.com.br/common/default/images/favicon/32x32.png" />
             </i>
-            <span><a href="https://clickweb.com.br">Vitor Gabriel</a> was promoted to a Full Stack Junior Developer at
-              <a href="https://clickweb.com.br">Clickweb</a></span>
+            <span>I was promoted to Full Stack Pleno Developer at <a href="https://clickweb.com.br">Clickweb</a></span>
+            <p>I took ownership of technical direction in key deliveries and raised quality standards across the product cycle.</p>
           </div>
         </li>
 
@@ -317,10 +377,9 @@
             <i class="avatar | small">
               <img src="https://assets.codepen.io/285131/hat-man.png" alt="DevOps Tools" />
             </i>
-            <span><a href="https://github.com/vitorgabrieldev">Vitor Gabriel</a> integrated CI/CD tools, <a
-                href="#">Docker</a>, and <a href="#">Kubernetes</a></span>
-            <p>Implemented CI/CD pipelines for build, testing, and deployment automation. Used Docker for
-              containerization and Kubernetes for orchestrating containers in production environments.</p>
+            <span>I integrated <a href="https://docs.github.com/en/actions">CI/CD</a>, <a href="https://docs.docker.com/">Docker</a>, and <a
+                href="https://kubernetes.io/docs/home/">Kubernetes</a></span>
+            <p>I automated build, test and deploy pipelines, increasing reliability and reducing lead time for production changes.</p>
           </div>
         </li>
 
@@ -330,11 +389,9 @@
               <i class="avatar | small">
                 <img src="https://assets.codepen.io/285131/hat-man.png" alt="Blockchain Developer" />
               </i>
-              <span><a href="https://github.com/vitorgabrieldev">Vitor Gabriel</a> started studying and creating
-                prototypes of <a href="#">Blockchain</a></span>
-              <p>Exploring Blockchain concepts and creating smart contracts with <a href="#">Solidity</a> and <a
-                  href="#">Ethereum</a>. Developing DApps and integrating with decentralized networks, using
-                cryptography and consensus technologies.</p>
+              <span>I studied and prototyped <a href="https://ethereum.org/en/developers/docs/">Blockchain</a></span>
+              <p>I built experiments with <a href="https://docs.soliditylang.org/">Solidity</a> and <a
+                  href="https://ethereum.org/en/developers/docs/">Ethereum</a>, validating DApp and decentralized integration concepts.</p>
             </div>
           </div>
         </li>
@@ -344,14 +401,18 @@
             <i class="avatar | small">
               <img src="https://assets.codepen.io/285131/hat-man.png" alt="DevOps" />
             </i>
-            <span><a href="https://github.com/vitorgabrieldev">Vitor Gabriel</a> configured servers and hosting
-              environments on <a href="#">DigitalOcean</a>, <a href="#">AWS</a>, <a href="#">Hostinger</a>, and <a
-                href="#">Hostgator</a></span>
-            <p>Configuring Linux servers, optimizing performance, continuous deployment, and managing infrastructure
-              using tools like SSH and Nginx.</p>
+            <span>I configured servers and hosting environments on <a href="https://docs.digitalocean.com/">DigitalOcean</a>, <a
+                href="https://docs.aws.amazon.com/">AWS</a>, <a href="https://www.hostinger.com/tutorials">Hostinger</a>, and <a
+                href="https://www.hostgator.com/help">Hostgator</a> with <a
+                href="https://www.kernel.org/doc/html/latest/">Linux</a>, <a href="https://www.openssh.com/manual.html">SSH</a> and <a
+                href="https://nginx.org/en/docs/">Nginx</a></span>
+            <p>After becoming pleno, I also worked on architecture decisions and team organization; you can refine these responsibilities later.</p>
           </div>
         </li>
-      </ol>
+        </ol>
+        <button type="button" id="timeline-toggle" class="timeline-toggle-button"
+          aria-expanded="false">Show more</button>
+      </div>
     </section>
 
     <section class="section" id="services">
@@ -386,10 +447,11 @@
           <div class="col-md-6 col-lg-3">
             <div class="service-card">
               <div class="body">
-                <img loading="lazy" src="assets/imgs/p2p.svg" alt="P2P Network" class="icon" />
-                <h6 class="title">Peer-to-Peer Networks</h6>
+                <img loading="lazy" src="assets/imgs/p2p.svg" alt="Backend Development" class="icon" />
+                <h6 class="title">Backend Development</h6>
                 <p class="subtitle">
-                  I build decentralized solutions using P2P protocols.
+                  I build robust backends with Laravel, focused on APIs,
+                  security and scalability.
                 </p>
               </div>
             </div>
@@ -397,11 +459,80 @@
           <div class="col-md-6 col-lg-3">
             <div class="service-card">
               <div class="body">
-                <img loading="lazy" src="assets/imgs/web-dev.svg" alt="Web Development" class="icon" />
-                <h6 class="title">Full Stack Development</h6>
-                <p class="subtitle">I build responsive websites and apps.</p>
+                <img loading="lazy" src="assets/imgs/web-dev.svg" alt="Frontend Development" class="icon" />
+                <h6 class="title">Frontend Development</h6>
+                <p class="subtitle">I develop modern frontends with React and Next.js.</p>
               </div>
             </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="service-card">
+              <div class="body">
+                <img loading="lazy" src="assets/imgs/analytics.svg" alt="API Integrations" class="icon" />
+                <h6 class="title">APIs & Integrations</h6>
+                <p class="subtitle">I design and integrate APIs with reliable contracts, versioning and data consistency.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="service-card">
+              <div class="body">
+                <img loading="lazy" src="assets/imgs/startup.svg" alt="Deployment Automation" class="icon" />
+                <h6 class="title">Deployment Automation</h6>
+                <p class="subtitle">I build CI/CD pipelines that automate test, release and rollback with safer production flow.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="service-card">
+              <div class="body">
+                <img loading="lazy" src="assets/imgs/toolbox.svg" alt="Application Security" class="icon" />
+                <h6 class="title">Application Security</h6>
+                <p class="subtitle">I apply secure coding practices, authentication hardening and vulnerability prevention.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="service-card">
+              <div class="body">
+                <img loading="lazy" src="assets/imgs/responsive.svg" alt="Software Quality" class="icon" />
+                <h6 class="title">Software Quality</h6>
+                <p class="subtitle">I ensure software quality with tests, coverage and regression prevention.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="availability">
+      <div class="container text-center">
+        <p class="section-subtitle">How I Work</p>
+        <h6 class="section-title mb-6">Availability</h6>
+        <div class="row availability-grid">
+          <div class="col-md-6 col-lg-3">
+            <article class="availability-card">
+              <h6 class="title">CLT &bull; PJ &bull; Freelance</h6>
+              <p class="subtitle">Open to full-time roles and strategic project contracts.</p>
+            </article>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <article class="availability-card">
+              <h6 class="title">Remote &bull; Hybrid</h6>
+              <p class="subtitle">Remote-first, with hybrid options depending on team and location.</p>
+            </article>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <article class="availability-card">
+              <h6 class="title">UTC-3 (Brazil)</h6>
+              <p class="subtitle">Comfortable collaborating with teams in Brazil and abroad.</p>
+            </article>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <article class="availability-card">
+              <h6 class="title">Immediate Start</h6>
+              <p class="subtitle">Can start quickly with clear onboarding and smooth handover.</p>
+            </article>
           </div>
         </div>
       </div>
@@ -414,60 +545,72 @@
         <div class="row">
           <div class="col-md-4">
             <a href="https://github.com/vitorgabrieldev/Blockchain" target="_blank" class="portfolio-card">
-              <img loading="lazy" src="assets/imgs/folio-1.jpg" class="portfolio-card-img" alt="Blockchain Project" />
-              <span class="portfolio-card-overlay">
-                <span class="portfolio-card-caption">
-                  <h4>Blockchain Solutions</h4>
-                  <p class="font-weight-normal">
-                    Category: Blockchain (Functional Models)
-                  </p>
-                </span>
-              </span>
+              <img loading="lazy" src="https://images.unsplash.com/photo-1526378800651-c32d170fe6f8?auto=format&fit=crop&w=1200&q=80" class="portfolio-card-img" alt="Blockchain Project" />
+              <span class="portfolio-card-overlay"><span class="portfolio-card-caption"><h4>Blockchain Solutions</h4><p class="font-weight-normal">Category: Blockchain System</p></span></span>
             </a>
           </div>
           <div class="col-md-4">
-            <a href="https://github.com/vitorgabrieldev/Template-Api-Node" target="_blank" class="portfolio-card">
-              <img loading="lazy" src="assets/imgs/folio-2.jpg" class="portfolio-card-img" alt="API Template" />
-              <span class="portfolio-card-overlay">
-                <span class="portfolio-card-caption">
-                  <h4>Node.js API Template</h4>
-                  <p class="font-weight-normal">
-                    Category: Backend Development (Node.js)
-                  </p>
-                </span>
-              </span>
+            <a href="https://github.com/vitorgabrieldev/motion-recognition-for-interaction-optimization" target="_blank" class="portfolio-card">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80" class="portfolio-card-img" alt="Motion Recognition Project" />
+              <span class="portfolio-card-overlay"><span class="portfolio-card-caption"><h4>Advanced Hand Motion Recognition</h4><p class="font-weight-normal">Category: Python Computer Vision</p></span></span>
             </a>
           </div>
           <div class="col-md-4">
-            <a href="https://github.com/vitorgabrieldev/Front-End-kit-React" target="_blank" class="portfolio-card">
-              <img loading="lazy" src="assets/imgs/folio-3.jpg" class="portfolio-card-img"
-                alt="React Web Application" />
-              <span class="portfolio-card-overlay">
-                <span class="portfolio-card-caption">
-                  <h4>React Front-End Template</h4>
-                  <p class="font-weight-normal">
-                    Category: Front-End Development (React)
-                  </p>
-                </span>
-              </span>
+            <a href="https://github.com/vitorgabrieldev/dubflow.pro.br" target="_blank" class="portfolio-card">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1200&q=80" class="portfolio-card-img" alt="DubFlow Platform" />
+              <span class="portfolio-card-overlay"><span class="portfolio-card-caption"><h4>Social Network for Dubbers</h4><p class="font-weight-normal">Category: Community Platform (Laravel)</p></span></span>
+            </a>
+          </div>
+          <div class="col-md-4">
+            <a href="https://github.com/vitorgabrieldev/frontend.dubflow.pro.br" target="_blank" class="portfolio-card">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1200&q=80" class="portfolio-card-img" alt="DubFlow Frontend" />
+              <span class="portfolio-card-overlay"><span class="portfolio-card-caption"><h4>DubFlow Frontend</h4><p class="font-weight-normal">Category: Front-End (Next.js, TypeScript)</p></span></span>
+            </a>
+          </div>
+          <div class="col-md-4">
+            <a href="https://github.com/vitorgabrieldev/rotina.pro.br" target="_blank" class="portfolio-card">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1200&q=80" class="portfolio-card-img" alt="Business Organization Platform" />
+              <span class="portfolio-card-overlay"><span class="portfolio-card-caption"><h4>Business Organization System</h4><p class="font-weight-normal">Category: Company Workflow Platform</p></span></span>
+            </a>
+          </div>
+          <div class="col-md-4">
+            <a href="https://github.com/vitorgabrieldev/risklog-api" target="_blank" class="portfolio-card">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80" class="portfolio-card-img" alt="Risklog API" />
+              <span class="portfolio-card-overlay"><span class="portfolio-card-caption"><h4>Risklog CI/CD Integration</h4><p class="font-weight-normal">Category: Deployment Reports & Summaries</p></span></span>
+            </a>
+          </div>
+          <div class="col-md-4">
+            <a href="https://github.com/vitorgabrieldev/painel.startup.dev.br" target="_blank" class="portfolio-card">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1200&q=80" class="portfolio-card-img" alt="Startup Admin Panel" />
+              <span class="portfolio-card-overlay"><span class="portfolio-card-caption"><h4>Risklog Admin Panel</h4><p class="font-weight-normal">Category: Admin Dashboard (Laravel)</p></span></span>
+            </a>
+          </div>
+          <div class="col-md-4">
+            <a href="https://github.com/vitorgabrieldev/laravel-fintech-core" target="_blank" class="portfolio-card">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80" class="portfolio-card-img" alt="Laravel Fintech Core" />
+              <span class="portfolio-card-overlay"><span class="portfolio-card-caption"><h4>Complete Banking System</h4><p class="font-weight-normal">Category: Fintech Platform</p></span></span>
+            </a>
+          </div>
+          <div class="col-md-4">
+            <a href="https://github.com/vitorgabrieldev/general-agent-terminal-linux" target="_blank" class="portfolio-card">
+              <img loading="lazy" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80" class="portfolio-card-img" alt="General Agent Terminal Linux" />
+              <span class="portfolio-card-overlay"><span class="portfolio-card-caption"><h4>Mistral AI Linux Terminal Agent</h4><p class="font-weight-normal">Category: AI + Linux Terminal</p></span></span>
             </a>
           </div>
         </div>
       </div>
     </section>
-
     <section class="section-sm bg-primary">
       <div class="container text-center text-sm-left">
         <div class="row align-items-center">
           <div class="col-sm offset-md-1 mb-4 mb-md-0">
-            <h6 class="title text-light">Want to work with me?</h6>
-            <p class="m-0 text-light">
-              Feel free to contact me and discuss any exciting opportunities.
+            <h6 class="title text-light cta-title">Let's Build Results Together</h6>
+            <p class="m-0 text-light cta-text">
+              If you need ownership, quality and fast delivery, let's talk about your next project.
             </p>
           </div>
           <div class="col-sm offset-sm-2 offset-md-3 container-offset">
-            <a href="https://wa.me/43984873807" target="_blank" class="btn btn-lg my-font btn-light rounded">Let's
-              talk?</a>
+            <a href="https://wa.me/43984873807" target="_blank" class="btn btn-lg my-font btn-light rounded cta-button">Start a conversation</a>
           </div>
         </div>
       </div>
@@ -476,22 +619,23 @@
     <div class="container">
       <footer class="footer">
         <p class="mb-0">
-          Copyright
+          <span class="footer-copyright-label">Copyright</span>
           <script>
             document.write(new Date().getFullYear());
           </script>
           &copy; Vitor Gabriel
         </p>
         <div class="social-links text-right m-auto ml-sm-auto">
-          <a target="_blank" href="https://linkedin.com/vitorgabrieldev" class="link"><i class="ti-linkedin"></i></a>
-          <a target="_blank" href="https://github.com/vitorgabrieldev" class="link"><i class="ti-github"></i></a>
           <a target="_blank" href="mailto:vitorgabrieldeoliveiradev@gmail.com" class="link"><i class="ti-email"></i></a>
         </div>
       </footer>
     </div>
-  </div>
 
   <script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
   <script src="assets/js/meyawo.js"></script>
 </body>
 </html>
+
+
+
+

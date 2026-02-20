@@ -214,7 +214,7 @@
                 "Assumi direção técnica em entregas-chave e elevei padrões de qualidade do ciclo de produto.",
                 "Automatizei build, testes e deploy, reduzindo tempo de entrega e risco operacional em produção.",
                 "Validei conceitos de DApps e integrações descentralizadas com foco prático e evolução incremental.",
-                "Atuei em decisões de arquitetura e organização do time; você pode detalhar depois."
+                "Atuei em decisões de arquitetura e organização do time."
             ]
         },
         services: {
@@ -283,11 +283,11 @@
             cards: [
                 {
                     title: "Soluções em Blockchain",
-                    subtitle: "Categoria: Sistema Blockchain"
+                    subtitle: "Categoria: Sistema Blockchain (Javascript)"
                 },
                 {
                     title: "Reconhecimento Avançado de Movimentos",
-                    subtitle: "Categoria: Visão Computacional com Python"
+                    subtitle: "Categoria: Visão Computacional (Python)"
                 },
                 {
                     title: "Rede Social para Dubladores",
@@ -299,23 +299,23 @@
                 },
                 {
                     title: "Sistema de Organização Empresarial",
-                    subtitle: "Categoria: Plataforma de Fluxo Empresarial"
+                    subtitle: "Categoria: Plataforma de Fluxo Empresarial (Laravel 12, React 18)"
                 },
                 {
                     title: "Integração CI/CD Risklog",
-                    subtitle: "Categoria: Resumos e Relatórios de Produção"
+                    subtitle: "Categoria: Resumos e Relatórios de Produção (Laravel 12, React 18)"
                 },
                 {
                     title: "Painel Admin do Risklog",
-                    subtitle: "Categoria: Dashboard Administrativo (Laravel)"
+                    subtitle: "Categoria: Dashboard Administrativo (Laravel 12, React 17)"
                 },
                 {
                     title: "Sistema Bancário Completo",
-                    subtitle: "Categoria: Plataforma Fintech"
+                    subtitle: "Categoria: Plataforma Fintech (Laravel 12, React 18)"
                 },
                 {
                     title: "Agente Linux com Mistral AI",
-                    subtitle: "Categoria: IA Integrada ao Terminal Linux"
+                    subtitle: "Categoria: IA Integrada ao Terminal Linux (Python)"
                 }
             ]
         },

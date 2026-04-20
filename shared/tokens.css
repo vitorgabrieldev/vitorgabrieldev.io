@@ -1,0 +1,228 @@
+/* ============================================
+   DESIGN TOKENS — Vitor Gabriel Portfolio
+   Original system. Warm neutrals, terracotta accent.
+   ============================================ */
+
+:root {
+  /* Base — warm neutrals */
+  --bg:            #f7f3ec;          /* page background — warm off-white */
+  --bg-elev:       #fbf8f2;          /* slightly lighter (cards, panels) */
+  --bg-sunken:     #ede7db;          /* sunken (code, inputs) */
+  --line:          rgba(30, 26, 22, 0.10);
+  --line-strong:   rgba(30, 26, 22, 0.20);
+
+  /* Ink */
+  --ink:           #1e1a16;          /* primary text — warm near-black */
+  --ink-muted:     #5b534a;          /* secondary text */
+  --ink-faint:     #8a8178;          /* tertiary / captions */
+  --ink-subtle:    #b4aa9e;          /* placeholder / hints */
+
+  /* Accent — terracotta */
+  --accent:        #c96442;
+  --accent-hover:  #b4573a;
+  --accent-soft:   rgba(201, 100, 66, 0.10);
+  --accent-ink:    #8a3d22;
+
+  /* Status */
+  --ok:            #5a7a4a;
+  --warn:          #b58844;
+
+  /* Type */
+  --font-mono:     'JetBrains Mono', 'SF Mono', ui-monospace, monospace;
+  --font-sans:     'Inter Tight', 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-display:  'Inter Tight', 'Inter', system-ui, sans-serif;
+
+  /* Scale — density: comfortable (default) */
+  --pad-page:      clamp(24px, 4vw, 64px);
+  --pad-section:   120px;
+  --pad-card:      32px;
+  --gap-grid:      32px;
+  --type-display:  clamp(48px, 8vw, 120px);
+  --type-h1:       clamp(40px, 5vw, 72px);
+  --type-h2:       clamp(28px, 3.2vw, 44px);
+  --type-h3:       22px;
+  --type-body:     16px;
+  --type-small:    13px;
+  --type-micro:    11px;
+  --radius:        4px;
+  --radius-lg:     8px;
+
+  /* Motion */
+  --ease:          cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-in-out:   cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast:      160ms;
+  --dur:           320ms;
+  --dur-slow:      640ms;
+}
+
+/* Dark mode — warm, not just inverted.
+   Based on oklch blacks pulled toward brown, off-white kept as terracotta-tinged warm ink.
+   Accent keeps hue, slightly lighter chroma for legibility on dark. */
+[data-theme="dark"] {
+  --bg:            #17130f;          /* deep warm near-black */
+  --bg-elev:       #1f1a15;          /* cards/panels */
+  --bg-sunken:     #0f0c09;          /* sunken (code, inputs) */
+  --line:          rgba(247, 243, 236, 0.08);
+  --line-strong:   rgba(247, 243, 236, 0.18);
+
+  --ink:           #f2ece0;          /* warm off-white — not pure white */
+  --ink-muted:     #b4a99a;
+  --ink-faint:     #7a7068;
+  --ink-subtle:    #4a433c;
+
+  --accent:        #e07c5a;          /* slightly lighter terracotta for contrast */
+  --accent-hover:  #ea8866;
+  --accent-soft:   rgba(224, 124, 90, 0.12);
+  --accent-ink:    #f2a888;
+
+  --ok:            #8aaa72;
+  --warn:          #d4a166;
+}
+[data-theme="dark"] .cursor-dot { background: var(--ink); }
+[data-theme="dark"] .cursor-ring { background: transparent; border-color: var(--ink); }
+[data-theme="dark"] .cursor-ring.hover { background: var(--accent-soft); border-color: var(--accent); }
+/* Invert hardcoded-color SVG thumbs in dark mode to keep legibility without rewriting every template */
+[data-theme="dark"] .thumb-canvas,
+[data-theme="dark"] .pgall__thumb-art > svg,
+[data-theme="dark"] .pgrid__thumb > svg,
+[data-theme="dark"] .case__hero > svg,
+[data-theme="dark"] .portrait__art > svg { filter: invert(0.92) hue-rotate(180deg); }
+
+/* Density — compact */
+[data-density="compact"] {
+  --pad-page:      clamp(16px, 2.5vw, 40px);
+  --pad-section:   72px;
+  --pad-card:      20px;
+  --gap-grid:      20px;
+  --type-display:  clamp(40px, 6vw, 88px);
+  --type-h1:       clamp(32px, 4vw, 56px);
+  --type-h2:       clamp(22px, 2.4vw, 32px);
+  --type-h3:       18px;
+  --type-body:     14px;
+  --type-small:    12px;
+}
+
+/* ============================================ */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+html { background: var(--bg); color: var(--ink); font-family: var(--font-sans); font-size: var(--type-body); line-height: 1.55; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+body { min-height: 100vh; }
+
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: none; padding: 0; cursor: pointer; }
+img { display: block; max-width: 100%; }
+
+::selection { background: var(--accent); color: var(--bg); }
+
+/* Mono treatments */
+.mono { font-family: var(--font-mono); font-feature-settings: "ss01"; }
+.caps { text-transform: uppercase; letter-spacing: 0.08em; font-size: var(--type-micro); }
+.mono-label { font-family: var(--font-mono); font-size: var(--type-micro); text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-faint); }
+
+/* Reading */
+h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; letter-spacing: -0.02em; margin: 0; line-height: 1.05; }
+h1 { font-size: var(--type-h1); letter-spacing: -0.03em; }
+h2 { font-size: var(--type-h2); }
+h3 { font-size: var(--type-h3); letter-spacing: -0.01em; }
+p  { margin: 0; }
+
+/* Layout utilities */
+.page { min-height: 100vh; padding: 88px var(--pad-page) 0; }
+.container { max-width: 1400px; margin: 0 auto; }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 10px 18px;
+  font-family: var(--font-mono); font-size: var(--type-small);
+  text-transform: uppercase; letter-spacing: 0.08em;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: var(--bg-elev);
+  color: var(--ink);
+  cursor: pointer;
+  transition: all var(--dur) var(--ease);
+  white-space: nowrap;
+}
+.btn:hover { border-color: var(--ink); background: var(--ink); color: var(--bg); }
+.btn--primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+.btn--primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: #fff; }
+.btn--ghost { background: transparent; }
+
+/* Card */
+.card {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: var(--pad-card);
+  transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.card:hover { border-color: var(--line-strong); }
+
+/* Rule */
+.rule { height: 1px; background: var(--line); border: none; margin: 0; }
+
+/* Chips */
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px;
+  font-family: var(--font-mono); font-size: var(--type-micro);
+  text-transform: uppercase; letter-spacing: 0.08em;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--ink-muted);
+}
+.chip .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--ok); }
+
+/* Scroll reveal */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease); }
+.reveal.in { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 80ms; }
+.reveal-delay-2 { transition-delay: 160ms; }
+.reveal-delay-3 { transition-delay: 240ms; }
+.reveal-delay-4 { transition-delay: 320ms; }
+
+/* Page transition overlay */
+.page-transition {
+  position: fixed; inset: 0;
+  background: var(--ink);
+  transform: translateY(100%);
+  z-index: 9999; pointer-events: none;
+}
+.page-transition.cover { animation: cover 520ms var(--ease-in-out) forwards; }
+@keyframes cover {
+  0%   { transform: translateY(100%); }
+  50%  { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
+}
+
+/* Focus */
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* Custom cursor */
+html.has-cursor, html.has-cursor body, html.has-cursor * { cursor: none !important; }
+.cursor-dot, .cursor-ring {
+  position: fixed; top: 0; left: 0; pointer-events: none; z-index: 99999;
+  will-change: transform;
+}
+.cursor-dot {
+  width: 6px; height: 6px; margin: -3px 0 0 -3px;
+  background: var(--ink); border-radius: 50%;
+}
+.cursor-ring {
+  width: 28px; height: 28px; margin: -14px 0 0 -14px;
+  border: 1px solid var(--ink); border-radius: 50%;
+  transition: width 180ms var(--ease), height 180ms var(--ease), margin 180ms var(--ease), border-color 180ms var(--ease), background 180ms var(--ease);
+}
+.cursor-ring.hover { width: 56px; height: 56px; margin: -28px 0 0 -28px; background: var(--accent-soft); border-color: var(--accent); }
+.cursor-ring.read  { width: 80px; height: 80px; margin: -40px 0 0 -40px; background: var(--ink); border-color: var(--ink); mix-blend-mode: difference; }
+.cursor-ring.external { width: 48px; height: 48px; margin: -24px 0 0 -24px; background: var(--accent); border-color: var(--accent); }
+.cursor-ring.external::after { content: "↗"; position: absolute; inset: 0; display: grid; place-items: center; font: 500 18px var(--font-sans); color: #fff; }
+.cursor-ring.drag { width: 72px; height: 72px; margin: -36px 0 0 -36px; background: var(--ink); border-color: var(--ink); }
+.cursor-ring.drag::after { content: "⇢ drag"; position: absolute; inset: 0; display: grid; place-items: center; font: 500 11px var(--font-mono); color: var(--bg); letter-spacing: 1px; }
+
+@media (max-width: 900px) {
+  .cursor-dot, .cursor-ring { display: none; }
+  html.has-cursor, html.has-cursor body, html.has-cursor * { cursor: auto !important; }
+}

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact — Vitor Gabriel</title>
+<meta name="description" content="Get in touch about engineering work, collaborations, or long-term engagements.">
+<meta name="author" content="Vitor Gabriel de Oliveira">
+<link rel="canonical" href="https://vitorgabriel.dev/contact.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Vitor Gabriel">
+<meta property="og:title" content="Contact — Vitor Gabriel">
+<meta property="og:description" content="Get in touch about engineering work, collaborations, or long-term engagements.">
+<meta property="og:url" content="https://vitorgabriel.dev/contact.html">
+<meta property="og:image" content="https://vitorgabriel.dev/og-contact.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Contact — Vitor Gabriel">
+<meta name="twitter:description" content="Get in touch about engineering work, collaborations, or long-term engagements.">
+<meta name="twitter:image" content="https://vitorgabriel.dev/og-contact.png">
+
+<meta name="theme-color" content="#c96442">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Vitor Gabriel de Oliveira","jobTitle":"Full Stack Engineer","url":"https://vitorgabriel.dev","email":"contact@vitorgabriel.dev","address":{"@type":"PostalAddress","addressLocality":"Londrina","addressCountry":"BR"},"sameAs":["https://github.com/vitorgabrieldev"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Vitor Gabriel","url":"https://vitorgabriel.dev","potentialAction":{"@type":"SearchAction","target":"https://vitorgabriel.dev/?q={query}","query-input":"required name=query"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared/tokens.css?v=4">
+<link rel="stylesheet" href="shared/nav.css?v=2">
+<style>
+.page--head { padding-top: 120px; padding-bottom: 64px; }
+.head__line { display: flex; justify-content: space-between; padding-bottom: 40px; border-bottom: 1px solid var(--line); margin-bottom: 48px; }
+.head__title { font-family: var(--font-display); font-size: clamp(44px, 7vw, 104px); letter-spacing: -0.045em; line-height: 0.95; font-weight: 500; max-width: 16ch; }
+.head__title em { font-style: italic; color: var(--accent); font-weight: 400; }
+
+.ct { padding: 40px var(--pad-page) var(--pad-section); }
+.ct__inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+
+/* Form */
+.form { display: flex; flex-direction: column; gap: 20px; }
+.form__step {
+  font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--ink-faint);
+  margin-bottom: 8px;
+}
+.field { display: flex; flex-direction: column; gap: 8px; }
+.field label { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-muted); }
+.field input, .field textarea {
+  font-family: var(--font-sans); font-size: 16px;
+  padding: 14px 16px;
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--ink);
+  transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease);
+  resize: vertical;
+}
+.field input:focus, .field textarea:focus { outline: none; border-color: var(--accent); background: var(--bg); }
+.field textarea { min-height: 140px; }
+.field .err { font-family: var(--font-mono); font-size: 11px; color: #c4513a; display: none; }
+.field.err .err { display: block; }
+.field.err input, .field.err textarea { border-color: #c4513a; }
+
+.chips-select { display: flex; gap: 6px; flex-wrap: wrap; }
+.chips-select button {
+  padding: 8px 14px; font-family: var(--font-mono); font-size: 12px;
+  border: 1px solid var(--line); border-radius: 999px;
+  color: var(--ink-muted); transition: all var(--dur) var(--ease);
+}
+.chips-select button:hover { border-color: var(--ink); color: var(--ink); }
+.chips-select button.on { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+.budget-row { display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 12px; color: var(--ink-muted); margin-bottom: 8px; }
+.budget-row strong { color: var(--accent); font-weight: 500; font-size: 14px; }
+.slider { width: 100%; -webkit-appearance: none; height: 4px; background: var(--bg-sunken); border-radius: 2px; outline: none; }
+.slider::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--accent); cursor: grab; border: 3px solid var(--bg); box-shadow: 0 0 0 1px var(--accent); }
+.slider::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--accent); cursor: grab; border: 3px solid var(--bg); box-shadow: 0 0 0 1px var(--accent); }
+
+.form__submit { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; padding-top: 24px; border-top: 1px solid var(--line); }
+.form__helper { font-family: var(--font-mono); font-size: 11px; color: var(--ink-faint); text-transform: uppercase; letter-spacing: .08em; }
+
+.form__sent {
+  padding: 32px;
+  border: 1px solid var(--accent);
+  background: var(--accent-soft);
+  border-radius: var(--radius-lg);
+  display: none;
+}
+.form__sent.show { display: block; }
+.form__sent h3 { font-family: var(--font-display); font-size: 26px; font-weight: 500; margin: 0 0 8px; letter-spacing: -0.02em; }
+.form__sent p { color: var(--ink-muted); font-size: 15px; margin: 0; }
+
+/* Aside */
+.ct-aside { position: sticky; top: 110px; display: flex; flex-direction: column; gap: 24px; }
+.ct-card { background: var(--bg-elev); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 28px; }
+.ct-card h4 { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--ink-faint); margin: 0 0 14px; font-weight: 500; }
+.ct-card .row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px dashed var(--line); font-size: 14px; }
+.ct-card .row:last-child { border-bottom: none; }
+.ct-card .row span:first-child { color: var(--ink-muted); font-family: var(--font-mono); font-size: 12px; letter-spacing: .05em; }
+.ct-card .row a { color: var(--ink); font-weight: 500; transition: color var(--dur) var(--ease); }
+.ct-card .row a:hover { color: var(--accent); }
+
+.live-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; background: var(--bg); border: 1px solid var(--line); border-radius: 999px; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--ok); }
+.live-badge .d { width: 6px; height: 6px; border-radius: 50%; background: var(--ok); animation: pulse 2s infinite; }
+
+.faq details { border-bottom: 1px solid var(--line); padding: 14px 0; }
+.faq summary { cursor: pointer; font-family: var(--font-display); font-size: 16px; letter-spacing: -0.01em; font-weight: 500; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font-family: var(--font-mono); color: var(--ink-faint); transition: transform var(--dur) var(--ease); }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq details p { font-size: 14px; color: var(--ink-muted); margin: 12px 0 0; line-height: 1.5; }
+
+@media (max-width: 900px) {
+  .ct__inner { grid-template-columns: 1fr; gap: 32px; }
+  .ct-aside { position: static; }
+}
+</style>
+<link rel="stylesheet" href="shared/enhance.css?v=3">
+</head>
+<body data-screen-label="contact" data-density="comfortable">
+
+<section class="page page--head">
+  <div class="container">
+    <div class="head__line reveal">
+      <span class="mono-label">[CONTACT] Start a conversation</span>
+      <span class="live-badge"><span class="d"></span>Available · Q2 2026</span>
+    </div>
+    <h1 class="head__title reveal reveal-delay-1">Tell me what you're <em>trying to ship</em>.</h1>
+  </div>
+</section>
+
+<section class="ct">
+  <div class="ct__inner">
+    <!-- FORM -->
+    <div>
+      <form class="form" id="ctForm" autocomplete="off">
+        <div class="form__step">[STEP 01] About you</div>
+        <div class="field">
+          <label for="f_name">Your name</label>
+          <input id="f_name" name="name" required>
+          <span class="err">Name is required.</span>
+        </div>
+        <div class="field">
+          <label for="f_email">Email</label>
+          <input id="f_email" name="email" type="email" required placeholder="you@company.com">
+          <span class="err">Valid email is required.</span>
+        </div>
+        <div class="field">
+          <label for="f_company">Company · Role (optional)</label>
+          <input id="f_company" name="company" placeholder="e.g. Acme · CTO">
+        </div>
+
+        <div class="form__step" style="margin-top:24px">[STEP 02] The project</div>
+        <div class="field">
+          <label>What kind of engagement?</label>
+          <div class="chips-select" data-group="kind">
+            <button type="button" data-v="clt">CLT</button>
+            <button type="button" data-v="pj">PJ</button>
+            <button type="button" data-v="freelance">Freelance project</button>
+            <button type="button" data-v="consult">Consult / audit</button>
+            <button type="button" data-v="unsure">Not sure yet</button>
+          </div>
+        </div>
+        <div class="field">
+          <label>Where's the weight?</label>
+          <div class="chips-select" data-group="focus">
+            <button type="button" data-v="backend">Backend / Laravel</button>
+            <button type="button" data-v="frontend">Frontend / React</button>
+            <button type="button" data-v="infra">DevOps / Infra</button>
+            <button type="button" data-v="fullstack">Full stack</button>
+            <button type="button" data-v="other">Other</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="budget-row">
+            <span>Budget range (BRL / month)</span>
+            <span id="budgetVal"><strong>R$ 12 000</strong> / month</span>
+          </div>
+          <input type="range" class="slider" id="budget" min="3" max="30" value="12" step="1">
+          <span class="form__helper">Rough is fine — I'll tell you if I'm the right fit.</span>
+        </div>
+
+        <div class="form__step" style="margin-top:24px">[STEP 03] The brief</div>
+        <div class="field">
+          <label for="f_msg">What are you trying to ship?</label>
+          <textarea id="f_msg" name="message" required placeholder="One or two paragraphs about the problem, the current state, and what 'done' looks like."></textarea>
+          <span class="err">A quick brief helps — even 2 sentences.</span>
+        </div>
+
+        <div class="form__submit">
+          <span class="form__helper">I reply within 24h on weekdays.</span>
+          <button type="submit" class="btn btn--primary">Send brief →</button>
+        </div>
+
+        <div class="form__sent" id="sent">
+          <h3>Brief received. ✓</h3>
+          <p>Thanks — I'll be in touch within 24h at the email you provided. If it's urgent, ping me on WhatsApp.</p>
+        </div>
+      </form>
+    </div>
+
+    <!-- ASIDE -->
+    <aside class="ct-aside">
+      <div class="ct-card">
+        <h4>/ Direct channels</h4>
+        <div class="row"><span>Email</span><a href="mailto:contact@vitorgabriel.dev">contact@vitorgabriel.dev</a></div>
+        <div class="row"><span>WhatsApp</span><a href="https://wa.me/5543984873807" target="_blank">+55 43 98487-3807 ↗</a></div>
+        <div class="row"><span>GitHub</span><a href="https://github.com/vitorgabrieldev" target="_blank">@vitorgabrieldev ↗</a></div>
+        <div class="row"><span>Location</span><span style="color:var(--ink)">Londrina · UTC−3</span></div>
+      </div>
+
+      <div class="ct-card">
+        <h4>/ Response expectations</h4>
+        <div class="row"><span>First reply</span><span style="color:var(--ink)">&lt; 24h (weekdays)</span></div>
+        <div class="row"><span>Intro call</span><span style="color:var(--ink)">Within the week</span></div>
+        <div class="row"><span>Kickoff</span><span style="color:var(--ink)">1–2 weeks</span></div>
+        <div class="row"><span>Current load</span><span style="color:var(--ok)">● Accepting new</span></div>
+      </div>
+
+      <div class="ct-card faq">
+        <h4>/ Quick FAQ</h4>
+        <details>
+          <summary>What stack do you prefer?</summary>
+          <p>Laravel + Postgres + React/Next.js, deployed on Linux with Docker. But I move where the problem is — I've shipped Node, Vue, Angular and various infra flavours.</p>
+        </details>
+        <details>
+          <summary>Do you take short contracts?</summary>
+          <p>Yes, if the scope is clear. Audits and 2–4 week engagements work well. I won't take work I can't finish properly.</p>
+        </details>
+        <details>
+          <summary>Remote or in-person?</summary>
+          <p>Remote-first. Hybrid is possible if you're in Londrina. Comfortable with async teams across time zones.</p>
+        </details>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<script src="shared/data.js"></script>
+<script src="shared/enhance.js?v=3" defer></script>
+<script src="shared/i18n.js?v=1"></script>
+<script src="shared/nav.js?v=5"></script>
+<script src="shared/footer.js"></script>
+<script>
+(function() {
+  // Chip groups — multi-select
+  const picks = { kind: [], focus: [] };
+  document.querySelectorAll('.chips-select').forEach(g => {
+    g.addEventListener('click', e => {
+      const b = e.target.closest('button'); if (!b) return;
+      b.classList.toggle('on');
+      const group = g.dataset.group;
+      picks[group] = [...g.querySelectorAll('.on')].map(x => x.dataset.v);
+    });
+  });
+
+  // Budget slider
+  const budget = document.getElementById('budget');
+  const val = document.getElementById('budgetVal');
+  const fmt = n => n.toLocaleString('pt-BR').replace(/,/g, ' ');
+  const update = () => {
+    const v = +budget.value;
+    if (v >= 30) { val.innerHTML = '<strong>R$ 30 000+</strong> / month'; }
+    else { val.innerHTML = `<strong>R$ ${fmt(v*1000)}</strong> / month`; }
+  };
+  budget.addEventListener('input', update); update();
+
+  // Form submit (fake)
+  const form = document.getElementById('ctForm');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    let ok = true;
+    ['f_name','f_email','f_msg'].forEach(id => {
+      const el = document.getElementById(id);
+      const wrap = el.closest('.field');
+      const bad = !el.value.trim() || (el.type === 'email' && !/^[^@]+@[^@]+\.[^@]+$/.test(el.value));
+      wrap.classList.toggle('err', bad);
+      if (bad) ok = false;
+    });
+    if (!ok) return;
+    form.querySelectorAll('input, textarea, button[type=submit], .chips-select button').forEach(el => el.disabled = true);
+    document.getElementById('sent').classList.add('show');
+    document.getElementById('sent').scrollIntoView({ block: 'nearest' });
+  });
+
+  // Observe reveals
+  document.querySelectorAll('.reveal').forEach(el => {
+    new IntersectionObserver((entries, io) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.08 }).observe(el);
+  });
+})();
+</script>
+</body>
+</html>

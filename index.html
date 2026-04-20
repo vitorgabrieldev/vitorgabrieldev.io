@@ -1,641 +1,272 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <meta name="description"
-    content="Vitor Gabriel | Full Stack Developer, Docker, Kubernetes, P2P Networking, Blockchain, and Linux Enthusiast. Explore my web development portfolio with a focus on cutting-edge technologies." />
-  <meta name="keywords"
-    content="Vitor Gabriel, Full Stack Developer, Web Development, Blockchain, Docker, Kubernetes, Node.js, React, PHP, APIs, Backend, Frontend, Linux, CI/CD, DevOps" />
-  <meta name="author" content="Vitor Gabriel de Oliveira" />
-  <meta name="robots" content="index, follow" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vitor Gabriel — Engenheiro Full Stack</title>
+<meta name="description" content="Full stack engineer in Londrina, BR. Laravel SaaS, CI/CD, and infrastructure. Systems that stay honest under load.">
+<meta name="author" content="Vitor Gabriel de Oliveira">
+<link rel="canonical" href="https://vitorgabriel.dev/">
 
-  <title>Vitor Gabriel - Full Stack Developer | Blockchain, DevOps & Web Apps</title>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Vitor Gabriel">
+<meta property="og:title" content="Vitor Gabriel — Full Stack Engineer">
+<meta property="og:description" content="Full stack engineer in Londrina, BR. Laravel SaaS, CI/CD, and infrastructure. Systems that stay honest under load.">
+<meta property="og:url" content="https://vitorgabriel.dev/">
+<meta property="og:image" content="https://vitorgabriel.dev/og-home.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Vitor Gabriel — Full Stack Engineer">
+<meta name="twitter:description" content="Full stack engineer in Londrina, BR. Laravel SaaS, CI/CD, and infrastructure. Systems that stay honest under load.">
+<meta name="twitter:image" content="https://vitorgabriel.dev/og-home.png">
 
-  <!-- Open Graph Meta Tags -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Vitor Gabriel | Full Stack Developer Portfolio" />
-  <meta property="og:description"
-    content="Explore the portfolio of Vitor Gabriel, a passionate Full Stack Developer skilled in modern web technologies including Docker, Kubernetes, and blockchain." />
-  <meta property="og:url" content="https://vitorgabrieldev.io" />
+<meta name="theme-color" content="#c96442">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 
-  <!-- Twitter Card Meta Tags -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Vitor Gabriel | Full Stack Developer Portfolio" />
-  <meta name="twitter:description"
-    content="Explore the portfolio of Vitor Gabriel, Full Stack Developer with experience in web, blockchain, and backend technologies." />
-
-  <!-- Canonical Link -->
-  <link rel="canonical" href="https://vitorgabrieldev.io" />
-
-  <!-- Favicon -->
-  <link rel="shortcut icon" href="assets/imgs/favicon.ico" type="image/x-icon" />
-
-  <!-- External Stylesheets -->
-  <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css" />
-  <link rel="stylesheet" href="assets/css/meyawo.css" />
-
-  <!-- Scripts -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="assets/js/app.js" defer></script>
-
-  <!-- JSON-LD Structured Data -->
-  <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Vitor Gabriel de Oliveira",
-        "url": "https://vitorgabrieldev.io",
-        "sameAs": [
-          "https://github.com/vitorgabrieldev",
-          "https://www.linkedin.com/in/vitorgabrieldev"
-        ],
-        "jobTitle": "Full Stack Developer",
-        "worksFor": {
-          "@type": "Organization",
-          "name": "Clickweb"
-        },
-        "description": "Full Stack Developer with expertise in front-end and back-end development, blockchain, Docker, Kubernetes, and Linux server configuration. Passionate about new technologies and innovative solutions.",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Londrina",
-          "addressRegion": "Paraná",
-          "addressCountry": "BR"
-        },
-        "email": "mailto:vitorgabrieldeoliveiradev@gmail.com",
-        "telephone": "+55 (43) 98487-3807"
-      }
-    </script>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Vitor Gabriel de Oliveira","jobTitle":"Full Stack Engineer","url":"https://vitorgabriel.dev","email":"contact@vitorgabriel.dev","address":{"@type":"PostalAddress","addressLocality":"Londrina","addressCountry":"BR"},"sameAs":["https://github.com/vitorgabrieldev"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Vitor Gabriel","url":"https://vitorgabriel.dev","potentialAction":{"@type":"SearchAction","target":"https://vitorgabriel.dev/?q={query}","query-input":"required name=query"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared/tokens.css?v=4">
+<link rel="stylesheet" href="shared/nav.css?v=2">
+<link rel="stylesheet" href="home.css">
+<link rel="stylesheet" href="shared/enhance.css?v=3">
 </head>
+<body data-screen-label="home" data-density="comfortable">
 
-<body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
+<!-- ============== HERO ============== -->
+<section class="hero page">
+  <div class="container">
+    <div class="hero__topline reveal">
+      <span class="mono-label" data-i18n="hero.topline">[01] Engenheiro · Londrina, BR · UTC−3</span>
+      <span class="hero__status"><span class="hero__status-dot"></span><span class="mono" style="font-size:var(--type-micro); text-transform:uppercase; letter-spacing:.1em; color:var(--ink-muted)" data-i18n="hero.status">Aceitando projetos · Q2 2026</span></span>
+    </div>
 
+    <h1 class="hero__title reveal reveal-delay-1">
+      <span class="hero__line" data-i18n="hero.line1" data-i18n-html>Sistemas que <em>permanecem</em></span>
+      <span class="hero__line" data-i18n="hero.line2" data-i18n-html>honestos sob <em>carga</em>.</span>
+    </h1>
 
+    <div class="hero__deck reveal reveal-delay-2">
+      <p class="hero__lede" data-i18n="hero.lede" data-i18n-html>
+        Sou o <strong>Vitor Gabriel</strong> — engenheiro full stack trabalhando com Laravel SaaS, CI/CD e infraestrutura. Transformo problemas técnicos confusos em algo que o negócio pode confiar em produção.
+      </p>
 
-    <header id="home" class="header animate__fadeIn">
-      <div class="overlay"></div>
-      <div class="header-content container">
-        <h1 class="header-title animate__fadeIn">
-          <span class="up"></span>
-          <span class="down"></span>
-        </h1>
-        <p class="header-subtitle"></p>
-        <div class="header-language-wrap">
-          <a href="https://docs.github.com/en/get-started/exploring-integrations/github-developer-program"
-            target="_blank" class="github-member-link">
-            <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true"
-              class="octicon octicon-cpu color-fg-muted mr-1">
-              <path
-                d="M6.5.75V2h3V.75a.75.75 0 0 1 1.5 0V2h1.25c.966 0 1.75.784 1.75 1.75V5h1.25a.75.75 0 0 1 0 1.5H14v3h1.25a.75.75 0 0 1 0 1.5H14v1.25A1.75 1.75 0 0 1 12.25 14H11v1.25a.75.75 0 0 1-1.5 0V14h-3v1.25a.75.75 0 0 1-1.5 0V14H3.75A1.75 1.75 0 0 1 2 12.25V11H.75a.75.75 0 0 1 0-1.5H2v-3H.75a.75.75 0 0 1 0-1.5H2V3.75C2 2.784 2.784 2 3.75 2H5V.75a.75.75 0 0 1 1.5 0Zm5.75 11.75a.25.25 0 0 0 .25-.25v-8.5a.25.25 0 0 0-.25-.25h-8.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25ZM5.75 5h4.5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-.75.75h-4.5a.75.75 0 0 1-.75-.75v-4.5A.75.75 0 0 1 5.75 5Zm.75 4.5h3v-3h-3Z">
-              </path>
-            </svg>
-            <span class="github-member-text">Developer Program Member | Github</span>
-          </a>
-          <button type="button" id="language-toggle" class="language-toggle" aria-label="Switch language" data-active="en">
-            <span class="language-thumb" aria-hidden="true"></span>
-            <span class="language-option" data-lang="en">EN</span>
-            <span class="language-option" data-lang="pt">PT</span>
-          </button>
-        </div>
-      </div>
-    </header>
-
-    <div class="menu-context-atalho" style="display: none;">
-      <div class="menu-content">
-        <!-- Título do menu -->
-        <div class="menu-header">
-          <h2>Buscar projetos</h2>
-          <button class="close-btn" onclick="closeMenu()">×</button>
-        </div>
-
-        <!-- Campo de busca -->
-        <div class="search-container">
-          <input type="text" placeholder="Pesquise por projetos..." class="search-input">
-        </div>
-
-        <!-- Outras opções de menu -->
-        <div class="menu-options">
-          <ul>
-            <li><a href="#">Novo Repositório</a></li>
-            <li><a href="#">Explorar</a></li>
-            <li><a href="#">Configurações</a></li>
-          </ul>
-        </div>
+      <div class="hero__cta">
+        <a href="projects.html" data-link class="btn btn--primary" data-i18n="btn.see_work">Ver os projetos →</a>
+        <a href="about.html" data-link class="btn" data-i18n="btn.read_about">Ler sobre mim</a>
+        <a href="#quickread" class="btn btn--ghost" data-i18n="btn.skim">↓ Resumo</a>
       </div>
     </div>
 
-    <section class="section pt-0" id="about">
-      <div class="container text-center">
-        <div class="about">
-          <div class="about-img-holder">
-            <img loading="lazy" src="assets/imgs/man.png" class="about-img"
-              alt="Vitor Gabriel - Full Stack Developer" />
-          </div>
-          <div class="about-caption">
-            <p class="section-subtitle">Who Am I?</p>
-            <h2 class="section-title mb-3">About Me</h2>
-            <p class="about-description">
-              I am Vitor Gabriel de Oliveira, a passionate Full Stack
-              Developer. From a young age, I’ve been driven by the
-              possibilities of technology and how it can solve real-world
-              problems...
-            </p>
-            <a href="assets/pdfs/CV.pdf" target="_blank"
-              class="btn-rounded btn btn-outline-primary mt-4 about-download-cv">Download
-              CV</a>
-          </div>
-        </div>
+    <!-- hero console — original motif, not copying any product -->
+    <div class="hero__console reveal reveal-delay-3" aria-hidden="true">
+      <div class="console__bar">
+        <span class="console__path mono">~/portfolio/engineer.md</span>
+        <span class="console__meta mono">UTF-8 · LF · Markdown</span>
       </div>
-    </section>
-
-    <section class="section" id="specialties">
-      <div class="container text-center">
-        <p class="section-subtitle">Core Domains</p>
-        <h6 class="section-title mb-6">Specialties</h6>
-        <div class="row specialties-grid">
-          <div class="col-md-4">
-            <article class="specialty-card">
-              <h6 class="title">Frontend</h6>
-              <div class="specialty-levels">
-                <div class="specialty-level" data-level="5y">
-                  <p class="specialty-level-label"><i class="ti-star" aria-hidden="true"></i><span>&gt; 5 anos</span></p>
-                  <ul class="specialty-list">
-                    <li class="specialty-item"><a class="specialty-link" href="https://developer.mozilla.org/docs/Web/HTML" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">HTML</span></a></li>
-                    <li class="specialty-item"><a class="specialty-link" href="https://developer.mozilla.org/docs/Web/CSS" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">CSS</span></a></li>
-                    <li class="specialty-item"><a class="specialty-link" href="https://developer.mozilla.org/docs/Web/JavaScript" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">JavaScript</span></a></li>
-                    <li class="specialty-item"><a class="specialty-link" href="https://api.jquery.com/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">jQuery</span></a></li>
-                  </ul>
-                </div>
-                <div class="specialty-level" data-level="3y">
-                  <p class="specialty-level-label"><i class="ti-layers" aria-hidden="true"></i><span>&gt; 3 anos</span></p>
-                  <ul class="specialty-list">
-                    <li class="specialty-item"><a class="specialty-link" href="https://react.dev/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">React.js</span></a></li>
-                    <li class="specialty-item"><a class="specialty-link" href="https://sass-lang.com/documentation/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">SASS</span></a></li>
-                    <li class="specialty-item"><a class="specialty-link" href="https://sass-lang.com/documentation/syntax/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">SCSS</span></a></li>
-                    <li class="specialty-item"><a class="specialty-link" href="https://vuejs.org/guide/introduction.html" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">Vue.js</span></a></li>
-                    <li class="specialty-item"><a class="specialty-link" href="https://angular.dev/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">Angular</span></a></li>
-                    <li class="specialty-item"><a class="specialty-link" href="https://www.typescriptlang.org/docs/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">TypeScript</span></a></li>
-                  </ul>
-                </div>
-                <div class="specialty-level" data-level="1y">
-                  <p class="specialty-level-label"><i class="ti-rocket" aria-hidden="true"></i><span>&gt; 1 ano</span></p>
-                  <ul class="specialty-list">
-                    <li class="specialty-item"><a class="specialty-link" href="https://nextjs.org/docs" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">Next.js</span></a></li>
-                  </ul>
-                </div>
-              </div>
-            </article>
-          </div>
-          <div class="col-md-4">
-            <article class="specialty-card">
-              <h6 class="title">Backend</h6>
-              <div class="specialty-levels">
-                <div class="specialty-level" data-level="5y">
-                  <p class="specialty-level-label"><i class="ti-star" aria-hidden="true"></i><span>&gt; 5 anos</span></p>
-                  <ul class="specialty-list">
-                    <li class="specialty-item"><a class="specialty-link" href="https://www.php.net/docs.php" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">PHP</span></a></li>
-                    <li class="specialty-item"><a class="specialty-link" href="https://restfulapi.net/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">API REST</span></a></li>
-                  </ul>
-                </div>
-                <div class="specialty-level" data-level="3y">
-                  <p class="specialty-level-label"><i class="ti-layers" aria-hidden="true"></i><span>&gt; 3 anos</span></p>
-                  <ul class="specialty-list">
-                    <li class="specialty-item"><a class="specialty-link" href="https://nodejs.org/docs/latest/api/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">Node.js</span></a></li>
-                    <li class="specialty-item"><a class="specialty-link" href="https://expressjs.com/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">Express.js</span></a></li>
-                    <li class="specialty-item"><a class="specialty-link" href="https://www.apollographql.com/docs/apollo-server/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">Apollo Server</span></a></li>
-                    <li class="specialty-item"><a class="specialty-link" href="https://graphql.org/learn/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">GraphQL</span></a></li>
-                  </ul>
-                </div>
-                <div class="specialty-level" data-level="1y">
-                  <p class="specialty-level-label"><i class="ti-rocket" aria-hidden="true"></i><span>&gt; 1 ano</span></p>
-                  <ul class="specialty-list">
-                    <li class="specialty-item"><a class="specialty-link" href="https://laravel.com/docs" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">Laravel</span></a></li>
-                    <li class="specialty-item"><a class="specialty-link" href="https://www.mongodb.com/docs/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">MongoDB</span></a></li>
-                    <li class="specialty-item"><a class="specialty-link" href="https://jwt.io/introduction" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">JWT</span></a></li>
-                    <li class="specialty-item"><a class="specialty-link" href="https://pm2.keymetrics.io/docs/usage/quick-start/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">PM2</span></a></li>
-                  </ul>
-                </div>
-              </div>
-            </article>
-          </div>
-          <div class="col-md-4">
-            <article class="specialty-card">
-              <h6 class="title">DevOps &amp; Quality</h6>
-              <div class="specialty-levels">
-                <div class="specialty-level" data-level="5y">
-                  <p class="specialty-level-label"><i class="ti-star" aria-hidden="true"></i><span>&gt; 5 anos</span></p>
-                  <ul class="specialty-list">
-                    <li class="specialty-item"><a class="specialty-link" href="https://git-scm.com/doc" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">Git</span></a></li>
-                    <li class="specialty-item"><a class="specialty-link" href="https://docs.github.com/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">GitHub</span></a></li>
-                    <li class="specialty-item"><a class="specialty-link" href="https://jestjs.io/docs/getting-started" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">Testes</span></a></li>
-                    <li class="specialty-item"><a class="specialty-link" href="https://httpd.apache.org/docs/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">Apache</span></a></li>
-                  </ul>
-                </div>
-                <div class="specialty-level" data-level="3y">
-                  <p class="specialty-level-label"><i class="ti-layers" aria-hidden="true"></i><span>&gt; 3 anos</span></p>
-                  <ul class="specialty-list">
-                    <li class="specialty-item"><a class="specialty-link" href="https://docs.gitlab.com/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">GitLab</span></a></li>
-                    <li class="specialty-item"><a class="specialty-link" href="https://docs.github.com/en/actions" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">CI/CD</span></a></li>
-                    <li class="specialty-item"><a class="specialty-link" href="https://docs.docker.com/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">Docker</span></a></li>
-                    <li class="specialty-item"><a class="specialty-link" href="https://www.kernel.org/doc/html/latest/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">Linux</span></a></li>
-                    <li class="specialty-item"><a class="specialty-link" href="https://docs.digitalocean.com/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">DigitalOcean</span></a></li>
-                  </ul>
-                </div>
-                <div class="specialty-level" data-level="1y">
-                  <p class="specialty-level-label"><i class="ti-rocket" aria-hidden="true"></i><span>&gt; 1 ano</span></p>
-                  <ul class="specialty-list">
-                    <li class="specialty-item"><a class="specialty-link" href="https://docs.aws.amazon.com/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">AWS</span></a></li>
-                    <li class="specialty-item"><a class="specialty-link" href="https://nginx.org/en/docs/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">Nginx</span></a></li>
-                    <li class="specialty-item"><a class="specialty-link" href="https://kubernetes.io/docs/home/" target="_blank" rel="noopener noreferrer"><i class="ti-link tech-link-icon" aria-hidden="true"></i><span class="tech-name">Kubernetes</span></a></li>
-                  </ul>
-                </div>
-              </div>
-            </article>
-          </div>
-        </div>
+      <div class="console__body">
+        <div class="console__line"><span class="mono ink-faint">01</span><span class="mono">#</span> <span class="mono ink">Vitor Gabriel</span></div>
+        <div class="console__line"><span class="mono ink-faint">02</span><span class="mono">&gt;</span> Full Stack Engineer · Pleno @ Clickweb</div>
+        <div class="console__line"><span class="mono ink-faint">03</span></div>
+        <div class="console__line"><span class="mono ink-faint">04</span><span class="mono">//</span> currently building</div>
+        <div class="console__line"><span class="mono ink-faint">05</span><span class="key">core</span><span class="eq">=</span><span class="val">laravel-fintech</span></div>
+        <div class="console__line"><span class="mono ink-faint">06</span><span class="key">ops</span> <span class="eq">=</span> <span class="val">risklog.ci</span></div>
+        <div class="console__line"><span class="mono ink-faint">07</span><span class="key">research</span> <span class="eq">=</span> <span class="val">tokenisation · KV-attention</span></div>
+        <div class="console__line"><span class="mono ink-faint">08</span></div>
+        <div class="console__line"><span class="mono ink-faint">09</span><span class="mono">$</span> <span class="prompt">whoami</span><span class="caret"></span></div>
       </div>
-    </section>
+    </div>
 
-    <section class="section" id="timeline-section">
-      <div class="container text-center timeline-section-head">
-        <p class="section-subtitle timeline-section-subtitle">Career Journey</p>
-        <h6 class="section-title mb-6 timeline-section-title">Timeline</h6>
+    <!-- marquee of stacks -->
+    <div class="marquee reveal reveal-delay-4" aria-hidden="true">
+      <div class="marquee__track">
+        <span>LARAVEL</span><span>·</span><span>REACT</span><span>·</span><span>POSTGRES</span><span>·</span>
+        <span>DOCKER</span><span>·</span><span>KUBERNETES</span><span>·</span><span>GRAPHQL</span><span>·</span>
+        <span>NEXT.JS</span><span>·</span><span>NODE.JS</span><span>·</span><span>LINUX</span><span>·</span>
+        <span>TYPESCRIPT</span><span>·</span><span>CI/CD</span><span>·</span><span>NGINX</span><span>·</span>
+        <span>LARAVEL</span><span>·</span><span>REACT</span><span>·</span><span>POSTGRES</span><span>·</span>
+        <span>DOCKER</span><span>·</span><span>KUBERNETES</span><span>·</span><span>GRAPHQL</span><span>·</span>
+        <span>NEXT.JS</span><span>·</span><span>NODE.JS</span><span>·</span><span>LINUX</span><span>·</span>
+        <span>TYPESCRIPT</span><span>·</span><span>CI/CD</span><span>·</span><span>NGINX</span><span>·</span>
       </div>
-      <div class="timeline-collapse-wrap">
-        <ol class="timeline is-collapsed" id="career-timeline">
-        <li class="timeline-item">
-          <div class="timeline-item-description">
-            <i class="avatar | small">
-              <img src="https://assets.codepen.io/285131/hat-man.png" alt="Blockchain Developer" />
-            </i>
-            <span>I started Front-End with <a href="https://developer.mozilla.org/docs/Web/HTML">HTML5</a>, <a
-                href="https://developer.mozilla.org/docs/Web/CSS">CSS3</a>, <a
-                href="https://developer.mozilla.org/docs/Web/JavaScript">JavaScript</a>, <a
-                href="https://sass-lang.com/documentation">SCSS/SASS</a> and <a href="https://lesscss.org/">LESS</a></span>
-            <p>I built responsive interfaces and reusable style layers, balancing performance, accessibility and visual consistency.</p>
-          </div>
-        </li>
+    </div>
+  </div>
+</section>
 
-        <li class="timeline-item">
-          <div class="timeline-item-description">
-            <i class="avatar | small">
-              <img src="https://assets.codepen.io/285131/hat-man.png" alt="jQuery Developer" />
-            </i>
-            <span>I worked with <a href="https://api.jquery.com/">jQuery</a> for <a
-                href="https://developer.mozilla.org/docs/Web/API/Document_Object_Model">DOM</a>, <a
-                href="https://developer.mozilla.org/docs/Web/API/XMLHttpRequest_API">AJAX</a> and UI interactions</span>
-            <p>I implemented lightweight interactive flows with faster iteration and maintainable behavior in production pages.</p>
-          </div>
-        </li>
+<!-- ============== QUICK READ ============== -->
+<section id="quickread" class="section">
+  <div class="container grid-2">
+    <div class="reveal">
+      <div class="mono-label" data-i18n="qr.label">[02] Resumo rápido</div>
+      <h2 class="section__title" data-i18n="qr.title" data-i18n-html>Um engenheiro full-stack<br>com viés de infra.</h2>
+    </div>
+    <div class="reveal reveal-delay-1 section__text">
+      <p data-i18n="qr.p1">Cinco anos com HTML/CSS/JavaScript, três rodando React e Node em produção, um liderando APIs Laravel e pipelines Kubernetes — vou onde estiver o gargalo.</p>
+      <p data-i18n="qr.p2">Me importo com o formato dos sistemas: as costuras entre serviços, como a falha se propaga, como a observabilidade é montada. Decisões de arquitetura que parecem pequenas no dia um e compõem por anos.</p>
+      <p data-i18n="qr.p3">Nas horas livres: protótipos com blockchain, e no momento estou imerso em internals de transformers — tokenização, atenção Q/K/V, lendo a matemática de ponta a ponta.</p>
+    </div>
+  </div>
+</section>
 
-        <li class="timeline-item">
-          <div class="timeline-item-description">
-            <i class="avatar | small">
-              <img src="https://assets.codepen.io/285131/hat-man.png" alt="React Developer" />
-            </i>
-            <span>I developed interfaces with <a href="https://react.dev/">React.js</a>, <a href="https://vuejs.org/guide/introduction.html">Vue.js</a>,
-              <a href="https://angular.dev/">Angular</a>, <a href="https://docs.npmjs.com/">npm</a> and <a
-                href="https://yarnpkg.com/getting-started">yarn</a></span>
-            <p>I created scalable front-end modules, standardized package workflows and improved delivery speed in projects.</p>
-          </div>
-        </li>
-
-        <li class="timeline-item">
-          <div class="timeline-item-description">
-            <i class="avatar | small">
-              <img src="https://assets.codepen.io/285131/hat-man.png" alt="Version Control" />
-            </i>
-            <span>I improved version control with <a href="https://git-scm.com/doc">Git</a>, <a href="https://docs.github.com/">GitHub</a>, <a
-                href="https://docs.gitlab.com/">GitLab</a> and <a href="https://github.com/gitbucket/gitbucket">GitBucket</a></span>
-            <p>I strengthened branch strategy, collaboration routines and review quality for safer releases and better code ownership.</p>
-          </div>
-        </li>
-
-        <li class="timeline-item timeline-item--career">
-          <span class="timeline-item-icon | faded-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="16" viewBox="0 0 18 16" fill="none">
-              <path
-                d="M1.616 16C1.15533 16 0.771 15.846 0.463 15.538C0.155 15.23 0.000666667 14.8453 0 14.384V4.616C0 4.15534 0.154333 3.771 0.463 3.463C0.771667 3.155 1.15567 3.00067 1.615 3H6V1.615C6 1.155 6.15433 0.770669 6.463 0.462002C6.77167 0.153335 7.156 -0.000664511 7.616 2.15517e-06H10.385C10.845 2.15517e-06 11.2293 0.154002 11.538 0.462002C11.8467 0.770002 12.0007 1.15434 12 1.615V3H16.385C16.845 3 17.229 3.15434 17.537 3.463C17.845 3.77167 17.9993 4.156 18 4.616V14.385C18 14.845 17.8457 15.2293 17.537 15.538C17.2283 15.8467 16.8443 16.0007 16.385 16H1.616ZM7 3H11V1.615C11 1.46167 10.936 1.32067 10.808 1.192C10.68 1.06334 10.539 0.999335 10.385 1H7.615C7.46167 1 7.32067 1.064 7.192 1.192C7.06333 1.32 6.99933 1.461 7 1.615V3ZM9 11C9.422 11 9.77733 10.8553 10.066 10.566C10.3553 10.2773 10.5 9.922 10.5 9.5C10.5 9.078 10.3553 8.72267 10.066 8.434C9.77667 8.14534 9.42133 8.00067 9 8C8.57867 7.99934 8.22333 8.144 7.934 8.434C7.64467 8.72267 7.5 9.078 7.5 9.5C7.5 9.922 7.64467 10.2773 7.934 10.566C8.22333 10.8547 8.57867 10.9993 9 11Z"
-                fill="#7B7B7B" />
-            </svg>
-          </span>
-          <div class="timeline-item-description">
-            <i class="avatar | small">
-              <img src="https://clickweb.com.br/common/default/images/favicon/32x32.png" />
-            </i>
-            <span>I started as a Full Stack Developer intern at <a href="https://clickweb.com.br">Clickweb</a></span>
-            <p>I worked across front-end and back-end demands while learning business constraints, support flow and delivery discipline.</p>
-          </div>
-        </li>
-
-        <li class="timeline-item">
-          <div class="timeline-item-description">
-            <i class="avatar | small">
-              <img src="https://assets.codepen.io/285131/hat-man.png" alt="Backend Developer" />
-            </i>
-            <span>I developed back-end solutions with <a href="https://nodejs.org/docs/latest/api/">Node.js</a>, <a href="https://expressjs.com/">Express.js</a>,
-              <a href="https://restfulapi.net/">RESTful APIs</a>, <a href="https://www.php.net/docs.php">PHP</a>, <a
-                href="https://laravel.com/docs">Laravel</a>, <a href="https://jwt.io/introduction">JWT</a>, <a
-                href="https://www.mongodb.com/docs/">MongoDB</a> and <a
-                href="https://pm2.keymetrics.io/docs/usage/quick-start/">PM2</a></span>
-            <p>I unified API and app development stacks, improving authentication, stability and maintainability in daily releases.</p>
-          </div>
-        </li>
-
-        <li class="timeline-item">
-          <div class="timeline-item-description">
-            <i class="avatar | small">
-              <img src="https://assets.codepen.io/285131/hat-man.png" alt="GraphQL & MongoDB Developer" />
-            </i>
-            <span>I implemented <a href="https://graphql.org/learn/">GraphQL</a> with <a
-                href="https://www.apollographql.com/docs/apollo-server/">Apollo Server</a> and <a
-                href="https://www.mongodb.com/docs/">MongoDB</a></span>
-            <p>I designed resolvers and query flows for complex data scenarios with better communication between client and server.</p>
-          </div>
-        </li>
-
-        <li class="timeline-item timeline-item--career">
-          <span class="timeline-item-icon | faded-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="16" viewBox="0 0 18 16" fill="none">
-              <path
-                d="M1.616 16C1.15533 16 0.771 15.846 0.463 15.538C0.155 15.23 0.000666667 14.8453 0 14.384V4.616C0 4.15534 0.154333 3.771 0.463 3.463C0.771667 3.155 1.15567 3.00067 1.615 3H6V1.615C6 1.155 6.15433 0.770669 6.463 0.462002C6.77167 0.153335 7.156 -0.000664511 7.616 2.15517e-06H10.385C10.845 2.15517e-06 11.2293 0.154002 11.538 0.462002C11.8467 0.770002 12.0007 1.15434 12 1.615V3H16.385C16.845 3 17.229 3.15434 17.537 3.463C17.845 3.77167 17.9993 4.156 18 4.616V14.385C18 14.845 17.8457 15.2293 17.537 15.538C17.2283 15.8467 16.8443 16.0007 16.385 16H1.616ZM7 3H11V1.615C11 1.46167 10.936 1.32067 10.808 1.192C10.68 1.06334 10.539 0.999335 10.385 1H7.615C7.46167 1 7.32067 1.064 7.192 1.192C7.06333 1.32 6.99933 1.461 7 1.615V3ZM9 11C9.422 11 9.77733 10.8553 10.066 10.566C10.3553 10.2773 10.5 9.922 10.5 9.5C10.5 9.078 10.3553 8.72267 10.066 8.434C9.77667 8.14534 9.42133 8.00067 9 8C8.57867 7.99934 8.22333 8.144 7.934 8.434C7.64467 8.72267 7.5 9.078 7.5 9.5C7.5 9.922 7.64467 10.2773 7.934 10.566C8.22333 10.8547 8.57867 10.9993 9 11Z"
-                fill="#7B7B7B" />
-            </svg>
-          </span>
-          <div class="timeline-item-description">
-            <i class="avatar | small">
-              <img src="https://clickweb.com.br/common/default/images/favicon/32x32.png" />
-            </i>
-            <span>I was promoted to Full Stack Pleno Developer at <a href="https://clickweb.com.br">Clickweb</a></span>
-            <p>I took ownership of technical direction in key deliveries and raised quality standards across the product cycle.</p>
-          </div>
-        </li>
-
-        <li class="timeline-item">
-          <div class="timeline-item-description">
-            <i class="avatar | small">
-              <img src="https://assets.codepen.io/285131/hat-man.png" alt="DevOps Tools" />
-            </i>
-            <span>I integrated <a href="https://docs.github.com/en/actions">CI/CD</a>, <a href="https://docs.docker.com/">Docker</a>, and <a
-                href="https://kubernetes.io/docs/home/">Kubernetes</a></span>
-            <p>I automated build, test and deploy pipelines, increasing reliability and reducing lead time for production changes.</p>
-          </div>
-        </li>
-
-        <li class="timeline-item">
-          <div class="timeline-item-wrapper">
-            <div class="timeline-item-description">
-              <i class="avatar | small">
-                <img src="https://assets.codepen.io/285131/hat-man.png" alt="Blockchain Developer" />
-              </i>
-              <span>I studied and prototyped <a href="https://ethereum.org/en/developers/docs/">Blockchain</a></span>
-              <p>I built experiments with <a href="https://docs.soliditylang.org/">Solidity</a> and <a
-                  href="https://ethereum.org/en/developers/docs/">Ethereum</a>, validating DApp and decentralized integration concepts.</p>
-            </div>
-          </div>
-        </li>
-
-        <li class="timeline-item">
-          <div class="timeline-item-description">
-            <i class="avatar | small">
-              <img src="https://assets.codepen.io/285131/hat-man.png" alt="DevOps" />
-            </i>
-            <span>I configured servers and hosting environments on <a href="https://docs.digitalocean.com/">DigitalOcean</a>, <a
-                href="https://docs.aws.amazon.com/">AWS</a>, <a href="https://www.hostinger.com/tutorials">Hostinger</a>, and <a
-                href="https://www.hostgator.com/help">Hostgator</a> with <a
-                href="https://www.kernel.org/doc/html/latest/">Linux</a>, <a href="https://www.openssh.com/manual.html">SSH</a> and <a
-                href="https://nginx.org/en/docs/">Nginx</a></span>
-            <p>After becoming pleno, I also worked on architecture decisions and team organization; you can refine these responsibilities later.</p>
-          </div>
-        </li>
-        </ol>
-        <button type="button" id="timeline-toggle" class="timeline-toggle-button"
-          aria-expanded="false">Show more</button>
+<!-- ============== FEATURED WORK ============== -->
+<section class="section section--tight">
+  <div class="container">
+    <div class="section__head">
+      <div class="reveal">
+        <div class="mono-label" data-i18n="feat.label">[03] Trabalhos selecionados</div>
+        <h2 class="section__title" data-i18n="feat.title" data-i18n-html>Três projetos<br>que vale a pena ler.</h2>
       </div>
-    </section>
+      <a href="projects.html" data-link class="btn btn--ghost reveal reveal-delay-2" data-i18n="btn.all_projects">Todos os projetos →</a>
+    </div>
 
-    <section class="section" id="services">
-      <div class="container text-center">
-        <p class="section-subtitle">What I Do?</p>
-        <h6 class="section-title mb-6">Services</h6>
-        <div class="row">
-          <div class="col-md-6 col-lg-3">
-            <div class="service-card">
-              <div class="body">
-                <img loading="lazy" src="assets/imgs/Docker-teste.svg" alt="Docker" class="icon" />
-                <h6 class="title">Docker & Kubernetes</h6>
-                <p class="subtitle">
-                  I work with containerization and orchestration using Docker
-                  and Kubernetes.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3">
-            <div class="service-card">
-              <div class="body">
-                <img loading="lazy" src="assets/imgs/linux.svg" alt="Linux Configuration" class="icon" />
-                <h6 class="title">Linux Configuration</h6>
-                <p class="subtitle">
-                  I configure and manage Linux servers to optimize performance
-                  and security.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3">
-            <div class="service-card">
-              <div class="body">
-                <img loading="lazy" src="assets/imgs/p2p.svg" alt="Backend Development" class="icon" />
-                <h6 class="title">Backend Development</h6>
-                <p class="subtitle">
-                  I build robust backends with Laravel, focused on APIs,
-                  security and scalability.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3">
-            <div class="service-card">
-              <div class="body">
-                <img loading="lazy" src="assets/imgs/web-dev.svg" alt="Frontend Development" class="icon" />
-                <h6 class="title">Frontend Development</h6>
-                <p class="subtitle">I develop modern frontends with React and Next.js.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3">
-            <div class="service-card">
-              <div class="body">
-                <img loading="lazy" src="assets/imgs/analytics.svg" alt="API Integrations" class="icon" />
-                <h6 class="title">APIs & Integrations</h6>
-                <p class="subtitle">I design and integrate APIs with reliable contracts, versioning and data consistency.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3">
-            <div class="service-card">
-              <div class="body">
-                <img loading="lazy" src="assets/imgs/startup.svg" alt="Deployment Automation" class="icon" />
-                <h6 class="title">Deployment Automation</h6>
-                <p class="subtitle">I build CI/CD pipelines that automate test, release and rollback with safer production flow.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3">
-            <div class="service-card">
-              <div class="body">
-                <img loading="lazy" src="assets/imgs/toolbox.svg" alt="Application Security" class="icon" />
-                <h6 class="title">Application Security</h6>
-                <p class="subtitle">I apply secure coding practices, authentication hardening and vulnerability prevention.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3">
-            <div class="service-card">
-              <div class="body">
-                <img loading="lazy" src="assets/imgs/responsive.svg" alt="Software Quality" class="icon" />
-                <h6 class="title">Software Quality</h6>
-                <p class="subtitle">I ensure software quality with tests, coverage and regression prevention.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <div class="feat" id="featuredGrid"></div>
+  </div>
+</section>
 
-    <section class="section" id="availability">
-      <div class="container text-center">
-        <p class="section-subtitle">How I Work</p>
-        <h6 class="section-title mb-6">Availability</h6>
-        <div class="row availability-grid">
-          <div class="col-md-6 col-lg-3">
-            <article class="availability-card">
-              <h6 class="title">CLT &bull; PJ &bull; Freelance</h6>
-              <p class="subtitle">Open to full-time roles and strategic project contracts.</p>
-            </article>
-          </div>
-          <div class="col-md-6 col-lg-3">
-            <article class="availability-card">
-              <h6 class="title">Remote &bull; Hybrid</h6>
-              <p class="subtitle">Remote-first, with hybrid options depending on team and location.</p>
-            </article>
-          </div>
-          <div class="col-md-6 col-lg-3">
-            <article class="availability-card">
-              <h6 class="title">UTC-3 (Brazil)</h6>
-              <p class="subtitle">Comfortable collaborating with teams in Brazil and abroad.</p>
-            </article>
-          </div>
-          <div class="col-md-6 col-lg-3">
-            <article class="availability-card">
-              <h6 class="title">Immediate Start</h6>
-              <p class="subtitle">Can start quickly with clear onboarding and smooth handover.</p>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
+<!-- ============== CAPABILITIES ============== -->
+<section class="section">
+  <div class="container">
+    <div class="reveal">
+      <div class="mono-label" data-i18n="caps.label">[04] O que eu faço</div>
+      <h2 class="section__title" data-i18n="caps.title" data-i18n-html>Generalista. Fundo onde<br>precisa ser fundo.</h2>
+    </div>
 
-    <section class="section" id="portfolio">
-      <div class="container text-center">
-        <p class="section-subtitle">What I Did?</p>
-        <h6 class="section-title mb-6">Portfolio</h6>
-        <div class="row">
-          <div class="col-md-4">
-            <a href="https://github.com/vitorgabrieldev/Blockchain" target="_blank" class="portfolio-card">
-              <img loading="lazy" src="https://images.unsplash.com/photo-1526378800651-c32d170fe6f8?auto=format&fit=crop&w=1200&q=80" class="portfolio-card-img" alt="Blockchain Project" />
-              <span class="portfolio-card-overlay"><span class="portfolio-card-caption"><h4>Blockchain Solutions</h4><p class="font-weight-normal">Category: Blockchain System</p></span></span>
-            </a>
-          </div>
-          <div class="col-md-4">
-            <a href="https://github.com/vitorgabrieldev/motion-recognition-for-interaction-optimization" target="_blank" class="portfolio-card">
-              <img loading="lazy" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80" class="portfolio-card-img" alt="Motion Recognition Project" />
-              <span class="portfolio-card-overlay"><span class="portfolio-card-caption"><h4>Advanced Hand Motion Recognition</h4><p class="font-weight-normal">Category: Python Computer Vision</p></span></span>
-            </a>
-          </div>
-          <div class="col-md-4">
-            <a href="https://github.com/vitorgabrieldev/dubflow.pro.br" target="_blank" class="portfolio-card">
-              <img loading="lazy" src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1200&q=80" class="portfolio-card-img" alt="DubFlow Platform" />
-              <span class="portfolio-card-overlay"><span class="portfolio-card-caption"><h4>Social Network for Dubbers</h4><p class="font-weight-normal">Category: Community Platform (Laravel)</p></span></span>
-            </a>
-          </div>
-          <div class="col-md-4">
-            <a href="https://github.com/vitorgabrieldev/frontend.dubflow.pro.br" target="_blank" class="portfolio-card">
-              <img loading="lazy" src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1200&q=80" class="portfolio-card-img" alt="DubFlow Frontend" />
-              <span class="portfolio-card-overlay"><span class="portfolio-card-caption"><h4>DubFlow Frontend</h4><p class="font-weight-normal">Category: Front-End (Next.js, TypeScript)</p></span></span>
-            </a>
-          </div>
-          <div class="col-md-4">
-            <a href="https://github.com/vitorgabrieldev/rotina.pro.br" target="_blank" class="portfolio-card">
-              <img loading="lazy" src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1200&q=80" class="portfolio-card-img" alt="Business Organization Platform" />
-              <span class="portfolio-card-overlay"><span class="portfolio-card-caption"><h4>Business Organization System</h4><p class="font-weight-normal">Category: Company Workflow Platform</p></span></span>
-            </a>
-          </div>
-          <div class="col-md-4">
-            <a href="https://github.com/vitorgabrieldev/risklog-api" target="_blank" class="portfolio-card">
-              <img loading="lazy" src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80" class="portfolio-card-img" alt="Risklog API" />
-              <span class="portfolio-card-overlay"><span class="portfolio-card-caption"><h4>Risklog CI/CD Integration</h4><p class="font-weight-normal">Category: Deployment Reports & Summaries</p></span></span>
-            </a>
-          </div>
-          <div class="col-md-4">
-            <a href="https://github.com/vitorgabrieldev/painel.startup.dev.br" target="_blank" class="portfolio-card">
-              <img loading="lazy" src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1200&q=80" class="portfolio-card-img" alt="Startup Admin Panel" />
-              <span class="portfolio-card-overlay"><span class="portfolio-card-caption"><h4>Risklog Admin Panel</h4><p class="font-weight-normal">Category: Admin Dashboard (Laravel)</p></span></span>
-            </a>
-          </div>
-          <div class="col-md-4">
-            <a href="https://github.com/vitorgabrieldev/laravel-fintech-core" target="_blank" class="portfolio-card">
-              <img loading="lazy" src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80" class="portfolio-card-img" alt="Laravel Fintech Core" />
-              <span class="portfolio-card-overlay"><span class="portfolio-card-caption"><h4>Complete Banking System</h4><p class="font-weight-normal">Category: Fintech Platform</p></span></span>
-            </a>
-          </div>
-          <div class="col-md-4">
-            <a href="https://github.com/vitorgabrieldev/general-agent-terminal-linux" target="_blank" class="portfolio-card">
-              <img loading="lazy" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80" class="portfolio-card-img" alt="General Agent Terminal Linux" />
-              <span class="portfolio-card-overlay"><span class="portfolio-card-caption"><h4>Mistral AI Linux Terminal Agent</h4><p class="font-weight-normal">Category: AI + Linux Terminal</p></span></span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="section-sm bg-primary">
-      <div class="container text-center text-sm-left">
-        <div class="row align-items-center">
-          <div class="col-sm offset-md-1 mb-4 mb-md-0">
-            <h6 class="title text-light cta-title">Let's Build Results Together</h6>
-            <p class="m-0 text-light cta-text">
-              If you need ownership, quality and fast delivery, let's talk about your next project.
-            </p>
-          </div>
-          <div class="col-sm offset-sm-2 offset-md-3 container-offset">
-            <a href="https://wa.me/43984873807" target="_blank" class="btn btn-lg my-font btn-light rounded cta-button">Start a conversation</a>
-          </div>
-        </div>
-      </div>
-    </section>
+    <div class="caps-grid" id="capsGrid"></div>
+  </div>
+</section>
 
-    <div class="container">
-      <footer class="footer">
-        <p class="mb-0">
-          <span class="footer-copyright-label">Copyright</span>
-          <script>
-            document.write(new Date().getFullYear());
-          </script>
-          &copy; Vitor Gabriel
+<!-- ============== LATEST WRITING ============== -->
+<section class="section">
+  <div class="container">
+    <div class="section__head">
+      <div class="reveal">
+        <div class="mono-label" data-i18n="journ.label">[05] Diário</div>
+        <h2 class="section__title" data-i18n="journ.title">Notas, em público.</h2>
+      </div>
+      <a href="journal.html" data-link class="btn btn--ghost reveal reveal-delay-2" data-i18n="btn.read_all">Ler tudo →</a>
+    </div>
+    <div class="journal-list" id="journalList"></div>
+  </div>
+</section>
+
+<!-- ============== AVAILABILITY ============== -->
+<section class="section">
+  <div class="container">
+    <div class="cta-slab reveal">
+      <div>
+        <div class="mono-label" style="color:rgba(255,255,255,.55)" data-i18n="avail.label">[06] Disponibilidade</div>
+        <h2 class="section__title" style="color:#fff; max-width:18ch" data-i18n="avail.title">Contratando um engenheiro que entrega?</h2>
+        <p style="color:rgba(255,255,255,.7); max-width:48ch; margin-top:16px; font-size:16px;" data-i18n="avail.p">
+          CLT, PJ ou Freelance. Remote-first, híbrido possível. Onboarding em uma semana. Atualmente disponível para novos projetos.
         </p>
-        <div class="social-links text-right m-auto ml-sm-auto">
-          <a target="_blank" href="mailto:vitorgabrieldeoliveiradev@gmail.com" class="link"><i class="ti-email"></i></a>
-        </div>
-      </footer>
+      </div>
+      <div class="cta-slab__actions">
+        <a href="contact.html" data-link class="btn btn--primary" data-i18n="avail.book">Agendar conversa →</a>
+        <a href="mailto:contact@vitorgabriel.dev" class="btn" style="background:transparent; color:#fff; border-color:rgba(255,255,255,.3)" data-i18n="btn.email">Email</a>
+      </div>
     </div>
+  </div>
+</section>
 
-  <script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
-  <script src="assets/js/meyawo.js"></script>
+<!-- Tweaks panel -->
+<div id="tweaks" class="tweaks" hidden>
+  <div class="tweaks__head">
+    <span class="mono" style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)">Tweaks</span>
+    <button id="tweakClose" class="mono" style="font-size:12px">✕</button>
+  </div>
+  <div class="tweaks__row">
+    <label class="mono">Density</label>
+    <div class="tweaks__seg">
+      <button data-density="comfortable" class="on">Spacious</button>
+      <button data-density="compact">Compact</button>
+    </div>
+  </div>
+  <div class="tweaks__row">
+    <label class="mono">Accent</label>
+    <div class="tweaks__swatches">
+      <button data-accent="#c96442" class="on" style="background:#c96442"></button>
+      <button data-accent="#6b7a4a" style="background:#6b7a4a"></button>
+      <button data-accent="#3d5a7a" style="background:#3d5a7a"></button>
+      <button data-accent="#8a5a8c" style="background:#8a5a8c"></button>
+      <button data-accent="#1e1a16" style="background:#1e1a16"></button>
+    </div>
+  </div>
+  <div class="tweaks__row">
+    <label class="mono">Theme</label>
+    <div class="tweaks__seg" data-seg="theme">
+      <button data-theme="light" class="on">Light</button>
+      <button data-theme="dark">Dark</button>
+    </div>
+  </div>
+  <div class="tweaks__row">
+    <label class="mono">Custom cursor</label>
+    <input type="checkbox" id="tweakCursor" checked>
+  </div>
+</div>
+<style>
+.tweaks { position: fixed; bottom: 24px; right: 24px; z-index: 200; width: 280px; background: var(--bg-elev); border: 1px solid var(--line-strong); border-radius: var(--radius-lg); padding: 16px; box-shadow: 0 20px 48px -20px rgba(0,0,0,.2); }
+.tweaks__head { display: flex; justify-content: space-between; align-items: center; padding-bottom: 10px; margin-bottom: 12px; border-bottom: 1px solid var(--line); }
+.tweaks__row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; gap: 12px; }
+.tweaks__row label { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-muted); }
+.tweaks__seg { display: flex; background: var(--bg-sunken); border-radius: 999px; padding: 2px; }
+.tweaks__seg button { padding: 4px 10px; font-family: var(--font-mono); font-size: 11px; border-radius: 999px; color: var(--ink-muted); }
+.tweaks__seg button.on { background: var(--ink); color: var(--bg); }
+.tweaks__swatches { display: flex; gap: 6px; }
+.tweaks__swatches button { width: 20px; height: 20px; border-radius: 50%; border: 2px solid transparent; transition: border-color var(--dur) var(--ease); }
+.tweaks__swatches button.on { border-color: var(--ink); }
+</style>
+
+<script>
+// Tweaks wiring
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "density": "compact",
+  "accent": "#c96442",
+  "cursor": true
+}/*EDITMODE-END*/;
+(function() {
+  const panel = document.getElementById('tweaks');
+  window.addEventListener('message', (e) => {
+    if (e.data?.type === '__activate_edit_mode') panel.hidden = false;
+    if (e.data?.type === '__deactivate_edit_mode') panel.hidden = true;
+  });
+  window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+
+  const apply = (k, v) => {
+    if (k === 'density') document.body.dataset.density = v;
+    if (k === 'accent') document.documentElement.style.setProperty('--accent', v);
+    if (k === 'theme') document.documentElement.dataset.theme = v;
+    if (k === 'cursor') document.documentElement.classList.toggle('has-cursor', v);
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { [k]: v } }, '*');
+  };
+  apply('density', TWEAK_DEFAULTS.density);
+  apply('accent', TWEAK_DEFAULTS.accent);
+  apply('theme', TWEAK_DEFAULTS.theme);
+
+  panel.querySelectorAll('.tweaks__seg').forEach(seg => {
+    seg.addEventListener('click', e => {
+      const b = e.target.closest('button'); if (!b) return;
+      seg.querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b));
+      if (b.dataset.density) apply('density', b.dataset.density);
+      if (b.dataset.theme) apply('theme', b.dataset.theme);
+    });
+  });
+  panel.querySelector('.tweaks__swatches').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    panel.querySelectorAll('.tweaks__swatches button').forEach(x => x.classList.toggle('on', x === b));
+    apply('accent', b.dataset.accent);
+  });
+  document.getElementById('tweakCursor').addEventListener('change', e => apply('cursor', e.target.checked));
+  document.getElementById('tweakClose').addEventListener('click', () => { panel.hidden = true; window.parent.postMessage({ type: '__deactivate_edit_mode' }, '*'); });
+})();
+</script>
+
+<script src="shared/data.js"></script>
+<script src="shared/enhance.js?v=3" defer></script>
+<script src="shared/i18n.js?v=1"></script>
+<script src="shared/nav.js?v=5"></script>
+<script src="shared/footer.js"></script>
+<script src="home.js"></script>
 </body>
 </html>
-
-
-
-

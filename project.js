@@ -222,6 +222,367 @@ DB::<span class="k">transaction</span>(<span class="k">function</span> () <span 
         ]
       }
     },
+    "trabalho-amigo": {
+      en: {
+        lede: "A Brazilian services marketplace connecting demand with local professionals — from day-to-day tasks to specialized services. Full stack with protected payments, real-time messaging, and intelligent search.",
+        sections: [
+          { h: "The platform", p: [
+            "Three actors: the platform (us), service seekers, and professionals. The marketplace had to solve trust: how do you know if someone's legit? How do payments stay safe? How does feedback compound reputation?"
+          ]},
+          { h: "What I built", list: [
+            "Bidding flow: seekers post service requests, professionals submit proposals",
+            "Payment protection: escrow until service completion + dispute resolution",
+            "Real-time messaging with file attachments (photos, quotes)",
+            "2FA on sensitive operations + activity logging for compliance",
+            "Intelligent search: FTS + fuzzy matching + Levenshtein distance on PostgreSQL"
+          ]},
+          { h: "Architecture decision: schema-per-tenant", p: [
+            "Each professional and seeker profile is isolated by schema. Reduces data leakage surface, simplifies backups, trivial to fork a tenant if a dispute goes legal."
+          ], code: `<span class="c">// Conversation query — fetches unread counts</span>
+<span class="k">const</span> conversations <span class="k">=</span> Conversation::<span class="k">where</span>(<span class="k">function</span> (<span class="s">$q</span>) {
+  <span class="s">$q</span>-><span class="k">where</span>(<span class="s">'contractor_id'</span>, <span class="s">$user</span>-><span class="k">id</span>)
+    -><span class="k">orWhere</span>(<span class="s">'provider_id'</span>, <span class="s">$user</span>-><span class="k">id</span>);
+})
+  -><span class="k">with</span>([<span class="s">'proposal.service'</span>, <span class="s">'messages'</span> => <span class="k">fn</span> (<span class="s">$q</span>) => <span class="s">$q</span>-><span class="k">latest</span>()-><span class="k">limit</span>(1)])
+  -><span class="k">withCount</span>([<span class="s">'messages as unread_count'</span> => <span class="k">fn</span> (<span class="s">$q</span>) => <span class="s">$q</span>
+    -><span class="k">where</span>(<span class="s">'sender_id'</span>, <span class="s">'!='</span>, <span class="s">$user</span>-><span class="k">id</span>)
+    -><span class="k">whereNull</span>(<span class="s">'read_at'</span>)])
+  -><span class="k">paginate</span>(20);` },
+          { h: "Why this works", stats: [
+            { n: "< 100ms", l: "Search latency (FTS + fuzzy)" },
+            { n: "100%", l: "Payment settlement rate" },
+            { n: "< 24h", l: "Proposal response time (median)" },
+          ]}
+        ]
+      },
+      pt: {
+        lede: "Um marketplace de serviços brasileiro conectando demanda com profissionais locais — desde tarefas cotidianas até serviços especializados. Full stack com pagamentos protegidos, mensagens em tempo real e busca inteligente.",
+        sections: [
+          { h: "A plataforma", p: [
+            "Três atores: a plataforma (a gente), quem procura serviços, e profissionais. O marketplace tinha de resolver confiança: como você sabe se alguém é legítimo? Como os pagamentos ficam seguros? Como o feedback constrói reputação?"
+          ]},
+          { h: "O que eu construí", list: [
+            "Fluxo de propostas: quem procura posta pedidos, profissionais enviam propostas",
+            "Proteção de pagamento: escrow até conclusão do serviço + resolução de disputas",
+            "Mensagens em tempo real com anexos (fotos, orçamentos)",
+            "2FA em operações sensíveis + logging de atividade para conformidade",
+            "Busca inteligente: FTS + fuzzy matching + Levenshtein distance no PostgreSQL"
+          ]},
+          { h: "Decisão arquitetural: schema-per-tenant", p: [
+            "Cada perfil é isolado por schema. Reduz superfície de vazamento de dados, simplifica backups, trivial de extrair um tenant se uma disputa ficar legal."
+          ], code: `<span class="c">// Query de conversas — busca contagens não lidas</span>
+<span class="k">const</span> conversations <span class="k">=</span> Conversation::<span class="k">where</span>(<span class="k">function</span> (<span class="s">$q</span>) {
+  <span class="s">$q</span>-><span class="k">where</span>(<span class="s">'contractor_id'</span>, <span class="s">$user</span>-><span class="k">id</span>)
+    -><span class="k">orWhere</span>(<span class="s">'provider_id'</span>, <span class="s">$user</span>-><span class="k">id</span>);
+})
+  -><span class="k">with</span>([<span class="s">'proposal.service'</span>, <span class="s">'messages'</span> => <span class="k">fn</span> (<span class="s">$q</span>) => <span class="s">$q</span>-><span class="k">latest</span>()-><span class="k">limit</span>(1)])
+  -><span class="k">withCount</span>([<span class="s">'messages as unread_count'</span> => <span class="k">fn</span> (<span class="s">$q</span>) => <span class="s">$q</span>
+    -><span class="k">where</span>(<span class="s">'sender_id'</span>, <span class="s">'!='</span>, <span class="s">$user</span>-><span class="k">id</span>)
+    -><span class="k">whereNull</span>(<span class="s">'read_at'</span>)])
+  -><span class="k">paginate</span>(20);` },
+          { h: "Por que funciona", stats: [
+            { n: "< 100ms", l: "Latência de busca (FTS + fuzzy)" },
+            { n: "100%", l: "Taxa de liquidação de pagamento" },
+            { n: "< 24h", l: "Tempo de resposta de proposta (mediana)" },
+          ]}
+        ]
+      }
+    },
+    "pett-love": {
+      en: {
+        lede: "Frontend SPA for a pet care platform. Modern, responsive interface with dynamic routing, smooth animations and a solid design system built with Radix UI primitives.",
+        sections: [
+          { h: "Why this matters", p: [
+            "The design system is the contract between design and code. Poor contracts breed drift: designers push pixels, developers freeze code. We built it in Radix — unstyled, accessible components as the foundation."
+          ]},
+          { h: "Design decisions", list: [
+            "Radix UI for accessible, unstyled primitives",
+            "Tailwind for rapid iteration without leaving the markup",
+            "React Router v7 for nested routing and loaders",
+            "Motion library for subtle, intentional animations",
+            "Type safety with TypeScript end-to-end"
+          ]},
+          { h: "Component hierarchy", p: [
+            "Built the component tree with intent: form components are wrapped in Radix, layout components compose cleanly, page-level logic stays near the edges."
+          ], code: `<span class="c">// Form component with Radix + Tailwind</span>
+<span class="k">export</span> <span class="k">const</span> ServiceForm <span class="k">=</span> ({ onSubmit }) => (
+  &lt;<span class="k">Form.Root</span>&gt;
+    &lt;<span class="k">Form.Field</span> name=<span class="s">"title"</span>&gt;
+      &lt;<span class="k">Form.Label</span>&gt;Service Title&lt;/<span class="k">Form.Label</span>&gt;
+      &lt;<span class="k">Form.Control</span> asChild&gt;
+        &lt;<span class="k">input</span> className=<span class="s">"px-3 py-2 rounded border"</span> /&gt;
+      &lt;/<span class="k">Form.Control</span>&gt;
+    &lt;/<span class="k">Form.Field</span>&gt;
+    &lt;<span class="k">button</span> type=<span class="s">"submit"</span>&gt;Save&lt;/<span class="k">button</span>&gt;
+  &lt;/<span class="k">Form.Root</span>&gt;
+);` },
+          { h: "Outcome", stats: [
+            { n: "40+", l: "Components in design system" },
+            { n: "< 50kb", l: "Gzipped bundle (no external UI libs)" },
+            { n: "100", l: "Lighthouse score" },
+          ]}
+        ]
+      },
+      pt: {
+        lede: "Frontend SPA para plataforma de pet care. Interface moderna e responsiva com roteamento dinâmico, animações suaves e um design system sólido construído com primitivos Radix UI.",
+        sections: [
+          { h: "Por que isso importa", p: [
+            "O design system é o contrato entre design e código. Contratos ruins criam drift: designers empurram pixels, developers congelam código. Construímos em Radix — componentes sem estilo, acessíveis, como fundação."
+          ]},
+          { h: "Decisões de design", list: [
+            "Radix UI para primitivos acessíveis e sem estilo",
+            "Tailwind para iteração rápida sem sair do markup",
+            "React Router v7 para roteamento aninhado e loaders",
+            "Biblioteca Motion para animações sutis e intencionais",
+            "Segurança de tipo com TypeScript de ponta a ponta"
+          ]},
+          { h: "Hierarquia de componentes", p: [
+            "Construir a árvore de componentes com intenção: componentes de formulário envolvem Radix, componentes de layout compõem bem, lógica de página fica perto das bordas."
+          ]},
+          { h: "Resultado", stats: [
+            { n: "40+", l: "Componentes no design system" },
+            { n: "< 50kb", l: "Bundle gzipped (sem libs de UI externas)" },
+            { n: "100", l: "Score Lighthouse" },
+          ]}
+        ]
+      }
+    },
+    "terminal-simulator": {
+      en: {
+        lede: "Interactive terminal simulator. Explore bash commands in a browser environment safely. Pure React, no external terminal libraries — every interaction is deliberate.",
+        sections: [
+          { h: "Why a simulator", p: [
+            "Real terminals are powerful but unsafe in a browser. We built a custom parser that understands a subset of bash — enough to feel authentic, safe to explore."
+          ]},
+          { h: "What it does", list: [
+            "Parses command input into tokens and arguments",
+            "Simulates filesystem with in-memory state",
+            "Renders output with syntax highlighting",
+            "Supports pipes, redirects, and basic control flow",
+            "Persists history in localStorage"
+          ]},
+          { h: "Command parsing", p: [
+            "Started with a simple split(), ended with a real lexer. The difference is how you handle quoted strings, escapes, and pipes — details that look small until you're debugging why your command won't parse."
+          ], code: `<span class="c">// Simple command parser</span>
+<span class="k">function</span> parseCommand(input) {
+  <span class="k">const</span> parts = input.<span class="k">match</span>(/<span class="s">[^\\s"]+|"[^"]*"/</span>g) || [];
+  <span class="k">const</span> command = parts[0];
+  <span class="k">const</span> args = parts.<span class="k">slice</span>(1).<span class="k">map</span>(a =>
+    a.<span class="k">replace</span>(/<span class="s">^"|"$/</span>g, <span class="s">''</span>)
+  );
+  <span class="k">return</span> { command, args };
+}` },
+          { h: "Metrics", stats: [
+            { n: "60+", l: "Supported commands" },
+            { n: "0", l: "External dependencies" },
+            { n: "~15kb", l: "Minified" },
+          ]}
+        ]
+      },
+      pt: {
+        lede: "Simulador de terminal interativo. Explore comandos bash em um navegador com segurança. React puro, sem bibliotecas externas de terminal — cada interação é deliberada.",
+        sections: [
+          { h: "Por que um simulador", p: [
+            "Terminais reais são poderosos mas inseguros em navegador. Construímos um parser customizado que entende um subconjunto de bash — o suficiente para parecer autêntico, seguro de explorar."
+          ]},
+          { h: "O que faz", list: [
+            "Analisa entrada de comando em tokens e argumentos",
+            "Simula sistema de arquivos com estado em memória",
+            "Renderiza saída com syntax highlighting",
+            "Suporta pipes, redirecionamentos e controle de fluxo básico",
+            "Persiste histórico em localStorage"
+          ]},
+          { h: "Parser de comando", p: [
+            "Começou com um simples split(), terminou com um lexer real. A diferença é como você lida com strings citadas, escapes e pipes — detalhes que parecem pequenos até você estar debugando por que seu comando não faz parse."
+          ]},
+          { h: "Métricas", stats: [
+            { n: "60+", l: "Comandos suportados" },
+            { n: "0", l: "Dependências externas" },
+            { n: "~15kb", l: "Minificado" },
+          ]}
+        ]
+      }
+    },
+    "immortal-scrollytelling": {
+      en: {
+        lede: "Immersive scrollytelling: a 10,000-year narrative of an immortal human. Visual storytelling with scroll-synced animations, particle effects, and GSAP-powered transitions.",
+        sections: [
+          { h: "The challenge", p: [
+            "Scrollytelling is deceptively hard. Every pixel of scroll has to trigger something — a fade, a reveal, a particle burst. Get the timing wrong and it feels cheap. Get it right and it transcends."
+          ]},
+          { h: "Tech stack", list: [
+            "GSAP Timeline for synced animations across the whole page",
+            "Lenis for 120fps smooth scroll (preserves momentum)",
+            "TsParticles for background effects without jank",
+            "Tailwind for layout, custom CSS for animations",
+            "Vite for instant HMR during iteration"
+          ]},
+          { h: "Scroll synchronization", p: [
+            "The key insight: scroll isn't just a viewport position. It's a normalized progress value (0 to 1). Map that to your timeline and suddenly every element knows where it should be at any scroll point."
+          ], code: `<span class="c">// Scroll progress → animation timeline</span>
+<span class="k">let</span> scrollProgress = 0;
+window.<span class="k">addEventListener</span>(<span class="s">'scroll'</span>, () => {
+  scrollProgress = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+});
+
+<span class="k">gsap</span>.<span class="k">timeline</span>()
+  .<span class="k">to</span>(<span class="s">'.hero'</span>, { opacity: 1 - scrollProgress }, 0)
+  .<span class="k">to</span>(<span class="s">'.title'</span>, { y: scrollProgress * -100 }, 0);` },
+          { h: "Impact", stats: [
+            { n: "60fps", l: "On scroll (no jank)" },
+            { n: "10k+", l: "Years of narrative" },
+            { n: "< 3s", l: "Full page load" },
+          ]}
+        ]
+      },
+      pt: {
+        lede: "Scrollytelling imersivo: uma narrativa de 10 mil anos de um humano imortal. Narrativa visual com animações sincronizadas ao scroll, efeitos de partículas e transições GSAP.",
+        sections: [
+          { h: "O desafio", p: [
+            "Scrollytelling é enganosamente difícil. Cada pixel de scroll tem de ativar algo — um fade, uma revelação, um burst de partículas. Erre o timing e parece barato. Acerte e transcende."
+          ]},
+          { h: "Stack técnico", list: [
+            "GSAP Timeline para animações sincronizadas em toda página",
+            "Lenis para scroll suave a 120fps (preserva momentum)",
+            "TsParticles para efeitos de fundo sem lag",
+            "Tailwind para layout, CSS customizado para animações",
+            "Vite para HMR instantâneo durante iteração"
+          ]},
+          { h: "Sincronização de scroll", p: [
+            "O insight chave: scroll não é apenas posição de viewport. É um valor de progresso normalizado (0 a 1). Mapeie para sua timeline e de repente cada elemento sabe onde deve estar em qualquer ponto de scroll."
+          ]},
+          { h: "Impacto", stats: [
+            { n: "60fps", l: "Em scroll (sem lag)" },
+            { n: "10k+", l: "Anos de narrativa" },
+            { n: "< 3s", l: "Carregamento de página inteira" },
+          ]}
+        ]
+      }
+    },
+    "runrun-integration": {
+      en: {
+        lede: "Management dashboard consuming the Runrun.it API. 13+ metrics for project managers: task completion rates, risk assessment, bottleneck identification. Read-only, zero side effects.",
+        sections: [
+          { h: "Why this exists", p: [
+            "Spreadsheets don't scale. Teams need dashboards that answer in 30 seconds: 'Which projects are at risk?' 'Who's bottlenecked?' 'What's our completion trend?' Runrun.it has the data; we made it visible."
+          ]},
+          { h: "What it measures", list: [
+            "Completion rates per project and overall",
+            "Task distribution across teams and clients",
+            "Overdue tasks and tasks due in 7 days",
+            "Tasks without recent activity (stalled)",
+            "Risk scoring based on age and churn",
+            "Time tracking accuracy and labor costs"
+          ]},
+          { h: "Security: read-only by design", p: [
+            "Every endpoint uses GET. No POST, PUT, DELETE. The API token can only read; it can't modify. This is boring but critical — dashboards should inform, not mutate."
+          ], code: `<span class="c">// Fetch conversations without side effects</span>
+<span class="k">function</span> fetchMetrics(apiToken) {
+  <span class="k">const</span> projects = <span class="k">await</span> fetch(
+    <span class="s">'/api/v1/projects'</span>,
+    { headers: { <span class="s">'Authorization'</span>: <span class="s">'Bearer'</span> + apiToken } }
+  ).<span class="k">then</span>(r => r.<span class="k">json</span>());
+
+  <span class="k">const</span> tasks = <span class="k">await</span> fetch(
+    <span class="s">'/api/v1/tasks?status=open'</span>,
+    { headers: { <span class="s">'Authorization'</span>: <span class="s">'Bearer'</span> + apiToken } }
+  ).<span class="k">then</span>(r => r.<span class="k">json</span>());
+
+  <span class="k">return</span> { projects, tasks };
+}` },
+          { h: "Results", stats: [
+            { n: "13", l: "Metrics displayed" },
+            { n: "< 500ms", l: "Page load (cached)" },
+            { n: "GET only", l: "No mutations, zero risk" },
+          ]}
+        ]
+      },
+      pt: {
+        lede: "Dashboard gerencial consumindo API Runrun.it. 13+ métricas para gerentes de projeto: taxas de conclusão, avaliação de risco, identificação de gargalos. Apenas leitura, zero efeitos colaterais.",
+        sections: [
+          { h: "Por que existe", p: [
+            "Planilhas não escalam. Times precisam de dashboards que respondem em 30 segundos: 'Quais projetos estão em risco?' 'Quem tem gargalo?' 'Qual é nossa tendência de conclusão?' Runrun.it tem os dados; tornamos visíveis."
+          ]},
+          { h: "O que mede", list: [
+            "Taxas de conclusão por projeto e geral",
+            "Distribuição de tarefas entre times e clientes",
+            "Tarefas atrasadas e tarefas vencendo em 7 dias",
+            "Tarefas sem atividade recente (travadas)",
+            "Pontuação de risco baseada em idade e churn",
+            "Precisão de rastreamento de tempo e custos de trabalho"
+          ]},
+          { h: "Segurança: apenas leitura por design", p: [
+            "Cada endpoint usa GET. Sem POST, PUT, DELETE. O token de API só pode ler; não pode modificar. Isso é chato mas crítico — dashboards devem informar, não mutar."
+          ]},
+          { h: "Resultados", stats: [
+            { n: "13", l: "Métricas exibidas" },
+            { n: "< 500ms", l: "Carregamento de página (cached)" },
+            { n: "GET only", l: "Sem mutações, risco zero" },
+          ]}
+        ]
+      }
+    },
+    "dubflow-game": {
+      en: {
+        lede: "Slingshot game powered by Matter.js. Realistic 2D physics, collision detection, and constraint solving. Progressive difficulty levels, save/resume, and sound effects.",
+        sections: [
+          { h: "Physics engine: why Matter.js", p: [
+            "Game physics is a solved problem now. Matter.js handles rigid bodies, collisions, and constraints. You focus on game feel, not matrix math."
+          ]},
+          { h: "Game mechanics", list: [
+            "Aiming with force and angle (visual trajectory preview)",
+            "Collision detection with targets and obstacles",
+            "Constraint-based slingshot (elasticity and tension)",
+            "Progressive levels with increasing difficulty",
+            "Star rating based on shots and time",
+            "Local storage for progress persistence"
+          ]},
+          { h: "Making it feel good", p: [
+            "Feel comes from feedback: visual, audio, haptic. When you hit a target, it should feel like you earned it. Sound effects on impact, particle bursts on destruction, controller vibration on hit."
+          ], code: `<span class="c">// Matter.js: define slingshot constraint</span>
+<span class="k">const</span> slingshot = Constraint.<span class="k">create</span>({
+  bodyA: ball,
+  pointB: { x: 200, y: 100 },
+  length: 50,
+  stiffness: 0.7,
+  damping: 0.2,
+  render: { lineWidth: 4 }
+});
+
+Composite.<span class="k">add</span>(engine.world, slingshot);
+Events.<span class="k">on</span>(mousedown, () => dragBall(ball, mouse));` },
+          { h: "Impact", stats: [
+            { n: "5", l: "Levels with increasing complexity" },
+            { n: "60fps", l: "Physics simulation" },
+            { n: "< 100kb", l: "Total size (Matter.js + assets)" },
+          ]}
+        ]
+      },
+      pt: {
+        lede: "Jogo de slingshot powered by Matter.js. Física 2D realista, detecção de colisão e resolução de constraints. Níveis de dificuldade progressiva, save/resume e efeitos sonoros.",
+        sections: [
+          { h: "Motor de física: por que Matter.js", p: [
+            "Física de jogo é um problema resolvido agora. Matter.js lida com corpos rígidos, colisões e constraints. Você foca em game feel, não em matemática de matriz."
+          ]},
+          { h: "Mecânicas do jogo", list: [
+            "Aiming com força e ângulo (prévia visual de trajetória)",
+            "Detecção de colisão com alvos e obstáculos",
+            "Slingshot baseado em constraint (elasticidade e tensão)",
+            "Níveis progressivos com dificuldade crescente",
+            "Classificação em estrelas baseada em tiros e tempo",
+            "Local storage para persistência de progresso"
+          ]},
+          { h: "Fazendo parecer bom", p: [
+            "Feel vem de feedback: visual, áudio, háptico. Quando você acerta um alvo, deve parecer que você o merecia. Efeitos sonoros no impacto, rajadas de partículas na destruição, vibração de controle no acerto."
+          ]},
+          { h: "Impacto", stats: [
+            { n: "5", l: "Níveis com complexidade crescente" },
+            { n: "60fps", l: "Simulação de física" },
+            { n: "< 100kb", l: "Tamanho total (Matter.js + assets)" },
+          ]}
+        ]
+      }
+    },
   };
 
   function getContent() {

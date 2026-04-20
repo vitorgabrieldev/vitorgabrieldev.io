@@ -124,10 +124,10 @@
 <section class="page page--head">
   <div class="container">
     <div class="head__line reveal">
-      <span class="mono-label">[CONTACT] Start a conversation</span>
-      <span class="live-badge"><span class="d"></span>Available · Q2 2026</span>
+      <span class="mono-label" data-i18n="contact.head_label">[CONTACT] Start a conversation</span>
+      <span class="live-badge"><span class="d"></span><span data-i18n="contact.head_badge">Available · Q2 2026</span></span>
     </div>
-    <h1 class="head__title reveal reveal-delay-1">Tell me what you're <em>trying to ship</em>.</h1>
+    <h1 class="head__title reveal reveal-delay-1" data-i18n="contact.head_title" data-i18n-html>Tell me what you're <em>trying to ship</em>.</h1>
   </div>
 </section>
 
@@ -136,68 +136,68 @@
     <!-- FORM -->
     <div>
       <form class="form" id="ctForm" autocomplete="off">
-        <div class="form__step">[STEP 01] About you</div>
+        <div class="form__step" data-i18n="contact.step1">[STEP 01] About you</div>
         <div class="field">
-          <label for="f_name">Your name</label>
+          <label for="f_name" data-i18n="contact.f_name">Your name</label>
           <input id="f_name" name="name" required>
-          <span class="err">Name is required.</span>
+          <span class="err" data-i18n="contact.err.name">Name is required.</span>
         </div>
         <div class="field">
-          <label for="f_email">Email</label>
+          <label for="f_email" data-i18n="contact.form.email">Email</label>
           <input id="f_email" name="email" type="email" required placeholder="you@company.com">
-          <span class="err">Valid email is required.</span>
+          <span class="err" data-i18n="contact.err.email">Valid email is required.</span>
         </div>
         <div class="field">
-          <label for="f_company">Company · Role (optional)</label>
-          <input id="f_company" name="company" placeholder="e.g. Acme · CTO">
+          <label for="f_company" data-i18n="contact.f_company">Company · Role (optional)</label>
+          <input id="f_company" name="company" data-i18n-attr="placeholder:contact.f_company_ph" placeholder="e.g. Acme · CTO">
         </div>
 
-        <div class="form__step" style="margin-top:24px">[STEP 02] The project</div>
+        <div class="form__step" style="margin-top:24px" data-i18n="contact.step2">[STEP 02] The project</div>
         <div class="field">
-          <label>What kind of engagement?</label>
+          <label data-i18n="contact.kind_label">What kind of engagement?</label>
           <div class="chips-select" data-group="kind">
             <button type="button" data-v="clt">CLT</button>
             <button type="button" data-v="pj">PJ</button>
-            <button type="button" data-v="freelance">Freelance project</button>
-            <button type="button" data-v="consult">Consult / audit</button>
-            <button type="button" data-v="unsure">Not sure yet</button>
+            <button type="button" data-v="freelance" data-i18n="contact.kind.freelance">Freelance project</button>
+            <button type="button" data-v="consult" data-i18n="contact.kind.consult">Consult / audit</button>
+            <button type="button" data-v="unsure" data-i18n="contact.kind.unsure">Not sure yet</button>
           </div>
         </div>
         <div class="field">
-          <label>Where's the weight?</label>
+          <label data-i18n="contact.focus_label">Where's the weight?</label>
           <div class="chips-select" data-group="focus">
             <button type="button" data-v="backend">Backend / Laravel</button>
             <button type="button" data-v="frontend">Frontend / React</button>
             <button type="button" data-v="infra">DevOps / Infra</button>
             <button type="button" data-v="fullstack">Full stack</button>
-            <button type="button" data-v="other">Other</button>
+            <button type="button" data-v="other" data-i18n="contact.focus.other">Other</button>
           </div>
         </div>
 
         <div class="field">
           <div class="budget-row">
-            <span>Budget range (BRL / month)</span>
-            <span id="budgetVal"><strong>R$ 12 000</strong> / month</span>
+            <span data-i18n="contact.budget_label">Budget range (BRL / month)</span>
+            <span id="budgetVal"><strong>R$ 12 000</strong> <span data-i18n="contact.budget_unit">/ month</span></span>
           </div>
           <input type="range" class="slider" id="budget" min="3" max="30" value="12" step="1">
-          <span class="form__helper">Rough is fine — I'll tell you if I'm the right fit.</span>
+          <span class="form__helper" data-i18n="contact.budget_helper">Rough is fine — I'll tell you if I'm the right fit.</span>
         </div>
 
-        <div class="form__step" style="margin-top:24px">[STEP 03] The brief</div>
+        <div class="form__step" style="margin-top:24px" data-i18n="contact.step3">[STEP 03] The brief</div>
         <div class="field">
-          <label for="f_msg">What are you trying to ship?</label>
-          <textarea id="f_msg" name="message" required placeholder="One or two paragraphs about the problem, the current state, and what 'done' looks like."></textarea>
-          <span class="err">A quick brief helps — even 2 sentences.</span>
+          <label for="f_msg" data-i18n="contact.msg_label">What are you trying to ship?</label>
+          <textarea id="f_msg" name="message" required data-i18n-attr="placeholder:contact.msg_placeholder" placeholder="One or two paragraphs about the problem, the current state, and what 'done' looks like."></textarea>
+          <span class="err" data-i18n="contact.err.msg">A quick brief helps — even 2 sentences.</span>
         </div>
 
         <div class="form__submit">
-          <span class="form__helper">I reply within 24h on weekdays.</span>
-          <button type="submit" class="btn btn--primary">Send brief →</button>
+          <span class="form__helper" data-i18n="contact.submit_helper">I reply within 24h on weekdays.</span>
+          <button type="submit" class="btn btn--primary" data-i18n="contact.submit">Send brief →</button>
         </div>
 
         <div class="form__sent" id="sent">
-          <h3>Brief received. ✓</h3>
-          <p>Thanks — I'll be in touch within 24h at the email you provided. If it's urgent, ping me on WhatsApp.</p>
+          <h3 data-i18n="contact.sent_title">Brief received. ✓</h3>
+          <p data-i18n="contact.sent_p">Thanks — I'll be in touch within 24h at the email you provided. If it's urgent, ping me on WhatsApp.</p>
         </div>
       </form>
     </div>
@@ -205,7 +205,7 @@
     <!-- ASIDE -->
     <aside class="ct-aside">
       <div class="ct-card">
-        <h4>/ Direct channels</h4>
+        <h4 data-i18n="contact.direct">/ Direct channels</h4>
         <div class="row"><span>Email</span><a href="mailto:contact@vitorgabriel.dev">contact@vitorgabriel.dev</a></div>
         <div class="row"><span>WhatsApp</span><a href="https://wa.me/5543984873807" target="_blank">+55 43 98487-3807 ↗</a></div>
         <div class="row"><span>GitHub</span><a href="https://github.com/vitorgabrieldev" target="_blank">@vitorgabrieldev ↗</a></div>
@@ -213,26 +213,26 @@
       </div>
 
       <div class="ct-card">
-        <h4>/ Response expectations</h4>
-        <div class="row"><span>First reply</span><span style="color:var(--ink)">&lt; 24h (weekdays)</span></div>
-        <div class="row"><span>Intro call</span><span style="color:var(--ink)">Within the week</span></div>
-        <div class="row"><span>Kickoff</span><span style="color:var(--ink)">1–2 weeks</span></div>
-        <div class="row"><span>Current load</span><span style="color:var(--ok)">● Accepting new</span></div>
+        <h4 data-i18n="contact.response">/ Response expectations</h4>
+        <div class="row"><span data-i18n="contact.first_reply">First reply</span><span style="color:var(--ink)" data-i18n="contact.first_reply_val">&lt; 24h (weekdays)</span></div>
+        <div class="row"><span data-i18n="contact.intro_call">Intro call</span><span style="color:var(--ink)" data-i18n="contact.intro_call_val">Within the week</span></div>
+        <div class="row"><span data-i18n="contact.kickoff">Kickoff</span><span style="color:var(--ink)" data-i18n="contact.kickoff_val">1–2 weeks</span></div>
+        <div class="row"><span data-i18n="contact.load">Current load</span><span style="color:var(--ok)" data-i18n="contact.load_val">● Accepting new</span></div>
       </div>
 
       <div class="ct-card faq">
-        <h4>/ Quick FAQ</h4>
+        <h4 data-i18n="contact.faq.label">/ Quick FAQ</h4>
         <details>
-          <summary>What stack do you prefer?</summary>
-          <p>Laravel + Postgres + React/Next.js, deployed on Linux with Docker. But I move where the problem is — I've shipped Node, Vue, Angular and various infra flavours.</p>
+          <summary data-i18n="contact.faq.q1">What stack do you prefer?</summary>
+          <p data-i18n="contact.faq.a1">Laravel + Postgres + React/Next.js, deployed on Linux with Docker. But I move where the problem is — I've shipped Node, Vue, Angular and various infra flavours.</p>
         </details>
         <details>
-          <summary>Do you take short contracts?</summary>
-          <p>Yes, if the scope is clear. Audits and 2–4 week engagements work well. I won't take work I can't finish properly.</p>
+          <summary data-i18n="contact.faq.q2">Do you take short contracts?</summary>
+          <p data-i18n="contact.faq.a2">Yes, if the scope is clear. Audits and 2–4 week engagements work well. I won't take work I can't finish properly.</p>
         </details>
         <details>
-          <summary>Remote or in-person?</summary>
-          <p>Remote-first. Hybrid is possible if you're in Londrina. Comfortable with async teams across time zones.</p>
+          <summary data-i18n="contact.faq.q3">Remote or in-person?</summary>
+          <p data-i18n="contact.faq.a3">Remote-first. Hybrid is possible if you're in Londrina. Comfortable with async teams across time zones.</p>
         </details>
       </div>
     </aside>
@@ -263,10 +263,12 @@
   const fmt = n => n.toLocaleString('pt-BR').replace(/,/g, ' ');
   const update = () => {
     const v = +budget.value;
-    if (v >= 30) { val.innerHTML = '<strong>R$ 30 000+</strong> / month'; }
-    else { val.innerHTML = `<strong>R$ ${fmt(v*1000)}</strong> / month`; }
+    const unit = `<span data-i18n="contact.budget_unit">${window.t('contact.budget_unit')}</span>`;
+    if (v >= 30) { val.innerHTML = `<strong>R$ 30 000+</strong> ${unit}`; }
+    else { val.innerHTML = `<strong>R$ ${fmt(v*1000)}</strong> ${unit}`; }
   };
   budget.addEventListener('input', update); update();
+  window.addEventListener('langchange', update);
 
   // Form submit (fake)
   const form = document.getElementById('ctForm');

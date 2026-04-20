@@ -38,10 +38,7 @@
 <!-- ============== HERO ============== -->
 <section class="hero page">
   <div class="container">
-    <div class="hero__topline reveal">
-      <span class="mono-label" data-i18n="hero.topline">[01] Engenheiro · Londrina, BR · UTC−3</span>
-      <span class="hero__status"><span class="hero__status-dot"></span><span class="mono" style="font-size:var(--type-micro); text-transform:uppercase; letter-spacing:.1em; color:var(--ink-muted)" data-i18n="hero.status">Aceitando projetos · Q2 2026</span></span>
-    </div>
+    <div class="hero__topline reveal" style="visibility:hidden;height:0;margin:0;padding:0;"></div>
 
     <h1 class="hero__title reveal reveal-delay-1">
       <span class="hero__line" data-i18n="hero.line1" data-i18n-html>Sistemas que <em>permanecem</em></span>
@@ -61,21 +58,30 @@
     </div>
 
     <!-- hero console — original motif, not copying any product -->
-    <div class="hero__console reveal reveal-delay-3" aria-hidden="true">
+    <div class="hero__console reveal reveal-delay-3" aria-hidden="true" style="cursor:pointer;">
       <div class="console__bar">
-        <span class="console__path mono">~/portfolio/engineer.md</span>
-        <span class="console__meta mono">UTF-8 · LF · Markdown</span>
+        <span class="console__path mono">vitor@londrina:~/projects</span>
       </div>
       <div class="console__body">
-        <div class="console__line"><span class="mono ink-faint">01</span><span class="mono">#</span> <span class="mono ink">Vitor Gabriel</span></div>
-        <div class="console__line"><span class="mono ink-faint">02</span><span class="mono">&gt;</span> Full Stack Engineer · Pleno @ Clickweb</div>
-        <div class="console__line"><span class="mono ink-faint">03</span></div>
-        <div class="console__line"><span class="mono ink-faint">04</span><span class="mono">//</span> currently building</div>
-        <div class="console__line"><span class="mono ink-faint">05</span><span class="key">core</span><span class="eq">=</span><span class="val">laravel-fintech</span></div>
-        <div class="console__line"><span class="mono ink-faint">06</span><span class="key">ops</span> <span class="eq">=</span> <span class="val">risklog.ci</span></div>
-        <div class="console__line"><span class="mono ink-faint">07</span><span class="key">research</span> <span class="eq">=</span> <span class="val">tokenisation · KV-attention</span></div>
-        <div class="console__line"><span class="mono ink-faint">08</span></div>
-        <div class="console__line"><span class="mono ink-faint">09</span><span class="mono">$</span> <span class="prompt">whoami</span><span class="caret"></span></div>
+        <div class="console__line" style="font-size:14px;"><span class="mono ink-faint">~</span><span class="mono">#</span> <span class="prompt">cat README.md</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px 24px;margin-left:20px;margin-bottom:12px;margin-top:8px;width:calc(100% - 20px);">
+          <div class="console__line" style="color:var(--ink-muted); font-size:13px; margin:0;">Laravel: ████████░░ 80%</div>
+          <div class="console__line" style="color:var(--ink-muted); font-size:13px; margin:0;">TypeScript: ████████░░ 85%</div>
+          <div class="console__line" style="color:var(--ink-muted); font-size:13px; margin:0;">React: ███████░░░ 75%</div>
+          <div class="console__line" style="color:var(--ink-muted); font-size:13px; margin:0;">Node.js: ████░░░░░░ 40%</div>
+          <div class="console__line" style="color:var(--ink-muted); font-size:13px; margin:0;">DevOps: ██████░░░░ 65%</div>
+          <div class="console__line" style="color:var(--ink-muted); font-size:13px; margin:0;">Kubernetes: ██████░░░░ 60%</div>
+          <div class="console__line" style="color:var(--ink-muted); font-size:13px; margin:0;">PostgreSQL: ██████░░░░ 60%</div>
+          <div class="console__line" style="color:var(--ink-muted); font-size:13px; margin:0;">Next.js: ████████░░ 80%</div>
+          <div class="console__line" style="color:var(--ink-muted); font-size:13px; margin:0;">Docker: ████████░░ 80%</div>
+          <div class="console__line" style="color:var(--ink-muted); font-size:13px; margin:0;">Linux: ███████░░░ 70%</div>
+          <div class="console__line" style="color:var(--ink-muted); font-size:13px; margin:0;">CI/CD: ███████░░░ 76%</div>
+          <div class="console__line" style="color:var(--ink-muted); font-size:13px; margin:0;">AWS: ████░░░░░░ 40%</div>
+          <div class="console__line" style="color:var(--ink-muted); font-size:13px; margin:0;">Coffee: ██████████ 100%</div>
+          <div class="console__line" style="color:var(--ink-muted); font-size:13px; margin:0;">GraphQL: ██████░░░░ 60%</div>
+          <div class="console__line" style="color:var(--ink-muted); font-size:13px; margin:0;">Nginx: ██░░░░░░░░ 20%</div>
+        </div>
+        <div class="console__line" style="font-size:14px;"><span class="mono ink-faint">~</span><span class="mono">#</span> <span class="prompt" style="animation:none;border-right:2px solid var(--accent)">_</span></div>
       </div>
     </div>
 
@@ -96,22 +102,22 @@
 </section>
 
 <!-- ============== QUICK READ ============== -->
-<section id="quickread" class="section">
+<section id="quickread" class="section" style="padding-bottom: var(--pad-section);">
   <div class="container grid-2">
     <div class="reveal">
       <div class="mono-label" data-i18n="qr.label">[02] Resumo rápido</div>
       <h2 class="section__title" data-i18n="qr.title" data-i18n-html>Um engenheiro full-stack<br>com viés de infra.</h2>
     </div>
     <div class="reveal reveal-delay-1 section__text">
-      <p data-i18n="qr.p1">Cinco anos com HTML/CSS/JavaScript, três rodando React e Node em produção, um liderando APIs Laravel e pipelines Kubernetes — vou onde estiver o gargalo.</p>
-      <p data-i18n="qr.p2">Me importo com o formato dos sistemas: as costuras entre serviços, como a falha se propaga, como a observabilidade é montada. Decisões de arquitetura que parecem pequenas no dia um e compõem por anos.</p>
-      <p data-i18n="qr.p3">Nas horas livres: protótipos com blockchain, e no momento estou imerso em internals de transformers — tokenização, atenção Q/K/V, lendo a matemática de ponta a ponta.</p>
+      <p data-i18n="qr.p1">Especializado em Laravel SaaS, CI/CD pipelines e infraestrutura. Arquiteto sistemas que escalam — desde o schema do Postgres até Kubernetes. Obsessivo por observabilidade, performance e decisões que compõem ao longo do tempo.</p>
+      <p data-i18n="qr.p2">Histórico: 5 anos HTML/CSS/JS, 3 anos em produção com React/Node, atualmente full-stack pleno em DevOps e arquitetura. Vou onde o gargalo está.</p>
+      <p data-i18n="qr.p3">Explorando: blockchain, transformers e internals de LLMs. Prefiro trabalho profundo e duradouro.</p>
     </div>
   </div>
 </section>
 
 <!-- ============== FEATURED WORK ============== -->
-<section class="section section--tight">
+<section class="section section--tight" style="padding-bottom: var(--pad-section);">
   <div class="container">
     <div class="section__head">
       <div class="reveal">
@@ -126,7 +132,7 @@
 </section>
 
 <!-- ============== CAPABILITIES ============== -->
-<section class="section">
+<section class="section" style="padding-bottom: var(--pad-section);">
   <div class="container">
     <div class="reveal">
       <div class="mono-label" data-i18n="caps.label">[04] O que eu faço</div>
@@ -138,7 +144,7 @@
 </section>
 
 <!-- ============== LATEST WRITING ============== -->
-<section class="section">
+<section class="section" style="padding-bottom: var(--pad-section);">
   <div class="container">
     <div class="section__head">
       <div class="reveal">
@@ -152,7 +158,7 @@
 </section>
 
 <!-- ============== AVAILABILITY ============== -->
-<section class="section">
+<section class="section" style="padding-bottom: var(--pad-section);">
   <div class="container">
     <div class="cta-slab reveal">
       <div>

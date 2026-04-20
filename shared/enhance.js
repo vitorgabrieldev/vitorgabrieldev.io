@@ -60,14 +60,14 @@
     { type: 'page', label: 'Journal', sub: 'Writing', href: 'journal.html', icon: '✎' },
     { type: 'page', label: 'Contact', sub: 'Get in touch', href: 'contact.html', icon: '@' },
     ...((D.projects || []).map(p => ({
-      type: 'project', label: p.name, sub: `${p.category} · ${p.year}`,
+      type: 'project', label: p.name, sub: `${window.td ? window.td(p.category) : (p.category.en || p.category)} · ${p.year}`,
       href: `project.html?id=${p.id}`, icon: '▢',
-      keywords: [p.name, p.category, ...(p.stack || []), p.summary].join(' ').toLowerCase()
+      keywords: [p.name, p.category.en || p.category, ...(p.stack || []), p.summary.en || p.summary].join(' ').toLowerCase()
     }))),
     ...((D.journal || []).map(j => ({
-      type: 'writing', label: j.title, sub: `${j.date} · ${j.readTime || ''}`.trim(),
+      type: 'writing', label: j.title.en || j.title, sub: `${j.date} · ${j.readTime || ''}`.trim(),
       href: `journal.html#${j.id}`, icon: '✎',
-      keywords: [j.title, j.tag, j.excerpt].join(' ').toLowerCase()
+      keywords: [j.title.en || j.title, j.kicker.en || j.kicker, j.excerpt.en || j.excerpt].join(' ').toLowerCase()
     }))),
     // Quick actions
     { type: 'action', label: 'Toggle theme', sub: 'Light ↔ Dark', icon: '◑',

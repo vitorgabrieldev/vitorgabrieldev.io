@@ -88,11 +88,11 @@
 <section class="page page--head">
   <div class="container">
     <div class="head__line reveal">
-      <span class="mono-label">[JOURNAL] Writing · Learning in public</span>
+      <span class="mono-label" data-i18n="journal.head_label">[JOURNAL] Writing · Learning in public</span>
       <span class="mono-label" id="jrnCount">— entries</span>
     </div>
-    <h1 class="head__title reveal reveal-delay-1">Thinking out loud, in <em>full paragraphs</em>.</h1>
-    <p class="head__lede reveal reveal-delay-2">Notes on architecture, decisions in production, and what I'm reading. Unpolished by design — the point is to think, not to publish.</p>
+    <h1 class="head__title reveal reveal-delay-1" data-i18n="journal.head_title" data-i18n-html>Thinking out loud, in <em>full paragraphs</em>.</h1>
+    <p class="head__lede reveal reveal-delay-2" data-i18n="journal.head_lede">Notes on architecture, decisions in production, and what I'm reading. Unpolished by design — the point is to think, not to publish.</p>
   </div>
 </section>
 
@@ -105,7 +105,7 @@
 
 <!-- Modal -->
 <div class="jrn-modal" id="jrnModal">
-  <button class="jrn-modal__close" id="jrnClose">✕ Close</button>
+  <button class="jrn-modal__close" id="jrnClose" data-i18n="journal.close">✕ Close</button>
   <div class="jrn-modal__inner" id="jrnInner"></div>
 </div>
 
@@ -118,69 +118,92 @@
 (function() {
   const D = window.PORTFOLIO_DATA;
   let filter = 'all';
-  document.getElementById('jrnCount').textContent = `${D.journal.length} entries`;
+  let openSlug = null;
 
-  const kickers = ['all', ...new Set(D.journal.map(j => j.kicker))];
-  document.getElementById('jrnTags').innerHTML = kickers.map(k => `<button class="${k==='all'?'on':''}" data-k="${k}">${k === 'all' ? 'All' : k}</button>`).join('');
-  document.getElementById('jrnTags').addEventListener('click', e => {
-    const b = e.target.closest('button'); if (!b) return;
-    filter = b.dataset.k;
-    document.getElementById('jrnTags').querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b));
-    render();
-  });
+  function updateCount() {
+    document.getElementById('jrnCount').textContent = `${D.journal.length} ${window.t('journal.entries')}`;
+  }
+
+  function buildTags() {
+    const kickers = ['all', ...new Set(D.journal.map(j => j.kicker.en))];
+    document.getElementById('jrnTags').innerHTML = kickers.map(k => {
+      const label = k === 'all' ? window.t('journal.filter.all') : window.td(D.journal.find(j => j.kicker.en === k)?.kicker) || k;
+      return `<button class="${k===filter?'on':''}" data-k="${k}">${label}</button>`;
+    }).join('');
+    document.getElementById('jrnTags').addEventListener('click', e => {
+      const b = e.target.closest('button'); if (!b) return;
+      filter = b.dataset.k;
+      document.getElementById('jrnTags').querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b));
+      render();
+    });
+  }
 
   function render() {
-    const list = filter === 'all' ? D.journal : D.journal.filter(j => j.kicker === filter);
+    const list = filter === 'all' ? D.journal : D.journal.filter(j => j.kicker.en === filter);
     document.getElementById('jrnList').innerHTML = list.map(j => `
       <div class="jrn-row" data-slug="${j.slug}">
         <div class="jrn-row__date">${fmt(j.date)}</div>
-        <div class="jrn-row__kicker">${j.kicker}</div>
+        <div class="jrn-row__kicker">${window.td(j.kicker)}</div>
         <div>
-          <div class="jrn-row__t">${j.title}</div>
-          <div class="jrn-row__excerpt">${j.excerpt}</div>
-          <div class="jrn-row__meta">${j.read} · ~${Math.round(parseInt(j.read)*180)} words</div>
+          <div class="jrn-row__t">${window.td(j.title)}</div>
+          <div class="jrn-row__excerpt">${window.td(j.excerpt)}</div>
+          <div class="jrn-row__meta">${j.read} · ~${Math.round(parseInt(j.read)*180)} ${window.t('journal.words')}</div>
         </div>
         <div class="jrn-row__arrow">↗</div>
       </div>
     `).join('');
   }
+
+  updateCount();
+  buildTags();
   render();
 
   // Modal
   const modal = document.getElementById('jrnModal');
   const inner = document.getElementById('jrnInner');
+
+  function openModal(j) {
+    openSlug = j.slug;
+    inner.innerHTML = articleHTML(j);
+    modal.classList.add('open');
+    modal.scrollTop = 0;
+  }
+
   document.addEventListener('click', e => {
     const row = e.target.closest('.jrn-row');
     if (!row) return;
     const j = D.journal.find(x => x.slug === row.dataset.slug);
-    inner.innerHTML = articleHTML(j);
-    modal.classList.add('open');
-    modal.scrollTop = 0;
+    if (j) openModal(j);
   });
-  document.getElementById('jrnClose').addEventListener('click', () => modal.classList.remove('open'));
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') modal.classList.remove('open'); });
+  document.getElementById('jrnClose').addEventListener('click', () => {
+    modal.classList.remove('open');
+    openSlug = null;
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { modal.classList.remove('open'); openSlug = null; }
+  });
 
   // Deep link
   if (location.hash) {
     const slug = location.hash.slice(1);
     const j = D.journal.find(x => x.slug === slug);
-    if (j) { inner.innerHTML = articleHTML(j); modal.classList.add('open'); }
+    if (j) openModal(j);
   }
 
   function articleHTML(j) {
     return `
-      <div class="jrn-modal__kicker">${j.kicker}</div>
-      <h1 class="jrn-modal__title">${j.title}</h1>
-      <div class="jrn-modal__meta">${fmt(j.date)} · ${j.read} · by Vitor Gabriel</div>
+      <div class="jrn-modal__kicker">${window.td(j.kicker)}</div>
+      <h1 class="jrn-modal__title">${window.td(j.title)}</h1>
+      <div class="jrn-modal__meta">${fmt(j.date)} · ${j.read} · ${window.t('journal.by')}</div>
       <div class="jrn-modal__body">
-        <p class="lead">${j.excerpt}</p>
-        <p>This is a placeholder entry — the real article lives in my drafts folder and migrates here when it's ready. The idea, for now, is to give the portfolio the shape of someone who writes, and to show what the topics look like when they collect.</p>
-        <h3>Why write at all?</h3>
-        <p>Because the best way to know whether I actually understand something is to write it down, badly, and then read it back the next week. The second pass is where the real understanding happens.</p>
-        <blockquote>Writing is the compiler for thought. The error messages are unkind.</blockquote>
-        <p>Expect rough edges. Expect corrections. Expect the occasional "I was wrong about this, here's why" post — those are the ones I learn from most.</p>
-        <h3>Subscribing</h3>
-        <p>No newsletter yet. Follow along on <a href="https://github.com/vitorgabrieldev" style="color:var(--accent)">GitHub</a> or check back here.</p>
+        <p class="lead">${window.td(j.excerpt)}</p>
+        <p>${window.t('journal.article.p1')}</p>
+        <h3>${window.t('journal.article.why_h')}</h3>
+        <p>${window.t('journal.article.why_p')}</p>
+        <blockquote>${window.t('journal.article.quote')}</blockquote>
+        <p>${window.t('journal.article.rough_p')}</p>
+        <h3>${window.t('journal.article.sub_h')}</h3>
+        <p>${window.t('journal.article.sub_p')}</p>
       </div>`;
   }
 
@@ -189,6 +212,16 @@
     const months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
     return `${d} ${months[+m-1]} ${y}`;
   }
+
+  window.addEventListener('langchange', () => {
+    updateCount();
+    buildTags();
+    render();
+    if (openSlug) {
+      const j = D.journal.find(x => x.slug === openSlug);
+      if (j) inner.innerHTML = articleHTML(j);
+    }
+  });
 })();
 </script>
 </body>

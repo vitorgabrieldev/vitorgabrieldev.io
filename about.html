@@ -38,10 +38,10 @@
 <section class="page page--head">
   <div class="container">
     <div class="head__line reveal">
-      <span class="mono-label">[ABOUT] Engineer · Londrina, BR · Since 2023</span>
-      <span class="mono-label">3.5 years shipping</span>
+      <span class="mono-label" data-i18n="about.topline">[ABOUT] Engineer · Londrina, BR · Since 2023</span>
+      <span class="mono-label" data-i18n="about.topline_r">3.5 years shipping</span>
     </div>
-    <h1 class="head__title reveal reveal-delay-1">A full-stack engineer with <em>an infra bias</em>, a product instinct, and one eye on the math.</h1>
+    <h1 class="head__title reveal reveal-delay-1" data-i18n="about.head_title" data-i18n-html>A full-stack engineer with <em>an infra bias</em>, a product instinct, and one eye on the math.</h1>
   </div>
 </section>
 
@@ -72,12 +72,12 @@
 
     <div class="reveal reveal-delay-1">
       <div class="bio">
-        <p class="lead">I build SaaS systems that keep their promises. My specialty is Laravel, but the real work happens across the stack — from the Postgres schema up to the React state tree, and the VPS that holds it all.</p>
-        <p>I started in 2023 as an intern at <strong>Clickweb</strong>, built my way up to full-stack pleno, and picked up a series of orbital skills along the way: CI/CD pipelines, Docker, Kubernetes, Nginx, Linux server hardening. If something has to survive a Friday deploy, I'm probably the one you want near it.</p>
-        <p>I also take product seriously. The best technical decisions I've made were the ones where I understood <em>why</em> the business needed the thing — and the worst were the ones where I optimised for code elegance over what the team actually needed to ship.</p>
-        <p>Lately I spend evenings reading about transformers: tokenisation, vocabularies, attention heads, Q/K/V. Not to jump on a trend — because the math is good, and because I want to <strong>earn</strong> the vocabulary.</p>
+        <p class="lead" data-i18n="about.bio.p1" data-i18n-html>I build SaaS systems that keep their promises. My specialty is Laravel, but the real work happens across the stack — from the Postgres schema up to the React state tree, and the VPS that holds it all.</p>
+        <p data-i18n="about.bio.p2" data-i18n-html>I started in 2023 as an intern at <strong>Clickweb</strong>, built my way up to full-stack pleno, and picked up a series of orbital skills along the way: CI/CD pipelines, Docker, Kubernetes, Nginx, Linux server hardening. If something has to survive a Friday deploy, I'm probably the one you want near it.</p>
+        <p data-i18n="about.bio.p3" data-i18n-html>I also take product seriously. The best technical decisions I've made were the ones where I understood <em>why</em> the business needed the thing — and the worst were the ones where I optimised for code elegance over what the team actually needed to ship.</p>
+        <p data-i18n="about.bio.p4" data-i18n-html>Lately I spend evenings reading about transformers: tokenisation, vocabularies, attention heads, Q/K/V. Not to jump on a trend — because the math is good, and because I want to <strong>earn</strong> the vocabulary.</p>
 
-        <div class="bio__quote">
+        <div class="bio__quote" data-i18n="about.bio.quote">
           "If you can't explain the decision to the person paying the bill, you probably haven't finished thinking about it."
         </div>
       </div>
@@ -88,13 +88,16 @@
 <!-- Principles -->
 <section class="section">
   <div class="container">
-    <div class="reveal"><div class="mono-label">[PRINCIPLES] How I work</div><h2 class="section__title" style="margin-top:8px">Five notes I keep on my desk.</h2></div>
+    <div class="reveal">
+      <div class="mono-label" data-i18n="sec.principles">[PRINCIPLES] How I work</div>
+      <h2 class="section__title" style="margin-top:8px" data-i18n="sec.principles_title">Five notes I keep on my desk.</h2>
+    </div>
     <div class="principles">
-      <div class="reveal"><div class="principles__n">01</div><div class="principles__t">Boring wins in production.</div><div class="principles__d">The cleverest solution is the one the team can debug at 3am without me.</div></div>
-      <div class="reveal reveal-delay-1"><div class="principles__n">02</div><div class="principles__t">Make illegal states unrepresentable.</div><div class="principles__d">A schema that can't encode a broken state costs less than the test suite for catching one.</div></div>
-      <div class="reveal reveal-delay-2"><div class="principles__n">03</div><div class="principles__t">Observe, then optimise.</div><div class="principles__d">No performance work starts before the metric exists to measure it.</div></div>
-      <div class="reveal reveal-delay-3"><div class="principles__n">04</div><div class="principles__t">Ship the seam before the feature.</div><div class="principles__d">The interfaces compound. The features get rewritten. Design the interfaces first.</div></div>
-      <div class="reveal reveal-delay-4"><div class="principles__n">05</div><div class="principles__t">Own the whole stack, respect each layer.</div><div class="principles__d">Generalism isn't an excuse to be shallow — it's permission to go deep where the problem is.</div></div>
+      <div class="reveal"><div class="principles__n">01</div><div class="principles__t" data-i18n="about.p01.t">Boring wins in production.</div><div class="principles__d" data-i18n="about.p01.d">The cleverest solution is the one the team can debug at 3am without me.</div></div>
+      <div class="reveal reveal-delay-1"><div class="principles__n">02</div><div class="principles__t" data-i18n="about.p02.t">Make illegal states unrepresentable.</div><div class="principles__d" data-i18n="about.p02.d">A schema that can't encode a broken state costs less than the test suite for catching one.</div></div>
+      <div class="reveal reveal-delay-2"><div class="principles__n">03</div><div class="principles__t" data-i18n="about.p03.t">Observe, then optimise.</div><div class="principles__d" data-i18n="about.p03.d">No performance work starts before the metric exists to measure it.</div></div>
+      <div class="reveal reveal-delay-3"><div class="principles__n">04</div><div class="principles__t" data-i18n="about.p04.t">Ship the seam before the feature.</div><div class="principles__d" data-i18n="about.p04.d">The interfaces compound. The features get rewritten. Design the interfaces first.</div></div>
+      <div class="reveal reveal-delay-4"><div class="principles__n">05</div><div class="principles__t" data-i18n="about.p05.t">Own the whole stack, respect each layer.</div><div class="principles__d" data-i18n="about.p05.d">Generalism isn't an excuse to be shallow — it's permission to go deep where the problem is.</div></div>
     </div>
   </div>
 </section>
@@ -103,8 +106,11 @@
 <section class="section">
   <div class="container">
     <div class="section__head">
-      <div class="reveal"><div class="mono-label">[EXPERIENCE] Career</div><h2 class="section__title" style="margin-top:8px">The short version.</h2></div>
-      <a href="https://vitorgabrieldev.github.io/vitorgabrieldev.io/assets/pdfs/CV.pdf" target="_blank" class="btn btn--ghost">Download CV (PDF) ↗</a>
+      <div class="reveal">
+        <div class="mono-label" data-i18n="sec.career">[EXPERIENCE] Career</div>
+        <h2 class="section__title" style="margin-top:8px" data-i18n="sec.career_title">The short version.</h2>
+      </div>
+      <a href="CV.pdf" target="_blank" class="btn btn--ghost" data-i18n="btn.download_cv">Download CV (PDF) ↗</a>
     </div>
     <div class="timeline" id="timeline"></div>
   </div>
@@ -113,7 +119,10 @@
 <!-- Skills -->
 <section class="section">
   <div class="container">
-    <div class="reveal"><div class="mono-label">[SKILLS] The toolkit</div><h2 class="section__title" style="margin-top:8px">Tools I reach for.</h2></div>
+    <div class="reveal">
+      <div class="mono-label" data-i18n="sec.skills">[SKILLS] The toolkit</div>
+      <h2 class="section__title" style="margin-top:8px" data-i18n="sec.skills_title">Tools I reach for.</h2>
+    </div>
     <div class="skills" id="skillsRoot"></div>
   </div>
 </section>
@@ -121,7 +130,10 @@
 <!-- Open source -->
 <section class="section">
   <div class="container">
-    <div class="reveal"><div class="mono-label">[OPEN SOURCE] Public work</div><h2 class="section__title" style="margin-top:8px">A handful of things I've put out there.</h2></div>
+    <div class="reveal">
+      <div class="mono-label" data-i18n="sec.oss">[OPEN SOURCE] Public work</div>
+      <h2 class="section__title" style="margin-top:8px" data-i18n="sec.oss_title">A handful of things I've put out there.</h2>
+    </div>
     <div class="oss-grid" id="ossRoot"></div>
   </div>
 </section>
@@ -131,14 +143,14 @@
   <div class="container">
     <div class="now reveal">
       <div>
-        <div class="mono-label" style="color:rgba(255,255,255,.55)">[NOW] Currently</div>
-        <h2 class="section__title" style="color:#fff; margin-top:8px">What I'm doing this quarter.</h2>
+        <div class="mono-label" style="color:rgba(255,255,255,.55)" data-i18n="sec.now">[NOW] Currently</div>
+        <h2 class="section__title" style="color:#fff; margin-top:8px" data-i18n="sec.now_title">What I'm doing this quarter.</h2>
       </div>
       <ul class="now__list">
-        <li><span class="now__k">● BUILDING</span><span>Laravel Fintech Core — ledger hardening + multi-tenant read models</span></li>
-        <li><span class="now__k">● SHIPPING</span><span>Risklog — v2 risk model, pulling authorship + file criticality</span></li>
-        <li><span class="now__k">● READING</span><span>Transformers from scratch — notes up on Journal</span></li>
-        <li><span class="now__k">● CONSIDERING</span><span>New engagement, Q2 2026 — CLT, PJ or strategic freelance</span></li>
+        <li><span class="now__k" data-i18n="about.now.k.building">● BUILDING</span><span data-i18n="about.now.building">Laravel Fintech Core — ledger hardening + multi-tenant read models</span></li>
+        <li><span class="now__k" data-i18n="about.now.k.shipping">● SHIPPING</span><span data-i18n="about.now.shipping">Risklog — v2 risk model, pulling authorship + file criticality</span></li>
+        <li><span class="now__k" data-i18n="about.now.k.reading">● READING</span><span data-i18n="about.now.reading">Transformers from scratch — notes up on Journal</span></li>
+        <li><span class="now__k" data-i18n="about.now.k.considering">● CONSIDERING</span><span data-i18n="about.now.considering">New engagement, Q2 2026 — CLT, PJ or strategic freelance</span></li>
       </ul>
     </div>
   </div>
@@ -152,38 +164,44 @@
 <script>
 (function() {
   const D = window.PORTFOLIO_DATA;
-  // Timeline
-  document.getElementById('timeline').innerHTML = D.timeline.map((t, i) => `
-    <div class="tl-row reveal ${t.current ? 'tl-row--current' : ''}">
-      <div class="tl-year mono">${t.year}${t.current ? ' →' : ''}</div>
-      <div class="tl-line"><span class="tl-dot"></span></div>
-      <div class="tl-body">
-        <div class="tl-role">${t.role}</div>
-        <div class="tl-company mono">${t.company} · ${t.where}</div>
-        <div class="tl-notes">${t.notes}</div>
+
+  function renderTimeline() {
+    document.getElementById('timeline').innerHTML = D.timeline.map((t, i) => `
+      <div class="tl-row reveal ${t.current ? 'tl-row--current' : ''}">
+        <div class="tl-year mono">${t.year}${t.current ? ' →' : ''}</div>
+        <div class="tl-line"><span class="tl-dot"></span></div>
+        <div class="tl-body">
+          <div class="tl-role">${window.td(t.role)}</div>
+          <div class="tl-company mono">${t.company} · ${t.where}</div>
+          ${t.stack ? `<div class="tl-stack" style="font-family:var(--font-mono); font-size:12px; color:var(--accent); margin:8px 0; letter-spacing:.05em;">${t.stack.join(' · ')}</div>` : ''}
+          <div class="tl-notes">${window.td(t.notes)}</div>
+        </div>
       </div>
-    </div>
-  `).join('');
-  // Skills
-  document.getElementById('skillsRoot').innerHTML = Object.entries(D.skills).map(([group, items], i) => `
-    <div class="skills__col reveal reveal-delay-${i}">
-      <div class="mono-label">${String(i+1).padStart(2,'0')} · ${group}</div>
-      <ul>${items.map(s => `<li>${s}</li>`).join('')}</ul>
-    </div>
-  `).join('');
-  // Open source
-  const ossRoot = document.getElementById('ossRoot');
-  if (ossRoot && D.oss) {
+    `).join('');
+  }
+
+  function renderSkills() {
+    document.getElementById('skillsRoot').innerHTML = Object.entries(D.skills).map(([group, items], i) => `
+      <div class="skills__col reveal reveal-delay-${i}">
+        <div class="mono-label">${String(i+1).padStart(2,'0')} · ${window.t('skills.' + group)}</div>
+        <ul>${items.map(s => `<li>${s}</li>`).join('')}</ul>
+      </div>
+    `).join('');
+  }
+
+  function renderOss() {
+    const ossRoot = document.getElementById('ossRoot');
+    if (!ossRoot || !D.oss) return;
     ossRoot.innerHTML = D.oss.map((o, i) => `
       <a class="oss reveal reveal-delay-${i % 3}" href="https://github.com/${o.owner}/${o.repo}" target="_blank" rel="noopener">
         <div class="oss__top">
-          <span class="oss__kind mono">${o.kind}</span>
+          <span class="oss__kind mono">${window.td(o.kind)}</span>
           <span class="oss__lang mono">${o.lang}</span>
         </div>
         <div class="oss__repo">
           <span class="mono oss__owner">${o.owner}/</span><span>${o.repo}</span>
         </div>
-        <div class="oss__desc">${o.desc}</div>
+        <div class="oss__desc">${window.td(o.desc)}</div>
         <div class="oss__foot mono">
           ${o.stars != null ? `<span>★ ${o.stars}</span>` : `<span>↗ PR merged</span>`}
           <span class="oss__arrow">↗</span>
@@ -191,12 +209,25 @@
       </a>
     `).join('');
   }
-  // Observe
-  document.querySelectorAll('.reveal').forEach(el => {
-    if (el.classList.contains('in')) return;
-    new IntersectionObserver((entries, io) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, { threshold: 0.08 }).observe(el);
+
+  function observe() {
+    document.querySelectorAll('.reveal').forEach(el => {
+      if (el.classList.contains('in')) return;
+      new IntersectionObserver((entries, io) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { threshold: 0.08 }).observe(el);
+    });
+  }
+
+  renderTimeline();
+  renderSkills();
+  renderOss();
+  observe();
+
+  window.addEventListener('langchange', () => {
+    renderTimeline();
+    renderSkills();
+    renderOss();
   });
 })();
 </script>

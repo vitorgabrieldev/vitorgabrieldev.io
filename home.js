@@ -2,75 +2,86 @@
 (function() {
   const D = window.PORTFOLIO_DATA;
 
-  // ---- Featured work ----
-  const featGrid = document.getElementById('featuredGrid');
-  const featured = D.projects.filter(p => p.featured);
-  featGrid.innerHTML = featured.map((p, i) => `
-    <a href="project.html?id=${p.id}" data-link class="feat__item reveal" data-cursor>
-      <div class="feat__meta">
-        <div class="feat__chipline">
-          <span class="chip"><span class="dot" style="background:${p.accent}"></span>${p.category}</span>
-          <span class="chip" style="background:var(--bg)">${p.year}</span>
-          <span class="chip" style="background:var(--bg)">${p.role}</span>
+  function renderFeatured() {
+    const featGrid = document.getElementById('featuredGrid');
+    const featured = D.projects.filter(p => p.featured);
+    featGrid.innerHTML = featured.map((p, i) => `
+      <a href="project.html?id=${p.id}" data-link class="feat__item reveal" data-cursor>
+        <div class="feat__meta">
+          <div class="feat__chipline">
+            <span class="chip"><span class="dot" style="background:${p.accent}"></span>${window.td(p.category)}</span>
+            <span class="chip" style="background:var(--bg)">${p.year}</span>
+            <span class="chip" style="background:var(--bg)">${window.td(p.role)}</span>
+          </div>
+          <div class="feat__num">CASE · 0${i+1} / 0${featured.length}</div>
+          <h3 class="feat__title">${p.name}</h3>
+          <p class="feat__desc">${window.td(p.summary)}</p>
+          <div class="feat__stack">${p.stack.map(s => `<span>${s}</span>`).join('')}</div>
+          <p class="feat__impact">${window.td(p.impact)}</p>
+          <span class="feat__link">${window.t('projects.read_case')}</span>
         </div>
-        <div class="feat__num">CASE · 0${i+1} / 0${featured.length}</div>
-        <h3 class="feat__title">${p.name}</h3>
-        <p class="feat__desc">${p.summary}</p>
-        <div class="feat__stack">${p.stack.map(s => `<span>${s}</span>`).join('')}</div>
-        <p class="feat__impact">${p.impact}</p>
-        <span class="feat__link">Read case →</span>
-      </div>
-      <div class="feat__thumb">
-        <div class="feat__thumb-art">
-          ${thumbArt(p, i)}
+        <div class="feat__thumb">
+          <div class="feat__thumb-art">
+            ${thumbArt(p, i)}
+          </div>
         </div>
+      </a>
+    `).join('');
+
+    document.querySelectorAll('.feat__item').forEach(el => {
+      new IntersectionObserver((entries, io) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { threshold: 0.08 }).observe(el);
+    });
+  }
+
+  function renderCaps() {
+    const caps = [
+      { num: "01", tk: 'cap.01.t', bk: 'cap.01.b' },
+      { num: "02", tk: 'cap.02.t', bk: 'cap.02.b' },
+      { num: "03", tk: 'cap.03.t', bk: 'cap.03.b' },
+      { num: "04", tk: 'cap.04.t', bk: 'cap.04.b' },
+      { num: "05", tk: 'cap.05.t', bk: 'cap.05.b' },
+      { num: "06", tk: 'cap.06.t', bk: 'cap.06.b' },
+      { num: "07", tk: 'cap.07.t', bk: 'cap.07.b' },
+      { num: "08", tk: 'cap.08.t', bk: 'cap.08.b' },
+    ];
+    document.getElementById('capsGrid').innerHTML = caps.map(c => `
+      <div class="reveal">
+        <div class="num">${c.num}</div>
+        <div class="t">${window.t(c.tk)}</div>
+        <div class="b">${window.t(c.bk)}</div>
       </div>
-    </a>
-  `).join('');
+    `).join('');
+  }
 
-  // re-observe reveals
-  document.querySelectorAll('.feat__item').forEach(el => {
-    new IntersectionObserver((entries, io) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, { threshold: 0.08 }).observe(el);
-  });
+  function renderJournal() {
+    document.getElementById('journalList').innerHTML = D.journal.slice(0, 4).map(j => `
+      <a href="journal.html#${j.slug}" data-link>
+        <span class="date">${formatDate(j.date)}</span>
+        <span class="kicker">${window.td(j.kicker)}</span>
+        <span class="t">${window.td(j.title)}</span>
+        <span class="r">${j.read} · →</span>
+      </a>
+    `).join('');
+  }
 
-  // ---- Capabilities grid ----
-  const caps = [
-    { num: "01", t: "Backend systems", b: "Laravel APIs, data models, auth, queues, multi-tenant design." },
-    { num: "02", t: "Infra & DevOps", b: "Docker, Kubernetes, CI/CD pipelines, Nginx, Linux hardening." },
-    { num: "03", t: "Frontend delivery", b: "React, Next.js, TypeScript. Interfaces that age well." },
-    { num: "04", t: "API design", b: "REST and GraphQL contracts. Versioning without drama." },
-    { num: "05", t: "Observability", b: "Logs, metrics, traces — the machinery to answer \"why\"." },
-    { num: "06", t: "Release safety", b: "Automated tests, rollback strategy, deploy risk tagging." },
-    { num: "07", t: "Research", b: "Blockchain prototypes, transformer internals, LLM ops." },
-    { num: "08", t: "Product intuition", b: "Translating business requirements into technical reality." },
-  ];
-  document.getElementById('capsGrid').innerHTML = caps.map(c => `
-    <div class="reveal">
-      <div class="num">${c.num}</div>
-      <div class="t">${c.t}</div>
-      <div class="b">${c.b}</div>
-    </div>
-  `).join('');
+  function render() {
+    renderFeatured();
+    renderCaps();
+    renderJournal();
 
-  // ---- Journal ----
-  document.getElementById('journalList').innerHTML = D.journal.slice(0, 4).map(j => `
-    <a href="journal.html#${j.slug}" data-link>
-      <span class="date">${formatDate(j.date)}</span>
-      <span class="kicker">${j.kicker}</span>
-      <span class="t">${j.title}</span>
-      <span class="r">${j.read} · →</span>
-    </a>
-  `).join('');
+    document.querySelectorAll('.reveal').forEach(el => {
+      if (el.classList.contains('in')) return;
+      new IntersectionObserver((entries, io) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { threshold: 0.08 }).observe(el);
+    });
+  }
 
-  // Observe revealed elements added dynamically
-  document.querySelectorAll('.reveal').forEach(el => {
-    if (el.classList.contains('in')) return;
-    new IntersectionObserver((entries, io) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, { threshold: 0.08 }).observe(el);
-  });
+  render();
+
+  window.addEventListener('langchange', render);
 
   function formatDate(iso) {
     const [y,m,d] = iso.split('-');
@@ -79,11 +90,9 @@
   }
 
   function thumbArt(p, i) {
-    // Generate per-project abstract SVG placeholder — original, no brand mimicry
     const w = 800, h = 600;
     const accent = p.accent;
     if (i === 0) {
-      // ledger-grid for fintech
       return `<svg class="thumb-canvas" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid slice">
         <rect width="${w}" height="${h}" fill="#ede7db"/>
         ${Array.from({length:12}, (_,r) => `<line x1="0" y1="${50+r*46}" x2="${w}" y2="${50+r*46}" stroke="rgba(30,26,22,.08)" stroke-width="1"/>`).join('')}
@@ -101,7 +110,6 @@
       </svg>`;
     }
     if (i === 1) {
-      // pipeline graph for risklog
       return `<svg class="thumb-canvas" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid slice">
         <rect width="${w}" height="${h}" fill="#ede7db"/>
         <g stroke="rgba(30,26,22,.25)" stroke-width="1.5" fill="none">
@@ -130,7 +138,6 @@
       </svg>`;
     }
     if (i === 2) {
-      // network nodes for dubflow
       return `<svg class="thumb-canvas" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid slice">
         <rect width="${w}" height="${h}" fill="#ede7db"/>
         <g stroke="rgba(30,26,22,.15)" stroke-width="1">

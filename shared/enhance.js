@@ -65,9 +65,9 @@
       keywords: [p.name, p.category.en || p.category, ...(p.stack || []), p.summary.en || p.summary].join(' ').toLowerCase()
     }))),
     ...((D.journal || []).map(j => ({
-      type: 'writing', label: j.title.en || j.title, sub: `${j.date} · ${j.readTime || ''}`.trim(),
-      href: `journal.html#${j.id}`, icon: '✎',
-      keywords: [j.title.en || j.title, j.kicker.en || j.kicker, j.excerpt.en || j.excerpt].join(' ').toLowerCase()
+      type: 'writing', label: j.title.en || j.title, sub: `${j.date} · ${j.read || ''}`.trim(),
+      href: `journal-${j.slug}.html`, icon: '✎',
+      keywords: [j.title.en || j.title, j.kicker.en || j.kicker, j.summary?.en || j.summary || ''].join(' ').toLowerCase()
     }))),
     // Quick actions
     { type: 'action', label: 'Toggle theme', sub: 'Light ↔ Dark', icon: '◑',

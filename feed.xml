@@ -12,8 +12,8 @@
 
     <item>
       <title>Portfolio projects: ideas beyond the calculator</title>
-      <link>https://vitorgabriel.dev/journal/portfolio-project-ideas.html</link>
-      <guid isPermaLink="true">https://vitorgabriel.dev/journal/portfolio-project-ideas.html</guid>
+      <link>https://vitorgabriel.dev/journal-portfolio-project-ideas.html</link>
+      <guid isPermaLink="true">https://vitorgabriel.dev/journal-portfolio-project-ideas.html</guid>
       <pubDate>Sun, 19 Apr 2026 00:00:00 +0000</pubDate>
       <description>Your portfolio won't impress anyone with a notes CRUD or calculator. Build something that solves your real problem.</description>
       <category>Career</category>
@@ -21,8 +21,8 @@
 
     <item>
       <title>Scaling Laravel without rewrite: caching, queues, read models</title>
-      <link>https://vitorgabriel.dev/journal/scaling-laravel-no-rewrite.html</link>
-      <guid isPermaLink="true">https://vitorgabriel.dev/journal/scaling-laravel-no-rewrite.html</guid>
+      <link>https://vitorgabriel.dev/journal-scaling-laravel-no-rewrite.html</link>
+      <guid isPermaLink="true">https://vitorgabriel.dev/journal-scaling-laravel-no-rewrite.html</guid>
       <pubDate>Fri, 18 Apr 2026 00:00:00 +0000</pubDate>
       <description>App got slow? Before rewriting in Go, try this: layered caching, queues for heavy jobs, read models for complex queries.</description>
       <category>Architecture</category>
@@ -30,8 +30,8 @@
 
     <item>
       <title>Claude's design: how Anthropic built aligned AI</title>
-      <link>https://vitorgabriel.dev/journal/claude-design.html</link>
-      <guid isPermaLink="true">https://vitorgabriel.dev/journal/claude-design.html</guid>
+      <link>https://vitorgabriel.dev/journal-claude-design.html</link>
+      <guid isPermaLink="true">https://vitorgabriel.dev/journal-claude-design.html</guid>
       <pubDate>Wed, 15 Apr 2026 00:00:00 +0000</pubDate>
       <description>Constitutional AI, honest RLHF, refusal patterns. Building trustworthy AI requires firm design, not just scale.</description>
       <category>AI</category>
@@ -39,8 +39,8 @@
 
     <item>
       <title>Claude Opus 4.7: deep reasoning in real time</title>
-      <link>https://vitorgabriel.dev/journal/opus-4-7-capabilities.html</link>
-      <guid isPermaLink="true">https://vitorgabriel.dev/journal/opus-4-7-capabilities.html</guid>
+      <link>https://vitorgabriel.dev/journal-opus-4-7-capabilities.html</link>
+      <guid isPermaLink="true">https://vitorgabriel.dev/journal-opus-4-7-capabilities.html</guid>
       <pubDate>Mon, 14 Apr 2026 00:00:00 +0000</pubDate>
       <description>Improvements in complex reasoning, context, inference speed. Viable for code generation, technical analysis, system design.</description>
       <category>Tools</category>
@@ -48,8 +48,8 @@
 
     <item>
       <title>AI in software development: it's not automation, it's amplification</title>
-      <link>https://vitorgabriel.dev/journal/ai-in-software-dev.html</link>
-      <guid isPermaLink="true">https://vitorgabriel.dev/journal/ai-in-software-dev.html</guid>
+      <link>https://vitorgabriel.dev/journal-ai-in-software-dev.html</link>
+      <guid isPermaLink="true">https://vitorgabriel.dev/journal-ai-in-software-dev.html</guid>
       <pubDate>Sun, 13 Apr 2026 00:00:00 +0000</pubDate>
       <description>LLMs accelerate boilerplate. Architecture, review, judgment are still yours. Real value: 10x faster exploring.</description>
       <category>Thoughts</category>
@@ -57,8 +57,8 @@
 
     <item>
       <title>Relational vs Non-Relational: true trade-offs</title>
-      <link>https://vitorgabriel.dev/journal/relational-vs-nonrelational.html</link>
-      <guid isPermaLink="true">https://vitorgabriel.dev/journal/relational-vs-nonrelational.html</guid>
+      <link>https://vitorgabriel.dev/journal-relational-vs-nonrelational.html</link>
+      <guid isPermaLink="true">https://vitorgabriel.dev/journal-relational-vs-nonrelational.html</guid>
       <pubDate>Sat, 12 Apr 2026 00:00:00 +0000</pubDate>
       <description>SQL: ACID, integrity, rigidity. NoSQL: flexibility, scale, risk. No silver bullet.</description>
       <category>Databases</category>
@@ -66,8 +66,8 @@
 
     <item>
       <title>Why TypeScript is non-negotiable now</title>
-      <link>https://vitorgabriel.dev/journal/why-typescript.html</link>
-      <guid isPermaLink="true">https://vitorgabriel.dev/journal/why-typescript.html</guid>
+      <link>https://vitorgabriel.dev/journal-why-typescript.html</link>
+      <guid isPermaLink="true">https://vitorgabriel.dev/journal-why-typescript.html</guid>
       <pubDate>Fri, 11 Apr 2026 00:00:00 +0000</pubDate>
       <description>Types enforce validation. 15-20% overhead, 3x faster refactoring. Executable documentation.</description>
       <category>Languages</category>
@@ -75,8 +75,8 @@
 
     <item>
       <title>Clean Code in 2026: pragmatism over dogma</title>
-      <link>https://vitorgabriel.dev/journal/clean-code-2026.html</link>
-      <guid isPermaLink="true">https://vitorgabriel.dev/journal/clean-code-2026.html</guid>
+      <link>https://vitorgabriel.dev/journal-clean-code-2026.html</link>
+      <guid isPermaLink="true">https://vitorgabriel.dev/journal-clean-code-2026.html</guid>
       <pubDate>Thu, 10 Apr 2026 00:00:00 +0000</pubDate>
       <description>Clean Code 2008 vs 2026: AI reads bad code for you, so shift focus. Now: auditability, decision traceability, observability.</description>
       <category>Architecture</category>
@@ -84,8 +84,8 @@
 
     <item>
       <title>Service Layers in Laravel 12: where does logic actually go?</title>
-      <link>https://vitorgabriel.dev/journal/service-layers-laravel.html</link>
-      <guid isPermaLink="true">https://vitorgabriel.dev/journal/service-layers-laravel.html</guid>
+      <link>https://vitorgabriel.dev/journal-service-layers-laravel.html</link>
+      <guid isPermaLink="true">https://vitorgabriel.dev/journal-service-layers-laravel.html</guid>
       <pubDate>Mon, 07 Apr 2026 00:00:00 +0000</pubDate>
       <description>Controller → Service → Repository → Model. Who does what? Controller deserializes HTTP. Service orchestrates business.</description>
       <category>Architecture</category>
@@ -93,8 +93,8 @@
 
     <item>
       <title>Why your ledger needs double-entry, even on day one</title>
-      <link>https://vitorgabriel.dev/journal/ledger-consistency.html</link>
-      <guid isPermaLink="true">https://vitorgabriel.dev/journal/ledger-consistency.html</guid>
+      <link>https://vitorgabriel.dev/journal-ledger-consistency.html</link>
+      <guid isPermaLink="true">https://vitorgabriel.dev/journal-ledger-consistency.html</guid>
       <pubDate>Sat, 14 Mar 2026 00:00:00 +0000</pubDate>
       <description>Double-entry isn't optional. Implementing early costs 2 hours. Retrofitting in production costs 200 hours.</description>
       <category>Architecture</category>
@@ -102,8 +102,8 @@
 
     <item>
       <title>Shipping Risklog: turning deploys into paragraphs</title>
-      <link>https://vitorgabriel.dev/journal/risklog-post.html</link>
-      <guid isPermaLink="true">https://vitorgabriel.dev/journal/risklog-post.html</guid>
+      <link>https://vitorgabriel.dev/journal-risklog-post.html</link>
+      <guid isPermaLink="true">https://vitorgabriel.dev/journal-risklog-post.html</guid>
       <pubDate>Mon, 02 Feb 2026 00:00:00 +0000</pubDate>
       <description>Silent deploy is risky. Risklog analyzes each diff, classifies by risk, reduced post-deploy scrambles 62%.</description>
       <category>Case study</category>
@@ -111,8 +111,8 @@
 
     <item>
       <title>Attention from scratch: notes while reading the GPT paper</title>
-      <link>https://vitorgabriel.dev/journal/kv-attention.html</link>
-      <guid isPermaLink="true">https://vitorgabriel.dev/journal/kv-attention.html</guid>
+      <link>https://vitorgabriel.dev/journal-kv-attention.html</link>
+      <guid isPermaLink="true">https://vitorgabriel.dev/journal-kv-attention.html</guid>
       <pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate>
       <description>Built a transformer from scratch in PHP. Attention is just matrix multiplication. Code fits in 200 lines.</description>
       <category>Learning in public</category>
@@ -120,8 +120,8 @@
 
     <item>
       <title>Multi-tenancy in Laravel: four shapes, one trap</title>
-      <link>https://vitorgabriel.dev/journal/laravel-tenancy.html</link>
-      <guid isPermaLink="true">https://vitorgabriel.dev/journal/laravel-tenancy.html</guid>
+      <link>https://vitorgabriel.dev/journal-laravel-tenancy.html</link>
+      <guid isPermaLink="true">https://vitorgabriel.dev/journal-laravel-tenancy.html</guid>
       <pubDate>Tue, 11 Nov 2025 00:00:00 +0000</pubDate>
       <description>Start with simple row-scoped. Migrate to schema per tenant when scaling. Database per tenant if compliance requires.</description>
       <category>Architecture</category>

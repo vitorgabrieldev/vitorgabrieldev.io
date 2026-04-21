@@ -122,7 +122,7 @@
   function render() {
     const list = filter === 'all' ? D.journal : D.journal.filter(j => j.kicker.en === filter);
     document.getElementById('jrnList').innerHTML = list.map(j => `
-      <a class="jrn-row" href="/journal/${j.slug}.html" data-link>
+      <a class="jrn-row" href="journal-${j.slug}.html" data-link>
         <div class="jrn-row__date">${fmt(j.date)}</div>
         <div class="jrn-row__kicker">${window.td(j.kicker)}</div>
         <div>

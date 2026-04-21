@@ -599,6 +599,20 @@ Events.<span class="k">on</span>(mousedown, () => dragBall(ball, mouse));` },
             "Context-aware multi-turn conversations",
             "Supports piping and shell operators"
           ]},
+          { h: "Core flow", code: `<span class="c">// User intent → LLM reasoning → command proposal → execution</span>
+<span class="k">async</span> <span class="k">function</span> reasonAndExecute(userInput) {
+  <span class="k">const</span> reasoning = <span class="k">await</span> mistral.stream({
+    prompt: <span class="s">\`Reason about: \${userInput}\`</span>,
+    model: <span class="s">'mistral-medium'</span>
+  });
+
+  <span class="k">const</span> command = extractCommand(reasoning);
+  <span class="k">const</span> approved = <span class="k">await</span> askUserConfirmation(command);
+
+  <span class="k">if</span> (approved) {
+    <span class="k">return</span> executeShell(command);
+  }
+}` },
           { h: "Key decisions", p: [
             "Used Mistral (cheaper than Opus, fast enough for reasoning), streaming for perceived responsiveness, and explicit confirmation gates to prevent accidents. No permission elevation — the agent runs with user privileges only."
           ]},
@@ -624,6 +638,20 @@ Events.<span class="k">on</span>(mousedown, () => dragBall(ball, mouse));` },
             "Conversas multi-turn conscientes de contexto",
             "Suporta piping e operadores shell"
           ]},
+          { h: "Fluxo principal", code: `<span class="c">// Intenção do usuário → raciocínio LLM → proposta → execução</span>
+<span class="k">async</span> <span class="k">function</span> raciocinaEExecuta(input) {
+  <span class="k">const</span> raciocinio = <span class="k">await</span> mistral.stream({
+    prompt: <span class="s">\`Raciocine sobre: \${input}\`</span>,
+    model: <span class="s">'mistral-medium'</span>
+  });
+
+  <span class="k">const</span> comando = extraiComando(raciocinio);
+  <span class="k">const</span> aprovado = <span class="k">await</span> pedirAprovacao(comando);
+
+  <span class="k">if</span> (aprovado) {
+    <span class="k">return</span> executaShell(comando);
+  }
+}` },
           { h: "Decisões chave", p: [
             "Usei Mistral (mais barato que Opus, rápido o suficiente para raciocínio), streaming para responsividade percebida, e gates de confirmação explícita para prevenir acidentes. Sem elevação de permissão — o agente roda apenas com privilégios do usuário."
           ]},
@@ -652,6 +680,21 @@ Events.<span class="k">on</span>(mousedown, () => dragBall(ball, mouse));` },
             "Multi-sig and time-lock patterns for security",
             "Off-chain indexing (The Graph) for scalable reads"
           ]},
+          { h: "On-chain vs off-chain", code: `<span class="c">// Expensive: storing everything on-chain</span>
+<span class="k">function</span> recordAllHistory() <span class="k">public</span> {
+  <span class="k">for</span> (<span class="k">uint</span> i = <span class="val">0</span>; i < events.length; i++) {
+    state[i] = events[i]; <span class="c">// Gas: ~20k per write</span>
+  }
+}
+
+<span class="c">// Efficient: emit events, verify proofs</span>
+<span class="k">event</span> Transfer(<span class="k">address</span> <span class="k">indexed</span> from, <span class="k">address</span> <span class="k">indexed</span> to, <span class="k">uint</span> amount);
+
+<span class="k">function</span> transfer(<span class="k">address</span> to, <span class="k">uint</span> amount) <span class="k">public</span> {
+  <span class="k">emit</span> Transfer(msg.sender, to, amount); <span class="c">// Gas: ~375 per event</span>
+  balances[msg.sender] -= amount;
+  balances[to] += amount;
+}` },
           { h: "Trade-offs explored", p: [
             "Storing data on-chain is expensive. Off-chain with on-chain verification is cheaper but adds complexity. The pattern: minimal on-chain state machine, maximal off-chain logic, use events as the source of truth for indexing and read-side data."
           ]},
@@ -678,6 +721,21 @@ Events.<span class="k">on</span>(mousedown, () => dragBall(ball, mouse));` },
             "Padrões multi-sig e time-lock para segurança",
             "Indexação off-chain (The Graph) para reads escaláveis"
           ]},
+          { h: "On-chain vs off-chain", code: `<span class="c">// Caro: armazenar tudo on-chain</span>
+<span class="k">function</span> registraTodoHistorico() <span class="k">public</span> {
+  <span class="k">for</span> (<span class="k">uint</span> i = <span class="val">0</span>; i < eventos.length; i++) {
+    estado[i] = eventos[i]; <span class="c">// Gas: ~20k por escrita</span>
+  }
+}
+
+<span class="c">// Eficiente: emite eventos, verifica provas</span>
+<span class="k">event</span> Transferencia(<span class="k">address</span> <span class="k">indexed</span> de, <span class="k">address</span> <span class="k">indexed</span> para, <span class="k">uint</span> valor);
+
+<span class="k">function</span> transfere(<span class="k">address</span> para, <span class="k">uint</span> valor) <span class="k">public</span> {
+  <span class="k">emit</span> Transferencia(msg.sender, para, valor); <span class="c">// Gas: ~375 por evento</span>
+  saldos[msg.sender] -= valor;
+  saldos[para] += valor;
+}` },
           { h: "Trade-offs explorados", p: [
             "Armazenar dados on-chain é caro. Off-chain com verificação on-chain é mais barato mas adiciona complexidade. O padrão: máquina de estado on-chain mínima, lógica off-chain máxima, use events como fonte de verdade para indexação e dados de read-side."
           ]},
@@ -707,6 +765,25 @@ Events.<span class="k">on</span>(mousedown, () => dragBall(ball, mouse));` },
             "WebGL rendering for performance",
             "Fallback to CPU if GPU unavailable"
           ]},
+          { h: "Detection pipeline", code: `<span class="c">// Real-time hand tracking with MediaPipe</span>
+<span class="k">const</span> hands = <span class="k">new</span> Hands({
+  locateFile: (file) => <span class="s">\`/mediapipe/\${file}\`</span>
+});
+
+hands.onResults((results) => {
+  <span class="k">if</span> (results.multiHandLandmarks) {
+    results.multiHandLandmarks.forEach((landmarks) => {
+      <span class="k">const</span> pose = classifyGesture(landmarks);
+      updateUI(pose);
+    });
+  }
+});
+
+<span class="k">const</span> camera = <span class="k">new</span> Camera(video, {
+  onFrame: <span class="k">async</span> () => {
+    <span class="k">await</span> hands.send({ image: video });
+  }
+});` },
           { h: "Key findings", p: [
             "Lighting matters enormously. Poor lighting breaks detection. Hand occlusion is harder than expected — even slight finger overlap confuses the model. Smoothing latency trades off responsiveness — you need 2-3 frames of history for stable classification."
           ]},
@@ -734,6 +811,25 @@ Events.<span class="k">on</span>(mousedown, () => dragBall(ball, mouse));` },
             "Renderização WebGL para performance",
             "Fallback para CPU se GPU indisponível"
           ]},
+          { h: "Pipeline de detecção", code: `<span class="c">// Rastreamento de mão em tempo real com MediaPipe</span>
+<span class="k">const</span> maos = <span class="k">new</span> Hands({
+  locateFile: (file) => <span class="s">\`/mediapipe/\${file}\`</span>
+});
+
+maos.onResults((resultados) => {
+  <span class="k">if</span> (resultados.multiHandLandmarks) {
+    resultados.multiHandLandmarks.forEach((landmarks) => {
+      <span class="k">const</span> pose = classificaGesto(landmarks);
+      atualizaUI(pose);
+    });
+  }
+});
+
+<span class="k">const</span> camera = <span class="k">new</span> Camera(video, {
+  onFrame: <span class="k">async</span> () => {
+    <span class="k">await</span> maos.send({ image: video });
+  }
+});` },
           { h: "Achados chave", p: [
             "Iluminação importa enormemente. Má iluminação quebra detecção. Oclusão de mão é mais difícil que o esperado — até sobreposição leve de dedos confunde o modelo. Smoothing de latência faz trade-off com responsividade — você precisa de 2-3 frames de história para classificação estável."
           ]},
@@ -763,6 +859,22 @@ Events.<span class="k">on</span>(mousedown, () => dragBall(ball, mouse));` },
             "Real-time presence (who's viewing now)",
             "Archived weeks for historical reference"
           ]},
+          { h: "Data structure", code: `<span class="c">// Weekly cadence as the core structure</span>
+<span class="k">interface</span> WeeklyPlanning {
+  week: <span class="k">string</span>;
+  tasks: {
+    title: <span class="s">'string'</span>;
+    owner: <span class="s">'user_id'</span>;
+    dueDate: <span class="k">Date</span>;
+    blocker?: { reason: <span class="s">'string'</span>; severity: <span class="s">'high'</span> | <span class="s">'medium'</span> };
+  }[];
+  updatedAt: <span class="k">timestamp</span>;
+}
+
+<span class="c">// No fancy sorting — just: owner + status + blockers visible</span>
+<span class="k">SELECT</span> * <span class="k">FROM</span> tasks
+<span class="k">WHERE</span> week = <span class="val">@current</span>
+<span class="k">ORDER</span> <span class="k">BY</span> owner, status, blocker <span class="k">DESC</span>;` },
           { h: "Adoption", p: [
             "Team used it as default planning for 6 months. Replaced three spreadsheets. The biggest win: nobody asked 'who's doing this?' anymore — ownership was visible and enforced."
           ]},
@@ -790,6 +902,22 @@ Events.<span class="k">on</span>(mousedown, () => dragBall(ball, mouse));` },
             "Presença em tempo real (quem está vendo agora)",
             "Semanas arquivadas para referência histórica"
           ]},
+          { h: "Estrutura de dados", code: `<span class="c">// Cadência semanal como estrutura core</span>
+<span class="k">interface</span> PlanejamentoSemanal {
+  semana: <span class="k">string</span>;
+  tarefas: {
+    titulo: <span class="s">'string'</span>;
+    dono: <span class="s">'user_id'</span>;
+    dataVencimento: <span class="k">Date</span>;
+    bloqueio?: { motivo: <span class="s">'string'</span>; severidade: <span class="s">'alta'</span> | <span class="s">'média'</span> };
+  }[];
+  atualizadoEm: <span class="k">timestamp</span>;
+}
+
+<span class="c">// Sem sortes fancy — só: dono + status + blockers visível</span>
+<span class="k">SELECT</span> * <span class="k">FROM</span> tarefas
+<span class="k">WHERE</span> semana = <span class="val">@atual</span>
+<span class="k">ORDER</span> <span class="k">BY</span> dono, status, bloqueio <span class="k">DESC</span>;` },
           { h: "Adoção", p: [
             "Time usou como planejamento padrão por 6 meses. Substituiu três spreadsheets. A maior vitória: ninguém perguntou mais 'quem tá fazendo isso?' — ownership era visível e enforçado."
           ]},
@@ -819,6 +947,19 @@ Events.<span class="k">on</span>(mousedown, () => dragBall(ball, mouse));` },
             "Soft validation with warnings, not hard blocks",
             "Rollback history for accidental changes"
           ]},
+          { h: "Rules engine", code: `<span class="c">// Live rule adjustment — no deploy required</span>
+<span class="k">const</span> rules = {
+  riskWeight: { backend: <span class="val">0.4</span>, frontend: <span class="val">0.6</span> },
+  timeGate: { start: <span class="val">9</span>, end: <span class="val">17</span> },
+  blastRadius: { critical: <span class="val">80</span>, high: <span class="val">60</span>, medium: <span class="val">40</span> }
+};
+
+<span class="c">// Ops updates rules in UI → changes apply immediately</span>
+<span class="k">function</span> evaluateRisk(deploy) {
+  <span class="k">const</span> score = deploy.changes * rules.riskWeight[deploy.area];
+  <span class="k">const</span> isAllowed = isWithinTimeGate(rules.timeGate);
+  <span class="k">return</span> { flagged: score > <span class="val">50</span> && !isAllowed };
+}` },
           { h: "Outcomes", p: [
             "Ops stopped filing tickets for threshold changes. Response to production incidents dropped: previously a 30-min feedback loop (code → review → deploy), now < 2 min (change → test → apply)."
           ]},
@@ -846,6 +987,19 @@ Events.<span class="k">on</span>(mousedown, () => dragBall(ball, mouse));` },
             "Soft validation com avisos, não blocks hard",
             "Histórico de rollback para mudanças acidentais"
           ]},
+          { h: "Motor de regras", code: `<span class="c">// Ajuste de regras ao vivo — zero deploy necessário</span>
+<span class="k">const</span> regras = {
+  riscoPeso: { backend: <span class="val">0.4</span>, frontend: <span class="val">0.6</span> },
+  portaoHorario: { inicio: <span class="val">9</span>, fim: <span class="val">17</span> },
+  raioBlast: { critico: <span class="val">80</span>, alto: <span class="val">60</span>, medio: <span class="val">40</span> }
+};
+
+<span class="c">// Ops atualiza regras na UI → mudanças aplicam imediatamente</span>
+<span class="k">function</span> avaliaRisco(deploy) {
+  <span class="k">const</span> score = deploy.mudancas * regras.riscoPeso[deploy.area];
+  <span class="k">const</span> permitido = estaEmHorario(regras.portaoHorario);
+  <span class="k">return</span> { sinalizado: score > <span class="val">50</span> && !permitido };
+}` },
           { h: "Resultados", p: [
             "Ops parou de filar tickets para mudanças de threshold. Resposta a incidents de produção caiu: anteriormente um loop de 30-min (código → review → deploy), agora < 2 min (mudança → teste → aplicação)."
           ]},

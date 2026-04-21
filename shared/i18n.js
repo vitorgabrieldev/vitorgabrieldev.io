@@ -219,7 +219,6 @@
     'project.next_case': { pt: 'Próximo case →', en: 'Next case →' },
     'project.default.context': { pt: 'Contexto', en: 'Context' },
     'project.default.stack_label': { pt: 'Stack', en: 'Stack' },
-    'project.default.placeholder': { pt: 'Um write-up detalhado está em andamento. Este é um substituto — me pergunte sobre isso e vou te guiar pelas decisões de design ao vivo.', en: "A detailed case write-up is in progress. This placeholder is a stand-in — ask me about it and I'll walk you through the design decisions live." },
 
     // Footer
     'foot.studio_title': { pt: 'Vamos entregar algo preciso.', en: "Let's ship something precise." },

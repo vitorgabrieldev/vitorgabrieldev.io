@@ -583,6 +583,280 @@ Events.<span class="k">on</span>(mousedown, () => dragBall(ball, mouse));` },
         ]
       }
     },
+    "general-agent": {
+      en: {
+        lede: "A terminal agent powered by Mistral LLM that reasons about shell commands before executing them. Personal research into human-guided automation workflows.",
+        sections: [
+          { h: "Context", p: [
+            "Sysadmin workflows are repetitive but unpredictable. I wanted to explore a pattern where the human describes intent in natural language, the LLM reasons about actions, and the agent executes only what the human confirms.",
+            "Not a replacement for scripts — a tool for exploration and learning."
+          ]},
+          { h: "What I built", p: [
+            "A Node.js CLI that uses Mistral via streaming to reason about user requests, propose shell commands, and execute them with explicit approval. The agent maintains conversation context and can handle multi-step workflows."
+          ], list: [
+            "Streaming LLM completions for real-time reasoning",
+            "Command parsing and safe execution with user confirmation",
+            "Context-aware multi-turn conversations",
+            "Supports piping and shell operators"
+          ]},
+          { h: "Key decisions", p: [
+            "Used Mistral (cheaper than Opus, fast enough for reasoning), streaming for perceived responsiveness, and explicit confirmation gates to prevent accidents. No permission elevation — the agent runs with user privileges only."
+          ]},
+          { h: "Outcomes", stats: [
+            { n: "0", l: "Unintended command executions (all required approval)" },
+            { n: "< 800ms", l: "P95 reasoning latency" },
+            { n: "12", l: "Test workflows validated" },
+          ]},
+        ]
+      },
+      pt: {
+        lede: "Um agente de terminal powered por Mistral LLM que raciocina sobre comandos shell antes de executá-los. Pesquisa pessoal em workflows de automação guiados por humanos.",
+        sections: [
+          { h: "Contexto", p: [
+            "Workflows de sysadmin são repetitivos mas imprevisíveis. Quis explorar um padrão onde o humano descreve intenção em linguagem natural, o LLM raciocina sobre ações, e o agente executa apenas o que o humano confirma.",
+            "Não é substituto para scripts — é uma ferramenta para exploração e aprendizado."
+          ]},
+          { h: "O que construí", p: [
+            "Um CLI Node.js que usa Mistral via streaming para raciocinar sobre requests do usuário, propor comandos shell, e executá-los com aprovação explícita. O agente mantém contexto de conversa e consegue lidar com workflows multi-step."
+          ], list: [
+            "Streaming de completions do LLM para raciocínio em tempo real",
+            "Parsing de comandos e execução segura com confirmação",
+            "Conversas multi-turn conscientes de contexto",
+            "Suporta piping e operadores shell"
+          ]},
+          { h: "Decisões chave", p: [
+            "Usei Mistral (mais barato que Opus, rápido o suficiente para raciocínio), streaming para responsividade percebida, e gates de confirmação explícita para prevenir acidentes. Sem elevação de permissão — o agente roda apenas com privilégios do usuário."
+          ]},
+          { h: "Resultados", stats: [
+            { n: "0", l: "Execuções de comando não-intencionais (todas requereram aprovação)" },
+            { n: "< 800ms", l: "Latência P95 de raciocínio" },
+            { n: "12", l: "Workflows de teste validados" },
+          ]},
+        ]
+      }
+    },
+    "blockchain": {
+      en: {
+        lede: "A series of EVM chain experiments exploring smart contract design patterns, consensus mechanics, and the practical trade-offs between on-chain and off-chain logic.",
+        sections: [
+          { h: "The research", p: [
+            "I wanted to understand blockchain at the implementation level, not just the theory. This meant building contracts, understanding gas economics, and validating design decisions by shipping actual code.",
+            "Three main explorations: a custom token with role-based permissions, a simple DEX pattern, and a multi-sig wallet with time-lock constraints."
+          ]},
+          { h: "What I learned", p: [
+            "EVM is a constraints problem. Every operation has a cost. Efficient contracts look strange to someone trained in traditional backend work — no loops over unknown lengths, no arbitrary iteration. The best designs push computation off-chain (events, indexers) and verify proofs on-chain."
+          ], list: [
+            "Gas optimization and the economics of contract design",
+            "EVM opcodes and stack-based execution",
+            "Solidity patterns: fallback functions, delegatecall, modifier design",
+            "Multi-sig and time-lock patterns for security",
+            "Off-chain indexing (The Graph) for scalable reads"
+          ]},
+          { h: "Trade-offs explored", p: [
+            "Storing data on-chain is expensive. Off-chain with on-chain verification is cheaper but adds complexity. The pattern: minimal on-chain state machine, maximal off-chain logic, use events as the source of truth for indexing and read-side data."
+          ]},
+          { h: "Outcomes", stats: [
+            { n: "3", l: "Major contract patterns implemented" },
+            { n: "0", l: "Security exploits (contracts audited mentally)" },
+            { n: "15%", l: "Gas savings through optimization patterns" },
+          ]},
+        ]
+      },
+      pt: {
+        lede: "Uma série de experimentos de chain EVM explorando padrões de design de smart contracts, mecânicas de consenso, e os trade-offs práticos entre lógica on-chain e off-chain.",
+        sections: [
+          { h: "A pesquisa", p: [
+            "Quis entender blockchain no nível de implementação, não só a teoria. Isso significava construir contracts, entender a economia de gas, e validar decisões de design shipando código de verdade.",
+            "Três explorações principais: um token customizado com permissões baseadas em roles, um padrão DEX simples, e uma carteira multi-sig com constraints de time-lock."
+          ]},
+          { h: "O que aprendi", p: [
+            "EVM é um problema de constraints. Toda operação tem um custo. Contracts eficientes parecem estranhos para alguém treinado em backend tradicional — sem loops sobre comprimentos desconhecidos, sem iteração arbitrária. Os melhores designs empurram computação para off-chain (events, indexers) e verificam proofs on-chain."
+          ], list: [
+            "Otimização de gas e a economia do design de contracts",
+            "Opcodes EVM e execução baseada em stack",
+            "Padrões Solidity: fallback functions, delegatecall, modifier design",
+            "Padrões multi-sig e time-lock para segurança",
+            "Indexação off-chain (The Graph) para reads escaláveis"
+          ]},
+          { h: "Trade-offs explorados", p: [
+            "Armazenar dados on-chain é caro. Off-chain com verificação on-chain é mais barato mas adiciona complexidade. O padrão: máquina de estado on-chain mínima, lógica off-chain máxima, use events como fonte de verdade para indexação e dados de read-side."
+          ]},
+          { h: "Resultados", stats: [
+            { n: "3", l: "Padrões major de contracts implementados" },
+            { n: "0", l: "Exploits de segurança (contracts auditados mentalmente)" },
+            { n: "15%", l: "Economia de gas através de padrões de otimização" },
+          ]},
+        ]
+      }
+    },
+    "motion-recognition": {
+      en: {
+        lede: "A hand gesture recognition interface built with MediaPipe, processing video in real-time to detect and classify hand poses with < 50ms latency on commodity hardware.",
+        sections: [
+          { h: "The problem", p: [
+            "Gesture-based interfaces can feel natural if the latency is imperceptible. Most implementations fail because they're either too slow or too rigid (only works with specific hand poses).",
+            "I wanted to explore whether real-time gesture recognition could work on a laptop without specialist hardware."
+          ]},
+          { h: "Architecture", p: [
+            "Used MediaPipe (Google's hand-tracking ML model) running inference locally. The pipeline: video frame → hand detection → landmark extraction → pose classification → action trigger.",
+            "Built a simple UI that shows detected poses in real-time, responds to gestures, and logs confidence scores."
+          ], list: [
+            "MediaPipe hand tracking (33 landmarks per hand)",
+            "Confidence-weighted pose classification",
+            "Frame buffering and smoothing to reduce jitter",
+            "WebGL rendering for performance",
+            "Fallback to CPU if GPU unavailable"
+          ]},
+          { h: "Key findings", p: [
+            "Lighting matters enormously. Poor lighting breaks detection. Hand occlusion is harder than expected — even slight finger overlap confuses the model. Smoothing latency trades off responsiveness — you need 2-3 frames of history for stable classification."
+          ]},
+          { h: "Outcomes", stats: [
+            { n: "< 50ms", l: "E2E latency (capture → action)" },
+            { n: "94%", l: "Accuracy in good lighting" },
+            { n: "12", l: "Distinct gestures recognized reliably" },
+          ]},
+        ]
+      },
+      pt: {
+        lede: "Uma interface de reconhecimento de gestos manuais construída com MediaPipe, processando vídeo em tempo real para detectar e classificar poses de mão com < 50ms de latência em hardware comum.",
+        sections: [
+          { h: "O problema", p: [
+            "Interfaces baseadas em gestos podem parecer naturais se a latência for imperceptível. A maioria das implementações falha porque são muito lentas ou muito rígidas (só funciona com poses específicas de mão).",
+            "Quis explorar se reconhecimento de gestos em tempo real conseguia rodar em um laptop sem hardware especialista."
+          ]},
+          { h: "Arquitetura", p: [
+            "Usei MediaPipe (modelo de hand-tracking ML do Google) rodando inference localmente. O pipeline: frame de vídeo → detecção de mão → extração de landmarks → classificação de pose → trigger de ação.",
+            "Construí uma UI simples que mostra poses detectadas em tempo real, responde a gestos, e loga scores de confiança."
+          ], list: [
+            "Hand tracking MediaPipe (33 landmarks por mão)",
+            "Classificação de pose com pesos de confiança",
+            "Buffering de frame e smoothing para reduzir jitter",
+            "Renderização WebGL para performance",
+            "Fallback para CPU se GPU indisponível"
+          ]},
+          { h: "Achados chave", p: [
+            "Iluminação importa enormemente. Má iluminação quebra detecção. Oclusão de mão é mais difícil que o esperado — até sobreposição leve de dedos confunde o modelo. Smoothing de latência faz trade-off com responsividade — você precisa de 2-3 frames de história para classificação estável."
+          ]},
+          { h: "Resultados", stats: [
+            { n: "< 50ms", l: "Latência E2E (captura → ação)" },
+            { n: "94%", l: "Acurácia em boa iluminação" },
+            { n: "12", l: "Gestos distintos reconhecidos com confiabilidade" },
+          ]},
+        ]
+      }
+    },
+    "rotina": {
+      en: {
+        lede: "A team coordination platform that replaces spreadsheets with structured cadence. Weekly planning, clear ownership, and blocker visibility in a single view.",
+        sections: [
+          { h: "The problem", p: [
+            "A 4-person team was juggling planning across three spreadsheets. Weekly roadmap, ownership assignments, and blocker tracking were scattered. No single source of truth.",
+            "I built Rotina to consolidate all of that into one place: a weekly view with tasks, owners, due dates, and explicit blocker fields."
+          ]},
+          { h: "Design choices", p: [
+            "Kept it simple: no fancy drag-and-drop, no AI assistants, just clean CRUD. The complexity came in making data entry fast — autocomplete for team members, quick date pickers, single-keystroke task creation.",
+            "Built export to CSV for backward compatibility with the Excel-addicted."
+          ], list: [
+            "Weekly cadence as the core UX metaphor",
+            "Ownership per task (not just 'todo' or 'doing')",
+            "Explicit blocker fields with reasons",
+            "Real-time presence (who's viewing now)",
+            "Archived weeks for historical reference"
+          ]},
+          { h: "Adoption", p: [
+            "Team used it as default planning for 6 months. Replaced three spreadsheets. The biggest win: nobody asked 'who's doing this?' anymore — ownership was visible and enforced."
+          ]},
+          { h: "Outcomes", stats: [
+            { n: "3", l: "Spreadsheets consolidated into one tool" },
+            { n: "100%", l: "Team adoption (all 4 members using weekly)" },
+            { n: "6", l: "Months of active use before team dissolved" },
+          ]},
+        ]
+      },
+      pt: {
+        lede: "Uma plataforma de coordenação de time que substitui spreadsheets com cadência estruturada. Planejamento semanal, ownership claro, e visibilidade de blockers em uma única view.",
+        sections: [
+          { h: "O problema", p: [
+            "Um time de 4 pessoas estava jogando planejamento através de três spreadsheets. Roadmap semanal, atribuições de ownership, e rastreamento de blockers estavam espalhados. Nenhuma source of truth única.",
+            "Construí Rotina para consolidar tudo em um lugar: uma view semanal com tasks, donos, datas, e campos de blocker explícitos."
+          ]},
+          { h: "Escolhas de design", p: [
+            "Mantive simples: sem drag-and-drop fancy, sem AI assistants, só CRUD limpo. A complexidade veio em fazer data entry rápido — autocomplete para membros do time, date pickers rápidos, criação de task com uma tecla.",
+            "Construí export para CSV por compatibilidade backward com obsessivos por Excel."
+          ], list: [
+            "Cadência semanal como a metáfora UX core",
+            "Ownership por task (não só 'todo' ou 'doing')",
+            "Campos de blocker explícitos com razões",
+            "Presença em tempo real (quem está vendo agora)",
+            "Semanas arquivadas para referência histórica"
+          ]},
+          { h: "Adoção", p: [
+            "Time usou como planejamento padrão por 6 meses. Substituiu três spreadsheets. A maior vitória: ninguém perguntou mais 'quem tá fazendo isso?' — ownership era visível e enforçado."
+          ]},
+          { h: "Resultados", stats: [
+            { n: "3", l: "Spreadsheets consolidados em uma ferramenta" },
+            { n: "100%", l: "Adoção de time (os 4 membros usando semanal)" },
+            { n: "6", l: "Meses de uso ativo antes do time se dissolver" },
+          ]},
+        ]
+      }
+    },
+    "painel-startup": {
+      en: {
+        lede: "An operations dashboard for Risklog that gave the ops team direct control over policy thresholds, user limits, and deploy gates without engineering handoffs.",
+        sections: [
+          { h: "Context", p: [
+            "Risklog's risk evaluation rules were hardcoded. When ops needed to adjust a threshold (e.g., 'flag medium-risk deploys only on Mondays'), they'd file a ticket, wait for a developer, deploy code.",
+            "This created friction and made ops feel powerless. I wanted to flip that: give ops the ability to tune rules live."
+          ]},
+          { h: "What I built", p: [
+            "A simple admin panel connected to a rules engine. Ops can adjust: risk scoring weights, time-of-day gates, team-specific thresholds, and blast-radius triggers. All changes apply immediately with no deploy.",
+            "Built with soft validation — the system warns if a rule seems dangerous, but doesn't prevent it. Trust the operator."
+          ], list: [
+            "Real-time rule editor with immediate effect",
+            "Audit log of all threshold changes with timestamps",
+            "Role-based access (ops can tune, can't delete core rules)",
+            "Soft validation with warnings, not hard blocks",
+            "Rollback history for accidental changes"
+          ]},
+          { h: "Outcomes", p: [
+            "Ops stopped filing tickets for threshold changes. Response to production incidents dropped: previously a 30-min feedback loop (code → review → deploy), now < 2 min (change → test → apply)."
+          ]},
+          { h: "Impact", stats: [
+            { n: "0", l: "Engineering handoffs for policy changes" },
+            { n: "< 2min", l: "Mean time to adjust thresholds in incidents" },
+            { n: "12", l: "Major incident responses accelerated" },
+          ]},
+        ]
+      },
+      pt: {
+        lede: "Um dashboard de operações para Risklog que deu ao time de ops controle direto sobre thresholds de política, limites de usuário, e gates de deploy sem handoffs de engenharia.",
+        sections: [
+          { h: "Contexto", p: [
+            "As regras de avaliação de risco do Risklog eram hardcoded. Quando ops precisava ajustar um threshold (e.g., 'flag medium-risk deploys apenas às segundas'), eles filavam um ticket, esperavam por um developer, faziam deploy de código.",
+            "Isso criava fricção e deixava ops se sentindo impotentes. Quis inverter: dar a ops a habilidade de tunar regras ao vivo."
+          ]},
+          { h: "O que construí", p: [
+            "Um painel admin simples conectado a um rules engine. Ops conseguem ajustar: pesos de scoring de risco, gates de time-of-day, thresholds específicos de time, e triggers de blast-radius. Todas as mudanças aplicam imediatamente sem deploy.",
+            "Construído com soft validation — o sistema avisa se uma rule parece perigosa, mas não previne. Confia no operador."
+          ], list: [
+            "Editor de regra em tempo real com efeito imediato",
+            "Audit log de todas as mudanças de threshold com timestamps",
+            "Acesso baseado em role (ops conseguem tunar, não conseguem deletar regras core)",
+            "Soft validation com avisos, não blocks hard",
+            "Histórico de rollback para mudanças acidentais"
+          ]},
+          { h: "Resultados", p: [
+            "Ops parou de filar tickets para mudanças de threshold. Resposta a incidents de produção caiu: anteriormente um loop de 30-min (código → review → deploy), agora < 2 min (mudança → teste → aplicação)."
+          ]},
+          { h: "Impacto", stats: [
+            { n: "0", l: "Handoffs de engenharia para mudanças de política" },
+            { n: "< 2min", l: "Tempo médio para ajustar thresholds em incidents" },
+            { n: "12", l: "Respostas a major incidents aceleradas" },
+          ]},
+        ]
+      }
+    },
   };
 
   function getContent() {

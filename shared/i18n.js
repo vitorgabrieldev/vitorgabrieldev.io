@@ -94,10 +94,10 @@
     'about.now.k.shipping': { pt: '● ENTREGANDO', en: '● SHIPPING' },
     'about.now.k.reading': { pt: '● LENDO', en: '● READING' },
     'about.now.k.considering': { pt: '● CONSIDERANDO', en: '● CONSIDERING' },
-    'about.now.building': { pt: 'Minha própria empresa', en: 'Building my own company' },
-    'about.now.shipping': { pt: 'Meu trabalho e meus projetos pessoais', en: 'My work and personal projects' },
-    'about.now.reading': { pt: 'Modelagem avançada de banco de dados PostgreSQL', en: 'Advanced PostgreSQL database modeling' },
-    'about.now.considering': { pt: 'Trabalho para fora, gringa', en: 'International remote work' },
+    'about.now.building': { pt: 'Venture própria — arquitetura e go-to-market strategy', en: 'Building a venture — architecture and go-to-market strategy' },
+    'about.now.shipping': { pt: 'Delivery de sistemas em produção e iteração de produto', en: 'Shipping production systems and product iteration' },
+    'about.now.reading': { pt: 'Otimizações críticas em PostgreSQL — índices, query planning e escalabilidade', en: 'Critical PostgreSQL optimizations — indexing, query planning and scalability' },
+    'about.now.considering': { pt: 'Oportunidades remotas internacionais — timezone-friendly, high-impact roles', en: 'International remote opportunities — timezone-friendly, high-impact roles' },
 
     // Skills categories
     'skills.Backend': { pt: 'Backend', en: 'Backend' },

@@ -46,7 +46,7 @@
 .jrn__tags button.on:hover { color: var(--bg); }
 
 .jrn-list { border-top: 1px solid var(--line); }
-.jrn-row { display: grid; grid-template-columns: 160px 160px 1fr auto; gap: 32px; padding: 32px 0; border-bottom: 1px solid var(--line); align-items: start; transition: padding var(--dur) var(--ease); cursor: pointer; }
+.jrn-row { display: grid; grid-template-columns: 160px 160px 1fr auto; gap: 32px; padding: 32px 0; border-bottom: 1px solid var(--line); align-items: start; transition: padding var(--dur) var(--ease); cursor: pointer; text-decoration: none; color: inherit; }
 .jrn-row:hover { padding-left: 20px; padding-right: 20px; background: var(--bg-elev); }
 .jrn-row:hover .jrn-row__arrow { color: var(--accent); transform: translate(6px, -6px); }
 .jrn-row__date { font-family: var(--font-mono); font-size: 12px; color: var(--ink-faint); letter-spacing: .06em; padding-top: 8px; }
@@ -61,33 +61,6 @@
   .jrn-row__date, .jrn-row__kicker { grid-column: 1 / -1; padding-top: 0; }
 }
 
-/* Article modal */
-.jrn-modal { position: fixed; inset: 0; background: var(--bg); z-index: 1000; overflow-y: auto; transform: translateY(100%); transition: transform var(--dur) var(--ease-in-out); }
-.jrn-modal.open { transform: translateY(0); }
-.jrn-modal__close {
-  position: fixed; top: 20px; right: 24px; z-index: 1001;
-  padding: 10px 16px;
-  font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: .08em;
-  background: var(--bg-elev); border: 1px solid var(--line-strong); border-radius: 999px;
-  cursor: pointer;
-}
-.jrn-modal__inner { max-width: 720px; margin: 0 auto; padding: 80px var(--pad-page); }
-.jrn-modal__kicker { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--accent-ink); margin-bottom: 24px; }
-.jrn-modal__title { font-family: var(--font-display); font-size: clamp(36px, 5vw, 56px); letter-spacing: -0.03em; line-height: 1; font-weight: 500; margin-bottom: 16px; }
-.jrn-modal__meta { font-family: var(--font-mono); font-size: 12px; color: var(--ink-faint); letter-spacing: .06em; padding-bottom: 40px; border-bottom: 1px solid var(--line); margin-bottom: 40px; }
-.jrn-modal__body { font-family: 'Source Serif 4', serif; }
-.jrn-modal__body p { font-size: 19px; line-height: 1.75; color: var(--ink); margin: 0 0 24px; }
-.jrn-modal__body p.lead { font-size: 22px; color: var(--ink-muted); font-style: italic; }
-.jrn-modal__body h2 { font-family: var(--font-display); font-weight: 500; font-size: 28px; margin: 40px 0 20px; letter-spacing: -0.02em; }
-.jrn-modal__body h3 { font-family: var(--font-display); font-weight: 500; font-size: 26px; margin: 36px 0 16px; letter-spacing: -0.015em; }
-.jrn-modal__body blockquote { border-left: 2px solid var(--accent); padding-left: 20px; margin: 24px 0; font-style: italic; color: var(--ink-muted); }
-.jrn-modal__body ul, .jrn-modal__body ol { margin: 20px 0; padding-left: 24px; }
-.jrn-modal__body li { font-size: 17px; line-height: 1.75; color: var(--ink); margin: 12px 0; }
-.jrn-modal__body strong { font-weight: 600; }
-.jrn-modal__body em { font-style: italic; }
-.jrn-modal__body code { font-family: var(--font-mono); font-size: 0.9em; padding: 2px 6px; background: var(--bg-sunken); border-radius: 3px; color: var(--accent); }
-.jrn-modal__body pre { background: var(--bg-sunken); border-left: 2px solid var(--accent); padding: 16px; border-radius: 6px; overflow-x: auto; margin: 20px 0; }
-.jrn-modal__body pre code { padding: 0; background: none; border-radius: 0; color: inherit; }
 </style>
 <link rel="stylesheet" href="shared/enhance.css?v=3">
 </head>
@@ -111,15 +84,6 @@
   </div>
 </section>
 
-<!-- Modal -->
-<div class="jrn-modal" id="jrnModal">
-  <button class="jrn-modal__close" id="jrnClose" data-i18n="journal.close">✕ Close</button>
-  <div class="jrn-modal__inner" id="jrnInner"></div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/es/highlight.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/atom-one-dark.min.css">
 <script src="shared/data.js"></script>
 <script src="shared/enhance.js?v=3" defer></script>
 <script src="shared/i18n.js?v=1"></script>
@@ -129,7 +93,12 @@
 (function() {
   const D = window.PORTFOLIO_DATA;
   let filter = 'all';
-  let openSlug = null;
+
+  function fmt(iso) {
+    const [y,m,d] = iso.split('-');
+    const months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+    return `${d} ${months[+m-1]} ${y}`;
+  }
 
   function updateCount() {
     document.getElementById('jrnCount').textContent = `${D.journal.length} ${window.t('journal.entries')}`;
@@ -152,7 +121,7 @@
   function render() {
     const list = filter === 'all' ? D.journal : D.journal.filter(j => j.kicker.en === filter);
     document.getElementById('jrnList').innerHTML = list.map(j => `
-      <div class="jrn-row" data-slug="${j.slug}">
+      <a class="jrn-row" href="/journal/${j.slug}.html" data-link>
         <div class="jrn-row__date">${fmt(j.date)}</div>
         <div class="jrn-row__kicker">${window.td(j.kicker)}</div>
         <div>
@@ -161,7 +130,7 @@
           <div class="jrn-row__meta">${j.read} · ~${Math.round(parseInt(j.read)*180)} ${window.t('journal.words')}</div>
         </div>
         <div class="jrn-row__arrow">↗</div>
-      </div>
+      </a>
     `).join('');
   }
 
@@ -169,77 +138,7 @@
   buildTags();
   render();
 
-  // Modal
-  const modal = document.getElementById('jrnModal');
-  const inner = document.getElementById('jrnInner');
-
-  function openModal(j) {
-    openSlug = j.slug;
-    inner.innerHTML = articleHTML(j);
-    modal.classList.add('open');
-    modal.scrollTop = 0;
-  }
-
-  document.addEventListener('click', e => {
-    const row = e.target.closest('.jrn-row');
-    if (!row) return;
-    const j = D.journal.find(x => x.slug === row.dataset.slug);
-    if (j) openModal(j);
-  });
-  document.getElementById('jrnClose').addEventListener('click', () => {
-    modal.classList.remove('open');
-    openSlug = null;
-  });
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') { modal.classList.remove('open'); openSlug = null; }
-  });
-
-  // Deep link
-  if (location.hash) {
-    const slug = location.hash.slice(1);
-    const j = D.journal.find(x => x.slug === slug);
-    if (j) openModal(j);
-  }
-
-  function articleHTML(j) {
-    const excerptText = window.td(j.excerpt);
-
-    // Custom marked options with syntax highlighting
-    marked.setOptions({
-      highlight: (code, lang) => {
-        if (lang && hljs.getLanguage(lang)) {
-          return hljs.highlight(code, { language: lang }).value;
-        }
-        return hljs.highlightAuto(code).value;
-      },
-      breaks: true,
-    });
-
-    const renderedHTML = marked.parse(excerptText);
-    return `
-      <div class="jrn-modal__kicker">${window.td(j.kicker)}</div>
-      <h1 class="jrn-modal__title">${window.td(j.title)}</h1>
-      <div class="jrn-modal__meta">${fmt(j.date)} · ${j.read} · ${window.t('journal.by')}</div>
-      <div class="jrn-modal__body">
-        ${renderedHTML}
-      </div>`;
-  }
-
-  function fmt(iso) {
-    const [y,m,d] = iso.split('-');
-    const months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
-    return `${d} ${months[+m-1]} ${y}`;
-  }
-
-  window.addEventListener('langchange', () => {
-    updateCount();
-    buildTags();
-    render();
-    if (openSlug) {
-      const j = D.journal.find(x => x.slug === openSlug);
-      if (j) inner.innerHTML = articleHTML(j);
-    }
-  });
+  window.addEventListener('langchange', () => { updateCount(); buildTags(); render(); });
 })();
 </script>
 </body>

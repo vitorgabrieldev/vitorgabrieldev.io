@@ -10,6 +10,7 @@
     'nav.about': { pt: 'Sobre', en: 'About' },
     'nav.journal': { pt: 'Diário', en: 'Journal' },
     'nav.available': { pt: 'Bora trabalhar juntos?', en: "Let's work together?" },
+    'nav.back_journal': { pt: '← Diário', en: '← Journal' },
     'nav.engineer': { pt: '/ ENGENHEIRO', en: '/ ENGINEER' },
 
     // Common buttons

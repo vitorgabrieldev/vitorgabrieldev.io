@@ -581,24 +581,6 @@ window.PORTFOLIO_DATA = {
       },
     },
     {
-      slug: "scaling-laravel",
-      title: {
-        pt: "Como escalar uma aplicação Laravel sem reescrever tudo",
-        en: "How to scale Laravel without rewriting everything",
-      },
-      date: "2026-04-08",
-      read: "11 min",
-      kicker: { pt: "Infraestrutura", en: "Infrastructure" },
-      summary: {
-        pt: "Fase 1: cache, índices. Fase 2: horizontal scale, replicas. Fase 3: CQRS. Escalar é incremento, não reengenharia.",
-        en: "Phase 1: cache, indexes. Phase 2: horizontal scale, replicas. Phase 3: CQRS. Scaling is increment, not reengineering.",
-      },
-      excerpt: {
-        pt: "Fase 1 (0-1k req/s): cache de queries (Redis), índices de banco, view caching. Fase 2 (1-10k): horizontal scale (load balancer, workers múltiplos), separar reads do banco (read replicas). Fase 3 (10k+): CQRS + event sourcing, separar dados quentes (cache), denormalizar. O erro: tentar Phase 3 quando está em Phase 1. Escalar é incremento progressivo, não reengenharia. Laravel permite tudo isso se você arquitetar com camadas desde o início.",
-        en: "Phase 1 (0-1k req/s): query caching (Redis), database indexes, view caching. Phase 2 (1-10k): horizontal scale (load balancer, multiple workers), separate reads (read replicas). Phase 3 (10k+): CQRS + event sourcing, hot data (cache), denormalization. The mistake: trying Phase 3 when in Phase 1. Scaling is progressive increment, not reengineering. Laravel allows all this if you architect with layers from day one.",
-      },
-    },
-    {
       slug: "service-layers-laravel",
       title: {
         pt: "Service Layers em Laravel 12: onde vai a lógica mesmo?",

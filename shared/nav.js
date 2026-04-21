@@ -23,7 +23,7 @@
           <button type="button" data-lang="en">EN</button>
         </div>
         <a href="contact.html" data-link data-match="contact.html" class="nav__cta">
-          <span class="nav__cta-dot"></span><span data-i18n="nav.available">Disponível</span>
+          <span data-i18n="nav.available">Disponível</span> →
         </a>
       </nav>
     </div>

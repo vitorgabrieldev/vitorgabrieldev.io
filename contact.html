@@ -180,6 +180,7 @@
             <span id="budgetVal"><strong>R$ 12 000</strong> <span data-i18n="contact.budget_unit">/ month</span></span>
           </div>
           <input type="range" class="slider" id="budget" min="3" max="30" value="12" step="1">
+          <input type="hidden" name="budget_value" id="budgetHidden">
           <span class="form__helper" data-i18n="contact.budget_helper">Rough is fine — I'll tell you if I'm the right fit.</span>
         </div>
 
@@ -206,7 +207,7 @@
     <aside class="ct-aside">
       <div class="ct-card">
         <h4 data-i18n="contact.direct">/ Direct channels</h4>
-        <div class="row"><span>Email</span><a href="mailto:contact@vitorgabriel.dev">contact@vitorgabriel.dev</a></div>
+        <div class="row"><span>Email</span><a href="mailto:vitorgabrieldeoliveiradev@gmail.com">vitorgabrieldeoliveiradev@gmail.com</a></div>
         <div class="row"><span>WhatsApp</span><a href="https://wa.me/5543984873807" target="_blank">+55 43 98487-3807 ↗</a></div>
         <div class="row"><span>GitHub</span><a href="https://github.com/vitorgabrieldev" target="_blank">@vitorgabrieldev ↗</a></div>
         <div class="row"><span>Location</span><span style="color:var(--ink)">Londrina · UTC−3</span></div>
@@ -270,9 +271,10 @@
   budget.addEventListener('input', update); update();
   window.addEventListener('langchange', update);
 
-  // Form submit (fake)
+  // Form submit — Web3Forms
   const form = document.getElementById('ctForm');
-  form.addEventListener('submit', e => {
+  const submitBtn = form.querySelector('button[type="submit"]');
+  form.addEventListener('submit', async e => {
     e.preventDefault();
     let ok = true;
     ['f_name','f_email','f_msg'].forEach(id => {
@@ -283,9 +285,42 @@
       if (bad) ok = false;
     });
     if (!ok) return;
-    form.querySelectorAll('input, textarea, button[type=submit], .chips-select button').forEach(el => el.disabled = true);
-    document.getElementById('sent').classList.add('show');
-    document.getElementById('sent').scrollIntoView({ block: 'nearest' });
+
+    // inject extra fields
+    document.getElementById('budgetHidden').value = document.getElementById('budgetVal').textContent.replace(/<[^>]+>/g,'').trim();
+    const kindInput = form.querySelector('input[name="kind"]') || Object.assign(document.createElement('input'), {type:'hidden', name:'kind'});
+    kindInput.value = picks.kind.join(', ') || '—';
+    form.appendChild(kindInput);
+    const focusInput = form.querySelector('input[name="focus"]') || Object.assign(document.createElement('input'), {type:'hidden', name:'focus'});
+    focusInput.value = picks.focus.join(', ') || '—';
+    form.appendChild(focusInput);
+
+    const formData = new FormData(form);
+    formData.append('access_key', '482b39bb-0089-4af1-9326-4255e7eda0e6');
+
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = window.t ? window.t('contact.sending') || 'Enviando…' : 'Enviando…';
+    submitBtn.disabled = true;
+    form.querySelectorAll('input, textarea, .chips-select button').forEach(el => el.disabled = true);
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: formData });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        document.getElementById('sent').classList.add('show');
+        document.getElementById('sent').scrollIntoView({ block: 'nearest' });
+      } else {
+        alert('Erro ao enviar: ' + (data.message || 'tente novamente.'));
+        form.querySelectorAll('input, textarea, .chips-select button').forEach(el => el.disabled = false);
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      }
+    } catch {
+      alert('Falha na conexão — tente novamente.');
+      form.querySelectorAll('input, textarea, .chips-select button').forEach(el => el.disabled = false);
+      submitBtn.textContent = originalText;
+      submitBtn.disabled = false;
+    }
   });
 
   // Observe reveals

@@ -9,7 +9,7 @@
     'nav.work': { pt: 'Projetos', en: 'Work' },
     'nav.about': { pt: 'Sobre', en: 'About' },
     'nav.journal': { pt: 'Diário', en: 'Journal' },
-    'nav.available': { pt: 'Disponível', en: 'Available' },
+    'nav.available': { pt: 'Bora trabalhar juntos?', en: "Let's work together?" },
     'nav.engineer': { pt: '/ ENGENHEIRO', en: '/ ENGINEER' },
 
     // Common buttons
@@ -129,7 +129,7 @@
     'contact.focus.other': { pt: 'Outro', en: 'Other' },
     'contact.budget_label': { pt: 'Faixa de orçamento (BRL / mês)', en: 'Budget range (BRL / month)' },
     'contact.budget_unit': { pt: '/ mês', en: '/ month' },
-    'contact.budget_helper': { pt: 'Aproximado está bom — te digo se sou o fit certo.', en: "Rough is fine — I'll tell you if I'm the right fit." },
+    'contact.budget_helper': { pt: 'Opcional — um valor aproximado já ajuda.', en: 'Optional — a rough number helps.' },
     'contact.step3': { pt: '[PASSO 03] O briefing', en: '[STEP 03] The brief' },
     'contact.msg_label': { pt: 'O que você está tentando entregar?', en: "What are you trying to ship?" },
     'contact.msg_placeholder': { pt: "Um ou dois parágrafos sobre o problema, o estado atual e como 'pronto' se parece.", en: "One or two paragraphs about the problem, the current state, and what 'done' looks like." },

@@ -40,7 +40,7 @@
 
 /* Timeline */
 .timeline { display: flex; flex-direction: column; }
-.tl-row { display: grid; grid-template-columns: 100px 60px 1fr; gap: 32px; padding: 32px 0; border-bottom: 1px solid var(--line); align-items: start; }
+.tl-row { display: grid; grid-template-columns: 100px 60px 1fr; gap: 32px; padding: 20px 0; border-bottom: 1px solid var(--line); align-items: start; }
 .tl-row:last-child { border-bottom: none; }
 .tl-year { font-family: var(--font-mono); font-size: 14px; color: var(--ink-faint); padding-top: 4px; letter-spacing: .06em; }
 .tl-row--current .tl-year { color: var(--accent); font-weight: 500; }

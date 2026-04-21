@@ -38,7 +38,7 @@
           <a href="https://github.com/${d.meta.github}" target="_blank" rel="noopener">GitHub ↗</a>
           <a href="https://wa.me/5543984873807" target="_blank" rel="noopener">WhatsApp ↗</a>
           <a href="CV.pdf" target="_blank" rel="noopener">CV (PDF) ↗</a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a href="https://linkedin.com/in/vitorgabrieldev" target="_blank" rel="noopener">LinkedIn ↗</a>
         </div>
         <div class="foot__col">
           <h4>${window.t('foot.col.info')}</h4>

@@ -226,3 +226,15 @@ html.has-cursor, html.has-cursor body, html.has-cursor * { cursor: none !importa
   .cursor-dot, .cursor-ring { display: none; }
   html.has-cursor, html.has-cursor body, html.has-cursor * { cursor: auto !important; }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  .page-transition { display: none !important; }
+  .cursor-dot, .cursor-ring { display: none !important; }
+}

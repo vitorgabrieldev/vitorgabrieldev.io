@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(awk '/slug: \"ledger-consistency\"/,/slug: \"risklog-post\"/' /c/Users/vitor/Documents/Desenvolvimento/vitorgabrieldev.io/shared/data.js)",
+      "Bash(node -e ' *)"
+    ]
+  }
+}

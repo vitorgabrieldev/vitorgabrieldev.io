@@ -159,3 +159,13 @@
 
   render();
 })();
+
+// GoatCounter analytics — sign up at goatcounter.com and replace the code below
+(function () {
+  const code = 'vitorgabrieldev';
+  const s = document.createElement('script');
+  s.dataset.goatcounter = 'https://' + code + '.goatcounter.com/count';
+  s.async = true;
+  s.src = '//gc.zgo.at/count.js';
+  document.head.appendChild(s);
+})();

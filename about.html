@@ -115,28 +115,6 @@
   </div>
 </section>
 
-<!-- Skills -->
-<section class="section">
-  <div class="container">
-    <div class="reveal">
-      <div class="mono-label" data-i18n="sec.skills">[SKILLS] The toolkit</div>
-      <h2 class="section__title" style="margin-top:8px" data-i18n="sec.skills_title">Tools I reach for.</h2>
-    </div>
-    <div class="skills" id="skillsRoot"></div>
-  </div>
-</section>
-
-<!-- Open source -->
-<section class="section">
-  <div class="container">
-    <div class="reveal">
-      <div class="mono-label" data-i18n="sec.oss">[OPEN SOURCE] Public work</div>
-      <h2 class="section__title" style="margin-top:8px" data-i18n="sec.oss_title">A handful of things I've put out there.</h2>
-    </div>
-    <div class="oss-grid" id="ossRoot"></div>
-  </div>
-</section>
-
 <!-- Now -->
 <section class="section">
   <div class="container">
@@ -179,37 +157,7 @@
     `).join('');
   }
 
-  function renderSkills() {
-    document.getElementById('skillsRoot').innerHTML = Object.entries(D.skills).map(([group, items], i) => `
-      <div class="skills__col reveal reveal-delay-${i}">
-        <div class="mono-label">${String(i+1).padStart(2,'0')} · ${window.t('skills.' + group)}</div>
-        <ul>${items.map(s => `<li>${s}</li>`).join('')}</ul>
-      </div>
-    `).join('');
-  }
-
-  function renderOss() {
-    const ossRoot = document.getElementById('ossRoot');
-    if (!ossRoot || !D.oss) return;
-    ossRoot.innerHTML = D.oss.map((o, i) => `
-      <a class="oss reveal reveal-delay-${i % 3}" href="https://github.com/${o.owner}/${o.repo}" target="_blank" rel="noopener">
-        <div class="oss__top">
-          <span class="oss__kind mono">${window.td(o.kind)}</span>
-          <span class="oss__lang mono">${o.lang}</span>
-        </div>
-        <div class="oss__repo">
-          <span class="mono oss__owner">${o.owner}/</span><span>${o.repo}</span>
-        </div>
-        <div class="oss__desc">${window.td(o.desc)}</div>
-        <div class="oss__foot mono">
-          ${o.stars != null ? `<span>★ ${o.stars}</span>` : `<span>↗ PR merged</span>`}
-          <span class="oss__arrow">↗</span>
-        </div>
-      </a>
-    `).join('');
-  }
-
-  function observe() {
+function observe() {
     document.querySelectorAll('.reveal').forEach(el => {
       if (el.classList.contains('in')) return;
       new IntersectionObserver((entries, io) => {
@@ -219,14 +167,10 @@
   }
 
   renderTimeline();
-  renderSkills();
-  renderOss();
   observe();
 
   window.addEventListener('langchange', () => {
     renderTimeline();
-    renderSkills();
-    renderOss();
   });
 })();
 </script>

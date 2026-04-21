@@ -174,8 +174,6 @@
     'journal.article.why_p': { pt: 'Porque a melhor forma de saber se realmente entendo algo é escrever, mal, e depois ler na semana seguinte. A segunda passagem é onde o entendimento real acontece.', en: "Because the best way to know whether I actually understand something is to write it down, badly, and then read it back the next week. The second pass is where the real understanding happens." },
     'journal.article.quote': { pt: 'Escrever é o compilador do pensamento. As mensagens de erro são cruéis.', en: "Writing is the compiler for thought. The error messages are unkind." },
     'journal.article.rough_p': { pt: 'Espere arestas. Espere correções. Espere os ocasionais posts "eu estava errado sobre isso, e eis o porquê" — esses são os que mais aprendo.', en: "Expect rough edges. Expect corrections. Expect the occasional \"I was wrong about this, here's why\" post — those are the ones I learn from most." },
-    'journal.article.sub_h': { pt: 'Assinar', en: 'Subscribing' },
-    'journal.article.sub_p': { pt: 'Ainda sem newsletter. Acompanhe no <a href="https://github.com/vitorgabrieldev" style="color:var(--accent)">GitHub</a> ou volte aqui.', en: 'No newsletter yet. Follow along on <a href="https://github.com/vitorgabrieldev" style="color:var(--accent)">GitHub</a> or check back here.' },
 
     // Projects page
     'projects.title': { pt: 'Projetos', en: 'Work' },

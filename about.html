@@ -101,20 +101,6 @@
   </div>
 </section>
 
-<!-- Timeline -->
-<section class="section">
-  <div class="container">
-    <div class="section__head">
-      <div class="reveal">
-        <div class="mono-label" data-i18n="sec.career">[EXPERIENCE] Career</div>
-        <h2 class="section__title" style="margin-top:8px" data-i18n="sec.career_title">The short version.</h2>
-      </div>
-      <a href="CV.pdf" target="_blank" class="btn btn--ghost" data-i18n="btn.download_cv">Download CV (PDF) ↗</a>
-    </div>
-    <div class="timeline" id="timeline"></div>
-  </div>
-</section>
-
 <!-- Now -->
 <section class="section">
   <div class="container">
@@ -142,21 +128,6 @@
 (function() {
   const D = window.PORTFOLIO_DATA;
 
-  function renderTimeline() {
-    document.getElementById('timeline').innerHTML = D.timeline.map((t, i) => `
-      <div class="tl-row reveal ${t.current ? 'tl-row--current' : ''}">
-        <div class="tl-year mono">${t.year}${t.current ? ' →' : ''}</div>
-        <div class="tl-line"><span class="tl-dot"></span></div>
-        <div class="tl-body">
-          <div class="tl-role">${window.td(t.role)}</div>
-          <div class="tl-company mono">${t.company} · ${t.where}</div>
-          ${t.stack ? `<div class="tl-stack" style="font-family:var(--font-mono); font-size:12px; color:var(--accent); margin:8px 0; letter-spacing:.05em;">${t.stack.join(' · ')}</div>` : ''}
-          <div class="tl-notes">${window.td(t.notes)}</div>
-        </div>
-      </div>
-    `).join('');
-  }
-
 function observe() {
     document.querySelectorAll('.reveal').forEach(el => {
       if (el.classList.contains('in')) return;
@@ -166,14 +137,7 @@ function observe() {
     });
   }
 
-  console.log('Timeline data:', D.timeline);
-  console.log('Timeline element:', document.getElementById('timeline'));
-  renderTimeline();
   observe();
-
-  window.addEventListener('langchange', () => {
-    renderTimeline();
-  });
 })();
 </script>
 </body>

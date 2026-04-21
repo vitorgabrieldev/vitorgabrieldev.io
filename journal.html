@@ -146,7 +146,7 @@
         <div class="jrn-row__kicker">${window.td(j.kicker)}</div>
         <div>
           <div class="jrn-row__t">${window.td(j.title)}</div>
-          <div class="jrn-row__excerpt">${window.td(j.excerpt)}</div>
+          <div class="jrn-row__excerpt">${window.td(j.summary || j.excerpt)}</div>
           <div class="jrn-row__meta">${j.read} · ~${Math.round(parseInt(j.read)*180)} ${window.t('journal.words')}</div>
         </div>
         <div class="jrn-row__arrow">↗</div>

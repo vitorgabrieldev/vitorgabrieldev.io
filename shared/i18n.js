@@ -94,10 +94,10 @@
     'about.now.k.shipping': { pt: '● ENTREGANDO', en: '● SHIPPING' },
     'about.now.k.reading': { pt: '● LENDO', en: '● READING' },
     'about.now.k.considering': { pt: '● CONSIDERANDO', en: '● CONSIDERING' },
-    'about.now.building': { pt: 'Laravel Fintech Core — hardening do ledger + modelos de leitura multi-tenant', en: 'Laravel Fintech Core — ledger hardening + multi-tenant read models' },
-    'about.now.shipping': { pt: 'Risklog — v2 do modelo de risco, puxando autoria + criticidade de arquivo', en: 'Risklog — v2 risk model, pulling authorship + file criticality' },
-    'about.now.reading': { pt: 'Transformers do zero — notas no Diário', en: 'Transformers from scratch — notes up on Journal' },
-    'about.now.considering': { pt: 'Novo contrato, Q2 2026 — CLT, PJ ou freelance estratégico', en: 'New engagement, Q2 2026 — CLT, PJ or strategic freelance' },
+    'about.now.building': { pt: 'Minha própria empresa', en: 'Building my own company' },
+    'about.now.shipping': { pt: 'Meu trabalho e meus projetos pessoais', en: 'My work and personal projects' },
+    'about.now.reading': { pt: 'Modelagem avançada de banco de dados PostgreSQL', en: 'Advanced PostgreSQL database modeling' },
+    'about.now.considering': { pt: 'Trabalho para fora, gringa', en: 'International remote work' },
 
     // Skills categories
     'skills.Backend': { pt: 'Backend', en: 'Backend' },

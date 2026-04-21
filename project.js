@@ -866,7 +866,7 @@ Events.<span class="k">on</span>(mousedown, () => dragBall(ball, mouse));` },
     return {
       lede: window.td(p.summary),
       sections: [
-        { h: window.t('project.default.context'), p: [window.td(p.impact), window.t('project.default.placeholder')] },
+        { h: window.t('project.default.context'), p: [window.td(p.impact)] },
         { h: window.t('project.default.stack_label'), list: p.stack }
       ]
     };

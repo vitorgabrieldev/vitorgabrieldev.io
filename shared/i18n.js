@@ -169,11 +169,6 @@
     'journal.entries': { pt: 'entradas', en: 'entries' },
     'journal.words': { pt: 'palavras', en: 'words' },
     'journal.by': { pt: 'por Vitor Gabriel', en: 'by Vitor Gabriel' },
-    'journal.article.p1': { pt: 'Esta é uma entrada placeholder — o artigo real está na minha pasta de rascunhos e migra para cá quando está pronto. A ideia, por ora, é dar ao portfólio a forma de alguém que escreve, e mostrar como os tópicos ficam quando se acumulam.', en: "This is a placeholder entry — the real article lives in my drafts folder and migrates here when it's ready. The idea, for now, is to give the portfolio the shape of someone who writes, and to show what the topics look like when they collect." },
-    'journal.article.why_h': { pt: 'Por que escrever afinal?', en: 'Why write at all?' },
-    'journal.article.why_p': { pt: 'Porque a melhor forma de saber se realmente entendo algo é escrever, mal, e depois ler na semana seguinte. A segunda passagem é onde o entendimento real acontece.', en: "Because the best way to know whether I actually understand something is to write it down, badly, and then read it back the next week. The second pass is where the real understanding happens." },
-    'journal.article.quote': { pt: 'Escrever é o compilador do pensamento. As mensagens de erro são cruéis.', en: "Writing is the compiler for thought. The error messages are unkind." },
-    'journal.article.rough_p': { pt: 'Espere arestas. Espere correções. Espere os ocasionais posts "eu estava errado sobre isso, e eis o porquê" — esses são os que mais aprendo.', en: "Expect rough edges. Expect corrections. Expect the occasional \"I was wrong about this, here's why\" post — those are the ones I learn from most." },
 
     // Projects page
     'projects.title': { pt: 'Projetos', en: 'Work' },

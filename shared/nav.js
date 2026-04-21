@@ -7,22 +7,22 @@
   const navHTML = `
   <header class="nav" id="siteNav">
     <div class="nav__inner">
-      <a href="index.html" class="nav__brand" data-link>
+      <a href="/index.html" class="nav__brand" data-link>
         <span class="nav__mark"></span>
         <span class="nav__brand-name">Vitor Gabriel</span>
         <span class="nav__brand-meta mono" data-i18n="nav.engineer">/ ENGENHEIRO</span>
       </a>
       <nav class="nav__links">
-        <a href="index.html" data-link data-match="index.html" data-i18n="nav.index">Início</a>
-        <a href="projects.html" data-link data-match="projects.html,project.html" data-i18n="nav.work">Projetos</a>
-        <a href="about.html" data-link data-match="about.html" data-i18n="nav.about">Sobre</a>
-        <a href="journal.html" data-link data-match="journal.html" data-i18n="nav.journal">Diário</a>
+        <a href="/index.html" data-link data-match="index.html" data-i18n="nav.index">Início</a>
+        <a href="/projects.html" data-link data-match="projects.html,project.html" data-i18n="nav.work">Projetos</a>
+        <a href="/about.html" data-link data-match="about.html" data-i18n="nav.about">Sobre</a>
+        <a href="/journal.html" data-link data-match="journal.html" data-i18n="nav.journal">Diário</a>
         <div class="lang-toggle mono" role="group" aria-label="Language">
           <button type="button" data-lang="pt" class="active">PT</button>
           <span class="lang-toggle__sep">/</span>
           <button type="button" data-lang="en">EN</button>
         </div>
-        <a href="contact.html" data-link data-match="contact.html" class="nav__cta">
+        <a href="/contact.html" data-link data-match="contact.html" class="nav__cta">
           <span data-i18n="nav.available">Disponível</span> →
         </a>
       </nav>

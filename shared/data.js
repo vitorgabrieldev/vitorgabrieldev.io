@@ -563,24 +563,6 @@ window.PORTFOLIO_DATA = {
       },
     },
     {
-      slug: "portfolio-projects-2026",
-      title: {
-        pt: "Projetos para portfólio: ideias além da calculadora",
-        en: "Portfolio projects: ideas beyond the calculator",
-      },
-      date: "2026-04-09",
-      read: "8 min",
-      kicker: { pt: "Carreira", en: "Career" },
-      summary: {
-        pt: "Scraper de preços, analisador de GitHub, simulador de filas. Regra: resolve problema real. Documenta decisões.",
-        en: "Price scraper, GitHub analyzer, queue simulator. Rule: solve real problem. Document decisions.",
-      },
-      excerpt: {
-        pt: "O que impressiona: um scraper que monitora preços de imóveis e alertas via Telegram. Uma ferramenta que analisa seu GitHub e te mostra padrões de bugs. Um simulador de filas com diferentes estratégias (SJF, priority, fair queueing). Ou: exporta dados de sua conta e gera insights mensais. A regra: tem que resolver problema real (seu ou de alguém). Projeto que documenta decisão arquitetural > projeto que só funciona.",
-        en: "What impresses: a scraper that monitors real estate prices and sends Telegram alerts. A tool that analyzes your GitHub and shows you bug patterns. A simulator for queues with different strategies (SJF, priority, fair queueing). Or: exports your account data and generates monthly insights. Rule: it must solve a real problem (yours or someone's). Project that documents architectural decision > project that just works.",
-      },
-    },
-    {
       slug: "service-layers-laravel",
       title: {
         pt: "Service Layers em Laravel 12: onde vai a lógica mesmo?",

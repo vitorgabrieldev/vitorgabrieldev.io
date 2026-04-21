@@ -286,6 +286,7 @@ window.PORTFOLIO_DATA = {
       date: "2026-04-15",
       read: "9 min",
       kicker: { pt: "IA", en: "AI" },
+      summary: { pt: "Constitutional AI, RLHF honesto, padrões de recusa. Construir IA confiável requer design firme, não só escala.", en: "Constitutional AI, honest RLHF, refusal patterns. Building trustworthy AI requires firm design, not just scale." },
       excerpt: { pt: "Claude não é só um modelo maior. É uma arquitetura deliberada: Constitutional AI, RLHF honesto, rejeição de certos padrões de uso. O trade-off: menos compliance games, mais transparência. Construir IA que você consegue confiar requer design firme — não é emergência de escala.", en: "Claude isn't just a bigger model. It's deliberate architecture: Constitutional AI, honest RLHF, refusal patterns. The trade-off: fewer compliance games, more transparency. Building AI you can trust requires firm design — it's not scale emergence." },
     },
     {
@@ -294,6 +295,7 @@ window.PORTFOLIO_DATA = {
       date: "2026-04-14",
       read: "6 min",
       kicker: { pt: "Ferramentas", en: "Tools" },
+      summary: { pt: "Melhorias em raciocínio complexo, contexto, speed. Viável para code generation, análise técnica, design de sistemas.", en: "Improvements in complex reasoning, context, inference speed. Viable for code generation, technical analysis, system design." },
       excerpt: { pt: "Opus 4.7 traz melhorias em raciocínio complexo, interpretação de contexto e velocidade de inference. Prático para: code generation com garantias, análise técnica profunda, architecting de sistemas. Curva de custo vs. output é agora viável para muitos use-cases que antes exigiam serviços separados.", en: "Opus 4.7 brings improvements in complex reasoning, context interpretation, and inference speed. Practical for: code generation with guarantees, deep technical analysis, system architecting. Cost vs. output curve is now viable for many use cases that previously required separate services." },
     },
     {
@@ -302,6 +304,7 @@ window.PORTFOLIO_DATA = {
       date: "2026-04-13",
       read: "8 min",
       kicker: { pt: "Pensamentos", en: "Thoughts" },
+      summary: { pt: "LLMs aceleram boilerplate. Arquitetura, review, julgamento ainda são seus. Valor real: 10x mais rápido explorando.", en: "LLMs accelerate boilerplate. Architecture, review, judgment are still yours. Real value: 10x faster exploring." },
       excerpt: { pt: "A ilusão: LLMs escrevem código, você coloca em produção. A realidade: LLMs aceleram o boilerplate, mas decisões arquiteturais, review crítico, e julgamento ainda são seus. O valor real é velocidade em exploração e prototipagem. Você consegue iterar 10x mais rápido, desde que você saiba o que está iterando.", en: "The illusion: LLMs write code, you ship it. Reality: LLMs accelerate boilerplate, but architectural decisions, critical review, and judgment are still yours. Real value is speed in exploration and prototyping. You iterate 10x faster, if you know what you're iterating." },
     },
     {
@@ -310,6 +313,7 @@ window.PORTFOLIO_DATA = {
       date: "2026-04-12",
       read: "10 min",
       kicker: { pt: "Bancos de Dados", en: "Databases" },
+      summary: { pt: "SQL: ACID, integridade, rigidez. NoSQL: flexibilidade, escala, risco. Não há bala de prata.", en: "SQL: ACID, integrity, rigidity. NoSQL: flexibility, scale, risk. No silver bullet." },
       excerpt: { pt: "SQL oferece: ACID, integridade referencial, queries ad-hoc. Custa em: rigidez de schema, escalabilidade horizontal limitada. NoSQL oferece: flexibilidade, escalabilidade horizontal, low-latency. Custa em: consistency, manualidade de relações, queries podem virar O(n) rápido. Não há bala de prata — e muitos projetos ganham com híbrido.", en: "SQL offers: ACID, referential integrity, ad-hoc queries. Costs: schema rigidity, limited horizontal scalability. NoSQL offers: flexibility, horizontal scale, low-latency. Costs: consistency, manual relationships, queries can turn O(n) fast. No silver bullet — and many projects win with hybrid." },
     },
     {
@@ -318,6 +322,7 @@ window.PORTFOLIO_DATA = {
       date: "2026-04-11",
       read: "7 min",
       kicker: { pt: "Linguagens", en: "Languages" },
+      summary: { pt: "Types forçam validação. Overhead 15-20% em escrita, 3x mais rápido em refatoração. Documentação executável.", en: "Types enforce validation. 15-20% overhead, 3x faster refactoring. Executable documentation." },
       excerpt: { pt: "Sem types, você está confiando que seu time vai lembrar de validar inputs na hora certa. TypeScript te força. É overhead em escrita inicial (15-20%), ganho em confiança e velocidade de refatoração (3x mais rápido). Para teams: ts-node + tsx tornam a barreira zero. Para maintainability: types são documentação executável que não pode sair de sincronia.", en: "Without types, you're trusting your team to remember to validate inputs at exactly the right moment. TypeScript enforces it. It's overhead in initial writing (15-20%), gains in confidence and refactor speed (3x faster). For teams: ts-node + tsx make the barrier zero. For maintainability: types are executable documentation that can't drift." },
     },
     {
@@ -326,6 +331,7 @@ window.PORTFOLIO_DATA = {
       date: "2026-04-10",
       read: "9 min",
       kicker: { pt: "Arquitetura", en: "Architecture" },
+      summary: { pt: "Importante agora: auditabilidade, rastreabilidade. Code que explica o porquê. Clean é meio, não fim.", en: "Important now: auditability, traceability. Code that explains why. Clean is a means, not an end." },
       excerpt: { pt: "Clean Code de 2008 dizia: nomes descritivos, funções pequenas, sem comentários. Verdade. Mas em 2026: sua IA pode ler seu código ruim e te avisar. Mais importante agora: auditabilidade, rastreabilidade de decisões, observabilidade. Code que explica por quê é melhor que code que explica o quê. Clean é um meio, não um fim.", en: "Clean Code from 2008 said: descriptive names, small functions, no comments. True. But in 2026: your AI can read bad code and warn you. More important now: auditability, decision traceability, observability. Code that explains why is better than code that explains what. Clean is a means, not an end." },
     },
     {
@@ -334,6 +340,7 @@ window.PORTFOLIO_DATA = {
       date: "2026-04-09",
       read: "8 min",
       kicker: { pt: "Carreira", en: "Career" },
+      summary: { pt: "Scraper de preços, analisador de GitHub, simulador de filas. Regra: resolve problema real. Documenta decisões.", en: "Price scraper, GitHub analyzer, queue simulator. Rule: solve real problem. Document decisions." },
       excerpt: { pt: "O que impressiona: um scraper que monitora preços de imóveis e alertas via Telegram. Uma ferramenta que analisa seu GitHub e te mostra padrões de bugs. Um simulador de filas com diferentes estratégias (SJF, priority, fair queueing). Ou: exporta dados de sua conta e gera insights mensais. A regra: tem que resolver problema real (seu ou de alguém). Projeto que documenta decisão arquitetural > projeto que só funciona.", en: "What impresses: a scraper that monitors real estate prices and sends Telegram alerts. A tool that analyzes your GitHub and shows you bug patterns. A simulator for queues with different strategies (SJF, priority, fair queueing). Or: exports your account data and generates monthly insights. Rule: it must solve a real problem (yours or someone's). Project that documents architectural decision > project that just works." },
     },
     {
@@ -342,6 +349,7 @@ window.PORTFOLIO_DATA = {
       date: "2026-04-08",
       read: "11 min",
       kicker: { pt: "Infraestrutura", en: "Infrastructure" },
+      summary: { pt: "Fase 1: cache, índices. Fase 2: horizontal scale, replicas. Fase 3: CQRS. Escalar é incremento, não reengenharia.", en: "Phase 1: cache, indexes. Phase 2: horizontal scale, replicas. Phase 3: CQRS. Scaling is increment, not reengineering." },
       excerpt: { pt: "Fase 1 (0-1k req/s): cache de queries (Redis), índices de banco, view caching. Fase 2 (1-10k): horizontal scale (load balancer, workers múltiplos), separar reads do banco (read replicas). Fase 3 (10k+): CQRS + event sourcing, separar dados quentes (cache), denormalizar. O erro: tentar Phase 3 quando está em Phase 1. Escalar é incremento progressivo, não reengenharia. Laravel permite tudo isso se você arquitetar com camadas desde o início.", en: "Phase 1 (0-1k req/s): query caching (Redis), database indexes, view caching. Phase 2 (1-10k): horizontal scale (load balancer, multiple workers), separate reads (read replicas). Phase 3 (10k+): CQRS + event sourcing, hot data (cache), denormalization. The mistake: trying Phase 3 when in Phase 1. Scaling is progressive increment, not reengineering. Laravel allows all this if you architect with layers from day one." },
     },
     {

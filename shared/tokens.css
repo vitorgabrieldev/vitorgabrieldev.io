@@ -78,9 +78,6 @@
   --ok:            #8aaa72;
   --warn:          #d4a166;
 }
-[data-theme="dark"] .cursor-dot { background: var(--ink); }
-[data-theme="dark"] .cursor-ring { background: transparent; border-color: var(--ink); }
-[data-theme="dark"] .cursor-ring.hover { background: var(--accent-soft); border-color: var(--accent); }
 /* Invert hardcoded-color SVG thumbs in dark mode to keep legibility without rewriting every template */
 [data-theme="dark"] .thumb-canvas,
 [data-theme="dark"] .pgall__thumb-art > svg,
@@ -127,7 +124,7 @@ h3 { font-size: var(--type-h3); letter-spacing: -0.01em; }
 p  { margin: 0; }
 
 /* Layout utilities */
-.page { min-height: 100vh; padding: 88px var(--pad-page) 0; }
+.page { padding: 88px var(--pad-page) 0; }
 .container { max-width: 1400px; margin: 0 auto; }
 
 /* Buttons */
@@ -200,33 +197,6 @@ p  { margin: 0; }
 /* Focus */
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
-/* Custom cursor */
-html.has-cursor, html.has-cursor body, html.has-cursor * { cursor: none !important; }
-.cursor-dot, .cursor-ring {
-  position: fixed; top: 0; left: 0; pointer-events: none; z-index: 99999;
-  will-change: transform;
-}
-.cursor-dot {
-  width: 6px; height: 6px; margin: -3px 0 0 -3px;
-  background: var(--ink); border-radius: 50%;
-}
-.cursor-ring {
-  width: 28px; height: 28px; margin: -14px 0 0 -14px;
-  border: 1px solid var(--ink); border-radius: 50%;
-  transition: width 180ms var(--ease), height 180ms var(--ease), margin 180ms var(--ease), border-color 180ms var(--ease), background 180ms var(--ease);
-}
-.cursor-ring.hover { width: 56px; height: 56px; margin: -28px 0 0 -28px; background: var(--accent-soft); border-color: var(--accent); }
-.cursor-ring.read  { width: 80px; height: 80px; margin: -40px 0 0 -40px; background: var(--ink); border-color: var(--ink); mix-blend-mode: difference; }
-.cursor-ring.external { width: 48px; height: 48px; margin: -24px 0 0 -24px; background: var(--accent); border-color: var(--accent); }
-.cursor-ring.external::after { content: "↗"; position: absolute; inset: 0; display: grid; place-items: center; font: 500 18px var(--font-sans); color: #fff; }
-.cursor-ring.drag { width: 72px; height: 72px; margin: -36px 0 0 -36px; background: var(--ink); border-color: var(--ink); }
-.cursor-ring.drag::after { content: "⇢ drag"; position: absolute; inset: 0; display: grid; place-items: center; font: 500 11px var(--font-mono); color: var(--bg); letter-spacing: 1px; }
-
-@media (max-width: 900px) {
-  .cursor-dot, .cursor-ring { display: none; }
-  html.has-cursor, html.has-cursor body, html.has-cursor * { cursor: auto !important; }
-}
-
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -236,5 +206,4 @@ html.has-cursor, html.has-cursor body, html.has-cursor * { cursor: none !importa
   }
   .reveal { opacity: 1 !important; transform: none !important; }
   .page-transition { display: none !important; }
-  .cursor-dot, .cursor-ring { display: none !important; }
 }

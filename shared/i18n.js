@@ -30,18 +30,16 @@
     'hero.line1': { pt: 'Sistemas que <em>permanecem</em>', en: 'Systems that <em>stay</em>' },
     'hero.line2': { pt: 'honestos sob <em>carga</em>.', en: 'honest under <em>load</em>.' },
     'hero.lede': {
-      pt: 'Sou o <strong>Vitor Gabriel</strong> — engenheiro full stack trabalhando com Laravel SaaS, CI/CD e infraestrutura. Transformo problemas técnicos confusos em algo que o negócio pode confiar em produção.',
-      en: "I'm <strong>Vitor Gabriel</strong> — full stack engineer working across Laravel SaaS, CI/CD and infra. I turn messy technical problems into something the business can actually trust in production."
+      pt: 'Sou o <strong>Vitor Gabriel</strong> — engenheiro full stack com Laravel, CI/CD e infraestrutura.',
+      en: "I'm <strong>Vitor Gabriel</strong> — full stack engineer working with Laravel, CI/CD and infrastructure."
     },
 
     // Home sections
     'qr.label': { pt: '[02] Resumo rápido', en: '[02] Quick read' },
-    'qr.title': { pt: 'Um engenheiro full-stack<br>com viés de infra.', en: 'A full-stack engineer<br>with an infra bias.' },
-    'qr.p1': { pt: 'Especializado em Laravel SaaS, CI/CD pipelines e infraestrutura. Arquiteto sistemas que escalam — desde o schema do Postgres até Kubernetes. Obsessivo por observabilidade, performance e decisões que compõem ao longo do tempo.', en: 'Specialized in Laravel SaaS, CI/CD pipelines and infrastructure. Architect systems that scale — from Postgres schema to Kubernetes. Obsessive about observability, performance and decisions that compound over time.' },
-    'qr.p2': { pt: 'Histórico: 5 anos HTML/CSS/JS, 3 anos em produção com React/Node, atualmente full-stack pleno em DevOps e arquitetura. Vou onde o gargalo está.', en: 'Background: 5 years HTML/CSS/JS, 3 years production React/Node, now full-stack pleno in DevOps and architecture. I move where the bottleneck is.' },
-    'qr.p3': { pt: 'Explorando: blockchain, transformers e internals de LLMs. Prefiro trabalho profundo e duradouro.', en: "Exploring: blockchain, transformers and LLM internals. I prefer deep, lasting work." },
+    'qr.title': { pt: 'O que eu faço', en: 'What I do' },
+    'qr.p1': { pt: 'Recentemente trabalhei em uma plataforma multitenant com RAG, embeddings e banco vetorial para IA, integrando múltiplas plataformas de CRM, ERP, marketing e redes sociais. Começamos com function calling direto nos endpoints e depois migramos pra um MCP Server, isolando cada integração como uma tool própria. O maior desafio foi lidar com rate limits e formatos de dados completamente diferentes entre essas integrações — resolvido normalizando tudo em um schema único, mantendo o código simples e sem complexidade desnecessária.', en: 'I recently worked on a multitenant platform with RAG, embeddings and a vector database for AI, integrating multiple CRM, ERP, marketing and social media platforms. We started with function calling directly on the endpoints and later migrated to an MCP Server, isolating each integration as its own tool. The biggest challenge was handling rate limits and completely different data formats across these integrations — solved by normalizing everything into a single schema while keeping the code simple, without unnecessary complexity.' },
     'feat.label': { pt: '[03] Trabalhos selecionados', en: '[03] Selected work' },
-    'feat.title': { pt: 'Três projetos<br>que vale a pena ler.', en: 'Three projects<br>worth reading about.' },
+    'feat.title': { pt: 'Quatro projetos<br>que vale a pena ler.', en: 'Four projects<br>worth reading about.' },
     'caps.label': { pt: '[04] O que eu faço', en: '[04] What I do' },
     'caps.title': { pt: 'Full stack. Vou onde<br>o problema está.', en: 'Full stack. I move where<br>the problem is.' },
     'journ.label': { pt: '[05] Diário', en: '[05] Journal' },

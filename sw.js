@@ -1,4 +1,4 @@
-const CACHE = 'vg-v2026.04';
+const CACHE = 'vg-v2026.02';
 
 const STATIC = [
   '/',

@@ -48,41 +48,6 @@
     });
   });
 
-  // ============== CUSTOM CURSOR ==============
-  if (matchMedia('(hover: hover)').matches && window.innerWidth > 900) {
-    document.documentElement.classList.add('has-cursor');
-    const dot = document.createElement('div'); dot.className = 'cursor-dot';
-    const ring = document.createElement('div'); ring.className = 'cursor-ring';
-    document.body.append(dot, ring);
-    let tx = -100, ty = -100, rx = -100, ry = -100;
-    document.addEventListener('mousemove', (e) => {
-      tx = e.clientX; ty = e.clientY;
-      dot.style.transform = `translate(${tx}px, ${ty}px)`;
-    });
-    (function tick() {
-      rx += (tx - rx) * 0.35;
-      ry += (ty - ry) * 0.35;
-      ring.style.transform = `translate(${rx}px, ${ry}px)`;
-      requestAnimationFrame(tick);
-    })();
-    // hover states
-    const hoverSel = 'a, button, [data-cursor]';
-    document.addEventListener('mouseover', e => {
-      if (e.target.closest(hoverSel)) ring.classList.add('hover');
-      if (e.target.closest('[data-cursor="read"]')) ring.classList.add('read');
-      const ext = e.target.closest('a[target="_blank"], a[href^="http"]:not([href*="vitorgabriel"])');
-      if (ext && !ext.closest('[data-no-ext]')) ring.classList.add('external');
-      const drag = e.target.closest('[data-cursor="drag"]');
-      if (drag) ring.classList.add('drag');
-    });
-    document.addEventListener('mouseout', e => {
-      if (e.target.closest(hoverSel)) ring.classList.remove('hover');
-      if (e.target.closest('[data-cursor="read"]')) ring.classList.remove('read');
-      if (e.target.closest('a[target="_blank"], a[href^="http"]')) ring.classList.remove('external');
-      if (e.target.closest('[data-cursor="drag"]')) ring.classList.remove('drag');
-    });
-  }
-
   // ============== SCROLL REVEAL ==============
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
@@ -110,9 +75,16 @@
   // no-op hook for now
 
   // ============== SERVICE WORKER ==============
+  const isDev = ['localhost', '127.0.0.1'].includes(location.hostname);
   if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js').catch(() => {});
-    });
+    if (isDev) {
+      // dev: kill any previously registered SW + its caches so nothing is ever cached locally
+      navigator.serviceWorker.getRegistrations().then(regs => regs.forEach(r => r.unregister()));
+      if ('caches' in window) caches.keys().then(keys => keys.forEach(k => caches.delete(k)));
+    } else {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').catch(() => {});
+      });
+    }
   }
 })();

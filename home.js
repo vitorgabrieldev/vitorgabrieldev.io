@@ -162,6 +162,44 @@
         </g>
       </svg>`;
     }
+    if (i === 3) {
+      return `<svg class="thumb-canvas" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid slice">
+        <rect width="${w}" height="${h}" fill="#ede7db"/>
+        <g font-family="JetBrains Mono, monospace" font-size="13">
+          <rect x="30" y="40" width="740" height="44" rx="6" fill="#fbf8f2" stroke="rgba(30,26,22,.2)"/>
+          <text x="48" y="67" fill="#5b534a">🔍  "eletricista perto de mim"</text>
+          <text x="${w-58}" y="67" fill="${accent}" text-anchor="end">FTS + fuzzy</text>
+        </g>
+        <g font-family="Inter Tight, sans-serif" font-size="14">
+          <rect x="30" y="120" width="230" height="150" rx="8" fill="#fbf8f2" stroke="rgba(30,26,22,.15)"/>
+          <circle cx="75" cy="165" r="20" fill="${accent}"/>
+          <text x="105" y="160" fill="#1e1a16" font-weight="500">Camila R.</text>
+          <text x="105" y="180" fill="#5b534a" font-size="12">Elétrica residencial</text>
+          <text x="48" y="230" fill="#5b534a" font-size="12">★ 4.9 · 812 serviços</text>
+          <rect x="48" y="245" width="80" height="20" rx="4" fill="${accent}"/>
+          <text x="88" y="259" fill="#fff" font-size="11" text-anchor="middle">2FA ✓</text>
+
+          <rect x="285" y="120" width="230" height="150" rx="8" fill="#fbf8f2" stroke="rgba(30,26,22,.15)"/>
+          <circle cx="330" cy="165" r="20" fill="rgba(30,26,22,.3)"/>
+          <text x="360" y="160" fill="#1e1a16" font-weight="500">Diego M.</text>
+          <text x="360" y="180" fill="#5b534a" font-size="12">Design de interiores</text>
+          <text x="303" y="230" fill="#5b534a" font-size="12">★ 4.7 · 340 serviços</text>
+          <rect x="303" y="245" width="80" height="20" rx="4" fill="rgba(30,26,22,.25)"/>
+          <text x="343" y="259" fill="#fff" font-size="11" text-anchor="middle">2FA ✓</text>
+
+          <rect x="540" y="120" width="230" height="150" rx="8" fill="#fbf8f2" stroke="rgba(30,26,22,.15)"/>
+          <circle cx="585" cy="165" r="20" fill="rgba(30,26,22,.3)"/>
+          <text x="615" y="160" fill="#1e1a16" font-weight="500">Bruno T.</text>
+          <text x="615" y="180" fill="#5b534a" font-size="12">Suporte de TI</text>
+          <text x="558" y="230" fill="#5b534a" font-size="12">★ 5.0 · 96 serviços</text>
+          <rect x="558" y="245" width="80" height="20" rx="4" fill="rgba(30,26,22,.25)"/>
+          <text x="598" y="259" fill="#fff" font-size="11" text-anchor="middle">2FA ✓</text>
+        </g>
+        <g font-family="JetBrains Mono, monospace" font-size="11" fill="#5b534a">
+          <text x="30" y="${h-40}">3 401 profissionais · pagamento protegido · chat realtime</text>
+        </g>
+      </svg>`;
+    }
     return '';
   }
 })();

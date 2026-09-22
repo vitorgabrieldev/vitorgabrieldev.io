@@ -7,7 +7,6 @@ import { ThemeToggle } from "@/components/theme-toggle";
 
 export function Nav() {
   const t = useTranslations("nav");
-  const tBtn = useTranslations("btn");
   const pathname = usePathname();
   const activeLocale = useLocale();
 
@@ -37,11 +36,6 @@ export function Nav() {
           </div>
 
           <ThemeToggle />
-
-          <a href="/CV.pdf" target="_blank" rel="noopener" className="nav__cta">
-            <span className="nav__cta-dot" />
-            {tBtn("download_cv")}
-          </a>
         </nav>
       </div>
     </header>

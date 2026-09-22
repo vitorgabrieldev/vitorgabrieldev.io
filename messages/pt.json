@@ -6,16 +6,76 @@
     "projects": "Ver projetos",
     "journal": "Ler o diário"
   },
+  "marquee": {
+    "items": [
+      {
+        "label": "SISTEMAS DISTRIBUÍDOS",
+        "description": "Arquiteturas que escalam horizontalmente e toleram falha."
+      },
+      {
+        "label": "NODE.JS",
+        "description": "Runtime JavaScript assíncrono para APIs e serviços."
+      },
+      {
+        "label": "PHP/LARAVEL",
+        "description": "Framework PHP para APIs e aplicações web robustas."
+      },
+      {
+        "label": "GRAPHQL",
+        "description": "Linguagem de consulta de API tipada e flexível."
+      },
+      {
+        "label": "GRPC",
+        "description": "RPC de alta performance entre microsserviços."
+      },
+      {
+        "label": "REACT",
+        "description": "Biblioteca para interfaces declarativas e componentizadas."
+      },
+      {
+        "label": "NEXT.JS",
+        "description": "Framework React com SSR/SSG e rotas full stack."
+      },
+      {
+        "label": "KUBERNETES",
+        "description": "Orquestração de containers em produção."
+      },
+      {
+        "label": "DOCKER",
+        "description": "Containerização de aplicações e ambientes."
+      },
+      {
+        "label": "POSTGRESQL",
+        "description": "Banco relacional robusto e extensível."
+      },
+      {
+        "label": "PGVECTOR",
+        "description": "Extensão do Postgres para busca vetorial e RAG."
+      },
+      {
+        "label": "RAG",
+        "description": "Retrieval-Augmented Generation — IA com contexto real."
+      },
+      {
+        "label": "C",
+        "description": "Linguagem de baixo nível para performance e controle."
+      },
+      {
+        "label": "CI/CD",
+        "description": "Automação de build, teste e deploy contínuo."
+      }
+    ]
+  },
   "resume": {
     "hero": {
       "title": "Engenheiro de Software Full Stack",
       "subtitle": "Arquitetura de Sistemas Distribuídos & Performance",
-      "lede": "7 anos de experiência em arquiteturas escaláveis e sistemas distribuídos — full stack com React, Node.js, PHP/Laravel, GraphQL e gRPC, forte base em infraestrutura e, mais recentemente, em Engenharia de IA."
+      "lede": "6 anos de experiência em arquiteturas escaláveis e sistemas distribuídos — full stack com React, Node.js, PHP/Laravel, GraphQL e gRPC, forte base em infraestrutura."
     },
     "summary": {
       "label": "[RESUMO] Perfil profissional",
       "title": "Resumo profissional.",
-      "b1": "7 anos de experiência em arquiteturas escaláveis e sistemas distribuídos, atuando também como Sócio-Fundador com visão de produto e execução técnica ponta a ponta.",
+      "b1": "6 anos de experiência em arquiteturas escaláveis e sistemas distribuídos, atuando também como Sócio-Fundador com visão de produto e execução técnica ponta a ponta.",
       "b2": "Desenvolvimento full stack com React, Node.js, PHP/Laravel, GraphQL, gRPC e REST, forte base em C e otimização de algoritmos; ciclo completo de infraestrutura com Linux, Docker, Kubernetes e CI/CD.",
       "b3": "Em Engenharia de IA, atuação em otimização de inferência, quantização, fine-tuning e integração de modelos diretamente em pipelines de produção."
     },
@@ -70,13 +130,49 @@
         "methodology": "Metodologia & Processo"
       },
       "items": {
-        "arch": ["Sistemas Distribuídos", "Node.js", "PHP / Laravel", "Microserviços", "GraphQL", "gRPC", "REST", "C"],
-        "frontend": ["React", "Next.js", "Tailwind CSS"],
-        "cloud": ["Kubernetes", "Docker", "CI/CD", "Linux", "Cloudflare"],
-        "data": ["PostgreSQL", "MySQL", "pgvector / RAG"],
-        "ai": ["Otimização de Inferência", "Quantização", "Fine-tuning (LoRA / PEFT)", "Model Serving (vLLM)"],
-        "quality": ["Clean Code", "SOLID", "Design Patterns"],
-        "methodology": ["Scrum", "Agile"]
+        "arch": [
+          "Sistemas Distribuídos",
+          "Node.js",
+          "PHP / Laravel",
+          "Microserviços",
+          "GraphQL",
+          "gRPC",
+          "REST",
+          "C"
+        ],
+        "frontend": [
+          "React",
+          "Next.js",
+          "Tailwind CSS"
+        ],
+        "cloud": [
+          "Kubernetes",
+          "Docker",
+          "CI/CD",
+          "Linux",
+          "Cloudflare"
+        ],
+        "data": [
+          "PostgreSQL",
+          "MySQL",
+          "pgvector / RAG",
+          "Supabase"
+        ],
+        "ai": [
+          "Otimização de Inferência",
+          "Quantização",
+          "Fine-tuning (LoRA / PEFT)",
+          "Model Serving (vLLM)"
+        ],
+        "quality": [
+          "Clean Code",
+          "SOLID",
+          "Design Patterns"
+        ],
+        "methodology": [
+          "Scrum",
+          "Agile"
+        ]
       }
     },
     "languages": {
@@ -98,7 +194,7 @@
     },
     "availability": {
       "label": "[DISPONIBILIDADE]",
-      "title": "Contratando um engenheiro que entrega?",
+      "title": "Vamos conversar sobre a próxima oportunidade.",
       "kind": "Remoto — PJ/B2B ou CLT",
       "detail": "Full-time, consultoria técnica ou projetos pontuais."
     }
@@ -106,7 +202,7 @@
   "meta": {
     "title": "Vitor Gabriel — Engenheiro de Software Full Stack",
     "ogTitle": "Vitor Gabriel — Arquitetura de Sistemas Distribuídos & Performance",
-    "description": "7 anos de experiência em arquiteturas escaláveis, sistemas distribuídos e engenharia de IA. Full stack com React, Node.js, PHP/Laravel, GraphQL e gRPC.",
+    "description": "6 anos de experiência em arquiteturas escaláveis, sistemas distribuídos e engenharia de IA. Full stack com React, Node.js, PHP/Laravel, GraphQL e gRPC.",
     "about": {
       "title": "Sobre",
       "description": "Engenheiro desde 2018. Atualmente Full Stack na Clickweb. Trajetória e como eu trabalho."
@@ -171,7 +267,7 @@
   },
   "avail": {
     "label": "[06] Disponibilidade",
-    "title": "Contratando um engenheiro que entrega?",
+    "title": "Vamos conversar sobre a próxima oportunidade.",
     "p": "CLT, PJ ou Freelance. Remote-first, híbrido possível. Onboarding em uma semana. Atualmente disponível para novos projetos.",
     "book": "Agendar conversa →"
   },
@@ -397,7 +493,7 @@
     }
   },
   "foot": {
-    "studio_title": "Vamos entregar algo preciso.",
+    "studio_title": "Vamos conversar?",
     "studio_p": "Aberto a full-time, contratos de projeto e freelance. Remoto ou híbrido (Londrina, BR). Responde em 24h em dias úteis.",
     "start_conv": "Começar uma conversa →",
     "col": {
@@ -419,6 +515,6 @@
     "search": "Buscar projetos, posts, sobre…"
   },
   "btt": {
-    "top": "TOPO"
+    "top": "ARRASTAR PARA CIMA"
   }
 }

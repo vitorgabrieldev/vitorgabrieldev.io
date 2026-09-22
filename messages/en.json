@@ -6,16 +6,76 @@
     "projects": "See projects",
     "journal": "Read the journal"
   },
+  "marquee": {
+    "items": [
+      {
+        "label": "DISTRIBUTED SYSTEMS",
+        "description": "Architectures that scale horizontally and tolerate failure."
+      },
+      {
+        "label": "NODE.JS",
+        "description": "Asynchronous JavaScript runtime for APIs and services."
+      },
+      {
+        "label": "PHP/LARAVEL",
+        "description": "PHP framework for robust APIs and web applications."
+      },
+      {
+        "label": "GRAPHQL",
+        "description": "Typed, flexible API query language."
+      },
+      {
+        "label": "GRPC",
+        "description": "High-performance RPC between microservices."
+      },
+      {
+        "label": "REACT",
+        "description": "Library for declarative, component-based interfaces."
+      },
+      {
+        "label": "NEXT.JS",
+        "description": "React framework with SSR/SSG and full stack routing."
+      },
+      {
+        "label": "KUBERNETES",
+        "description": "Container orchestration in production."
+      },
+      {
+        "label": "DOCKER",
+        "description": "Containerizing applications and environments."
+      },
+      {
+        "label": "POSTGRESQL",
+        "description": "Robust, extensible relational database."
+      },
+      {
+        "label": "PGVECTOR",
+        "description": "Postgres extension for vector search and RAG."
+      },
+      {
+        "label": "RAG",
+        "description": "Retrieval-Augmented Generation — AI with real context."
+      },
+      {
+        "label": "C",
+        "description": "Low-level language for performance and control."
+      },
+      {
+        "label": "CI/CD",
+        "description": "Automated build, test and continuous deployment."
+      }
+    ]
+  },
   "resume": {
     "hero": {
       "title": "Full Stack Software Engineer",
       "subtitle": "Distributed Systems Architecture & Performance",
-      "lede": "7 years of experience in scalable architectures and distributed systems — full stack with React, Node.js, PHP/Laravel, GraphQL and gRPC, a strong infrastructure base and, more recently, AI Engineering."
+      "lede": "6 years of experience in scalable architectures and distributed systems — full stack with React, Node.js, PHP/Laravel, GraphQL and gRPC, a strong infrastructure base."
     },
     "summary": {
       "label": "[SUMMARY] Professional profile",
       "title": "Professional summary.",
-      "b1": "7 years of experience in scalable architectures and distributed systems, also acting as Co-Founder with product vision and end-to-end technical execution.",
+      "b1": "6 years of experience in scalable architectures and distributed systems, also acting as Co-Founder with product vision and end-to-end technical execution.",
       "b2": "Full stack development with React, Node.js, PHP/Laravel, GraphQL, gRPC and REST, a strong base in C and algorithm optimization; full infrastructure lifecycle with Linux, Docker, Kubernetes and CI/CD.",
       "b3": "In AI Engineering, work spans inference optimization, quantization, fine-tuning, and integrating models directly into production pipelines."
     },
@@ -70,13 +130,49 @@
         "methodology": "Methodology & Process"
       },
       "items": {
-        "arch": ["Distributed Systems", "Node.js", "PHP / Laravel", "Microservices", "GraphQL", "gRPC", "REST", "C"],
-        "frontend": ["React", "Next.js", "Tailwind CSS"],
-        "cloud": ["Kubernetes", "Docker", "CI/CD", "Linux", "Cloudflare"],
-        "data": ["PostgreSQL", "MySQL", "pgvector / RAG"],
-        "ai": ["Inference Optimization", "Quantization", "Fine-tuning (LoRA / PEFT)", "Model Serving (vLLM)"],
-        "quality": ["Clean Code", "SOLID", "Design Patterns"],
-        "methodology": ["Scrum", "Agile"]
+        "arch": [
+          "Distributed Systems",
+          "Node.js",
+          "PHP / Laravel",
+          "Microservices",
+          "GraphQL",
+          "gRPC",
+          "REST",
+          "C"
+        ],
+        "frontend": [
+          "React",
+          "Next.js",
+          "Tailwind CSS"
+        ],
+        "cloud": [
+          "Kubernetes",
+          "Docker",
+          "CI/CD",
+          "Linux",
+          "Cloudflare"
+        ],
+        "data": [
+          "PostgreSQL",
+          "MySQL",
+          "pgvector / RAG",
+          "Supabase"
+        ],
+        "ai": [
+          "Inference Optimization",
+          "Quantization",
+          "Fine-tuning (LoRA / PEFT)",
+          "Model Serving (vLLM)"
+        ],
+        "quality": [
+          "Clean Code",
+          "SOLID",
+          "Design Patterns"
+        ],
+        "methodology": [
+          "Scrum",
+          "Agile"
+        ]
       }
     },
     "languages": {
@@ -98,7 +194,7 @@
     },
     "availability": {
       "label": "[AVAILABILITY]",
-      "title": "Hiring an engineer who delivers?",
+      "title": "Let's talk about the next opportunity.",
       "kind": "Remote — PJ/B2B or CLT (full-time employment)",
       "detail": "Full-time, technical consulting or one-off projects."
     }
@@ -171,7 +267,7 @@
   },
   "avail": {
     "label": "[06] Availability",
-    "title": "Hiring an engineer who finishes things?",
+    "title": "Let's talk about the next opportunity.",
     "p": "CLT, PJ or Freelance. Remote-first, hybrid possible. Comfortable onboarding in a week. Currently able to start new engagements.",
     "book": "Book a call →"
   },
@@ -397,7 +493,7 @@
     }
   },
   "foot": {
-    "studio_title": "Let's ship something precise.",
+    "studio_title": "Let's talk?",
     "studio_p": "Open to full-time, project contracts and freelance. Remote or hybrid (Londrina, BR). Replies within 24h on weekdays.",
     "start_conv": "Start a conversation →",
     "col": {
@@ -419,6 +515,6 @@
     "search": "Search projects, writing, about…"
   },
   "btt": {
-    "top": "TOP"
+    "top": "SCROLL TO TOP"
   }
 }

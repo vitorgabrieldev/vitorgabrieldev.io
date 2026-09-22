@@ -14,9 +14,6 @@ export default async function NotFound() {
           <Link href="/" className="btn btn--primary">
             {t("home")}
           </Link>
-          <Link href="/projects" className="btn">
-            {t("projects")}
-          </Link>
           <Link href="/journal" className="btn">
             {t("journal")}
           </Link>

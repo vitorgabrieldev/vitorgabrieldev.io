@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 
 /** Back-to-top button + top scroll-progress bar. Ported from shared/enhance.js,
  *  driven by a single scroll listener instead of two. */
 export function ScrollChrome() {
+  const t = useTranslations("btt");
   const [showTop, setShowTop] = useState(false);
   const barRef = useRef<HTMLDivElement>(null);
 
@@ -31,9 +33,10 @@ export function ScrollChrome() {
         type="button"
         className={`btt${showTop ? " is-shown" : ""}`}
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        aria-label="Back to top"
+        aria-label={t("top")}
       >
-        ↑ TOP
+        <span aria-hidden="true">↑</span>
+        <span className="btt__label">{t("top")}</span>
       </button>
     </>
   );

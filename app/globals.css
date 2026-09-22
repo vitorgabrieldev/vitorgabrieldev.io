@@ -43,6 +43,7 @@
 
   --pad-page: clamp(24px, 4vw, 64px);
   --pad-section: var(--space-12);
+  --pad-section-mobile: var(--space-9);
   --pad-card: var(--space-7);
   --gap-grid: var(--space-7);
   --type-display: clamp(48px, 8vw, 120px);
@@ -52,6 +53,13 @@
   --type-body: 16px;
   --type-small: 13px;
   --type-micro: 11px;
+}
+
+@media (max-width: 600px) {
+  :root {
+    --pad-page: 20px;
+    --pad-section: var(--pad-section-mobile);
+  }
 }
 
 [data-theme="dark"] {
@@ -148,6 +156,9 @@
     line-height: 1.55;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    /* keeps a stable content width whether or not the scrollbar is showing,
+       so position:fixed .nav (full-bleed) lines up with in-flow .container */
+    scrollbar-gutter: stable;
   }
   body {
     min-height: 100vh;
@@ -213,11 +224,17 @@
     font-size: var(--type-micro);
   }
   .mono-label {
+    display: block;
     font-family: var(--font-mono);
     font-size: var(--type-micro);
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--ink-faint);
+    margin-bottom: var(--space-2);
+  }
+  .theme-toggle-icon-light,
+  .theme-toggle-icon-dark {
+    display: block;
   }
   .theme-toggle-icon-dark {
     display: none;
@@ -226,14 +243,14 @@
     display: none;
   }
   [data-theme="dark"] .theme-toggle-icon-dark {
-    display: inline;
+    display: block;
   }
 
   .page {
     padding: 88px var(--pad-page) 0;
   }
   .container {
-    max-width: 1400px;
+    max-width: 96rem;
     margin: 0 auto;
   }
 
@@ -386,7 +403,59 @@
   .marquee__track {
     display: flex;
     width: max-content;
-    animation: marquee 40s linear infinite;
+    will-change: transform;
+  }
+  .marquee__item {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    cursor: default;
+  }
+  /* .marquee-wrap is the non-clipped positioning root for the tooltip below —
+     .marquee itself has overflow:hidden for the scrolling effect, which would
+     otherwise clip the tooltip when it renders below the ticker bar. */
+  .marquee-wrap {
+    position: relative;
+  }
+  .marquee__tooltip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(-50%) translateY(-4px);
+    background: var(--ink);
+    color: var(--bg);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: none;
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius);
+    white-space: normal;
+    width: max-content;
+    max-width: 240px;
+    line-height: 1.4;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      opacity var(--duration-fast) var(--ease-portfolio),
+      transform var(--duration-fast) var(--ease-portfolio);
+    z-index: 20;
+    box-shadow: 0 12px 28px -12px rgba(0, 0, 0, 0.35);
+  }
+  .marquee__tooltip::before {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-bottom-color: var(--ink);
+  }
+  .marquee__tooltip.is-shown {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
   }
 
   /* ============== NAV ============== */
@@ -403,7 +472,7 @@
     border-bottom: 1px solid var(--line);
   }
   .nav__inner {
-    max-width: 1400px;
+    max-width: 96rem;
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -544,7 +613,7 @@
     background: var(--bg-elev);
   }
   .foot__grid {
-    max-width: 1400px;
+    max-width: 96rem;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr;
@@ -579,7 +648,7 @@
     margin-top: 12px;
   }
   .foot__bottom {
-    max-width: 1400px;
+    max-width: 96rem;
     margin: 40px auto 0;
     padding-top: 20px;
     border-top: 1px solid var(--line);
@@ -640,11 +709,18 @@
     border-color: var(--accent);
     color: #fff;
   }
-  @media (max-width: 700px) {
+  @media (max-width: 600px) {
     .btt {
       right: 16px;
       bottom: 16px;
-      padding: 8px 12px;
+      padding: 0;
+      width: 40px;
+      height: 40px;
+      justify-content: center;
+      border-radius: 50%;
+    }
+    .btt__label {
+      display: none;
     }
   }
 
@@ -695,8 +771,8 @@
   .hero__title {
     font-family: var(--font-sans);
     font-size: var(--type-display);
-    line-height: 0.95;
-    letter-spacing: -0.045em;
+    line-height: 1.08;
+    letter-spacing: 0.01em;
     font-weight: 500;
     max-width: 16ch;
     margin-bottom: 40px;
@@ -731,6 +807,21 @@
     gap: 8px;
     flex-wrap: wrap;
     justify-content: flex-end;
+  }
+  @media (max-width: 600px) {
+    .hero__cta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      justify-content: stretch;
+    }
+    .hero__cta .btn {
+      justify-content: center;
+    }
+    /* a lone leftover item on the last row spans full width instead of
+       sitting half-empty next to nothing */
+    .hero__cta > *:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+    }
   }
 
   .marquee {
@@ -1044,12 +1135,9 @@
   .cta-slab::before {
     content: "";
     position: absolute;
-    top: 0;
-    right: 0;
-    width: 300px;
-    height: 300px;
+    inset: 0;
     background: radial-gradient(
-      circle at top right,
+      560px circle at var(--mx, 80%) var(--my, 0%),
       color-mix(in oklab, var(--accent) 40%, transparent),
       transparent 70%
     );
@@ -1057,10 +1145,32 @@
   }
   .cta-slab__actions {
     display: flex;
-    gap: 8px;
-    justify-content: flex-end;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--space-1);
     z-index: 1;
+  }
+  .cta-slab__actions a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: var(--space-2) var(--space-1);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: rgba(255, 255, 255, 0.72);
+    transition:
+      color var(--duration-DEFAULT) var(--ease-portfolio),
+      gap var(--duration-DEFAULT) var(--ease-portfolio);
+  }
+  .cta-slab__actions a:hover {
+    color: #fff;
+    gap: 10px;
+  }
+  .cta-slab__actions a.is-primary {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
   }
 
   .thumb-canvas {
@@ -2638,6 +2748,8 @@
     font-family: var(--font-mono);
   }
   .tl-highlight {
+    width: fit-content;
+    max-width: 100%;
     margin-top: 12px;
     padding: 12px 16px;
     background: var(--accent-soft);
@@ -2645,6 +2757,27 @@
     border-radius: var(--radius);
     font-size: 14px;
     color: var(--ink);
+  }
+
+  @media (max-width: 600px) {
+    .tl-row {
+      grid-template-columns: 16px 1fr;
+      gap: 6px 16px;
+      padding: var(--space-4) 0;
+    }
+    .tl-year {
+      grid-column: 1 / -1;
+      padding-top: 0;
+    }
+    .tl-line {
+      min-height: 100%;
+    }
+    .tl-line::before {
+      bottom: -22px;
+    }
+    .tl-role {
+      font-size: 19px;
+    }
   }
 
   /* ============== SKILLS ============== */
@@ -2725,7 +2858,7 @@
       grid-template-columns: 1fr;
     }
     .cta-slab__actions {
-      justify-content: flex-start;
+      align-items: flex-start;
     }
   }
 }

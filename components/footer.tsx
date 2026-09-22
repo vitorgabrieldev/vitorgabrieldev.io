@@ -17,14 +17,6 @@ export function Footer() {
             {t("foot.studio_title")}
           </div>
           <p>{t("foot.studio_p")}</p>
-          <div className="flex gap-3 mt-5 flex-wrap">
-            <a href={`mailto:${EMAIL}`} className="btn btn--primary text-white! text-[11px] px-4">
-              {t("foot.start_conv")}
-            </a>
-            <a href="/CV.pdf" target="_blank" rel="noopener" className="btn px-7">
-              {t("btn.download_cv")}
-            </a>
-          </div>
         </div>
 
         <div className="foot__col">
@@ -50,7 +42,6 @@ export function Footer() {
 
       <div className="foot__bottom">
         <span>© 2026 VITOR GABRIEL DE OLIVEIRA</span>
-        <span>{t("foot.handcrafted")}</span>
       </div>
     </footer>
   );

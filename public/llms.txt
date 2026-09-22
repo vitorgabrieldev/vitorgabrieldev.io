@@ -1,6 +1,6 @@
 # Vitor Gabriel De Oliveira
 
-> Full Stack Software Engineer based in Londrina, Brazil. 7 years of experience in scalable architectures and distributed systems, currently also acting as Co-Founder & Technical Lead at Maestron Company. Background spans full stack development (React, Node.js, PHP/Laravel, GraphQL, gRPC, REST), infrastructure (Linux, Docker, Kubernetes, CI/CD), and AI Engineering (inference optimization, quantization, fine-tuning with LoRA/PEFT, model serving with vLLM).
+> Full Stack Software Engineer based in Londrina, Brazil. 6 years of experience in scalable architectures and distributed systems, currently also acting as Co-Founder & Technical Lead at Maestron Company. Background spans full stack development (React, Node.js, PHP/Laravel, GraphQL, gRPC, REST), infrastructure (Linux, Docker, Kubernetes, CI/CD), and AI Engineering (inference optimization, quantization, fine-tuning with LoRA/PEFT, model serving with vLLM).
 
 This site (vitorgabrieldev.vercel.app) is a single-page résumé/portfolio, available in Portuguese (default, unprefixed URLs) and English (`/en`).
 

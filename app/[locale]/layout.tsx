@@ -73,7 +73,10 @@ export async function generateMetadata({
 }
 
 export function generateViewport() {
-  return { themeColor: "#7b0ec5" };
+  // A custom viewport export replaces Next.js's defaults entirely, so
+  // width/initialScale have to be repeated here — omitting them was making
+  // mobile browsers fall back to their ~980px desktop-emulation viewport.
+  return { width: "device-width", initialScale: 1, themeColor: "#7b0ec5" };
 }
 
 export default async function LocaleLayout({

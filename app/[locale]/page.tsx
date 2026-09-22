@@ -1,14 +1,11 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { Reveal } from "@/components/reveal";
-
-const STACK_MARQUEE = [
-  "SISTEMAS DISTRIBUÍDOS", "NODE.JS", "PHP/LARAVEL", "GRAPHQL", "GRPC", "REACT",
-  "NEXT.JS", "KUBERNETES", "DOCKER", "POSTGRESQL", "PGVECTOR", "RAG", "C", "CI/CD",
-];
+import { MarqueeTicker } from "@/components/marquee-ticker";
+import { MouseGlow } from "@/components/mouse-glow";
 
 const SKILL_CATEGORIES = ["arch", "frontend", "cloud", "data", "ai", "quality", "methodology"] as const;
-const EXPERIENCES = ["maestron", "fullstack", "freelance", "military"] as const;
+const EXPERIENCES = ["maestron", "military", "freelance", "fullstack"] as const;
 
 const CONTACT = {
   phone: "+55 43 98487 3807",
@@ -38,7 +35,15 @@ export default async function HomePage({
         <div className="container">
           <h1 className="hero__title reveal in">
             <span className="hero__line">{r("hero.title")}</span>
-            <span className="hero__line" style={{ color: "var(--accent)", fontStyle: "italic", fontWeight: 400 }}>
+            <span
+              className="hero__line"
+              style={{
+                color: "var(--accent)",
+                fontStyle: "italic",
+                fontWeight: 400,
+                fontSize: "var(--type-h1)",
+              }}
+            >
               {r("hero.subtitle")}
             </span>
           </h1>
@@ -46,6 +51,8 @@ export default async function HomePage({
           <div className="hero__deck">
             <Reveal delay={2}>
               <p className="hero__lede">{r("hero.lede")}</p>
+            </Reveal>
+            <Reveal delay={3}>
               <div className="hero__cta">
                 <a href="/CV.pdf" target="_blank" rel="noopener" className="btn btn--primary">
                   {t("btn.download_cv")}
@@ -60,12 +67,8 @@ export default async function HomePage({
             </Reveal>
           </div>
 
-          <Reveal delay={4} className="marquee">
-            <div className="marquee__track">
-              {[...STACK_MARQUEE, ...STACK_MARQUEE].map((s, i) => (
-                <span key={i}>{s} ·</span>
-              ))}
-            </div>
+          <Reveal delay={4}>
+            <MarqueeTicker items={t.raw("marquee.items") as { label: string; description: string }[]} />
           </Reveal>
         </div>
       </section>
@@ -158,79 +161,37 @@ export default async function HomePage({
         </div>
       </section>
 
-      {/* ============== IDIOMAS + FORMAÇÃO ============== */}
-      <section className="section" style={{ paddingBottom: "var(--pad-section)" }}>
-        <div className="container grid-2">
-          <Reveal>
-            <div className="mono-label">{r("languages.label")}</div>
-            <h2 className="section__title">{r("languages.title")}</h2>
-            <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 24 }}>
-              <span className="chip">
-                {r("languages.pt")} — {r("languages.pt_level")}
-              </span>
-              <span className="chip">
-                {r("languages.en")} — {r("languages.en_level")}
-              </span>
-              <span className="chip">
-                {r("languages.es")} — {r("languages.es_level")}
-              </span>
-            </div>
-          </Reveal>
-
-          <Reveal delay={1}>
-            <div className="mono-label">{r("education.label")}</div>
-            <h2 className="section__title">{r("education.title")}</h2>
-            <div style={{ marginTop: 24 }}>
-              <div className="tl-role">{r("education.degree")}</div>
-              <div className="tl-company">
-                {r("education.school")} · {r("education.period")}
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
       {/* ============== DISPONIBILIDADE / CONTATO ============== */}
       <section className="section" style={{ paddingBottom: "var(--pad-section)" }}>
         <div className="container">
-          <Reveal className="cta-slab">
-            <div>
-              <div className="mono-label" style={{ color: "rgba(255,255,255,.55)" }}>
-                {r("availability.label")}
+          <Reveal>
+            <MouseGlow className="cta-slab">
+              <div>
+                <div className="mono-label" style={{ color: "rgba(255,255,255,.55)" }}>
+                  {r("availability.label")}
+                </div>
+                <h2 className="section__title" style={{ color: "#fff", maxWidth: "20ch" }}>
+                  {r("availability.title")}
+                </h2>
+                <p style={{ color: "rgba(255,255,255,.7)", maxWidth: "48ch", marginTop: 16, fontSize: 16 }}>
+                  {r("availability.kind")} · {r("availability.detail")}
+                </p>
+                <p style={{ color: "rgba(255,255,255,.55)", marginTop: 16, fontFamily: "var(--font-mono)", fontSize: 13 }}>
+                  {CONTACT.location} · {CONTACT.phone}
+                </p>
               </div>
-              <h2 className="section__title" style={{ color: "#fff", maxWidth: "20ch" }}>
-                {r("availability.title")}
-              </h2>
-              <p style={{ color: "rgba(255,255,255,.7)", maxWidth: "48ch", marginTop: 16, fontSize: 16 }}>
-                {r("availability.kind")} · {r("availability.detail")}
-              </p>
-              <p style={{ color: "rgba(255,255,255,.55)", marginTop: 16, fontFamily: "var(--font-mono)", fontSize: 13 }}>
-                {CONTACT.location} · {CONTACT.phone}
-              </p>
-            </div>
-            <div className="cta-slab__actions">
-              <a href={`mailto:${CONTACT.email}`} className="btn btn--primary">
-                {t("btn.email")}
-              </a>
-              <a
-                href={CONTACT.githubHref}
-                target="_blank"
-                rel="noopener"
-                className="btn"
-                style={{ background: "transparent", color: "#fff", borderColor: "rgba(255,255,255,.3)" }}
-              >
-                GitHub ↗
-              </a>
-              <a
-                href={CONTACT.linkedinHref}
-                target="_blank"
-                rel="noopener"
-                className="btn"
-                style={{ background: "transparent", color: "#fff", borderColor: "rgba(255,255,255,.3)" }}
-              >
-                LinkedIn ↗
-              </a>
-            </div>
+              <div className="cta-slab__actions">
+                <a href={`mailto:${CONTACT.email}`} className="is-primary">
+                  {t("btn.email")} →
+                </a>
+                <a href={CONTACT.githubHref} target="_blank" rel="noopener">
+                  GitHub ↗
+                </a>
+                <a href={CONTACT.linkedinHref} target="_blank" rel="noopener">
+                  LinkedIn ↗
+                </a>
+              </div>
+            </MouseGlow>
           </Reveal>
         </div>
       </section>

@@ -26,9 +26,7 @@ Sorteia um DDD válido de uma lista estática (11 a 99, só os que existem — t
 CEP fake não tem estrutura verificável (não é módulo 11 nem nada) — ou sorteia dentro de faixas conhecidas por estado (ex: SP começa em `01xxx-xxxx`), ou usa a **API pública do ViaCEP** (`viacep.com.br/ws/{cep}/json/`) pra puxar endereço real a partir de um CEP existente. Endereço "fake" de verdade normalmente é fixture: uma lista de logradouros/bairros por cidade e sorteio entre eles.
 
 ### 5. Gerador de e-mail temporário/descartável
-Dois caminhos bem diferentes:
-- **Client-side fake**: só concatena nome aleatório + domínio de mentira (`@example.com`), não recebe e-mails de verdade.
-- **De verdade funcional**: precisa de backend com uma API tipo Mailinator/Temp-Mail ou domínio próprio com servidor SMTP recebendo e persistindo em banco — bem mais complexo, projeto à parte.
+> **Decisão: fora de escopo.** A versão funcional (recebe e-mail de verdade) exige domínio + MX + servidor SMTP — infraestrutura de mensageria, não uma feature de site de utilitários. Só entra a versão **client-side fake**: concatena nome aleatório + domínio de mentira (`@example.com`), não recebe nada de verdade.
 
 ### 6. Gerador de nomes e dados de pessoa fictícia (tipo Faker)
 Combinação de listas estáticas (nomes, sobrenomes, profissões, empresas) sorteadas e combinadas. Bibliotecas como `@faker-js/faker` já fazem isso pronto — reimplementar do zero é só ter os arrays de dados em pt-BR (a lib já tem locale `pt_BR`).
@@ -75,7 +73,7 @@ O motor de regex é o nativo do JS (`RegExp`), o desafio real é a **explicaçã
 JSON→JS é nativo. Os outros formatos precisam de parser/serializer específico: YAML (`js-yaml`), XML (`fast-xml-parser` ou `DOMParser` nativo do browser pra ler), CSV (parse manual por vírgula/aspas ou lib `papaparse`).
 
 ### 18. Validador de e-mail
-Regex cobre sintaxe (RFC 5322 simplificado), mas "validação de verdade" (domínio existe, aceita e-mail) exige checar registro **MX** do domínio — isso não dá pra fazer no browser (DNS não é acessível via JS client-side), precisa de backend fazendo a query.
+Regex cobre sintaxe (RFC 5322 simplificado) — isso fica no escopo. **Fora de escopo:** checar se o domínio existe/aceita e-mail via registro **MX**, porque isso exige uma query DNS, que o browser não expõe (precisaria de backend).
 
 ### 19. Validador/formatador de CPF/CNPJ
 Inverso do gerador (item 1): recalcula os dígitos verificadores a partir dos 9/12 primeiros e compara com os informados.
@@ -183,10 +181,10 @@ Precisa de um parser da gramática cron (5 ou 6 campos: minuto, hora, dia do mê
 No browser, `fetch()` já faz requisições — a limitação é **CORS**: o browser bloqueia se o servidor de destino não permitir a origem do testador. Ferramentas desktop (Postman/Insomnia) não têm esse problema porque não rodam num contexto de browser.
 
 ### 46. Verificador de status de site (uptime checker)
-Requisição HTTP periódica (`fetch` com timeout) checando status code + tempo de resposta. Pra rodar de verdade (checando mesmo com o usuário sem a aba aberta) precisa de um **backend/cron** batendo periodicamente e persistindo histórico — não dá só no client.
+> **Decisão: fora de escopo.** A versão útil (histórico de uptime, checagem sem a aba aberta) exige cron + banco persistindo o histórico. Um "check único" via `fetch` no momento do clique até daria no client, mas esbarra em CORS na maioria dos sites-alvo — valor baixo pro esforço, não entra.
 
 ### 47. Lookup de DNS/WHOIS
-DNS e WHOIS são protocolos que o browser não expõe via JS — exige backend fazendo a consulta (Node com módulo `dns`, ou uma API terceirizada tipo `whoisjs`) e retornando o resultado pro front.
+> **Decisão: fora de escopo.** DNS e WHOIS são protocolos que o browser não expõe via JS — exigiria sempre um backend fazendo a consulta.
 
 ### 48. Testador de CORS
 Faz um `fetch` pra uma URL informada e mostra se deu erro de CORS e por quê — na prática só reflete o comportamento do próprio browser, então é mais uma ferramenta educativa (explica os headers `Access-Control-Allow-*`) do que uma "checagem" independente.
@@ -195,7 +193,7 @@ Faz um `fetch` pra uma URL informada e mostra se deu erro de CORS e por quê —
 Basicamente templates de regras comuns (redirect, force HTTPS, cache headers) preenchidos por formulário — o "validador" exigiria simular o parser do Apache, o que é complexo; mais realista é validar só a sintaxe básica das diretivas.
 
 ### 50. Testador de webhook (request bin)
-Precisa de **backend com URL pública** que recebe qualquer requisição HTTP, salva o payload/headers num banco e exibe numa tela em tempo real (WebSocket/polling) — não dá pra fazer só no client porque o objetivo é *receber* de fora.
+> **Decisão: fora de escopo.** Exige backend com URL pública recebendo requisição, storage e atualização em tempo real na tela — o objetivo do item é *receber* de fora, então não existe versão client-only.
 
 ---
 
@@ -220,6 +218,6 @@ Formulário com campos comuns (nome do projeto, descrição, instalação, uso, 
 
 ## Notas gerais de arquitetura
 
-- **A maioria (itens 1–13, 14–31, 37–44, 51–55) é 100% client-side** — sem servidor, sem banco, só JS rodando no browser. Combina bem com o approach vanilla do repo atual (sem build step).
-- **Exceções que exigem backend**: e-mail temporário funcional (5), lookup DNS/WHOIS (47), uptime checker persistente (46), request bin (50), validação de e-mail por MX (18). Esses têm uma barreira técnica real (o browser não fala DNS/SMTP diretamente), não é só preferência de arquitetura.
+- **Decisão (22/09/2026): escopo fechado em 100% client-side.** Os itens que exigiam backend por barreira técnica real (browser não fala DNS/SMTP diretamente, ou o objetivo é receber requisição de fora) ficam de fora do projeto: e-mail temporário funcional (5), validação de e-mail por MX (18), uptime checker persistente (46), lookup DNS/WHOIS (47), request bin (50). Só entram as versões client-side desses itens onde fizer sentido (ex: e-mail fake sem receber de verdade, validação de e-mail só por sintaxe).
+- **Todo o resto da lista é 100% client-side** — sem servidor, sem banco, só JS rodando no browser. Combina com o approach vanilla do repo atual (sem build step).
 - Se a ideia for transformar isso num projeto novo (site de utilitários) ao invés de uma seção do portfólio atual, faz sentido ser um repo separado — o [roadmap.md](roadmap.md) deste projeto já está com outro foco (guestbook via Supabase).

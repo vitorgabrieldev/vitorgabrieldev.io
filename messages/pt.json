@@ -6,10 +6,107 @@
     "projects": "Ver projetos",
     "journal": "Ler o diário"
   },
+  "resume": {
+    "hero": {
+      "title": "Engenheiro de Software Full Stack",
+      "subtitle": "Arquitetura de Sistemas Distribuídos & Performance",
+      "lede": "7 anos de experiência em arquiteturas escaláveis e sistemas distribuídos — full stack com React, Node.js, PHP/Laravel, GraphQL e gRPC, forte base em infraestrutura e, mais recentemente, em Engenharia de IA."
+    },
+    "summary": {
+      "label": "[RESUMO] Perfil profissional",
+      "title": "Resumo profissional.",
+      "b1": "7 anos de experiência em arquiteturas escaláveis e sistemas distribuídos, atuando também como Sócio-Fundador com visão de produto e execução técnica ponta a ponta.",
+      "b2": "Desenvolvimento full stack com React, Node.js, PHP/Laravel, GraphQL, gRPC e REST, forte base em C e otimização de algoritmos; ciclo completo de infraestrutura com Linux, Docker, Kubernetes e CI/CD.",
+      "b3": "Em Engenharia de IA, atuação em otimização de inferência, quantização, fine-tuning e integração de modelos diretamente em pipelines de produção."
+    },
+    "experience": {
+      "label": "[EXPERIÊNCIA] Trajetória",
+      "title": "Onde já entreguei.",
+      "current": "● ATUAL",
+      "maestron": {
+        "role": "Sócio-Fundador & Responsável Técnico",
+        "company": "Maestron Company",
+        "period": "Jan/2026 – atual",
+        "b1": "Arquitetura e desenvolvimento, ao lado do sócio, de plataforma de Atendimento Omnichannel e CRM, do zero à operação em produção, com cerimônias Scrum guiando o roadmap.",
+        "b2": "Atendimento & Helpdesk: ecossistema de suporte com chat interno via WebSockets, gestão de chamados e fluxos automatizados de pós-venda.",
+        "b3": "Faturamento SaaS: engine de cobrança recorrente com gestão de assinaturas, add-ons e precificação usage-based.",
+        "b4": "Arquitetura preparada para picos de acesso, com monitoramento proativo e foco em baixa latência."
+      },
+      "fullstack": {
+        "role": "Engenheiro de Software Full Stack",
+        "company": "Londrina, PR — em transição, aberto a novas oportunidades",
+        "period": "Nov/2022 – atual",
+        "b1": "Sustentação de sistemas PHP legados e desenvolvimento de novas aplicações com Laravel, React e Next.js.",
+        "b2": "Arquitetura de APIs REST e GraphQL, integrando busca vetorial via PostgreSQL + pgvector para pipelines de atendimento com RAG.",
+        "b3": "Gestão de infraestrutura e performance com Cloudflare, com pipelines de CI/CD para deploy contínuo."
+      },
+      "freelance": {
+        "role": "Freelancer",
+        "company": "Matetática — Londrina, PR",
+        "period": "Jan/2023 – Mai/2025",
+        "b1": "Perfis e Acessos (RBAC): controle de acesso granular por perfil de usuário e isolamento de dados sobre MySQL.",
+        "b2": "Gateway Pagar.me: checkout transacional para PIX, boleto e cartão de crédito com tokenização client-side (PCI-Compliance).",
+        "b3": "Webhooks e Idempotência: pipeline assíncrono para reconciliação bancária sem duplicidade de eventos."
+      },
+      "military": {
+        "role": "Serviço Militar — Atirador",
+        "company": "Exército Brasileiro",
+        "period": "Mar/2026 – Nov/2026",
+        "b1": "Idealização e desenvolvimento autônomo de sistema de gestão militar utilizado por todos os instrutores da unidade, centralizando escalas de serviço, logística de equipamentos, controle de faltas e organização de missões comunitárias.",
+        "b2": "Atuação no ciclo completo do software — levantamento de requisitos, arquitetura, desenvolvimento full stack e deploy.",
+        "highlight": "🎖️ Elogio de Comando — Reconhecimento Oficial concedido por Oficial Superior (Coronel) pelo impacto e eficiência operacional gerados pelo sistema desenvolvido."
+      }
+    },
+    "skills": {
+      "label": "[HABILIDADES] O kit",
+      "title": "Ferramentas que eu uso.",
+      "categories": {
+        "arch": "Arquitetura & Backend",
+        "frontend": "Frontend",
+        "cloud": "Cloud, Infra & DevOps",
+        "data": "Dados & Persistência",
+        "ai": "Engenharia de IA",
+        "quality": "Boas Práticas & Qualidade",
+        "methodology": "Metodologia & Processo"
+      },
+      "items": {
+        "arch": ["Sistemas Distribuídos", "Node.js", "PHP / Laravel", "Microserviços", "GraphQL", "gRPC", "REST", "C"],
+        "frontend": ["React", "Next.js", "Tailwind CSS"],
+        "cloud": ["Kubernetes", "Docker", "CI/CD", "Linux", "Cloudflare"],
+        "data": ["PostgreSQL", "MySQL", "pgvector / RAG"],
+        "ai": ["Otimização de Inferência", "Quantização", "Fine-tuning (LoRA / PEFT)", "Model Serving (vLLM)"],
+        "quality": ["Clean Code", "SOLID", "Design Patterns"],
+        "methodology": ["Scrum", "Agile"]
+      }
+    },
+    "languages": {
+      "label": "[IDIOMAS]",
+      "title": "Como eu me comunico.",
+      "pt": "Português",
+      "pt_level": "Nativo",
+      "en": "Inglês",
+      "en_level": "Intermediário",
+      "es": "Espanhol",
+      "es_level": "Intermediário"
+    },
+    "education": {
+      "label": "[FORMAÇÃO]",
+      "title": "De onde eu vim.",
+      "school": "Marista",
+      "degree": "Ensino Médio Técnico em Tecnologia da Informação",
+      "period": "Mar/2021 – Dez/2024"
+    },
+    "availability": {
+      "label": "[DISPONIBILIDADE]",
+      "title": "Contratando um engenheiro que entrega?",
+      "kind": "Remoto — PJ/B2B ou CLT",
+      "detail": "Full-time, consultoria técnica ou projetos pontuais."
+    }
+  },
   "meta": {
-    "title": "Vitor Gabriel — Engenheiro Full Stack",
-    "ogTitle": "Vitor Gabriel — Engenheiro Full Stack",
-    "description": "Engenheiro full stack em Londrina, BR. SaaS em Laravel, CI/CD e infraestrutura. Sistemas que permanecem honestos sob carga.",
+    "title": "Vitor Gabriel — Engenheiro de Software Full Stack",
+    "ogTitle": "Vitor Gabriel — Arquitetura de Sistemas Distribuídos & Performance",
+    "description": "7 anos de experiência em arquiteturas escaláveis, sistemas distribuídos e engenharia de IA. Full stack com React, Node.js, PHP/Laravel, GraphQL e gRPC.",
     "about": {
       "title": "Sobre",
       "description": "Engenheiro desde 2018. Atualmente Full Stack na Clickweb. Trajetória e como eu trabalho."

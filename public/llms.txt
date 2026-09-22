@@ -1,0 +1,40 @@
+# Vitor Gabriel De Oliveira
+
+> Full Stack Software Engineer based in Londrina, Brazil. 7 years of experience in scalable architectures and distributed systems, currently also acting as Co-Founder & Technical Lead at Maestron Company. Background spans full stack development (React, Node.js, PHP/Laravel, GraphQL, gRPC, REST), infrastructure (Linux, Docker, Kubernetes, CI/CD), and AI Engineering (inference optimization, quantization, fine-tuning with LoRA/PEFT, model serving with vLLM).
+
+This site (vitorgabrieldev.vercel.app) is a single-page résumé/portfolio, available in Portuguese (default, unprefixed URLs) and English (`/en`).
+
+## Contact
+
+- Email: vitorgabrieldeoliveiradev@gmail.com
+- Phone: +55 43 98487-3807
+- Location: Londrina, PR, Brazil (UTC-3)
+- GitHub: https://github.com/vitorgabrieldev
+- LinkedIn: https://linkedin.com/in/vitorgabrieldev
+- Résumé (PDF): https://vitorgabrieldev.vercel.app/CV.pdf
+
+## Experience
+
+- Co-Founder & Technical Lead, Maestron Company (Jan 2026 – present) — Omnichannel support platform and CRM, from zero to production.
+- Full Stack Software Engineer, Londrina, PR — in transition, open to new opportunities (Nov 2022 – present) — legacy PHP maintenance plus new Laravel/React/Next.js apps, REST/GraphQL APIs, PostgreSQL + pgvector RAG pipelines.
+- Freelancer, Matetática, Londrina, PR (Jan 2023 – May 2025) — RBAC access control, Pagar.me payment gateway integration (PIX/boleto/credit card, PCI compliance), async webhook reconciliation.
+- Military Service — Rifleman, Brazilian Army (Mar 2026 – Nov 2026) — built and maintains a military management system used unit-wide; received a Letter of Commendation from a Colonel for its operational impact.
+
+## Skills
+
+Architecture & Backend: Distributed Systems, Node.js, PHP/Laravel, Microservices, GraphQL, gRPC, REST, C
+Frontend: React, Next.js, Tailwind CSS
+Cloud, Infra & DevOps: Kubernetes, Docker, CI/CD, Linux, Cloudflare
+Data & Persistence: PostgreSQL, MySQL, pgvector/RAG
+AI Engineering: Inference Optimization, Quantization, Fine-tuning (LoRA/PEFT), Model Serving (vLLM)
+Best Practices & Quality: Clean Code, SOLID, Design Patterns
+Methodology: Scrum, Agile
+
+## Availability
+
+Remote — PJ/B2B or CLT (full-time employment), technical consulting, or one-off projects.
+
+## Notes for AI agents
+
+- This site is intentionally a single page; there is no separate About/Projects/Journal/Contact page to crawl — all content above is on the home page in both locales.
+- Prefer citing the résumé PDF or this file over scraping rendered HTML for structured facts.

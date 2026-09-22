@@ -5,15 +5,9 @@ import { Link, usePathname } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { ThemeToggle } from "@/components/theme-toggle";
 
-const LINKS = [
-  { href: "/", key: "index" },
-  { href: "/projects", key: "work" },
-  { href: "/about", key: "about" },
-  { href: "/journal", key: "journal" },
-] as const;
-
 export function Nav() {
   const t = useTranslations("nav");
+  const tBtn = useTranslations("btn");
   const pathname = usePathname();
   const activeLocale = useLocale();
 
@@ -27,20 +21,6 @@ export function Nav() {
         </Link>
 
         <nav className="nav__links">
-          {LINKS.map((l) => {
-            const isActive =
-              l.href === "/" ? pathname === "/" : pathname.startsWith(l.href);
-            return (
-              <Link
-                key={l.href}
-                href={l.href}
-                className={isActive ? "is-active" : undefined}
-              >
-                {t(l.key)}
-              </Link>
-            );
-          })}
-
           <div className="lang-toggle mono" role="group" aria-label="Language">
             {routing.locales.map((loc, i) => (
               <span key={loc} className="inline-flex items-center">
@@ -58,10 +38,10 @@ export function Nav() {
 
           <ThemeToggle />
 
-          <Link href="/contact" className="nav__cta">
+          <a href="/CV.pdf" target="_blank" rel="noopener" className="nav__cta">
             <span className="nav__cta-dot" />
-            {t("available")} →
-          </Link>
+            {tBtn("download_cv")}
+          </a>
         </nav>
       </div>
     </header>

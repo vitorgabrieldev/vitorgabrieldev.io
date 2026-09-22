@@ -1,45 +1,17 @@
 import type { MetadataRoute } from "next";
-import { allProjects, getJournalSlugs } from "@/lib/content";
 
-const SITE_URL = "https://vitorgabriel.dev";
-const STATIC_PATHS = ["", "/about", "/projects", "/journal", "/contact"];
+const SITE_URL = "https://vitorgabrieldev.vercel.app";
 
+// Single-page site: only the home route (PT default + EN) is public.
+// About/Projects/Journal/Contact still build (unlinked) but are intentionally
+// left out of the sitemap since they're not part of the live navigation.
 export default function sitemap(): MetadataRoute.Sitemap {
-  const entries: MetadataRoute.Sitemap = [];
-
-  for (const path of STATIC_PATHS) {
-    entries.push({
-      url: `${SITE_URL}${path}`,
-      alternates: { languages: { pt: `${SITE_URL}${path}`, en: `${SITE_URL}/en${path}` } },
-      priority: path === "" ? 1 : 0.7,
-    });
-  }
-
-  for (const p of allProjects) {
-    entries.push({
-      url: `${SITE_URL}/projects/${p.id}`,
-      alternates: {
-        languages: {
-          pt: `${SITE_URL}/projects/${p.id}`,
-          en: `${SITE_URL}/en/projects/${p.id}`,
-        },
-      },
-      priority: 0.6,
-    });
-  }
-
-  for (const slug of getJournalSlugs()) {
-    entries.push({
-      url: `${SITE_URL}/journal/${slug}`,
-      alternates: {
-        languages: {
-          pt: `${SITE_URL}/journal/${slug}`,
-          en: `${SITE_URL}/en/journal/${slug}`,
-        },
-      },
-      priority: 0.5,
-    });
-  }
-
-  return entries;
+  return [
+    {
+      url: SITE_URL,
+      alternates: { languages: { pt: SITE_URL, en: `${SITE_URL}/en` } },
+      priority: 1,
+      changeFrequency: "monthly",
+    },
+  ];
 }

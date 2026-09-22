@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import type { Locale } from "@/i18n/routing";
 
-export const SITE_URL = "https://vitorgabriel.dev";
+export const SITE_URL = "https://vitorgabrieldev.vercel.app";
 
 function localizedPath(locale: Locale, path: string) {
   return locale === "pt" ? path : `/en${path}`;

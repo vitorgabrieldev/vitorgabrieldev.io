@@ -1,18 +1,19 @@
 "use client";
 
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useRef, type CSSProperties, type ReactNode } from "react";
 
 type Props = {
   children: ReactNode;
   delay?: 1 | 2 | 3 | 4;
   className?: string;
+  style?: CSSProperties;
   as?: "div" | "section";
 };
 
 /** Fades/slides an element in once it enters the viewport. Pure CSS transition
  *  (see .reveal / .reveal.in in globals.css) — this component only toggles
  *  the class via IntersectionObserver, mirroring the legacy shared/nav.js. */
-export function Reveal({ children, delay, className, as = "div" }: Props) {
+export function Reveal({ children, delay, className, style, as = "div" }: Props) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -39,7 +40,7 @@ export function Reveal({ children, delay, className, as = "div" }: Props) {
     .join(" ");
 
   return (
-    <Tag ref={ref as never} className={classes}>
+    <Tag ref={ref as never} className={classes} style={style}>
       {children}
     </Tag>
   );

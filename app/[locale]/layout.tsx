@@ -25,7 +25,7 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-const SITE_URL = "https://vitorgabriel.dev";
+const SITE_URL = "https://vitorgabrieldev.vercel.app";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -73,7 +73,7 @@ export async function generateMetadata({
 }
 
 export function generateViewport() {
-  return { themeColor: "#c96442" };
+  return { themeColor: "#7b0ec5" };
 }
 
 export default async function LocaleLayout({
@@ -94,7 +94,7 @@ export default async function LocaleLayout({
       name: "Vitor Gabriel de Oliveira",
       jobTitle: "Full Stack Engineer",
       url: SITE_URL,
-      email: "contact@vitorgabriel.dev",
+      email: "vitorgabrieldeoliveiradev@gmail.com",
       address: { "@type": "PostalAddress", addressLocality: "Londrina", addressCountry: "BR" },
       sameAs: ["https://github.com/vitorgabrieldev"],
     },

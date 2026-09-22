@@ -1,6 +1,6 @@
 import { getAllJournalEntries } from "@/lib/content";
 
-const SITE_URL = "https://vitorgabriel.dev";
+const SITE_URL = "https://vitorgabrieldev.vercel.app";
 
 function escapeXml(s: string) {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");

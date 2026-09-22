@@ -2,9 +2,7 @@
   "notFound": {
     "title": "Página não encontrada.",
     "sub": "O link pode estar quebrado, a página pode ter sido movida, ou você digitou algo errado. Não tem o que fazer aqui.",
-    "home": "← Início",
-    "projects": "Ver projetos",
-    "journal": "Ler o diário"
+    "home": "← Início"
   },
   "marquee": {
     "items": [
@@ -82,7 +80,6 @@
     "experience": {
       "label": "[EXPERIÊNCIA] Trajetória",
       "title": "Onde já entreguei.",
-      "current": "● ATUAL",
       "maestron": {
         "role": "Sócio-Fundador & Responsável Técnico",
         "company": "Maestron Company",
@@ -175,23 +172,6 @@
         ]
       }
     },
-    "languages": {
-      "label": "[IDIOMAS]",
-      "title": "Como eu me comunico.",
-      "pt": "Português",
-      "pt_level": "Nativo",
-      "en": "Inglês",
-      "en_level": "Intermediário",
-      "es": "Espanhol",
-      "es_level": "Intermediário"
-    },
-    "education": {
-      "label": "[FORMAÇÃO]",
-      "title": "De onde eu vim.",
-      "school": "Marista",
-      "degree": "Ensino Médio Técnico em Tecnologia da Informação",
-      "period": "Mar/2021 – Dez/2024"
-    },
     "availability": {
       "label": "[DISPONIBILIDADE]",
       "title": "Vamos conversar sobre a próxima oportunidade.",
@@ -202,317 +182,23 @@
   "meta": {
     "title": "Vitor Gabriel — Engenheiro de Software Full Stack",
     "ogTitle": "Vitor Gabriel — Arquitetura de Sistemas Distribuídos & Performance",
-    "description": "6 anos de experiência em arquiteturas escaláveis, sistemas distribuídos e engenharia de IA. Full stack com React, Node.js, PHP/Laravel, GraphQL e gRPC.",
-    "about": {
-      "title": "Sobre",
-      "description": "Engenheiro desde 2018. Atualmente Full Stack na Clickweb. Trajetória e como eu trabalho."
-    },
-    "projects": {
-      "title": "Projetos",
-      "description": "Oito projetos selecionados em fintech, DevOps, plataformas sociais e pesquisa."
-    },
-    "journal": {
-      "title": "Diário",
-      "description": "Anotações sobre engenharia, sistemas e o ofício de entregar software confiável."
-    },
-    "contact": {
-      "title": "Contato",
-      "description": "Me fala o que você está tentando entregar. Respondo em até 24h."
-    }
+    "description": "6 anos de experiência em arquiteturas escaláveis, sistemas distribuídos e engenharia de IA. Full stack com React, Node.js, PHP/Laravel, GraphQL e gRPC."
   },
   "nav": {
-    "index": "Início",
-    "work": "Projetos",
-    "about": "Sobre",
-    "journal": "Diário",
-    "available": "Bora trabalhar juntos?",
-    "back_journal": "← Diário",
     "engineer": "/ ENGENHEIRO"
   },
   "btn": {
-    "see_work": "Ver os projetos →",
-    "read_about": "Ler sobre mim",
-    "skim": "↓ Resumo",
     "download_cv": "Baixar CV (PDF) ↗",
-    "email": "Email",
-    "all_projects": "Todos os projetos →",
-    "read_more": "Ler mais →",
-    "back": "← Voltar",
-    "next": "Próximo →",
-    "read_all": "Ler tudo →"
-  },
-  "hero": {
-    "topline": "[01] Engenheiro · Londrina, BR · UTC−3",
-    "status": "Aceitando projetos · Q2 2026",
-    "line1": "Sistemas que <em>permanecem</em>",
-    "line2": "honestos sob <em>carga</em>.",
-    "lede": "Sou o <strong>Vitor Gabriel</strong> — engenheiro full stack com Laravel, CI/CD e infraestrutura."
-  },
-  "qr": {
-    "label": "[02] Resumo rápido",
-    "title": "O que eu faço",
-    "p1": "Recentemente trabalhei em uma plataforma multitenant com RAG, embeddings e banco vetorial para IA, integrando múltiplas plataformas de CRM, ERP, marketing e redes sociais. Começamos com function calling direto nos endpoints e depois migramos pra um MCP Server, isolando cada integração como uma tool própria. O maior desafio foi lidar com rate limits e formatos de dados completamente diferentes entre essas integrações — resolvido normalizando tudo em um schema único, mantendo o código simples e sem complexidade desnecessária."
-  },
-  "feat": {
-    "label": "[03] Trabalhos selecionados",
-    "title": "Quatro projetos<br>que vale a pena ler."
-  },
-  "caps": {
-    "label": "[04] O que eu faço",
-    "title": "Full stack. Vou onde<br>o problema está."
-  },
-  "journ": {
-    "label": "[05] Diário",
-    "title": "Notas, em público."
-  },
-  "avail": {
-    "label": "[06] Disponibilidade",
-    "title": "Vamos conversar sobre a próxima oportunidade.",
-    "p": "CLT, PJ ou Freelance. Remote-first, híbrido possível. Onboarding em uma semana. Atualmente disponível para novos projetos.",
-    "book": "Agendar conversa →"
-  },
-  "sec": {
-    "selected": "SELECIONADOS · 2025–2026",
-    "selected_title": "Trabalhos em que estou profundamente imerso agora.",
-    "capabilities": "[CAPACIDADES]",
-    "capabilities_title": "Como eu realmente ajudo.",
-    "journal": "[DIÁRIO] Notas recentes",
-    "journal_title": "Pensando em voz alta.",
-    "cta": "Vamos construir algo que dure.",
-    "cta_sub": "Respondo em menos de 24 horas. Nenhum briefing é pequeno demais.",
-    "principles": "[PRINCÍPIOS] Como eu trabalho",
-    "principles_title": "Cinco notas que deixo na minha mesa.",
-    "career": "[EXPERIÊNCIA] Carreira",
-    "career_title": "A versão curta.",
-    "skills": "[HABILIDADES] O kit",
-    "skills_title": "Ferramentas que eu uso.",
-    "oss": "[OPEN SOURCE] Trabalho público",
-    "oss_title": "Algumas coisas que publiquei por aí.",
-    "now": "[AGORA] No momento",
-    "now_title": "O que estou fazendo neste trimestre."
-  },
-  "about": {
-    "topline": "[SOBRE] Engenheiro · Londrina, BR · Desde 2023",
-    "topline_r": "3,5 anos entregando",
-    "head_title": "Um engenheiro full-stack com <em>viés de infra</em>, instinto de produto e atenção aos trade-offs.",
-    "bio": {
-      "p1": "Projeto e entrego sistemas SaaS orientados por confiabilidade e escalabilidade. Laravel é minha base, mas meu trabalho se estende por toda a stack — desde modelagem de dados e otimizações de banco até state management e infraestrutura de produção.",
-      "p2": "Desde 2023 na <strong>Clickweb</strong>, evoluí de estagiário a full-stack pleno com foco em sistemas que escalam. Profundo em infraestrutura: CI/CD pipelines, containerização (Docker, Kubernetes), nginx, Linux hardening, observabilidade e disaster recovery. Responsável por manter aplicações mission-critical em produção — se precisa de uptime garantido, eu desenho e gerencio a infraestrutura.",
-      "p3": "Arquitetura é sobre trade-offs, não dogmas. Cada decisão técnica tem custo: performance vs. manutenibilidade, abstração vs. simplicidade, flexibilidade vs. velocidade. As melhores decisões vêm quando entendo <em>por que</em> o negócio escolhe um caminho — quais são os reais constrangimentos, qual é o timeline, qual é o risco de errar. Code elegance sem impacto de negócio é luxo que times em crescimento não podem pagar.",
-      "p4": "Aprendizado contínuo é não-negociável. Leio papers acadêmicos, documentação técnica, RFC de protocolos, commit histories de projetos high-performance. Ultimamente: transformers e LLMs — tokenização, atenção, arquiteturas modernas. Não é sobre seguir trends; é sobre construir expertise genuína. Entender de verdade — não superficialmente — como as coisas funcionam.",
-      "quote": "\"Se você não consegue explicar a decisão para quem está pagando a conta, provavelmente não terminou de pensar sobre ela.\""
-    },
-    "p01": {
-      "t": "O chato vence em produção.",
-      "d": "A solução mais inteligente é aquela que o time consegue debugar às 3h da manhã sem mim."
-    },
-    "p02": {
-      "t": "Torne estados ilegais irrepresentáveis.",
-      "d": "Um schema que não consegue codificar um estado quebrado custa menos do que a suite de testes para detectar um."
-    },
-    "p03": {
-      "t": "Observe, depois otimize.",
-      "d": "Nenhum trabalho de performance começa antes de existir a métrica para medir."
-    },
-    "p04": {
-      "t": "Entregue a junção antes da feature.",
-      "d": "As interfaces se compõem. As features são reescritas. Projete as interfaces primeiro."
-    },
-    "p05": {
-      "t": "Seja dono da stack inteira, respeite cada camada.",
-      "d": "Ser generalista não é desculpa para ser raso — é permissão para ir fundo onde o problema está."
-    },
-    "now": {
-      "k": {
-        "building": "● CONSTRUINDO",
-        "shipping": "● ENTREGANDO",
-        "reading": "● LENDO",
-        "considering": "● CONSIDERANDO"
-      },
-      "building": "Venture própria — arquitetura e go-to-market strategy",
-      "shipping": "Delivery de sistemas em produção e iteração de produto",
-      "reading": "Otimizações críticas em PostgreSQL — índices, query planning e escalabilidade",
-      "considering": "Oportunidades remotas internacionais — timezone-friendly, high-impact roles"
-    }
-  },
-  "skills": {
-    "Backend": "Backend",
-    "Frontend": "Frontend",
-    "Infra / DevOps": "Infra / DevOps",
-    "Exploratory": "Exploratório"
-  },
-  "contact": {
-    "head_label": "[CONTATO] Começar uma conversa",
-    "head_badge": "Disponível · Q2 2026",
-    "head_title": "Me fala o que você está <em>tentando entregar</em>.",
-    "title": "Vamos conversar.",
-    "sub": "Me fala do que você precisa. Respondo em até 24h.",
-    "form": {
-      "name": "Nome",
-      "email": "Email",
-      "message": "Mensagem",
-      "submit": "Enviar mensagem →"
-    },
-    "start_conv": "Começar uma conversa",
-    "step1": "[PASSO 01] Sobre você",
-    "f_name": "Seu nome",
-    "f_company": "Empresa · Cargo (opcional)",
-    "f_company_ph": "ex: Acme · CTO",
-    "step2": "[PASSO 02] O projeto",
-    "kind_label": "Que tipo de contrato?",
-    "kind": {
-      "freelance": "Projeto freelance",
-      "consult": "Consultoria / auditoria",
-      "unsure": "Ainda não sei"
-    },
-    "focus_label": "Onde está o peso?",
-    "focus": {
-      "other": "Outro"
-    },
-    "budget_label": "Faixa de orçamento (BRL / mês)",
-    "budget_unit": "/ mês",
-    "budget_helper": "Opcional — um valor aproximado já ajuda.",
-    "step3": "[PASSO 03] O briefing",
-    "msg_label": "O que você está tentando entregar?",
-    "msg_placeholder": "Um ou dois parágrafos sobre o problema, o estado atual e como 'pronto' se parece.",
-    "submit_helper": "Respondo em 24h em dias úteis.",
-    "submit": "Enviar briefing →",
-    "sending": "Enviando…",
-    "sent_title": "Briefing recebido. ✓",
-    "sent_p": "Obrigado — entro em contato em até 24h no email que você forneceu. Se for urgente, me manda mensagem no WhatsApp.",
-    "direct": "/ Canais diretos",
-    "response": "/ Tempo de resposta",
-    "first_reply": "Primeira resposta",
-    "first_reply_val": "< 24h (dias úteis)",
-    "intro_call": "Chamada inicial",
-    "intro_call_val": "Dentro da semana",
-    "kickoff": "Kickoff",
-    "kickoff_val": "1–2 semanas",
-    "load": "Carga atual",
-    "load_val": "● Aceitando novos",
-    "faq": {
-      "label": "/ Dúvidas frequentes",
-      "q1": "Qual stack você prefere?",
-      "a1": "Laravel + Postgres + React/Next.js, em Linux com Docker. Mas me movo onde o problema está — já entreguei Node, Vue, Angular e vários sabores de infra.",
-      "q2": "Você aceita contratos curtos?",
-      "a2": "Sim, se o escopo for claro. Auditorias e contratos de 2–4 semanas funcionam bem. Não aceito trabalho que não posso terminar direito.",
-      "q3": "Remoto ou presencial?",
-      "a3": "Remote-first. Híbrido é possível se você estiver em Londrina. Confortável com times async em diferentes fusos."
-    },
-    "err": {
-      "name": "Nome é obrigatório.",
-      "email": "Email válido é obrigatório.",
-      "msg": "Um briefing rápido ajuda — mesmo 2 frases.",
-      "submit": "Falha ao enviar — tente de novo ou me chame no WhatsApp."
-    }
-  },
-  "journal": {
-    "title": "Diário",
-    "sub": "Anotações sobre engenharia, sistemas e o ofício de entregar software confiável.",
-    "head_label": "[DIÁRIO] Escrita · Aprendendo em público",
-    "head_title": "Pensando em voz alta, em <em>parágrafos completos</em>.",
-    "head_lede": "Notas sobre arquitetura, decisões em produção e o que estou lendo. Inacabado por design — o objetivo é pensar, não publicar.",
-    "filter": {
-      "all": "Todos"
-    },
-    "close": "✕ Fechar",
-    "entries": "entradas",
-    "words": "palavras",
-    "by": "por Vitor Gabriel"
-  },
-  "projects": {
-    "title": "Projetos",
-    "sub": "Trabalhos selecionados · 2018 – presente",
-    "all": "Todos",
-    "head_label": "[ÍNDICE] Todo trabalho · 2023 → 2026",
-    "head_title": "Trabalho, em ordem do que <em>aprendi</em>.",
-    "head_lede": "Oito projetos selecionados em fintech, DevOps, plataformas sociais e pesquisa. Filtre por disciplina ou mude o modo de visualização.",
-    "view": "Visualizar",
-    "mode": {
-      "list": "☰ Lista",
-      "grid": "▦ Grade",
-      "gallery": "◐ Galeria"
-    },
-    "read_case": "Ver case →",
-    "results": {
-      "one": "resultado",
-      "many": "resultados"
-    }
-  },
-  "cap": {
-    "01": {
-      "t": "Sistemas backend",
-      "b": "APIs Laravel, modelos de dados, auth, filas, design multi-tenant."
-    },
-    "02": {
-      "t": "Infra & DevOps",
-      "b": "Docker, Kubernetes, pipelines CI/CD, Nginx, hardening Linux."
-    },
-    "03": {
-      "t": "Entrega frontend",
-      "b": "React, Next.js, TypeScript. Interfaces que envelhecem bem."
-    },
-    "04": {
-      "t": "Design de API",
-      "b": "Contratos REST e GraphQL. Versionamento sem drama."
-    },
-    "05": {
-      "t": "Observabilidade",
-      "b": "Logs, métricas, traces — a maquinaria para responder \"por quê\"."
-    },
-    "06": {
-      "t": "Segurança no release",
-      "b": "Testes automatizados, estratégia de rollback, tagging de risco de deploy."
-    },
-    "07": {
-      "t": "Pesquisa",
-      "b": "Protótipos blockchain, internals de transformers, LLM ops."
-    },
-    "08": {
-      "t": "Intuição de produto",
-      "b": "Traduzindo requisitos de negócio em realidade técnica."
-    }
-  },
-  "project": {
-    "back": "← Projetos",
-    "year_label": "ANO",
-    "role_label": "FUNÇÃO",
-    "status_label": "STATUS",
-    "shipped": "● Entregue",
-    "github": "Ver no GitHub ↗",
-    "read_mode": "Modo leitura ↗",
-    "exit_read": "Sair do modo leitura ✕",
-    "on_page": "Nesta página",
-    "tools": "Ferramentas",
-    "tool_read": "📖 Modo leitura",
-    "print": "⎙ Imprimir case",
-    "next_case": "Próximo case →",
-    "default": {
-      "context": "Contexto",
-      "stack_label": "Stack"
-    }
+    "email": "Email"
   },
   "foot": {
     "studio_title": "Vamos conversar?",
     "studio_p": "Aberto a full-time, contratos de projeto e freelance. Remoto ou híbrido (Londrina, BR). Responde em 24h em dias úteis.",
-    "start_conv": "Começar uma conversa →",
     "col": {
       "site": "/ SITE",
       "elsewhere": "/ OUTROS LUGARES",
       "info": "/ INFO"
-    },
-    "nav": {
-      "index": "Início",
-      "work": "Projetos",
-      "about": "Sobre",
-      "journal": "Diário",
-      "contact": "Contato"
-    },
-    "handcrafted": "FEITO À MÃO · SEM TEMPLATES",
-    "rights": "© 2026 Vitor Gabriel. Construído à mão."
-  },
-  "palette": {
-    "search": "Buscar projetos, posts, sobre…"
+    }
   },
   "btt": {
     "top": "ARRASTAR PARA CIMA"

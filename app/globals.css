@@ -989,7 +989,7 @@
     transition: transform var(--duration-slow) var(--ease-portfolio);
   }
   .feat__thumb::after {
-    content: "VIEW CASE →";
+    content: "VIEW CASE >";
     position: absolute;
     inset: auto 0 16px 0;
     text-align: center;
@@ -1125,7 +1125,9 @@
     grid-template-columns: 1.3fr 1fr;
     gap: 48px;
     align-items: end;
-    background: var(--ink);
+    /* Fixed dark slab by design — always contrasts, regardless of theme.
+       Not var(--ink): that token flips to near-white in dark mode. */
+    background: #18141e;
     color: #fff;
     padding: clamp(40px, 6vw, 64px);
     border-radius: var(--radius);
@@ -1632,6 +1634,40 @@
     }
   }
 
+  /* Mouse-driven tilt + glow (see components/project-card.tsx) — --rx/--ry/
+     --mx/--my are set on mousemove, --card-accent is per-project. */
+  .pgrid a.pcard {
+    --rx: 0deg;
+    --ry: 0deg;
+    --mx: 50%;
+    --my: 50%;
+    position: relative;
+    transform: perspective(900px) rotateX(var(--ry)) rotateY(var(--rx));
+    transition:
+      transform 150ms var(--ease-portfolio),
+      border-color var(--duration-DEFAULT) var(--ease-portfolio);
+  }
+  .pgrid a.pcard:hover {
+    border-color: color-mix(in oklab, var(--card-accent) 55%, var(--line-strong));
+    transform: perspective(900px) rotateX(var(--ry)) rotateY(var(--rx)) translateY(-4px);
+  }
+  .pgrid a.pcard::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      280px circle at var(--mx) var(--my),
+      color-mix(in oklab, var(--card-accent) 45%, transparent),
+      transparent 65%
+    );
+    opacity: 0;
+    transition: opacity 200ms var(--ease-portfolio);
+    pointer-events: none;
+  }
+  .pgrid a.pcard:hover::after {
+    opacity: 1;
+  }
+
   .pgall {
     display: flex;
     flex-direction: column;
@@ -1904,7 +1940,7 @@
     border-bottom: 1px dashed var(--line);
   }
   .case__article ul li::before {
-    content: "→";
+    content: ">";
     position: absolute;
     left: 0;
     color: var(--accent);
@@ -1962,6 +1998,20 @@
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--ink-faint);
+  }
+  @media (max-width: 700px) {
+    .case__stats {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 600px) {
+    .case__next-inner {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+    .case__next .arrow {
+      display: none;
+    }
   }
 
   /* Reading mode */
@@ -2396,6 +2446,7 @@
   .field.has-err textarea {
     border-color: #c4513a;
   }
+
   .chips-select {
     display: flex;
     gap: 6px;
@@ -2741,7 +2792,7 @@
     position: relative;
   }
   .tl-notes li::before {
-    content: "→";
+    content: ">";
     position: absolute;
     left: 0;
     color: var(--accent);

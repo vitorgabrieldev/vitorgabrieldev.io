@@ -185,7 +185,164 @@
     "description": "Full stack engineer in Londrina, BR. Laravel SaaS, CI/CD, and infrastructure. Systems that stay honest under load."
   },
   "nav": {
-    "engineer": "/ ENGINEER"
+    "engineer": "/ ENGINEER",
+    "projects": "/ PROJECTS"
+  },
+  "projectsSection": {
+    "label": "[PROJECTS] Case studies",
+    "title": "What I've built.",
+    "lede": "Six real projects — from an award-winning capstone to a system used by 230 people. Each with context, stack and technical decisions.",
+    "view_case": "View case →"
+  },
+  "case": {
+    "back": "← Projects",
+    "aside_title": "In this case",
+    "overview_label": "Overview",
+    "role_label": "Role",
+    "status_label": "Status",
+    "year_label": "Period",
+    "stack_label": "Stack",
+    "links_label": "Links",
+    "challenges_label": "Challenges",
+    "results_label": "Results",
+    "next_label": "Next project",
+    "links": {
+      "repo": "Repository ↗",
+      "deploy": "View live ↗"
+    }
+  },
+  "projects": {
+    "militrak": {
+      "name": "MiliTrak",
+      "tagline": "Management system for a Brazilian Army training unit, in real production use",
+      "role": "Solo idea, design and development",
+      "status": "In production — actively used",
+      "summary": [
+        "MiliTrak was born during Vitor's own mandatory military service at the Tiro de Guerra (a Brazilian Army reservist training unit) in Londrina. The sergeant in charge of the platoon proposed a simple system to organize day-to-day operations — Vitor \"bought into the idea\" and went far beyond what was asked. Together they built a complete system: daily roll call per platoon with individual, granular logins through an RBAC permission matrix (separate profiles for Sergeant, Instructor, Monitor and Rifleman), a mission system tracking extra-duty hours, weekly duty rosters, a disciplinary module, physical fitness evaluations, equipment and uniform management, consolidated reports, and automatic generation of official documents.",
+        "One non-technical requirement became a core architectural constraint: the infrastructure had to be 100% free to run, since Vitor wouldn't necessarily remain the one maintaining it the following year — the service is temporary. At the official inspection, the responsible colonel saw the system in action, praised the result, and expressed interest in rolling it out to every training unit in the country — for now it's actively used only at TG-05-003 (Londrina), with that expansion as an ongoing goal. Sergeants and the colonel both report that the system speeds up day-to-day operations considerably."
+      ],
+      "stats": [
+        { "n": "230", "l": "Active users" },
+        { "n": "4 months", "l": "From kickoff to the colonel's inspection" },
+        { "n": "100%", "l": "Free-tier infrastructure (Supabase + Vercel)" }
+      ],
+      "challenges": [
+        "Granular permission matrix, configurable by role and by tab",
+        "Keeping everything scalable and secure on 100% free infrastructure",
+        "Generating official documents from dynamic data",
+        "Modeling a domain governed by specific military regulations"
+      ],
+      "results": [
+        "230 active users on the system",
+        "Formal commendation from the colonel at inspection, with a request to expand to other units",
+        "Direct feedback from sergeants and the colonel confirming a real operational speed-up"
+      ]
+    },
+    "constria": {
+      "name": "Constria",
+      "tagline": "Operational intelligence for civil construction",
+      "role": "Solo founder",
+      "status": "Technical MVP ready — pre-launch",
+      "summary": [
+        "The idea for Constria came out of an earlier job where Vitor built an internal construction-site management dashboard, custom-built for a single construction company. That experience gave him real knowledge of a job site's operational flow — and an insight that became the product's thesis: the market already has systems that record site data, but few that actually turn that data into smart decisions. From there, he decided to generalize the idea into his own product: a multi-tenant SaaS, no longer bespoke for one client, positioned as an operational-intelligence layer on top of site management — not \"yet another construction ERP\".",
+        "As solo founder, Vitor has already shipped the technical MVP: identity, sessions, permission control (RBAC by module, role and site), multi-tenant organization structure, and even a subscription billing model via Stripe with fully working webhooks. An AI copilot is planned — function calling over operational data, secured through RLS — to surface insights such as which employees and equipment spend the most time under maintenance, which types of projects tend to run late most often, or which part categories arrive defective most frequently, always paired with suggestions to fix each issue."
+      ],
+      "stats": [
+        { "n": "MVP", "l": "Identity, sessions, RBAC and organization shipped" },
+        { "n": "Stripe", "l": "Recurring subscriptions + working webhooks" },
+        { "n": "2 repos", "l": "Backend and frontend kept separate" }
+      ],
+      "challenges": [
+        "Row-Level Security (RLS) to isolate multiple organizations with real, not just on-paper, security",
+        "Modeling a robust data structure for a domain with a large volume and variety of information",
+        "Designing an AI copilot architecture with cost control and data-access security"
+      ],
+      "results": ["Technical MVP finished (identity, sessions, RBAC, organization and Stripe subscriptions), still no set launch date"]
+    },
+    "trabalho-amigo": {
+      "name": "Trabalho Amigo",
+      "tagline": "Services marketplace — top-grade capstone project, later rewritten solo",
+      "role": "Backend + database on the team (v1) · solo rewrite (v2)",
+      "status": "V1 delivered · V2 paused at ~70%",
+      "summary": [
+        "Trabalho Amigo was the capstone project of a 5-person team on Vitor's technical high school track, built with a clear division of roles and a focus on performance — Vitor owned 100% of the backend and database, plus a good part of the frontend. The pitch: a platform connecting people who need a service to professionals who can provide it, with a review system for safer hiring. The first version (v1), in plain PHP with MySQL, was presented to the evaluation board and received the top grade along with excellent feedback.",
+        "After graduating — well outside of school — driven by personal challenge and a wish to go deeper, Vitor decided to rewrite the project solo: v2 recreates the same business domain with a far more robust architecture, a Laravel backend and a separate Next.js/TypeScript frontend. The rewrite is roughly 70% complete today and currently paused, but it's a project he plans to pick back up."
+      ],
+      "stats": [
+        { "n": "Top grade", "l": "Capstone evaluation board score" },
+        { "n": "5 people", "l": "Team on the technical school track" },
+        { "n": "~70%", "l": "Solo rewrite (v2) complete" }
+      ],
+      "challenges": [
+        "Team collaboration with a clear division of roles and a focus on performance (v1)",
+        "Rewriting a full, already-validated system solo, from scratch, with a more professional stack (v2)",
+        "Modeling a marketplace with provider reviews and client↔professional matching"
+      ],
+      "results": ["Top grade from the capstone evaluation board, with explicit praise"]
+    },
+    "dubflow": {
+      "name": "DubFlow",
+      "tagline": "Platform for dubbing communities (personal SaaS)",
+      "role": "Personal product, solo",
+      "status": "Paused — offline",
+      "summary": [
+        "DubFlow started as a solo learning project but quickly grew product ambitions: the idea was to evolve it into a full SaaS for dubbing communities, letting them have their own identity, organize playlists by title/season/episode, publish audio and video, credit characters and voice actors, collaborate through an approval flow before publishing, and interact socially — all with real-time updates.",
+        "Vitor took the product live solo and validated the idea in practice: the platform stayed active for roughly 2 to 4 months, with a few dozen real users. The project was paused due to a mix of limited time, infrastructure cost, and the realization that, as it stood, it wasn't going to monetize. The idea isn't dead — Vitor plans to revisit it someday with a different strategy."
+      ],
+      "stats": [
+        { "n": "2–4 months", "l": "Active with real users" },
+        { "n": "Dozens", "l": "Of real users came to use it" },
+        { "n": "100%", "l": "Built solo" }
+      ],
+      "challenges": [
+        "A large feature scope to sustain as a solo developer",
+        "Real-time architecture (WebSockets) for live notifications and interactions",
+        "An editorial collaboration flow with approval before publishing"
+      ],
+      "results": ["Product validated in practice, with dozens of real users coming to use the platform"]
+    },
+    "cybersec-lab": {
+      "name": "CyberSec Lab",
+      "tagline": "Incident-investigation simulator built around a Kali Linux desktop",
+      "role": "Personal study project, solo",
+      "status": "Live",
+      "summary": [
+        "Built as a personal information-security study and as a way to help other people break into the field, CyberSec Lab simulates a full Kali Linux desktop entirely in plain JavaScript: top panel, app launcher, file manager, notes, and a terminal with over 30 SSH CLI commands implemented from scratch.",
+        "The scenario: the server goes through a sequence of effects indicating a compromise, and the player has to investigate the environment, gather IOCs (indicators of compromise), fix the problem, and finally name the type of attack — only then finding out whether they got it right. Difficulty ramps up progressively with each round."
+      ],
+      "stats": [
+        { "n": "30+", "l": "Simulated SSH terminal commands" },
+        { "n": "Progressive", "l": "Difficulty ramps up each round" },
+        { "n": "Real", "l": "Positive feedback from testers" }
+      ],
+      "challenges": [
+        "Implementing a believable, functional SSH CLI in plain JavaScript alone",
+        "Recreating a full desktop interface with no framework",
+        "Designing a coherent investigation scenario, with enough clues to reach the diagnosis"
+      ],
+      "results": ["Already tested by other people, with positive feedback on how real the simulated environment feels"]
+    },
+    "pett-love": {
+      "name": "Pett-Love",
+      "tagline": "Hiring-challenge answer key, and a personal frontend benchmark",
+      "role": "Author of the answer key (Clickweb) + personal rebuild",
+      "status": "Completed",
+      "summary": [
+        "This project started as the reference answer key Clickweb uses to evaluate front-end developer candidates. After joining the company, Vitor decided to rebuild the challenge on his own, in just 1 day, not to be evaluated but to measure his own current front-end level against the original Figma.",
+        "He deliberately shipped more pages and features than the brief asked for: beyond the base screens, he added a blog, contact page, login and integration with a public animal API — the kind of initiative he expects from a mid-level developer. The focus wasn't just matching the Figma, but code quality and UX within a fixed layout's constraints, with special attention to accessibility and animation. In the end, the exercise confirmed exactly what he set out to test: he's at the level he expects of himself."
+      ],
+      "stats": [
+        { "n": "1 day", "l": "Time spent on the personal rebuild" },
+        { "n": "+4 pages", "l": "Beyond the original Figma scope" },
+        { "n": "Mid-level", "l": "Confirmed by the exercise itself" }
+      ],
+      "challenges": [
+        "Shipping beyond the requested scope without losing quality, on a short timeline",
+        "Accessibility within a layout with limited freedom",
+        "Animation that adds to the UX without hurting performance"
+      ],
+      "results": []
+    }
   },
   "btn": {
     "download_cv": "Download CV (PDF) ↗",

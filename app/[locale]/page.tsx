@@ -3,6 +3,8 @@ import type { Locale } from "@/i18n/routing";
 import { Reveal } from "@/components/reveal";
 import { MarqueeTicker } from "@/components/marquee-ticker";
 import { MouseGlow } from "@/components/mouse-glow";
+import { ProjectCard } from "@/components/project-card";
+import { PROJECTS } from "@/lib/projects";
 
 const SKILL_CATEGORIES = ["arch", "frontend", "cloud", "data", "ai", "quality", "methodology"] as const;
 const EXPERIENCES = ["maestron", "military", "freelance", "fullstack"] as const;
@@ -155,6 +157,27 @@ export default async function HomePage({
                     <li key={item}>{item}</li>
                   ))}
                 </ul>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============== PROJETOS ============== */}
+      <section id="projetos" className="section" style={{ paddingBottom: "var(--pad-section)" }}>
+        <div className="container">
+          <Reveal>
+            <div className="mono-label">{t("projectsSection.label")}</div>
+            <h2 className="section__title">{t("projectsSection.title")}</h2>
+            <p className="section__text" style={{ marginTop: 16 }}>
+              {t("projectsSection.lede")}
+            </p>
+          </Reveal>
+
+          <div className="pgrid">
+            {PROJECTS.map((project, i) => (
+              <Reveal key={project.slug} as="div" delay={((i % 4) + 1) as 1 | 2 | 3 | 4}>
+                <ProjectCard project={project} />
               </Reveal>
             ))}
           </div>

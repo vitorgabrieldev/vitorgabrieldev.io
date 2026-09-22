@@ -13,9 +13,17 @@ const THEME_INIT = `
 /** Sets data-theme before paint so there's no flash of the wrong theme —
  *  same mechanism as the legacy tweaks panel (attribute + localStorage),
  *  just applied unconditionally instead of behind a hidden iframe control.
- *  Uses next/script's beforeInteractive strategy (rather than a raw <script>
- *  in the React tree) so it's injected once into the initial HTML and never
- *  re-diffed client-side — avoids React 19's "script tag in component" warning. */
+ *  Uses next/script's beforeInteractive strategy so it's injected once into
+ *  the initial HTML and never re-diffed client-side. The content is passed
+ *  via dangerouslySetInnerHTML rather than children — React 19 warns
+ *  ("script tag in component") on the children form because it can't
+ *  guarantee that variant only ever renders once during SSR. */
 export function ThemeScript() {
-  return <Script id="theme-init" strategy="beforeInteractive">{THEME_INIT}</Script>;
+  return (
+    <Script
+      id="theme-init"
+      strategy="beforeInteractive"
+      dangerouslySetInnerHTML={{ __html: THEME_INIT }}
+    />
+  );
 }

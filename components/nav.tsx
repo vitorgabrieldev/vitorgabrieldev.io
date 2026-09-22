@@ -20,6 +20,10 @@ export function Nav() {
         </Link>
 
         <nav className="nav__links">
+          <Link href="/#projetos" className="mono">
+            {t("projects")}
+          </Link>
+
           <div className="lang-toggle mono" role="group" aria-label="Language">
             {routing.locales.map((loc, i) => (
               <span key={loc} className="inline-flex items-center">

@@ -1,0 +1,34 @@
+---
+lede: "Immersive scrollytelling: a 10,000-year narrative of an immortal human. Visual storytelling with scroll-synced animations, particle effects, and GSAP-powered transitions."
+---
+## The challenge
+
+Scrollytelling is deceptively hard. Every pixel of scroll has to trigger something — a fade, a reveal, a particle burst. Get the timing wrong and it feels cheap. Get it right and it transcends.
+
+## Tech stack
+
+- GSAP Timeline for synced animations across the whole page
+- Lenis for 120fps smooth scroll (preserves momentum)
+- TsParticles for background effects without jank
+- Tailwind for layout, custom CSS for animations
+- Vite for instant HMR during iteration
+
+## Scroll synchronization
+
+The key insight: scroll isn't just a viewport position. It's a normalized progress value (0 to 1). Map that to your timeline and suddenly every element knows where it should be at any scroll point.
+
+```js
+// Scroll progress → animation timeline
+let scrollProgress = 0;
+window.addEventListener('scroll', () => {
+  scrollProgress = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+});
+
+gsap.timeline()
+  .to('.hero', { opacity: 1 - scrollProgress }, 0)
+  .to('.title', { y: scrollProgress * -100 }, 0);
+```
+
+## Impact
+
+<Stats items={[{"n":"60fps","l":"On scroll (no jank)"},{"n":"10k+","l":"Years of narrative"},{"n":"< 3s","l":"Full page load"}]} />

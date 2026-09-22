@@ -1,0 +1,23 @@
+---
+lede: "Dashboard gerencial consumindo API Runrun.it. 13+ métricas para gerentes de projeto: taxas de conclusão, avaliação de risco, identificação de gargalos. Apenas leitura, zero efeitos colaterais."
+---
+## Por que existe
+
+Planilhas não escalam. Times precisam de dashboards que respondem em 30 segundos: 'Quais projetos estão em risco?' 'Quem tem gargalo?' 'Qual é nossa tendência de conclusão?' Runrun.it tem os dados; tornamos visíveis.
+
+## O que mede
+
+- Taxas de conclusão por projeto e geral
+- Distribuição de tarefas entre times e clientes
+- Tarefas atrasadas e tarefas vencendo em 7 dias
+- Tarefas sem atividade recente (travadas)
+- Pontuação de risco baseada em idade e churn
+- Precisão de rastreamento de tempo e custos de trabalho
+
+## Segurança: apenas leitura por design
+
+Cada endpoint usa GET. Sem POST, PUT, DELETE. O token de API só pode ler; não pode modificar. Isso é chato mas crítico — dashboards devem informar, não mutar.
+
+## Resultados
+
+<Stats items={[{"n":"13","l":"Métricas exibidas"},{"n":"< 500ms","l":"Carregamento de página (cached)"},{"n":"GET only","l":"Sem mutações, risco zero"}]} />

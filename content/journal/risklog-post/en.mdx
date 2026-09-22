@@ -1,0 +1,311 @@
+---
+title: "Shipping Risklog: turning deploys into paragraphs"
+date: "2026-02-02"
+read: "10 min"
+kicker: "Case study"
+summary: "Silent deploy is risky. Risklog analyzes each diff, classifies by risk, reduced post-deploy scrambles 62%."
+---
+## The Problem: Silent Deploy Is Risk
+
+Your team deploys 47 changes at 2 PM. At 2:02, Slack is panicking:
+
+```
+ops: "Dashboards broke"
+backend: "Which change?"
+frontend: "Was it me?"
+db: "Do we have a migration?"
+everybody: 🤷
+```
+
+You start blaming: "Who deployed with so many changes?" But no one knows exactly what changed. 2 hours later you find it was a missing index on the migration.
+
+## Current Deploy: Opaque Information
+
+All your deploys have these problems:
+
+```
+✗ "Deploy 47 commits" — says nothing
+✗ "All tests pass" — doesn't mean safe
+✗ Random reviewers — some let entire migrations through
+✗ "It's running" — yes, but at what risk?
+✗ No context of change — UI? Database? Auth?
+```
+
+## Risklog: Deploy Analyzes Itself
+
+Risklog reads each diff from your repository and describes **in natural language** what's happening.
+
+```yaml
+# Risklog receives a GitHub webhook
+Webhook:
+  repository: trabalhoamigo.com.br
+  commits: 47
+  files_changed: 23
+  additions: 3421
+  deletions: 892
+
+# Analyzes each diff
+- app/Models/User.php: +auth_2fa_enabled (auth risk)
+- database/migrations/..._add_totp.php: +full migration (database risk)
+- resources/js/components/Auth.jsx: +20 components (UI risk)
+- config/stripe.php: +payment key handling (security risk)
+
+# Classifies by type
+Categories:
+  - migrations: 2 (CRITICAL)
+  - auth: 3 (CRITICAL)
+  - payment: 1 (CRITICAL)
+  - ui: 12 (LOW)
+  - infra: 2 (MEDIUM)
+  - docs: 5 (INFO)
+
+# Generates risk score
+risk_score: 78 / 100
+reason: "2 database migrations + auth rewrite + Stripe integration changes"
+```
+
+## Result: One Paragraph in Slack
+
+Instead of "Deploy 47 commits", you see:
+
+```
+🚨 Deploy #2847 - Risk: HIGH
+
+2 critical migrations (users table, payments schema),
+auth layer rewritten (2FA + password reset flow),
+Stripe integration updated for 3D-Secure.
+Reviewed by @backend @security.
+
+Approach: Staged rollout, monitor auth errors + payment failures.
+```
+
+**Vs what you see now:**
+
+```
+Deploy #2847
+47 commits
+All tests pass ✓
+```
+
+## How Risklog Classifies Risk
+
+### Level 1: Automatic Pattern Detection
+
+```php
+class RiskClassifier
+{
+  public function analyze(Diff $diff): RiskScore
+  {
+    $score = 0;
+    
+    // Database migrations = ALWAYS critical
+    if ($diff->containsFile('database/migrations')) {
+      $score += 40;
+      $this->flag('Migration detected: schema changes');
+    }
+    
+    // Auth code = ALWAYS critical
+    if ($diff->touches('auth', 'password', 'session', 'token')) {
+      $score += 30;
+      $this->flag('Auth layer touched');
+    }
+    
+    // Payment code = ALWAYS critical
+    if ($diff->touches('stripe', 'payment', 'invoice', 'billing')) {
+      $score += 35;
+      $this->flag('Payment integration changed');
+    }
+    
+    // Churn (many lines deleted) = risk
+    if ($diff->deletions > 500 && $diff->additions < $diff->deletions * 0.3) {
+      $score += 15;
+      $this->flag('High deletion rate: possible refactor');
+    }
+    
+    // Infrastructure configuration
+    if ($diff->containsFile('.env', 'docker', 'nginx.conf', 'kubernetes')) {
+      $score += 25;
+      $this->flag('Infrastructure config changed');
+    }
+    
+    return new RiskScore(min($score, 100));
+  }
+}
+```
+
+### Level 2: Impact Analysis
+
+```php
+class ImpactAnalyzer
+{
+  public function getAffectedServices(Diff $diff): array
+  {
+    return [
+      'frontend' => $diff->contains('resources/js') ? 'modified' : 'safe',
+      'backend' => $diff->contains('app/') ? 'modified' : 'safe',
+      'database' => $diff->contains('database/') ? 'modified' : 'safe',
+      'api' => $diff->contains('routes/api.php') ? 'modified' : 'safe',
+      'auth' => $diff->contains('auth/', 'password', 'token') ? 'modified' : 'safe',
+    ];
+  }
+  
+  public function getRecommendedReviewers(RiskScore $risk): array
+  {
+    if ($risk->score > 70) {
+      return ['@backend', '@security', '@devops'];
+    }
+    
+    if ($risk->score > 40) {
+      return ['@backend', '@frontend'];
+    }
+    
+    return ['@anyone'];
+  }
+}
+```
+
+## Result in Production: 62% Fewer Incidents
+
+Before Risklog:
+```
+Deploys / week: 7
+Post-deploy incidents / week: 3.2
+Detection time: 45 min
+Fix time: 2.5 hours
+Cost (downtime + work): ~R$3,500/week
+```
+
+After Risklog:
+```
+Deploys / week: 12 (more confident to deploy)
+Post-deploy incidents / week: 1.2 (62% reduction)
+Detection time: 8 min (context already there)
+Fix time: 35 min (knew exactly what to look at)
+Cost: ~R$1,200/week
+```
+
+**Savings:**
+- 2 fewer hours of debug per week
+- 5 more deploys per week = features faster
+- Less panic = less stress
+
+## Real Cases Risklog Stopped
+
+### Case 1: Migration Without Backup
+
+```
+Risklog Flag: "Migration drops columns without backup"
+Developer: "Oops, true. I'll add safe_drop"
+Result: Avoided data loss
+```
+
+### Case 2: Auth Flow Without Tests
+
+```
+Risklog Flag: "Auth rewrite with 0 tests in auth/ folder"
+Reviewer: "Not merging without 2FA tests"
+Result: Stopped bug that would break all signups
+```
+
+### Case 3: Stripe API Call Without Retry
+
+```
+Risklog Flag: "Stripe integration: 4 new API calls, 0 retry logic"
+Backend: "I'll add exponential backoff"
+Result: Avoided random payment failures
+```
+
+## Challenge: Detecting False Positives
+
+Risklog's big problem is **not scaring everyone every time**.
+
+Example:
+```
+// This HAS the word 'password' but it's safe
+const PASSWORD_RESET_EMAIL_TEMPLATE = `...`;
+
+// Risklog marks it as "auth changed" even though it's just docs
+```
+
+Solution: **Whitelist patterns**
+
+```php
+private $safePatterns = [
+  'comments' => ['TODO', 'FIXME', 'example', 'template'],
+  'docs' => ['README', '.md', 'docstring'],
+  'tests' => ['__tests__', '.test.js', 'spec.php'],
+  'config' => ['example.env', '.env.example'],
+];
+
+public function isRealChange(DiffLine $line): bool
+{
+  foreach ($this->safePatterns as $pattern) {
+    if (str_contains($line->content, $pattern)) {
+      return false; // False positive
+    }
+  }
+  return true; // Real change
+}
+```
+
+## Implementation: 3 Webhooks
+
+```
+1. GitHub → Webhook → Risklog API
+   - Sends each push
+   - Risklog analyzes diffs
+
+2. Risklog → Analysis → Slack
+   - Classifies risk
+   - Posts paragraph
+   - Suggests reviewers
+
+3. Post-Deploy → Risklog → Learning
+   - If incident happens
+   - Risklog learns the classification
+   - Next time detects pattern
+```
+
+## The Trade-off: Information vs Noise
+
+**If Risklog is too aggressive:**
+→ Marks everything as risk
+→ No one reads anymore
+→ Back to chaos
+
+**If Risklog is too loose:**
+→ Lets dangerous changes through
+→ Incident in production
+→ Team doesn't trust
+
+Balance: **2-3 weeks of tuning**
+
+You start with aggressive score, reduce as you learn.
+
+## Next Step: Risklog Learns
+
+Future idea:
+```
+When incident occurs:
+  1. Risklog pulls the deploy that caused it
+  2. Compares with safe deploy
+  3. Identifies new pattern
+  4. Increases score for next deploys with similar pattern
+```
+
+Example:
+```
+Incident: "Payment processing failed"
+Deploy analyzed: Stripe API version bump + retry logic removal
+New pattern: "Stripe API version change + retry logic change = HIGH RISK"
+Next deploy with pattern = automatic alert
+```
+
+## Summary
+
+**Deploy before:** "Deploy 47 commits, all tests pass" → incident at 2:02 PM
+**Deploy after:** "2 migrations + auth rewrite + Stripe, staged rollout" → confidence
+
+Risklog doesn't make deploys more safe. It makes the **risk visible**.
+
+And with visibility, your team does better.

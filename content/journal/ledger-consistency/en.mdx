@@ -1,0 +1,282 @@
+---
+title: "Why your ledger needs double-entry, even on day one"
+date: "2026-03-14"
+read: "12 min"
+kicker: "Architecture"
+summary: "Double-entry isn't optional. Implementing early costs 2 hours. Retrofitting in production costs 200 hours."
+---
+## The Double-Entry Principle
+
+Double-entry isn't an optional feature. It's a **law of accounting physics**: every money movement creates two records. A debit from X requires a credit to Y. Always. No exceptions.
+
+Why? Because it enables audit: total debits must always equal total credits. If they don't, you lost money (or someone else gained it at your expense).
+
+## The Cost of Not Doing It First
+
+You think: "I'll just add a `balance` field. Quick, simple."
+
+```php
+// ❌ WRONG: Direct balance tracking
+DB::table('accounts')->where('id', $from)->decrement('balance', $amount);
+DB::table('accounts')->where('id', $to)->increment('balance', $amount);
+```
+
+**Day 1**: Works.
+**Month 3**: A debit fails halfway. `$from` decremented, but `$to` never incremented. You created R$1,000 from nothing. You don't know where.
+**Month 6**: Customer says "my balance looks weird". You can't audit. Manual log digging. Takes 8 hours to find a R$0.01 error from January.
+**Month 12**: You have 300 discrepancies. Need to refactor everything. 200 hours of work. Bank doesn't know if it went to customer or stayed lost. Cool.
+
+## Double-Entry: How It Really Works
+
+Every transaction is **two atomic records**.
+
+```php
+// ✅ CORRECT: Ledger with two atomic lines
+DB::transaction(function () use ($from, $to, $amount) {
+  // Debit
+  Ledger::create([
+    'account_id' => $from,
+    'type' => 'debit',
+    'amount' => $amount,
+    'transaction_id' => Str::uuid(),
+    'description' => "Transfer to {$to->name}",
+    'created_at' => now(),
+  ]);
+  
+  // Credit
+  Ledger::create([
+    'account_id' => $to,
+    'type' => 'credit',
+    'amount' => $amount,
+    'transaction_id' => Str::uuid(), // SAME! Links both
+    'description' => "Transfer from {$from->name}",
+    'created_at' => now(),
+  ]);
+});
+```
+
+**Why the same transaction_id?** So later you can trace "which two records belong to the same transaction".
+
+## The Test: Can You Audit?
+
+Real audit looks like this:
+
+```php
+// Sum all lines
+$totalDebits = Ledger::where('type', 'debit')->sum('amount');
+$totalCredits = Ledger::where('type', 'credit')->sum('amount');
+
+if ($totalDebits !== $totalCredits) {
+  // You created or destroyed money
+  throw new LedgerImbalanceException("Missing: R$ {$totalDebits - $totalCredits}");
+}
+
+// Orphaned transaction test
+$orphanedDebits = Ledger::where('type', 'debit')
+  ->whereNotExists(function ($query) {
+    $query->select(DB::raw(1))
+      ->from('ledgers as credits')
+      ->where('credits.type', 'credit')
+      ->whereRaw('credits.transaction_id = ledgers.transaction_id');
+  })
+  ->get();
+
+if ($orphanedDebits->isNotEmpty()) {
+  // Debit without matching credit = PROBLEM
+  Log::error('Orphaned ledger entries', ['count' => $orphanedDebits->count()]);
+}
+```
+
+## Real Scenario: Why This Kills Your App
+
+You're building a fintech. Day 30, you're live with 10K users.
+
+A customer makes a transfer during peak hours.
+
+```
+1. Server A decrements source account
+2. Network hiccup
+3. Server B can't increment dest account
+4. Half-baked transaction = R$500 disappeared
+```
+
+**Without double-entry ledger:**
+You don't know what happened. Logs say "query error", but which query? From whom? Where did the money go?
+
+**With double-entry ledger:**
+```php
+// You run audit in the morning
+$unmatched = Ledger::select('*')
+  ->where(function ($q) {
+    $q->whereNotExists(function ($subquery) {
+      $subquery->select(1)
+        ->from('ledgers as paired')
+        ->whereRaw('paired.transaction_id = ledgers.transaction_id')
+        ->where('paired.type', '!=', DB::raw('ledgers.type'));
+    });
+  })
+  ->get();
+
+// Finds the orphaned debit
+echo "Orphaned debit: R$500 from account {$unmatched->first()->account_id}";
+echo "Transaction ID: {$unmatched->first()->transaction_id}";
+
+// You retrieve error log with transaction_id
+Log::search('transaction_id', $unmatched->first()->transaction_id);
+// Found: "Stripe API timeout, retry later"
+
+// Now you can:
+// 1. Reopen the transaction
+// 2. Complete the credit
+// 3. Notify customer
+```
+
+## True Structure: 3 Tables
+
+```sql
+-- 1. Accounts table (just reference)
+CREATE TABLE accounts (
+  id BIGINT PRIMARY KEY,
+  name VARCHAR,
+  created_at TIMESTAMP
+);
+
+-- 2. Ledger table (the SOURCE OF TRUTH)
+CREATE TABLE ledgers (
+  id BIGINT PRIMARY KEY,
+  account_id BIGINT NOT NULL,
+  transaction_id UUID NOT NULL, -- Links debit + credit
+  type ENUM('debit', 'credit') NOT NULL,
+  amount DECIMAL(12, 2) NOT NULL,
+  description VARCHAR,
+  created_at TIMESTAMP NOT NULL,
+  
+  INDEX (transaction_id), -- Find debit/credit pair
+  INDEX (account_id, created_at), -- Account balance
+  INDEX (type, created_at) -- Global audit
+);
+
+-- 3. Balance table (cache, recalculable)
+CREATE TABLE account_balances (
+  id BIGINT PRIMARY KEY,
+  account_id BIGINT UNIQUE NOT NULL,
+  balance DECIMAL(12, 2) NOT NULL, -- Sum of ledger lines
+  calculated_at TIMESTAMP,
+  
+  -- If this balance matches SUM(ledger WHERE type='credit') - SUM(ledger WHERE type='debit'),
+  -- your system is healthy
+);
+```
+
+**Golden Rule:** Never alter `account_balances` directly. It's CACHE. Always recalculate from `ledgers`.
+
+## Safe Implementation
+
+```php
+class TransferService
+{
+  public function transfer(Account $from, Account $to, $amount): Transaction
+  {
+    return DB::transaction(function () use ($from, $to, $amount) {
+      $txnId = Str::uuid();
+      
+      // Validate before touching anything
+      if ($from->balance < $amount) {
+        throw new InsufficientFundsException();
+      }
+      
+      // LINE 1: Debit
+      Ledger::create([
+        'account_id' => $from->id,
+        'transaction_id' => $txnId,
+        'type' => 'debit',
+        'amount' => $amount,
+        'description' => "Transfer to {$to->name}",
+        'created_at' => now(),
+      ]);
+      
+      // LINE 2: Credit (if fails, entire transaction reverts via DB::transaction)
+      Ledger::create([
+        'account_id' => $to->id,
+        'transaction_id' => $txnId,
+        'type' => 'credit',
+        'amount' => $amount,
+        'description' => "Transfer from {$from->name}",
+        'created_at' => now(),
+      ]);
+      
+      // Recalculate balances (not strictly necessary every time, but clear)
+      AccountBalance::updateOrCreate(
+        ['account_id' => $from->id],
+        ['balance' => $from->getBalanceFromLedger()]
+      );
+      
+      AccountBalance::updateOrCreate(
+        ['account_id' => $to->id],
+        ['balance' => $to->getBalanceFromLedger()]
+      );
+      
+      return new Transaction([
+        'id' => $txnId,
+        'from' => $from,
+        'to' => $to,
+        'amount' => $amount,
+        'status' => 'completed',
+      ]);
+    });
+  }
+}
+
+// Helper: Calculate true balance
+Account::macro('getBalanceFromLedger', function () {
+  $credits = Ledger::where('account_id', $this->id)
+    ->where('type', 'credit')
+    ->sum('amount');
+  
+  $debits = Ledger::where('account_id', $this->id)
+    ->where('type', 'debit')
+    ->sum('amount');
+  
+  return $credits - $debits;
+});
+```
+
+## Implement Early: 2 Hours
+
+**Vs Retrofit in Production: 200 Hours + Headaches**
+
+If you don't have users yet:
+
+1. Create `ledgers` table
+2. Refactor each transaction to create two atomic records
+3. Add test: verify debits = credits after each operation
+4. Done. Your system is auditable forever.
+
+If you're already live with `balance` field:
+
+1. Backfill: create ledger entries from history
+2. Migration: move 10K transactions, validate
+3. Tests: nightly audit to detect discrepancies
+4. Cutover: switch to new system, kill old one
+5. Monitoring: alert if debits !== credits
+
+This isn't a hotfix, it's **rearchitecture**. Takes months.
+
+## Checklist: Is Your Ledger Safe?
+
+**YES if:**
+• Each transaction creates EXACTLY 2 lines (debit + credit)
+• Same `transaction_id` links both
+• SUM(debits) = SUM(credits) always
+• You can audit any account in 30 seconds
+• History is immutable (append-only)
+
+**NO if:**
+• You update/delete ledger records
+• You have a `balance` field you update directly
+• Incomplete transactions without rollback
+• No indexes on transaction_id
+
+## Summary
+
+Double-entry is the foundation. Implement early = 2 hours. Retrofit = 200 hours + sleepless nights.

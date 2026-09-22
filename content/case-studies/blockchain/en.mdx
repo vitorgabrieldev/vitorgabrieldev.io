@@ -1,0 +1,46 @@
+---
+lede: "A series of EVM chain experiments exploring smart contract design patterns, consensus mechanics, and the practical trade-offs between on-chain and off-chain logic."
+---
+## The research
+
+I wanted to understand blockchain at the implementation level, not just the theory. This meant building contracts, understanding gas economics, and validating design decisions by shipping actual code.
+
+Three main explorations: a custom token with role-based permissions, a simple DEX pattern, and a multi-sig wallet with time-lock constraints.
+
+## What I learned
+
+EVM is a constraints problem. Every operation has a cost. Efficient contracts look strange to someone trained in traditional backend work — no loops over unknown lengths, no arbitrary iteration. The best designs push computation off-chain (events, indexers) and verify proofs on-chain.
+
+- Gas optimization and the economics of contract design
+- EVM opcodes and stack-based execution
+- Solidity patterns: fallback functions, delegatecall, modifier design
+- Multi-sig and time-lock patterns for security
+- Off-chain indexing (The Graph) for scalable reads
+
+## On-chain vs off-chain
+
+```solidity
+// Expensive: storing everything on-chain
+function recordAllHistory() public {
+  for (uint i = 0; i < events.length; i++) {
+    state[i] = events[i]; // Gas: ~20k per write
+  }
+}
+
+// Efficient: emit events, verify proofs
+event Transfer(address indexed from, address indexed to, uint amount);
+
+function transfer(address to, uint amount) public {
+  emit Transfer(msg.sender, to, amount); // Gas: ~375 per event
+  balances[msg.sender] -= amount;
+  balances[to] += amount;
+}
+```
+
+## Trade-offs explored
+
+Storing data on-chain is expensive. Off-chain with on-chain verification is cheaper but adds complexity. The pattern: minimal on-chain state machine, maximal off-chain logic, use events as the source of truth for indexing and read-side data.
+
+## Outcomes
+
+<Stats items={[{"n":"3","l":"Major contract patterns implemented"},{"n":"0","l":"Security exploits (contracts audited mentally)"},{"n":"15%","l":"Gas savings through optimization patterns"}]} />

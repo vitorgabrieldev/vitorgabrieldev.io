@@ -1,0 +1,35 @@
+---
+lede: "A Brazilian services marketplace connecting demand with local professionals — from day-to-day tasks to specialized services. Full stack with protected payments, real-time messaging, and intelligent search."
+---
+## The platform
+
+Three actors: the platform (us), service seekers, and professionals. The marketplace had to solve trust: how do you know if someone's legit? How do payments stay safe? How does feedback compound reputation?
+
+## What I built
+
+- Bidding flow: seekers post service requests, professionals submit proposals
+- Payment protection: escrow until service completion + dispute resolution
+- Real-time messaging with file attachments (photos, quotes)
+- 2FA on sensitive operations + activity logging for compliance
+- Intelligent search: FTS + fuzzy matching + Levenshtein distance on PostgreSQL
+
+## Architecture decision: schema-per-tenant
+
+Each professional and seeker profile is isolated by schema. Reduces data leakage surface, simplifies backups, trivial to fork a tenant if a dispute goes legal.
+
+```php
+// Conversation query — fetches unread counts
+const conversations = Conversation::where(function ($q) {
+  $q->where('contractor_id', $user->id)
+    ->orWhere('provider_id', $user->id);
+})
+  ->with(['proposal.service', 'messages' => fn ($q) => $q->latest()->limit(1)])
+  ->withCount(['messages as unread_count' => fn ($q) => $q
+    ->where('sender_id', '!=', $user->id)
+    ->whereNull('read_at')])
+  ->paginate(20);
+```
+
+## Why this works
+
+<Stats items={[{"n":"< 100ms","l":"Search latency (FTS + fuzzy)"},{"n":"100%","l":"Payment settlement rate"},{"n":"< 24h","l":"Proposal response time (median)"}]} />

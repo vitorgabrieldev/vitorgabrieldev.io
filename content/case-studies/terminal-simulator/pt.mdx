@@ -1,0 +1,22 @@
+---
+lede: "Simulador de terminal interativo. Explore comandos bash em um navegador com segurança. React puro, sem bibliotecas externas de terminal — cada interação é deliberada."
+---
+## Por que um simulador
+
+Terminais reais são poderosos mas inseguros em navegador. Construímos um parser customizado que entende um subconjunto de bash — o suficiente para parecer autêntico, seguro de explorar.
+
+## O que faz
+
+- Analisa entrada de comando em tokens e argumentos
+- Simula sistema de arquivos com estado em memória
+- Renderiza saída com syntax highlighting
+- Suporta pipes, redirecionamentos e controle de fluxo básico
+- Persiste histórico em localStorage
+
+## Parser de comando
+
+Começou com um simples split(), terminou com um lexer real. A diferença é como você lida com strings citadas, escapes e pipes — detalhes que parecem pequenos até você estar debugando por que seu comando não faz parse.
+
+## Métricas
+
+<Stats items={[{"n":"60+","l":"Comandos suportados"},{"n":"0","l":"Dependências externas"},{"n":"~15kb","l":"Minificado"}]} />

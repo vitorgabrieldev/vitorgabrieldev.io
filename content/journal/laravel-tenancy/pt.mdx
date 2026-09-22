@@ -1,0 +1,330 @@
+---
+title: "Multi-tenancy no Laravel: quatro formas, uma armadilha"
+date: "2025-11-11"
+read: "15 min"
+kicker: "Arquitetura"
+summary: "Comece com row-scoped simples. Migre para schema per tenant quando escalar. Database per tenant se compliance exigir."
+---
+## Por Que Multi-Tenancy?
+
+Você construiu um SaaS. Agora tem 100 clientes.
+
+Opção A: Um banco de dados por cliente
+→ Database gigante com 100 schemas idênticos
+→ Impossível escalar
+
+Opção B: Um único banco com tudo misturado
+→ Rápido de começar
+→ Fácil de quebrar (um SELECT sem WHERE e expõe todos)
+
+**Multi-tenancy** é a solução: Um ou poucos bancos, mas **dados isolados logicamente**.
+
+## Estratégia 1: Database Per Tenant
+
+**Estrutura:**
+```
+acme_db: {users, orders, products}
+company_x_db: {users, orders, products}
+company_y_db: {users, orders, products}
+```
+
+**Implementação:**
+```php
+DB::connection("tenant_{$tenant->id}")->table('users')->get();
+```
+
+**Vantagens:**
+• Isolamento máximo (cliente nunca vê dados de outro)
+• Backup independente (perde um, outros sobrevivem)
+• Scaling fácil (mete cada cliente em servidor diferente)
+• Compliance fácil (alguns países exigem dados separados)
+
+**Desvantagens:**
+• Complexidade operacional (100 bancos = 100x mais trabalho)
+• Migration é hell (rodar migrations em 100 bancos é trabalhoso)
+• Sharing de dados entre tenants é impossível
+• Custo: cada database = custo de infraestrutura
+• Backups: 100 bancos = 100x mais storage
+
+**Quando usar:**
+→ Poucos clientes (< 10)
+→ Clientes enterprise que pagam bastante
+→ Compliance requerindo segregação extrema
+
+## Estratégia 2: Schema Per Tenant (A Melhor)
+
+**Estrutura:**
+```sql
+shared_db.public_schema:
+  users (apenas logins globais)
+  tenants (lista de quem é cliente)
+  
+shared_db.tenant_acme_schema:
+  users (usuários da Acme)
+  orders (pedidos da Acme)
+  products (produtos da Acme)
+  
+shared_db.tenant_company_x_schema:
+  users (usuários da Company X)
+  orders (pedidos da Company X)
+  products (produtos da Company X)
+```
+
+**Implementação:**
+```php
+// Middleware: Detecta tenant do request
+Public::middleware(function ($request, $next) {
+  $tenant = Tenant::whereSubdomain(request()->host())->first();
+  // "acme.app.com" → tenant_id = 1
+  
+  DB::statement("SET search_path = tenant_{$tenant->id}, public");
+  // PostgreSQL: procura em tenant_acme_schema primeiro
+  
+  // Agora todos os queries usam o schema correto
+  $users = User::all();  // SELECT from tenant_acme.users
+  
+  return $next($request);
+});
+```
+
+**Vantagens:**
+• Melhor ROI (um banco, muitos schemas)
+• Migrations rodadas uma vez (muito mais rápido)
+• Compartilhamento de dados fácil
+• Escalável até 1.000+ clientes
+• Backup único com multiplos schemas
+
+**Desvantagens:**
+• Um schema quebra = todos no mesmo banco sofrem
+• Queries entre schemas é complicado
+• Compliance: alguns reguladores não aceitam (dados no mesmo hardware)
+
+**Quando usar:**
+→ SaaS escalável (50-1000 clientes)
+→ Você quer simplicidade operacional
+→ Clientes aceitam compartilhar hardware
+
+## Estratégia 3: Row-Scoped (A Armadilha)
+
+**Estrutura:**
+```sql
+Table: users
+┌────┬─────────────┬───────────────┐
+│ id │ tenant_id   │ email         │
+├────┼─────────────┼───────────────┤
+│ 1  │ acme        │ alice@acme    │
+│ 2  │ company_x   │ bob@company   │
+│ 3  │ acme        │ charlie@acme  │
+└────┴─────────────┴───────────────┘
+```
+
+**Implementação:**
+```php
+User::where('tenant_id', $tenant->id)->get();
+```
+
+**Vantagens:**
+• Super simples de começar
+• Um banco, uma tabela, um índice
+• Fácil fazer queries entre tenants (se precisar)
+
+**Desvantagens (A Armadilha):**
+• **SELECT * FROM users sem WHERE = BUG CRÍTICO**
+  Se esquecer tenant_id em um lugar, vazou dados pra todos
+
+• **Performance**: Sem índice em tenant_id, é O(n) sempre
+  ```
+  Bad: SELECT * FROM users WHERE email = 'x'
+  → Full table scan por 10K usuários
+  
+  Good: SELECT * FROM users WHERE tenant_id = 'acme' AND email = 'x'
+  → Index range scan
+  ```
+  
+  Mas se esquecer tenant_id no index, é slow.
+
+• **Global scope pollution**: Você escreve
+  ```php
+  User::find(5);
+  ```
+  
+  Retorna qual tenant? O 5º usuário de qual cliente?
+  Sem context, isso é ambíguo.
+
+**O Disaster:**
+```php
+// Controller
+public function updateUser($id) {
+  $user = User::find($id);  // ← BUG: Qual tenant?
+  $user->update(request()->all());
+  // Se ID 5 pertence a outro cliente, você editou conta deles
+}
+
+// Implementação segura:
+public function updateUser($id) {
+  $user = User::where('tenant_id', Auth::user()->tenant_id)
+    ->findOrFail($id);
+  // Agora só retorna se pertence ao tenant do usuário
+  $user->update(request()->all());
+}
+```
+
+**Quando usar:**
+→ MVP rápido (você sabe os riscos)
+→ Time pequeno, confiável
+→ Depois você migra pra Schema per Tenant
+
+**Quando NÃO usar:**
+→ Clientes pagando bastante
+→ Sensibilidade em data privacy
+→ Team grande (fácil alguém esquecer tenant_id)
+
+## Estratégia 4: Column-Scoped (Nunca Use)
+
+**Estrutura:**
+```sql
+Table: users
+┌────┬──────────┬─────────────────────────┐
+│ id │ email    │ tenant_access           │
+├────┼──────────┼─────────────────────────┤
+│ 1  │ alice    │ {acme, company_x}       │  ← Array de tenants
+│ 2  │ bob      │ {acme}                  │
+└────┴──────────┴─────────────────────────┘
+```
+
+**Problema:**
+Você nunca consegue saber "quais dados vê este usuário". Cada query vira:
+
+```php
+User::whereJsonContains('tenant_access', $tenant->id)->get();
+// JSON contains check = sempre slow
+// Index não funciona bem
+```
+
+**Resultado:** Performance horrível, security difícil.
+
+**Nunca use isso.**
+
+## Decisão: Qual Escolher?
+
+**Comece com:** Row-Scoped (simples, rápido)
+**Cuidado:** Adicione global scope middleware
+**Quando escalar:** Migre pra Schema per Tenant
+**Se compliance:** Database per Tenant
+
+## Implementação Segura: Global Scope
+
+```php
+// app/Models/Traits/BelongsToTenant.php
+trait BelongsToTenant
+{
+  protected static function booted(): void
+  {
+    // Adiciona automaticamente WHERE tenant_id = X em TODO query
+    static::addGlobalScope(new TenantScope);
+  }
+}
+
+// app/Scopes/TenantScope.php
+class TenantScope implements Scope
+{
+  public function apply(Builder $builder, Model $model): void
+  {
+    if (auth()->check()) {
+      $builder->where('tenant_id', auth()->user()->tenant_id);
+    }
+  }
+}
+
+// app/Models/User.php
+class User extends Model
+{
+  use BelongsToTenant;  // ← Agora TODA query filtra automaticamente
+}
+
+// Uso:
+User::find(5);  // Automático: WHERE tenant_id = 'acme' AND id = 5
+User::all();    // Automático: WHERE tenant_id = 'acme'
+```
+
+**Segurança**: Mesmo se esquecer tenant_id, o scope filtra.
+
+## Migrando de Row-Scoped → Schema per Tenant
+
+**Dia 1:** Você tem
+```sql
+users: [id, email, tenant_id]
+orders: [id, user_id, tenant_id]
+```
+
+**Dia 2:** Você cria novo schema
+```bash
+psql -d shared_db -c "CREATE SCHEMA tenant_acme"
+psql -d shared_db -c "SET search_path = tenant_acme; CREATE TABLE users AS SELECT * FROM public.users WHERE tenant_id = 'acme'"
+```
+
+**Dia 3:** Migração final
+```php
+class MigrateToSchemaPerTenant {
+  public function handle() {
+    foreach (Tenant::all() as $tenant) {
+      // Cria schema
+      DB::statement("CREATE SCHEMA tenant_{$tenant->id}");
+      
+      // Copia dados
+      DB::statement(
+        "CREATE TABLE tenant_{$tenant->id}.users AS 
+         SELECT * FROM public.users WHERE tenant_id = ?",
+        [$tenant->id]
+      );
+      
+      // Remove coluna tenant_id (agora é redundante, está no schema)
+      DB::statement(
+        "ALTER TABLE tenant_{$tenant->id}.users 
+         DROP COLUMN tenant_id"
+      );
+    }
+    
+    // Depois
+    DB::statement("DROP TABLE public.users");
+  }
+}
+```
+
+## Caso Real: Trabalho Amigo
+
+Usamos:
+**Row-Scoped com Global Scope (MVP)**
+↓ (depois de 50 usuários)
+**Schema per Tenant**
+↓ (se escalar para 10K)
+**Database per Tenant (alguns clientes enterprise)**
+
+**Resultado:**
+- MVP em 2 semanas (row-scoped)
+- Scaling transparente pra 5K usuários (schema per tenant)
+- Enterprise customers felizes (seus próprios bancos)
+
+## Checklist: Sua Multi-Tenancy é Segura?
+
+**Sim se:**
+• Toda Model usa BelongsToTenant trait
+• Global scope filtra automaticamente
+• Você roda queries com logged-in user apenas
+• Índices em tenant_id + (other columns)
+• Migrations com scaffold de teste
+
+**Não se:**
+• Queries sem WHERE tenant_id
+• Você confia que devs sempre lembram tenant_id
+• Sem global scope
+• Sem testes verificando isolamento
+
+## Resumo
+
+**Row-Scoped:** Rápido pra começar, perigoso sem discipline
+**Schema per Tenant:** Melhor ROI, seguro por arquitetura
+**Database per Tenant:** Isolamento máximo, operacional hell
+**Column-Scoped:** Não use
+
+Comece simples, migre quando precisar escalar.

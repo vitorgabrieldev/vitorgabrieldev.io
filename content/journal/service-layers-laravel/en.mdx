@@ -1,0 +1,148 @@
+---
+title: "Service Layers in Laravel 12: where does logic actually go?"
+date: "2026-04-07"
+read: "18 min"
+kicker: "Architecture"
+summary: "Controller → Service → Repository → Model. Who does what? Controller deserializes HTTP. Service orchestrates business. Repository queries. Model is data. The rule: if it touches database + logic, remove it from Controller."
+---
+## The Problem: HTTP Logic Pollution
+
+Controllers doing queries, Controllers manipulating data, Controllers orchestrating transactions — scattered everywhere.
+
+## The Correct Structure
+
+**Controller** — just HTTP adapter
+• Deserializes request
+• Validates input
+• Calls Service
+• Serializes response
+
+**Service** — business orchestration
+• Domain validations
+• Business rules
+• DB transactions
+• Coordinates Repositories
+
+**Repository** — pure data access
+• Queries without logic
+• Mutations without logic
+• Zero business rules
+
+**Model** — data representation
+• Relationships
+• Casts and accessors
+• Basic validations
+
+## Example: Bank Transfer
+
+### ❌ WRONG (all in Controller)
+
+```php
+class TransferController {
+  public function transfer(Request $request) {
+    $from = Account::find($request->from_id);
+    $to = Account::find($request->to_id);
+    if ($from->balance < $request->amount) abort(400);
+    $from->balance -= $request->amount;
+    $to->balance += $request->amount;
+    $from->save();
+    $to->save();
+    AuditLog::create([...]);
+  }
+}
+```
+
+**Problems:**
+- Impossible to test isolated
+- Logic scattered
+- Zero reusability
+- Hard to change
+- No real transaction
+
+### ✅ CORRECT (Controller delegates)
+
+```php
+class TransferController {
+  public function transfer(Request $request, TransferService $service) {
+    $validated = $request->validate([...]);
+    $result = $service->transfer($validated);
+    return response()->json($result);
+  }
+}
+
+class TransferService {
+  public function transfer(array $data): array {
+    return DB::transaction(function () use ($data) {
+      $from = $this->accountRepo->findOrFail($data['from_id']);
+      $to = $this->accountRepo->findOrFail($data['to_id']);
+      
+      // Business validations
+      if (!$from->canTransfer($data['amount'])) {
+        throw new InsufficientFundsException();
+      }
+      
+      // Double-entry ledger
+      $this->ledger->debit($from, $data['amount']);
+      $this->ledger->credit($to, $data['amount']);
+      
+      // Audit trail
+      $this->auditLog->record('transfer', $data);
+      
+      return ['success' => true, 'txn_id' => ...];
+    });
+  }
+}
+
+class AccountRepository {
+  public function findOrFail(int $id): Account {
+    return Account::findOrFail($id);
+  }
+}
+```
+
+**Advantages:**
+- Testable (test Service isolated)
+- Real transaction with auto-rollback
+- Guaranteed audit trail
+- Reusable (HTTP, CLI, Queue)
+- Easy to change
+
+## Laravel 12: Actions vs Services
+
+**When to use Actions (Spatie)**
+→ Simple unitary operations
+→ Single data flow
+→ Examples: CreatePost, SendEmail, UpdateProfile
+
+**When to use Services**
+→ Complex flows with multiple steps
+→ Multiple entities involved
+→ Examples: Onboarding, Payment, Migration
+
+## Practical Benefits
+
+**Testability**
+• Test Service without Controller
+• Test Controller without Service (mock)
+• Real test coverage
+
+**Reusability**
+• Same logic via HTTP, CLI, Queue
+• Same logic via different controllers
+• No duplication
+
+**Maintainability**
+• Logic in single place
+• Safe isolated changes
+• Straight debugging
+
+**Scalability**
+• Structure ready for growth
+• Easy to extract to microservice
+• Clear separation of concerns
+
+## The Golden Rule
+
+**If it touches database + logic = remove it from Controller.**
+
+Not about microservices or complexity — it's about clean separation. Layered structure works at any scale.

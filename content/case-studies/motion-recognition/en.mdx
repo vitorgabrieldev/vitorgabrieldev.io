@@ -1,0 +1,52 @@
+---
+lede: "A hand gesture recognition interface built with MediaPipe, processing video in real-time to detect and classify hand poses with < 50ms latency on commodity hardware."
+---
+## The problem
+
+Gesture-based interfaces can feel natural if the latency is imperceptible. Most implementations fail because they're either too slow or too rigid (only works with specific hand poses).
+
+I wanted to explore whether real-time gesture recognition could work on a laptop without specialist hardware.
+
+## Architecture
+
+Used MediaPipe (Google's hand-tracking ML model) running inference locally. The pipeline: video frame → hand detection → landmark extraction → pose classification → action trigger.
+
+Built a simple UI that shows detected poses in real-time, responds to gestures, and logs confidence scores.
+
+- MediaPipe hand tracking (33 landmarks per hand)
+- Confidence-weighted pose classification
+- Frame buffering and smoothing to reduce jitter
+- WebGL rendering for performance
+- Fallback to CPU if GPU unavailable
+
+## Detection pipeline
+
+```js
+// Real-time hand tracking with MediaPipe
+const hands = new Hands({
+  locateFile: (file) => `/mediapipe/${file}`
+});
+
+hands.onResults((results) => {
+  if (results.multiHandLandmarks) {
+    results.multiHandLandmarks.forEach((landmarks) => {
+      const pose = classifyGesture(landmarks);
+      updateUI(pose);
+    });
+  }
+});
+
+const camera = new Camera(video, {
+  onFrame: async () => {
+    await hands.send({ image: video });
+  }
+});
+```
+
+## Key findings
+
+Lighting matters enormously. Poor lighting breaks detection. Hand occlusion is harder than expected — even slight finger overlap confuses the model. Smoothing latency trades off responsiveness — you need 2-3 frames of history for stable classification.
+
+## Outcomes
+
+<Stats items={[{"n":"< 50ms","l":"E2E latency (capture → action)"},{"n":"94%","l":"Accuracy in good lighting"},{"n":"12","l":"Distinct gestures recognized reliably"}]} />

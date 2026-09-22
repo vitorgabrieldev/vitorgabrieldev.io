@@ -1,0 +1,37 @@
+---
+lede: "Frontend SPA for a pet care platform. Modern, responsive interface with dynamic routing, smooth animations and a solid design system built with Radix UI primitives."
+---
+## Why this matters
+
+The design system is the contract between design and code. Poor contracts breed drift: designers push pixels, developers freeze code. We built it in Radix — unstyled, accessible components as the foundation.
+
+## Design decisions
+
+- Radix UI for accessible, unstyled primitives
+- Tailwind for rapid iteration without leaving the markup
+- React Router v7 for nested routing and loaders
+- Motion library for subtle, intentional animations
+- Type safety with TypeScript end-to-end
+
+## Component hierarchy
+
+Built the component tree with intent: form components are wrapped in Radix, layout components compose cleanly, page-level logic stays near the edges.
+
+```tsx
+// Form component with Radix + Tailwind
+export const ServiceForm = ({ onSubmit }) => (
+  <Form.Root>
+    <Form.Field name="title">
+      <Form.Label>Service Title</Form.Label>
+      <Form.Control asChild>
+        <input className="px-3 py-2 rounded border" />
+      </Form.Control>
+    </Form.Field>
+    <button type="submit">Save</button>
+  </Form.Root>
+);
+```
+
+## Outcome
+
+<Stats items={[{"n":"40+","l":"Components in design system"},{"n":"< 50kb","l":"Gzipped bundle (no external UI libs)"},{"n":"100","l":"Lighthouse score"}]} />

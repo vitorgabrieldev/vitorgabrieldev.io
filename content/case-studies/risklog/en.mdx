@@ -1,0 +1,37 @@
+---
+lede: "A CI/CD integration that reads a deploy and turns it into a paragraph — what changed, who should review, how risky it looks. Adopted as the team's release checklist."
+---
+## The problem
+
+Post-merge deploys were silent. Someone pressed the button, Slack got a 🟢, and nobody knew what actually went out until something broke.
+
+We wanted a summary: a paragraph per deploy that told the team, in plain language, what was shipping and where the risk was concentrated.
+
+## Architecture
+
+Risklog hooks into GitHub Actions. For every deploy event, it:
+
+- Pulls the diff across the release window
+- Classifies each file (migration, auth, infra, UI, config, docs)
+- Scores risk based on file class × churn × reviewer coverage
+- Renders a Markdown summary and posts it to Slack + the admin panel
+
+## Scoring
+
+Risk is a weighted sum, deliberately boring. No ML, no magic — just rules the team can read and argue with. Boring is what made it stick.
+
+```js
+// Simplified scoring
+const score = files.reduce((s, f) => {
+  const w = weights[f.class] ?? 1;
+  return s + w * f.churn;
+}, 0);
+
+if (score > 120) return 'HIGH';
+if (score > 60)  return 'MEDIUM';
+return 'LOW';
+```
+
+## Outcomes
+
+<Stats items={[{"n":"−62%","l":"Post-deploy Slack scrambles"},{"n":"100%","l":"Deploys with a readable summary"},{"n":"< 3s","l":"Hook run time"}]} />

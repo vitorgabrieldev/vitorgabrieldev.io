@@ -1,0 +1,44 @@
+---
+lede: "A terminal agent powered by Mistral LLM that reasons about shell commands before executing them. Personal research into human-guided automation workflows."
+---
+## Context
+
+Sysadmin workflows are repetitive but unpredictable. I wanted to explore a pattern where the human describes intent in natural language, the LLM reasons about actions, and the agent executes only what the human confirms.
+
+Not a replacement for scripts — a tool for exploration and learning.
+
+## What I built
+
+A Node.js CLI that uses Mistral via streaming to reason about user requests, propose shell commands, and execute them with explicit approval. The agent maintains conversation context and can handle multi-step workflows.
+
+- Streaming LLM completions for real-time reasoning
+- Command parsing and safe execution with user confirmation
+- Context-aware multi-turn conversations
+- Supports piping and shell operators
+
+## Core flow
+
+```js
+// User intent → LLM reasoning → command proposal → execution
+async function reasonAndExecute(userInput) {
+  const reasoning = await mistral.stream({
+    prompt: `Reason about: ${userInput}`,
+    model: 'mistral-medium'
+  });
+
+  const command = extractCommand(reasoning);
+  const approved = await askUserConfirmation(command);
+
+  if (approved) {
+    return executeShell(command);
+  }
+}
+```
+
+## Key decisions
+
+Used Mistral (cheaper than Opus, fast enough for reasoning), streaming for perceived responsiveness, and explicit confirmation gates to prevent accidents. No permission elevation — the agent runs with user privileges only.
+
+## Outcomes
+
+<Stats items={[{"n":"0","l":"Unintended command executions (all required approval)"},{"n":"< 800ms","l":"P95 reasoning latency"},{"n":"12","l":"Test workflows validated"}]} />

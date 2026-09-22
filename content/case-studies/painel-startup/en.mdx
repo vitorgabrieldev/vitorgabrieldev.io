@@ -1,0 +1,46 @@
+---
+lede: "An operations dashboard for Risklog that gave the ops team direct control over policy thresholds, user limits, and deploy gates without engineering handoffs."
+---
+## Context
+
+Risklog's risk evaluation rules were hardcoded. When ops needed to adjust a threshold (e.g., 'flag medium-risk deploys only on Mondays'), they'd file a ticket, wait for a developer, deploy code.
+
+This created friction and made ops feel powerless. I wanted to flip that: give ops the ability to tune rules live.
+
+## What I built
+
+A simple admin panel connected to a rules engine. Ops can adjust: risk scoring weights, time-of-day gates, team-specific thresholds, and blast-radius triggers. All changes apply immediately with no deploy.
+
+Built with soft validation — the system warns if a rule seems dangerous, but doesn't prevent it. Trust the operator.
+
+- Real-time rule editor with immediate effect
+- Audit log of all threshold changes with timestamps
+- Role-based access (ops can tune, can't delete core rules)
+- Soft validation with warnings, not hard blocks
+- Rollback history for accidental changes
+
+## Rules engine
+
+```js
+// Live rule adjustment — no deploy required
+const rules = {
+  riskWeight: { backend: 0.4, frontend: 0.6 },
+  timeGate: { start: 9, end: 17 },
+  blastRadius: { critical: 80, high: 60, medium: 40 }
+};
+
+// Ops updates rules in UI → changes apply immediately
+function evaluateRisk(deploy) {
+  const score = deploy.changes * rules.riskWeight[deploy.area];
+  const isAllowed = isWithinTimeGate(rules.timeGate);
+  return { flagged: score > 50 && !isAllowed };
+}
+```
+
+## Outcomes
+
+Ops stopped filing tickets for threshold changes. Response to production incidents dropped: previously a 30-min feedback loop (code → review → deploy), now < 2 min (change → test → apply).
+
+## Impact
+
+<Stats items={[{"n":"0","l":"Engineering handoffs for policy changes"},{"n":"< 2min","l":"Mean time to adjust thresholds in incidents"},{"n":"12","l":"Major incident responses accelerated"}]} />

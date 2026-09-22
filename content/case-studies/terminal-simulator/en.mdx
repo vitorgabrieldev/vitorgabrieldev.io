@@ -1,0 +1,34 @@
+---
+lede: "Interactive terminal simulator. Explore bash commands in a browser environment safely. Pure React, no external terminal libraries — every interaction is deliberate."
+---
+## Why a simulator
+
+Real terminals are powerful but unsafe in a browser. We built a custom parser that understands a subset of bash — enough to feel authentic, safe to explore.
+
+## What it does
+
+- Parses command input into tokens and arguments
+- Simulates filesystem with in-memory state
+- Renders output with syntax highlighting
+- Supports pipes, redirects, and basic control flow
+- Persists history in localStorage
+
+## Command parsing
+
+Started with a simple split(), ended with a real lexer. The difference is how you handle quoted strings, escapes, and pipes — details that look small until you're debugging why your command won't parse.
+
+```js
+// Simple command parser
+function parseCommand(input) {
+  const parts = input.match(/[^\s"]+|"[^"]*"/g) || [];
+  const command = parts[0];
+  const args = parts.slice(1).map(a =>
+    a.replace(/^"|"$/g, '')
+  );
+  return { command, args };
+}
+```
+
+## Metrics
+
+<Stats items={[{"n":"60+","l":"Supported commands"},{"n":"0","l":"External dependencies"},{"n":"~15kb","l":"Minified"}]} />

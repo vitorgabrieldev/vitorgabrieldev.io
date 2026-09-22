@@ -1,0 +1,47 @@
+---
+lede: "Um core bancário construído do zero em Laravel — ledger de partidas dobradas, transações auditáveis, contas multi-tenant. A fundação por trás de uma plataforma fintech completa."
+---
+## Contexto
+
+Precisávamos que o ledger sobrevivesse ao crescimento. A primeira versão usava uma tabela de transações única e uma coluna de saldo em cada conta — rápido de entregar, caro de confiar. Cada reconciliação era uma sessão manual de arqueologia.
+
+O briefing para a v2: reconstruir o core com contabilidade de partidas dobradas estrita, auditável por design, e implantá-lo como a espinha que tudo mais depende.
+
+## O que eu gerenciei
+
+Liderei a reescrita da camada de ledger: modelo de dados, superfície de API, estratégia de filas e o plano de migração da v1 sem downtime. Também configurei o pipeline CI/CD e a stack de observabilidade ao redor.
+
+- Modelo de contabilidade de partidas dobradas — cada transferência é duas linhas
+- Chaves de idempotência em cada endpoint de escrita
+- Log de eventos imutável com replay determinístico
+- Isolamento multi-tenant com schema por tenant
+- Grafana + Prometheus para KPIs financeiros em tempo real
+
+## Decisão: schema por tenant
+
+O roadmap do produto apontava para tenants regulados. Tenancy com escopo de linha teria sido mais barato a curto prazo, mas forçaria cada query a carregar um tenant_id e cada índice a começar com ele — uma classe de bugs que eu não queria possuir.
+
+Escolhemos schema por tenant no Postgres. Mais barato que banco por tenant, fronteira limpa, trivial de extrair um tenant se a conformidade algum dia exigir.
+
+## O ledger
+
+No core está uma única afirmação: para cada operação, débitos igualam créditos. Nada se move a menos que ambos os lados se equilibrem. Essa é a restrição que torna o resto barato — a reconciliação se torna um SELECT, não uma reconstrução.
+
+```php
+// Uma transferência sempre emite duas linhas
+DB::transaction(function () use ($txn) {
+  Ledger::insert([
+    ['account_id' => $txn->from, 'amount' => -$txn->amount],
+    ['account_id' => $txn->to,   'amount' => +$txn->amount],
+  ]);
+  AuditLog::append($txn);
+});
+```
+
+## Resultados
+
+<Stats items={[{"n":"0","l":"Incompatibilidades de reconciliação em 6 meses"},{"n":"< 40ms","l":"Latência de transferência P95"},{"n":"5×","l":"Throughput vs v1"}]} />
+
+## O que eu faria diferente
+
+Teria pressionado mais pelo modelo de leitura mais cedo. Passamos alguns meses com cada relatório acessando o ledger diretamente — bom para tenants pequenos, doloroso para os maiores. Um lado de leitura desnormalizado resolveu de forma limpa quando o construímos.

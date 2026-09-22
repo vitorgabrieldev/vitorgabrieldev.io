@@ -1,0 +1,22 @@
+---
+lede: "Frontend SPA para plataforma de pet care. Interface moderna e responsiva com roteamento dinâmico, animações suaves e um design system sólido construído com primitivos Radix UI."
+---
+## Por que isso importa
+
+O design system é o contrato entre design e código. Contratos ruins criam drift: designers empurram pixels, developers congelam código. Construímos em Radix — componentes sem estilo, acessíveis, como fundação.
+
+## Decisões de design
+
+- Radix UI para primitivos acessíveis e sem estilo
+- Tailwind para iteração rápida sem sair do markup
+- React Router v7 para roteamento aninhado e loaders
+- Biblioteca Motion para animações sutis e intencionais
+- Segurança de tipo com TypeScript de ponta a ponta
+
+## Hierarquia de componentes
+
+Construir a árvore de componentes com intenção: componentes de formulário envolvem Radix, componentes de layout compõem bem, lógica de página fica perto das bordas.
+
+## Resultado
+
+<Stats items={[{"n":"40+","l":"Componentes no design system"},{"n":"< 50kb","l":"Bundle gzipped (sem libs de UI externas)"},{"n":"100","l":"Score Lighthouse"}]} />

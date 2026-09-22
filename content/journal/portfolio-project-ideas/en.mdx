@@ -1,0 +1,347 @@
+---
+title: "Portfolio projects: ideas beyond the calculator"
+date: "2026-04-19"
+read: "14 min"
+kicker: "Career"
+summary: "Your portfolio won't impress anyone with a notes CRUD or calculator. Idea: build something that solves your real problem. Web scraper, GitHub analyzer, simulator, data exporter. The real project isn't the one that works — it's the one that's honest about its architectural challenges."
+---
+## The Problem: Generic Portfolios
+
+You see portfolios full of:
+• Todo app
+• Calculator
+• Product CRUD
+• Blog with Markdown
+• Real-time chat
+
+**No one differentiates from this.** Every dev did it. Recruiter sees 50 of these per week.
+
+## What Actually Impresses
+
+### 1. Solves Your Real Problem
+
+**Examples that work:**
+
+```
+• Scraper that monitors real estate prices in your neighborhood
+  → Sends Telegram alert when below X
+  → Solves your actual life problem, not a tutorial
+
+• GitHub analyzer that extracts bug patterns
+  → Reads issues + PRs from your repo
+  → Groups by type (memory leak, race condition, off-by-one)
+  → Report: "You fall 3x into boundary conditions"
+
+• Queue simulator with multiple strategies
+  → Compares SJF vs Priority vs Fair Queueing
+  → Visualizes real-time which is most efficient for your case
+  → Exports charts for report
+
+• Personal data exporter
+  → Pulls history from email, Google Drive, Telegram
+  → Reorganizes into timeline
+  → Generates "your year in numbers": messages, photos, contributions
+  → Creates beautiful PDF
+
+• Custom CI/CD monitor
+  → Hooks GitHub Actions
+  → Classifies failures (test, lint, build, deploy)
+  → Suggests who should review based on expertise
+  → Notifies Slack with context
+```
+
+### 2. Shows Architectural Trade-offs
+
+What differentiates senior devs:
+
+```
+❌ WEAK: "Works, it's fast, code is clean"
+
+✅ STRONG:
+• "Function X is slow in 2% of cases because [reason]"
+• "Started with Redis, discovered [problem]"
+• "Using Postgres JSONB because nested queries would kill perf"
+• "Switched from event sourcing to CQRS light because [trade-off]"
+• "Aggressively cached because sub-100ms latency is critical"
+```
+
+**Project with decision history > perfect project born perfect**
+
+## Categories of Working Projects
+
+### Category A: Data + Scraping
+
+**Idea 1: Scraper with analysis**
+
+```php
+// Monitors product prices on Mercado Livre / OLX
+// Each product has price history
+// Alerts via Telegram: "20% drop in last 7 days"
+
+class ProductMonitor
+{
+  public function scrapeAndAnalyze(): void
+  {
+    $products = $this->scraper->fetch();
+    
+    foreach ($products as $product) {
+      $history = PriceHistory::where('product_id', $product->id)
+        ->orderByDesc('checked_at')
+        ->limit(30)
+        ->get();
+      
+      $percentChange = $this->calculateTrend($history);
+      
+      if ($percentChange < -20) {
+        $this->notifyTelegram("Price dropped {$percentChange}%: {$product->name}");
+      }
+      
+      PriceHistory::create([
+        'product_id' => $product->id,
+        'price' => $product->price,
+        'checked_at' => now(),
+      ]);
+    }
+  }
+}
+```
+
+**Idea 2: GitHub repository analyzer**
+
+```php
+// Pulls issues, PRs, commits from your repo
+// Identifies bug patterns
+
+class GitHubAnalyzer
+{
+  public function analyzeErrorPatterns(): array
+  {
+    $issues = $this->github->fetchIssues('vitorgabrieldev/laravel-fintech');
+    
+    $patterns = [];
+    foreach ($issues as $issue) {
+      // Classifies by type
+      if (str_contains($issue->title, ['null', 'undefined', 'NaN'])) {
+        $patterns['null-safety'][] = $issue;
+      }
+      if (str_contains($issue->body, ['race', 'concurrent', 'transaction'])) {
+        $patterns['concurrency'][] = $issue;
+      }
+      if (str_contains($issue->body, ['loop', 'iteration', 'index'])) {
+        $patterns['off-by-one'][] = $issue;
+      }
+    }
+    
+    return [
+      'total_issues' => count($issues),
+      'patterns' => $patterns,
+      'top_issue' => $this->getMostCommonPattern($patterns),
+      'recommendation' => "Your biggest problem is {$patterns.top_issue}, consider...",
+    ];
+  }
+}
+```
+
+### Category B: Simulators and Visualizers
+
+**Idea 3: Queue simulator**
+
+```php
+// Compares different scheduling strategies
+
+class QueueSimulator
+{
+  public function compareStrategies(array $jobs): array
+  {
+    return [
+      'fifo' => $this->simulateFIFO($jobs),
+      'sjf' => $this->simulateSJF($jobs),
+      'priority' => $this->simulatePriority($jobs),
+      'fair_queueing' => $this->simulateFairQueueing($jobs),
+    ];
+  }
+  
+  private function simulateSJF(array $jobs): array
+  {
+    $sorted = collect($jobs)->sortBy('duration');
+    $totalWaitTime = 0;
+    $timeline = [];
+    
+    foreach ($sorted as $job) {
+      $totalWaitTime += $job->duration;
+      $timeline[] = [
+        'job' => $job->name,
+        'started_at' => $totalWaitTime - $job->duration,
+        'finished_at' => $totalWaitTime,
+      ];
+    }
+    
+    return [
+      'strategy' => 'Shortest Job First',
+      'avg_wait_time' => $totalWaitTime / count($jobs),
+      'timeline' => $timeline,
+    ];
+  }
+}
+```
+
+**Idea 4: Bank transaction visualizer**
+
+```
+• Imports bank CSV
+• Auto-categorizes (Food, Transport, etc)
+• Shows charts: spending by month, category, day of week
+• Identifies anomalies: "You spent 3x on restaurants in March"
+• Predicts: "Your pattern = R$2,500/month"
+• Exports insights to PDF
+```
+
+### Category C: Personal Tools
+
+**Idea 5: Personal data exporter**
+
+```php
+// Creates single file with your digital life history
+
+class PersonalDataExporter
+{
+  public function export(): void
+  {
+    $timeline = [];
+    
+    // Gmail
+    $emails = $this->gmail->fetch();
+    foreach ($emails as $email) {
+      $timeline[] = [
+        'date' => $email->date,
+        'type' => 'email',
+        'data' => $email->subject,
+      ];
+    }
+    
+    // GitHub contributions
+    $commits = $this->github->fetchCommits();
+    foreach ($commits as $commit) {
+      $timeline[] = [
+        'date' => $commit->created_at,
+        'type' => 'contribution',
+        'data' => $commit->message,
+      ];
+    }
+    
+    // Telegram messages
+    $messages = $this->telegram->fetchMessages();
+    foreach ($messages as $msg) {
+      $timeline[] = [
+        'date' => $msg->date,
+        'type' => 'message',
+        'data' => $msg->text,
+      ];
+    }
+    
+    $sorted = collect($timeline)->sortBy('date');
+    
+    // Generate stats
+    $stats = [
+      'total_emails' => count($emails),
+      'total_commits' => count($commits),
+      'total_messages' => count($messages),
+      'date_range' => $sorted->first()['date'] . ' to ' . $sorted->last()['date'],
+      'busiest_month' => $this->getBusiestMonth($sorted),
+      'commits_per_day' => count($commits) / $sorted->count(),
+    ];
+    
+    $this->pdf->generate('annual-report.pdf', $stats, $sorted);
+  }
+}
+```
+
+### Category D: Analysis and Monitoring
+
+**Idea 6: Smart CI/CD monitor**
+
+```php
+// Hooks GitHub Actions, classifies failures
+
+class CIPipeline
+{
+  public function classifyFailure(array $log): array
+  {
+    $content = implode('\n', $log);
+    
+    return match(true) {
+      str_contains($content, ['FAILED', 'AssertionError']) => [
+        'type' => 'test',
+        'severity' => 'critical',
+        'action' => 'Your test failed',
+      ],
+      str_contains($content, ['syntax error', 'parse error']) => [
+        'type' => 'lint',
+        'severity' => 'blocker',
+        'action' => 'Syntax error, won\'t pass',
+      ],
+      str_contains($content, ['Connection refused', 'timeout']) => [
+        'type' => 'infra',
+        'severity' => 'warning',
+        'action' => 'Connection problem (ephemeral?)',
+      ],
+      str_contains($content, ['FATAL', 'OOM', 'panic']) => [
+        'type' => 'runtime',
+        'severity' => 'critical',
+        'action' => 'App crashed',
+      ],
+      default => [
+        'type' => 'unknown',
+        'severity' => 'info',
+        'action' => 'Unknown failure, inspect logs',
+      ]
+    };
+  }
+}
+```
+
+## Checklist: Does Your Project Impress?
+
+**Answer YES to:**
+
+• Solved a real problem (yours or someone\'s)
+• Has documented decision history
+• Shows trade-offs: "Used Redis here because X, but Y is a problem"
+• Has real data (not fake data)
+• Documents limitations: "Scaling to 100K items is a problem"
+• Shows iteration: "Started with Y, changed to Z because"
+
+**Avoid:**
+
+• "Built with React, Firebase, Tailwind" (generic)
+• Perfect code but no story
+• Feature creep (1,000 features, none well done)
+• No documentation of challenges
+• Tutorial-driven (copied from YouTube)
+
+## Example: Risklog (Mine)
+
+Why it impresses:
+
+```
+✅ Real problem: Silent deploy is risky
+✅ Trade-off: Analyzing diff is heavy, but we cache results
+✅ Honest limitation: Doesn\'t detect runtime race conditions
+✅ Metric: Reduced post-deploy scrambles 62%
+✅ Architecture: Event stream of diffs → classification → score
+✅ Documented decision: Chose Postgres JSONB because nested queries would kill perf
+```
+
+## Next Steps
+
+**Week 1:** Pick a problem you have
+**Week 2-4:** Build basic solution (works, not perfect)
+**Week 5:** Document challenges: "Why did I do this?"
+**Week 6:** Show in README:
+• The problem
+• Your solution
+• Trade-offs
+• Limitations
+• How you\'d iterate
+
+**Result:** Portfolio that says "I think about architecture", not "I follow tutorials".

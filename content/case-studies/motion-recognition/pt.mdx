@@ -1,0 +1,52 @@
+---
+lede: "Uma interface de reconhecimento de gestos manuais construída com MediaPipe, processando vídeo em tempo real para detectar e classificar poses de mão com < 50ms de latência em hardware comum."
+---
+## O problema
+
+Interfaces baseadas em gestos podem parecer naturais se a latência for imperceptível. A maioria das implementações falha porque são muito lentas ou muito rígidas (só funciona com poses específicas de mão).
+
+Quis explorar se reconhecimento de gestos em tempo real conseguia rodar em um laptop sem hardware especialista.
+
+## Arquitetura
+
+Usei MediaPipe (modelo de hand-tracking ML do Google) rodando inference localmente. O pipeline: frame de vídeo → detecção de mão → extração de landmarks → classificação de pose → trigger de ação.
+
+Construí uma UI simples que mostra poses detectadas em tempo real, responde a gestos, e loga scores de confiança.
+
+- Hand tracking MediaPipe (33 landmarks por mão)
+- Classificação de pose com pesos de confiança
+- Buffering de frame e smoothing para reduzir jitter
+- Renderização WebGL para performance
+- Fallback para CPU se GPU indisponível
+
+## Pipeline de detecção
+
+```js
+// Rastreamento de mão em tempo real com MediaPipe
+const maos = new Hands({
+  locateFile: (file) => `/mediapipe/${file}`
+});
+
+maos.onResults((resultados) => {
+  if (resultados.multiHandLandmarks) {
+    resultados.multiHandLandmarks.forEach((landmarks) => {
+      const pose = classificaGesto(landmarks);
+      atualizaUI(pose);
+    });
+  }
+});
+
+const camera = new Camera(video, {
+  onFrame: async () => {
+    await maos.send({ image: video });
+  }
+});
+```
+
+## Achados chave
+
+Iluminação importa enormemente. Má iluminação quebra detecção. Oclusão de mão é mais difícil que o esperado — até sobreposição leve de dedos confunde o modelo. Smoothing de latência faz trade-off com responsividade — você precisa de 2-3 frames de história para classificação estável.
+
+## Resultados
+
+<Stats items={[{"n":"< 50ms","l":"Latência E2E (captura → ação)"},{"n":"94%","l":"Acurácia em boa iluminação"},{"n":"12","l":"Gestos distintos reconhecidos com confiabilidade"}]} />

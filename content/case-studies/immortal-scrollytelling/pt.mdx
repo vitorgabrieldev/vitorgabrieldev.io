@@ -1,0 +1,22 @@
+---
+lede: "Scrollytelling imersivo: uma narrativa de 10 mil anos de um humano imortal. Narrativa visual com animações sincronizadas ao scroll, efeitos de partículas e transições GSAP."
+---
+## O desafio
+
+Scrollytelling é enganosamente difícil. Cada pixel de scroll tem de ativar algo — um fade, uma revelação, um burst de partículas. Erre o timing e parece barato. Acerte e transcende.
+
+## Stack técnico
+
+- GSAP Timeline para animações sincronizadas em toda página
+- Lenis para scroll suave a 120fps (preserva momentum)
+- TsParticles para efeitos de fundo sem lag
+- Tailwind para layout, CSS customizado para animações
+- Vite para HMR instantâneo durante iteração
+
+## Sincronização de scroll
+
+O insight chave: scroll não é apenas posição de viewport. É um valor de progresso normalizado (0 a 1). Mapeie para sua timeline e de repente cada elemento sabe onde deve estar em qualquer ponto de scroll.
+
+## Impacto
+
+<Stats items={[{"n":"60fps","l":"Em scroll (sem lag)"},{"n":"10k+","l":"Anos de narrativa"},{"n":"< 3s","l":"Carregamento de página inteira"}]} />

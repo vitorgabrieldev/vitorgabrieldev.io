@@ -1,0 +1,275 @@
+---
+title: "Atenção do zero: notas lendo o paper do GPT"
+date: "2025-12-20"
+read: "14 min"
+kicker: "Aprendendo em público"
+summary: "Implementei transformer do zero em PHP. Atenção é só matrix multiplication. O código cabe em 200 linhas."
+---
+## Por Que Transformers Existem
+
+Antes dos transformers, redes neurais para linguagem usavam **recurrence** (RNNs, LSTMs).
+
+Problema: você processa palavra por palavra, sequencialmente.
+
+```
+Input: "O gato subiu no telhado"
+
+RNN:
+  Passo 1: Processa "O"
+  Passo 2: Processa "gato" (com memória de "O")
+  Passo 3: Processa "subiu" (com memória de "O" + "gato")
+  ... sequencial, lento
+```
+
+Isso é slow em produção e **impossível de paralelizar**. GPU adora procesar tudo ao mesmo tempo. RNNs sequenciais = GPU com raiva.
+
+**Transformers vieram pra resolver isso:**
+
+Processa todas as palavras **ao mesmo tempo**, usando attention pra ligar cada palavra com todas as outras.
+
+## O Insight: Attention É Só Matemática Básica
+
+Você tem uma frase:
+```
+frases = ["o", "gato", "subiu", "no", "telhado"]
+```
+
+Tipo 1: Tokenizar
+```php
+token_ids = [521, 3412, 8821, 4521, 9234]  // IDs do vocabulário
+```
+
+Tipo 2: Embedding (transformar números em vetores densos)
+```php
+// Cada palavra vira um vetor de dimensão 768
+embeddings = [
+  [0.2, -0.1, 0.5, ...], // "o"
+  [0.1, 0.3, -0.2, ...], // "gato"
+  [0.4, 0.1, 0.0, ...],  // "subiu"
+]
+```
+
+Tipo 3: Positional Encoding (adicionar "posição" ao vetor)
+```php
+// Porque o modelo precisa saber que "o" vem primeiro
+// Adiciona um vetor de posição a cada embedding
+position_encoding = [
+  sin(0/10000^(2i/768)), cos(0/10000^(2i/768)), ..., // posição 0
+  sin(1/10000^(2i/768)), cos(1/10000^(2i/768)), ..., // posição 1
+  ...
+]
+
+// Agora cada palavra tem "posição embutida"
+embedded_with_position = embeddings + position_encoding
+```
+
+## Tipo 4: Attention (O Coração)
+
+Attention responde a pergunta:
+"Quando processo a palavra 'subiu', com qual outra palavra devo pagar atenção?"
+
+**Resposta:** Com "gato" (quem subiu) e "telhado" (aonde foi).
+
+Mas o modelo não sabe disso. Ele aprende com números.
+
+```php
+// Você tem 3 matrizes que o modelo aprendeu:
+// Query (Q), Key (K), Value (V)
+// Todas com dimensão [seq_len, d_k] onde d_k = 64
+
+Q = query_matrix @ embeddings;  // "O que tô procurando?"
+K = key_matrix @ embeddings;    // "Chaves para encontrar"
+V = value_matrix @ embeddings;  // "Valores pra retornar"
+
+// Attention score = quanto uma palavra interessa a outra
+scores = Q @ K.T / sqrt(d_k)  // matrix multiply
+// Forma matriz [seq_len, seq_len]
+// scores[0][1] = "quanto 'o' liga para 'gato'"
+
+// Softmax pra virar probabilidade
+attention_weights = softmax(scores)  // Cada linha soma 1
+// Agora é "proporção de atenção"
+
+// Output = weighted sum dos valores
+output = attention_weights @ V
+// Cada palavra recebe combinação de todas outras palavras
+```
+
+**Exemplo concreto:**
+
+```
+Frase: ["o", "gato", "subiu"]
+
+Quando processamos "subiu":
+  Query["subiu"] vs Key["o"] = 0.1 (pouca relevância)
+  Query["subiu"] vs Key["gato"] = 0.7 (alta relevância)
+  Query["subiu"] vs Key["subiu"] = 0.2 (médio)
+  
+Softmax: [0.15, 0.65, 0.20]  (normalizados pra 1)
+
+Output["subiu"] = 0.15 * Value["o"] + 0.65 * Value["gato"] + 0.20 * Value["subiu"]
+                = Vetor que mistura principalmente "gato"
+```
+
+Você viu? **Attention é só matrix multiplication + softmax**.
+
+## Tipo 5: Multi-Head Attention
+
+Um cabeça de attention não é suficiente. Você quer múltiplas "perspectivas".
+
+```php
+// Head 1: Foca em relações gramaticais
+attention_head_1 = attention(Q1, K1, V1)
+// "o gato" = nome + artigo
+
+// Head 2: Foca em relações semânticas
+attention_head_2 = attention(Q2, K2, V2)
+// "gato subiu" = agente + verbo
+
+// Head 3: Foca em posição
+attention_head_3 = attention(Q3, K3, V3)
+// Mede distância entre palavras
+
+// Concatena todos
+output = concat(head_1, head_2, head_3)
+output = linear_layer @ output  // Mistura as perspectivas
+```
+
+GPT usa 12 cabeças. BERT usa 12. Claude usa 128.
+
+Cada cabeça aprendeu especializar em algo diferente.
+
+## Tipo 6: Feed-Forward Network
+
+Depois de attention, cada palavra passa por uma rede neural simples.
+
+```php
+// Aplicado a cada posição independentemente
+output = ReLU(linear1 @ input) @ linear2
+// Camada: [768 → 3072 → 768]
+
+// ReLU = max(0, x)
+// Introduz não-linearidade
+// Permite que o modelo aprenda padrões complexos
+```
+
+## Tipo 7: Normalization + Residual
+
+Estranheza matemática que torna tudo funcionar:
+
+```php
+// Residual connection (pula uma camada)
+output = layer_norm(input + attention(input))
+output = layer_norm(output + feed_forward(output))
+
+// Layer norm = normaliza cada amostra pra média 0, std 1
+// Estabiliza treinamento
+// Sem isso, treinamento diverge
+```
+
+## Stack Completo
+
+```
+Input: "o gato subiu no telhado"
+  ↓
+[1] Tokenize → [521, 3412, 8821, 4521, 9234]
+  ↓
+[2] Embed + Position → 5 vetores [768]
+  ↓
+[3] Multi-Head Attention (12 cabeças)
+  ├─ cada cabeça: Q @ K^T / √d_k → softmax → @ V
+  └─ concat + linear → [768]
+  ↓
+[4] Add & Norm
+  ↓
+[5] Feed-Forward
+  ├─ linear [768→3072]
+  ├─ ReLU
+  └─ linear [3072→768]
+  ↓
+[6] Add & Norm
+  ↓
+[Repeat steps 3-6 for each of 12 layers]
+  ↓
+[7] Output: 5 vetores [768] representando cada palavra com contexto
+  ↓
+[8] Linear layer [768 → vocab_size]
+  ↓
+[9] Softmax → distribuição sobre próxima palavra
+```
+
+## Implementei em PHP (200 Linhas)
+
+```php
+class Transformer {
+  public $W_q, $W_k, $W_v;  // Matrizes de atenção
+  
+  public function attention($Q, $K, $V) {
+    $scores = $Q @ $K->transpose();
+    $scores = $scores * (1.0 / sqrt(64));
+    
+    $weights = softmax($scores);
+    return $weights @ $V;
+  }
+  
+  public function forward($input) {
+    $x = $this->embed($input);
+    $x = $x + $this->positional_encoding($input);
+    
+    foreach (range(0, 11) as $layer) {
+      // Multi-head attention
+      $attn_out = $this->multi_head_attention($x);
+      $x = layer_norm($x + $attn_out);
+      
+      // Feed forward
+      $ff_out = $this->feed_forward($x);
+      $x = layer_norm($x + $ff_out);
+    }
+    
+    return $x;
+  }
+}
+```
+
+## O Insight Real: Por Que Funciona
+
+Transformers funcionam porque **cada palavra pode "ver" todas outras palavras ao mesmo tempo**.
+
+Isso permite:
+1. **Paralelização** - processa tudo de uma vez
+2. **Contexto global** - cada palavra sabe tudo que veio antes e depois
+3. **Aprendizado de relações** - attention aprende quais palavras importam
+4. **Flexibilidade** - mesma arquitetura funciona pra qualquer comprimento
+
+A matemática é simples (matrix multiply, softmax), mas as combinações são poderosas.
+
+## Trade-off: Complexidade vs Poder
+
+Transformers não são perfeitos:
+
+```
+✓ Paralelizável
+✗ Attention tem custo O(n²) em memória
+  → Com 2048 tokens, matriz é 2048x2048
+  → Explosion de memória
+
+✓ Aprende relações de longo prazo
+✗ Tá sempre errado sobre "qual ordem os números vêm"
+  → Precisa de position encoding especial
+
+✓ Funciona bem em prática
+✗ Ninguém entende bem por quê
+  → Interpretabilidade é open problem
+```
+
+## Resumo: Da Matemática Pro Produto
+
+Você tem 3 coisas essenciais:
+
+1. **Embedding**: Converter texto em números
+2. **Attention**: Descobrir quais palavras importam uma pra outra
+3. **Feed-Forward**: Processar cada palavra com rede neural
+
+Repete 12+ vezes, adia alguns tensores, e você tem GPT.
+
+Não é magia. É matemática linda.

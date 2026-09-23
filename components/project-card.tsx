@@ -8,10 +8,8 @@ import type { Project } from "@/lib/projects";
 
 const TILT_DEG = 8;
 
-/** Card with a mouse-driven tilt + a radial "light" that follows the
- *  cursor, tinted per project via --card-accent. Same technique as
- *  MouseGlow (CSS custom properties updated on mousemove), just applied
- *  to rotation as well as gradient position — no external tilt library. */
+/** Card with a mouse-driven tilt, tinted per project via --card-accent
+ *  (CSS custom properties updated on mousemove) — no external tilt library. */
 export function ProjectCard({ project }: { project: Project }) {
   const t = useTranslations(`projects.${project.slug}`);
   const ref = useRef<HTMLAnchorElement>(null);
@@ -24,8 +22,6 @@ export function ProjectCard({ project }: { project: Project }) {
     const py = (e.clientY - rect.top) / rect.height;
     el.style.setProperty("--rx", `${(px - 0.5) * TILT_DEG}deg`);
     el.style.setProperty("--ry", `${(0.5 - py) * TILT_DEG}deg`);
-    el.style.setProperty("--mx", `${px * 100}%`);
-    el.style.setProperty("--my", `${py * 100}%`);
   }
 
   function handleMouseLeave() {
@@ -48,10 +44,6 @@ export function ProjectCard({ project }: { project: Project }) {
         <ProjectArt project={project} className="thumb-canvas" />
       </div>
       <div className="pgrid__body">
-        <div className="pgrid__meta">
-          <span>{t("status")}</span>
-          <span>{project.year}</span>
-        </div>
         <div className="pgrid__name">{t("name")}</div>
         <p className="pgrid__desc">{t("tagline")}</p>
         <div className="pgrid__stack">

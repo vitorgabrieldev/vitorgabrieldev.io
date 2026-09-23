@@ -1634,13 +1634,11 @@
     }
   }
 
-  /* Mouse-driven tilt + glow (see components/project-card.tsx) — --rx/--ry/
-     --mx/--my are set on mousemove, --card-accent is per-project. */
+  /* Mouse-driven tilt (see components/project-card.tsx) — --rx/--ry are set
+     on mousemove, --card-accent is per-project. */
   .pgrid a.pcard {
     --rx: 0deg;
     --ry: 0deg;
-    --mx: 50%;
-    --my: 50%;
     position: relative;
     transform: perspective(900px) rotateX(var(--ry)) rotateY(var(--rx));
     transition:
@@ -1650,22 +1648,6 @@
   .pgrid a.pcard:hover {
     border-color: color-mix(in oklab, var(--card-accent) 55%, var(--line-strong));
     transform: perspective(900px) rotateX(var(--ry)) rotateY(var(--rx)) translateY(-4px);
-  }
-  .pgrid a.pcard::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-      280px circle at var(--mx) var(--my),
-      color-mix(in oklab, var(--card-accent) 45%, transparent),
-      transparent 65%
-    );
-    opacity: 0;
-    transition: opacity 200ms var(--ease-portfolio);
-    pointer-events: none;
-  }
-  .pgrid a.pcard:hover::after {
-    opacity: 1;
   }
 
   .pgall {
@@ -1827,6 +1809,86 @@
     overflow: hidden;
     position: relative;
     margin-top: 16px;
+  }
+  .showcase {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .showcase__stage {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    background: var(--bg-sunken);
+  }
+  .showcase__video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    transition: opacity 250ms var(--ease-portfolio);
+  }
+  .showcase__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: color-mix(in oklab, var(--bg) 75%, transparent);
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+    transition:
+      border-color var(--duration-DEFAULT) var(--ease-portfolio),
+      color var(--duration-DEFAULT) var(--ease-portfolio);
+  }
+  .showcase__nav:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .showcase__nav--prev {
+    left: 12px;
+  }
+  .showcase__nav--next {
+    right: 12px;
+  }
+  .showcase__dots {
+    display: flex;
+    gap: 6px;
+    padding: 10px 12px;
+    background: var(--bg-sunken);
+    border-top: 1px solid var(--line);
+    overflow-x: auto;
+  }
+  .showcase__dots button {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: transparent;
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+      color var(--duration-DEFAULT) var(--ease-portfolio),
+      border-color var(--duration-DEFAULT) var(--ease-portfolio);
+  }
+  .showcase__dots button.is-active {
+    color: #fff;
   }
   .case__body {
     padding: 80px var(--pad-page);

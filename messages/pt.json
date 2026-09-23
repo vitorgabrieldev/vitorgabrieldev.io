@@ -207,7 +207,6 @@
     "results_label": "Resultados",
     "next_label": "Próximo projeto",
     "links": {
-      "repo": "Repositório ↗",
       "deploy": "Ver online ↗"
     }
   },
@@ -218,13 +217,13 @@
       "role": "Idealização e desenvolvimento solo",
       "status": "Em produção — uso ativo",
       "summary": [
-        "O MiliTrak nasceu durante o próprio alistamento militar de Vitor no Tiro de Guerra de Londrina. O sargento responsável pela turma propôs a ideia de um sistema simples para organizar o dia a dia — Vitor \"comprou a ideia\" e foi muito além do que havia sido pedido. Juntos, construíram um sistema completo: chamada diária por turma com login individual e granular via matriz de permissões RBAC (perfis separados para Sargento, Instrutor, Monitor e Atirador), sistema de missões com gestão de horas complementares, escala semanal de serviço, módulo disciplinar, avaliação física (TAF/TAT), gestão de equipamentos e fardamento, relatórios consolidados e geração automática de documentos oficiais como o CTSM e declarações de falta.",
-        "Um requisito não-técnico virou restrição central de arquitetura: a infraestrutura precisava ser 100% gratuita, já que Vitor não necessariamente continuaria administrando o sistema no ano seguinte — o alistamento é temporário. Na inspeção oficial, o coronel responsável viu o sistema em funcionamento, elogiou o resultado e manifestou o desejo de expandir o uso para todos os Tiros de Guerra — por enquanto, em uso ativo apenas no TG-05-003 (Londrina), com essa expansão como objetivo em andamento. Sargentos e o coronel relatam que o sistema agiliza muito o processo do dia a dia."
+        "O MiliTrak é um sistema de gestão para unidades de Tiro de Guerra (serviço militar obrigatório no Brasil), construído para digitalizar a operação diária de uma turma. O núcleo é um controle de acesso RBAC com quatro perfis (Sargento, Instrutor, Monitor e Atirador), cada um com permissões configuráveis por aba, sobre uma base de chamada diária com login individual. O sistema também cobre gestão de missões e horas complementares, escala semanal de serviço, módulo disciplinar, avaliação física (TAF/TAT), controle de equipamentos e fardamento, relatórios consolidados e geração automática de documentos oficiais como o CTSM e declarações de falta.",
+        "A infraestrutura roda inteiramente em camadas gratuitas — Supabase (banco de dados e autenticação) e Vercel (hospedagem) —, uma restrição de arquitetura definida desde o início por ser um sistema que precisa se manter operacional independente de manutenção contínua. Em produção, está em uso ativo na unidade TG-05-003 (Londrina), com expansão para outras unidades como próximo passo planejado."
       ],
       "stats": [
-        { "n": "230", "l": "Atiradores ativos" },
-        { "n": "4 meses", "l": "Do início à inspeção do coronel" },
-        { "n": "100%", "l": "Infra gratuita (Supabase + Vercel)" }
+        { "n": "4", "l": "Perfis RBAC com permissão granular por aba" },
+        { "n": "100%", "l": "Infra gratuita — Supabase + Vercel" },
+        { "n": "Auto", "l": "Geração automática de documentos oficiais (CTSM)" }
       ],
       "challenges": [
         "Matriz de permissões granular e configurável por perfil e por aba",
@@ -241,16 +240,38 @@
     "constria": {
       "name": "Constria",
       "tagline": "Inteligência operacional para construção civil",
+      "screens": {
+        "login": "Login",
+        "cadastro": "Cadastro",
+        "cadastro-step2": "Cadastro — dados da conta",
+        "dashboard": "Workspace",
+        "dashboard-obras": "Obras",
+        "dashboard-obras-novo": "Nova obra",
+        "dashboard-diario": "Diário de obra",
+        "dashboard-diario-novo": "Novo registro de diário",
+        "dashboard-equipes": "Equipes",
+        "dashboard-equipes-novo": "Nova equipe",
+        "dashboard-equipamentos": "Equipamentos",
+        "dashboard-equipamentos-novo": "Novo equipamento",
+        "dashboard-conta-perfil": "Conta — perfil",
+        "dashboard-conta-seguranca": "Conta — segurança",
+        "dashboard-organizacao-geral": "Organização — geral",
+        "dashboard-organizacao-membros": "Organização — membros",
+        "dashboard-organizacao-plano": "Organização — plano",
+        "dashboard-organizacao-permissoes": "Organização — permissões",
+        "dashboard-organizacao-plano-alterar": "Plano — alterar",
+        "dashboard-organizacao-plano-cancelar": "Plano — cancelar"
+      },
       "role": "Fundador solo",
       "status": "MVP técnico pronto — pré-lançamento",
       "summary": [
-        "A ideia da Constria nasceu de uma experiência profissional anterior de Vitor, na qual ele desenvolveu um painel de gestão de obras interno, feito sob medida para uma única construtora. Essa vivência deu a ele conhecimento real do fluxo operacional de um canteiro — e um insight que se tornaria a tese do produto: o mercado já tem sistemas que registram dados de obra, mas poucos que realmente transformam esses dados em decisões inteligentes. A partir daí, decidiu generalizar essa ideia como produto próprio: um SaaS multi-organização, não mais um sistema sob medida, posicionado como uma camada de inteligência operacional sobre a gestão da obra — não \"mais um ERP de construção\".",
-        "Como fundador solo, Vitor já entregou o MVP técnico: identidade, sessão, controle de permissões (RBAC por módulo, cargo e obra), estrutura de organização multi-tenant e até o modelo de monetização por assinatura via Stripe, com webhooks totalmente funcionais. Um copiloto de IA está planejado — function calling sobre dados operacionais, com camada de segurança via RLS — para gerar insights como: quais funcionários e equipamentos passam mais tempo em manutenção, quais tipos de obra costumam atrasar mais, ou quais categorias de peças chegam com mais defeito, sempre com sugestões de como resolver cada problema."
+        "A Constria é um SaaS multi-organização de inteligência operacional para construção civil, pensado como alternativa a sistemas que apenas registram dados de obra sem transformá-los em decisão. A arquitetura é multi-tenant, com isolamento de dados entre organizações garantido via Row-Level Security (RLS) no banco, e controle de permissões RBAC granular por módulo, cargo e obra.",
+        "O MVP técnico já cobre identidade, sessão, RBAC, estrutura multi-tenant e monetização por assinatura via Stripe, com webhooks funcionando de ponta a ponta. A próxima camada planejada é um copiloto de IA com function calling sobre os dados operacionais, protegido pela mesma camada de RLS, para gerar insights como quais equipamentos passam mais tempo em manutenção, quais tipos de obra atrasam mais, ou quais categorias de peças chegam com mais defeito — sempre com sugestão de resolução."
       ],
       "stats": [
-        { "n": "MVP", "l": "Identidade, sessão, RBAC e organização prontos" },
-        { "n": "Stripe", "l": "Assinaturas recorrentes + webhooks funcionais" },
-        { "n": "2 repos", "l": "Backend e frontend em separado" }
+        { "n": "RLS", "l": "Isolamento de dados por organização (multi-tenant)" },
+        { "n": "RBAC", "l": "Permissões por módulo, cargo e obra" },
+        { "n": "Stripe", "l": "Assinaturas recorrentes com webhooks end-to-end" }
       ],
       "challenges": [
         "Row-Level Security (RLS) para isolar múltiplas organizações com segurança real",
@@ -265,13 +286,13 @@
       "role": "Backend + banco de dados na equipe (v1) · reescrita solo (v2)",
       "status": "V1 entregue · V2 pausada em ~70%",
       "summary": [
-        "O Trabalho Amigo foi o Trabalho de Conclusão de Curso de uma equipe de 5 pessoas no curso técnico do Colégio Marista, desenvolvido com divisão de funções e foco em performance — Vitor foi responsável por 100% do backend e do banco de dados, além de boa parte do frontend. A proposta: uma plataforma que conecta pessoas que precisam de um serviço a profissionais que podem prestá-lo, com sistema de avaliação para garantir contratações mais seguras. A primeira versão (v1), em PHP puro com MySQL, foi apresentada à banca e recebeu nota máxima e excelentes feedbacks.",
-        "Depois da entrega — já fora da escola —, por desafio pessoal e vontade de aprofundar o aprendizado, Vitor decidiu reescrever o projeto sozinho: a v2 recria o mesmo domínio de negócio com uma arquitetura bem mais robusta, backend em Laravel e frontend separado em Next.js/TypeScript. Hoje a reescrita está cerca de 70% concluída e pausada, mas é um projeto que ele pretende retomar futuramente."
+        "Trabalho Amigo é um marketplace de serviços que conecta clientes a profissionais autônomos, com sistema de avaliação para reduzir o risco de contratações ruins. A v1 foi construída em PHP puro com MySQL, com backend, modelagem de banco de dados completos e parte do frontend.",
+        "A v2 é uma reescrita completa do mesmo domínio de negócio com arquitetura desacoplada: backend em Laravel e frontend separado em Next.js/TypeScript, consumindo a API. Está cerca de 70% concluída e pausada, mantendo o mesmo modelo de matching cliente↔profissional e avaliação de prestadores da v1."
       ],
       "stats": [
-        { "n": "Nota máxima", "l": "Avaliação da banca do TCC" },
-        { "n": "5 pessoas", "l": "Equipe no curso técnico do Marista" },
-        { "n": "~70%", "l": "Reescrita solo (v2) concluída" }
+        { "n": "PHP → Laravel", "l": "V1 em PHP puro/MySQL, v2 reescrita em Laravel" },
+        { "n": "~70%", "l": "Reescrita solo (v2) em Next.js/TypeScript" },
+        { "n": "2 stacks", "l": "Backend e frontend desacoplados na v2" }
       ],
       "challenges": [
         "Trabalho em equipe com divisão clara de funções e foco em performance (v1)",
@@ -286,13 +307,13 @@
       "role": "Produto pessoal, solo",
       "status": "Pausado — fora do ar",
       "summary": [
-        "O DubFlow começou como projeto de aprendizado solo, mas rapidamente ganhou ambição de produto: a ideia era evoluir para um SaaS completo voltado a comunidades de dublagem, permitindo que elas tenham identidade própria, organizem playlists por obra/temporada/episódio, publiquem áudio e vídeo, atribuam créditos por personagem e dublador, colaborem com um fluxo de aceite antes de publicar, e interajam socialmente — tudo com atualizações em tempo real.",
-        "Vitor chegou a colocar o produto no ar sozinho e validar a ideia na prática: a plataforma ficou ativa por cerca de 2 a 4 meses, com algumas dezenas de usuários reais. O projeto foi pausado por uma combinação de falta de tempo, custo de infraestrutura e a percepção de que, do jeito que estava, não ia monetizar. A ideia não foi abandonada: Vitor pretende retomá-la no futuro, com uma estratégia diferente."
+        "DubFlow é uma plataforma para comunidades de dublagem organizarem conteúdo por obra, temporada e episódio, com publicação de áudio e vídeo, atribuição de créditos por personagem e dublador, e um fluxo editorial de aceite antes da publicação. A comunicação em tempo real — notificações, atualizações de status, interações sociais — roda sobre WebSockets, com autenticação própria via JWT em vez de um provedor terceiro.",
+        "O produto chegou a rodar em produção durante 2 a 4 meses, com uso real por algumas dezenas de contas. Está pausado atualmente, mas a arquitetura de tempo real e o modelo de créditos/colaboração seguem como base para uma eventual retomada."
       ],
       "stats": [
-        { "n": "2–4 meses", "l": "Tempo ativo com usuários reais" },
-        { "n": "Dezenas", "l": "De usuários reais chegaram a usar" },
-        { "n": "100%", "l": "Desenvolvido solo" }
+        { "n": "Realtime", "l": "Atualizações via WebSockets" },
+        { "n": "JWT", "l": "Autenticação própria, sem provedor terceiro" },
+        { "n": "Workflow", "l": "Publicação de mídia com etapa de aceite editorial" }
       ],
       "challenges": [
         "Escopo grande de funcionalidades para ser sustentado por um desenvolvedor solo",
@@ -304,16 +325,22 @@
     "cybersec-lab": {
       "name": "CyberSec Lab",
       "tagline": "Simulador de investigação de incidentes em Kali Linux",
+      "screens": {
+        "desktop": "Área de trabalho",
+        "terminal": "Terminal",
+        "files": "Investigação",
+        "tool": "Alerta"
+      },
       "role": "Estudo pessoal, solo",
       "status": "No ar",
       "summary": [
-        "Criado como estudo pessoal de segurança da informação e como forma de ajudar outras pessoas a entrarem na área, o CyberSec Lab simula, inteiramente em JavaScript puro, uma área de trabalho estilo Kali Linux: painel superior, lançador de aplicativos, gerenciador de arquivos, notas e um terminal com mais de 30 comandos de CLI SSH implementados do zero.",
-        "O cenário: o servidor sofre uma sequência de efeitos que indicam comprometimento, e o jogador precisa investigar o ambiente, coletar IOCs (indicadores de comprometimento), resolver o problema e, ao final, apontar qual foi o tipo de ataque sofrido — só então descobrindo se acertou o diagnóstico. A dificuldade aumenta progressivamente a cada rodada."
+        "CyberSec Lab simula, inteiramente em JavaScript puro (sem framework), uma área de trabalho estilo Kali Linux: painel superior, lançador de aplicativos, gerenciador de arquivos, notas e um terminal com mais de 30 comandos de CLI SSH implementados do zero, sem shell real por trás.",
+        "O cenário de uso: o servidor simulado sofre uma sequência de sinais de comprometimento, e o jogador precisa investigar o ambiente, coletar IOCs (indicadores de comprometimento) usando os próprios comandos do terminal, resolver o problema e apontar o tipo de ataque sofrido. A dificuldade escala progressivamente a cada rodada, com novos cenários de ataque."
       ],
       "stats": [
-        { "n": "30+", "l": "Comandos de terminal SSH simulados" },
-        { "n": "Progressiva", "l": "Dificuldade aumenta a cada rodada" },
-        { "n": "Real", "l": "Feedback elogioso de quem testou" }
+        { "n": "30+", "l": "Comandos de terminal SSH implementados do zero" },
+        { "n": "0 libs", "l": "Interface de desktop 100% em JavaScript puro" },
+        { "n": "IOCs", "l": "Investigação guiada por indicadores de comprometimento" }
       ],
       "challenges": [
         "Implementar uma CLI SSH funcional e crível só em JavaScript",
@@ -325,16 +352,22 @@
     "pett-love": {
       "name": "Pett-Love",
       "tagline": "Gabarito de desafio técnico e benchmark pessoal de frontend",
+      "screens": {
+        "home": "Início",
+        "pets-namorando": "Pets Namorando",
+        "blog": "Blog",
+        "contato": "Contato"
+      },
       "role": "Autor do gabarito (Clickweb) + recriação pessoal",
       "status": "Concluído",
       "summary": [
-        "Este projeto nasceu como o gabarito de referência usado pela Clickweb para avaliar candidatos a vaga de desenvolvedor front-end. Depois de entrar na empresa, Vitor decidiu recriar o desafio por conta própria, em apenas 1 dia, não para ser avaliado, mas para medir seu próprio nível de desenvolvimento front-end frente ao Figma original.",
-        "Ele entregou mais páginas e funcionalidades do que o escopo pedia, deliberadamente: além das telas base, adicionou blog, contato, login e integração com uma API pública de animais — o tipo de proatividade que ele espera de um dev pleno. O foco não foi só \"bater o Figma\", mas qualidade de código e UX dentro das limitações de um layout fixo, com atenção especial a acessibilidade e animações. No fim, o exercício confirmou o que ele queria testar: está no nível de pleno que esperava de si mesmo."
+        "Pett-Love é a recriação de um desafio técnico de front-end (originalmente o gabarito de avaliação da Clickweb para candidatos à vaga), implementada em React + TypeScript com Vite, Tailwind CSS e Motion para animações.",
+        "A implementação vai além do escopo original do Figma: além das telas base, inclui blog, contato, login e integração com uma API pública de animais. O foco de engenharia foi qualidade de código e UX dentro das restrições de um layout fixo, com atenção específica a acessibilidade e animações performáticas, usando Biome para lint e formatação."
       ],
       "stats": [
-        { "n": "1 dia", "l": "Tempo da recriação pessoal" },
-        { "n": "+4 páginas", "l": "Além do escopo original do Figma" },
-        { "n": "Nível pleno", "l": "Confirmado pelo próprio exercício" }
+        { "n": "1 dia", "l": "Tempo de desenvolvimento da recriação" },
+        { "n": "+4 páginas", "l": "Além do escopo do Figma (blog, contato, login, API de animais)" },
+        { "n": "Vite + Motion", "l": "Build otimizado e animações performáticas" }
       ],
       "challenges": [
         "Entregar além do escopo pedido, sem perder qualidade, dentro de um prazo curto",

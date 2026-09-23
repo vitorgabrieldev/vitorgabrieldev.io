@@ -5,6 +5,7 @@ import type { Locale } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
 import { Reveal } from "@/components/reveal";
 import { ProjectArt } from "@/components/project-art";
+import { ProjectShowcase } from "@/components/project-showcase";
 import { PROJECTS, getProject } from "@/lib/projects";
 
 export function generateStaticParams() {
@@ -58,26 +59,22 @@ export default async function ProjectCasePage({
             <div className="case__crumb">
               <Link href="/#projetos">{c("back")}</Link>
             </div>
-            <div className="case__meta-row">
-              <span>
-                {c("role_label")}
-                <strong>{t(`projects.${slug}.role`)}</strong>
-              </span>
-              <span>
-                {c("status_label")}
-                <strong>{t(`projects.${slug}.status`)}</strong>
-              </span>
-              <span>
-                {c("year_label")}
-                <strong>{project.year}</strong>
-              </span>
-            </div>
             <h1 className="case__title">{t(`projects.${slug}.name`)}</h1>
             <p className="case__lede">{t(`projects.${slug}.tagline`)}</p>
           </Reveal>
           <Reveal delay={1}>
             <div className="case__hero">
-              <ProjectArt project={project} className="thumb-canvas" />
+              {project.previews ? (
+                <ProjectShowcase
+                  accent={project.accent}
+                  items={project.previews.map((preview) => ({
+                    ...preview,
+                    label: t(`projects.${slug}.screens.${preview.key}`),
+                  }))}
+                />
+              ) : (
+                <ProjectArt project={project} className="thumb-canvas" />
+              )}
             </div>
           </Reveal>
         </div>
@@ -92,13 +89,15 @@ export default async function ProjectCasePage({
             <a href="#desafios">{c("challenges_label")}</a>
             {results.length > 0 && <a href="#resultados">{c("results_label")}</a>}
 
-            <div className="tools">
-              {project.links.map((link) => (
-                <a key={link.kind} href={link.href} target="_blank" rel="noopener" className="tool-btn">
-                  {c(`links.${link.kind}`)}
-                </a>
-              ))}
-            </div>
+            {project.links.length > 0 && (
+              <div className="tools">
+                {project.links.map((link) => (
+                  <a key={link.kind} href={link.href} target="_blank" rel="noopener" className="tool-btn">
+                    {c(`links.${link.kind}`)}
+                  </a>
+                ))}
+              </div>
+            )}
           </aside>
 
           <article className="case__article">

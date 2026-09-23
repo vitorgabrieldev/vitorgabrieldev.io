@@ -207,7 +207,6 @@
     "results_label": "Results",
     "next_label": "Next project",
     "links": {
-      "repo": "Repository ↗",
       "deploy": "View live ↗"
     }
   },
@@ -218,13 +217,13 @@
       "role": "Solo idea, design and development",
       "status": "In production — actively used",
       "summary": [
-        "MiliTrak was born during Vitor's own mandatory military service at the Tiro de Guerra (a Brazilian Army reservist training unit) in Londrina. The sergeant in charge of the platoon proposed a simple system to organize day-to-day operations — Vitor \"bought into the idea\" and went far beyond what was asked. Together they built a complete system: daily roll call per platoon with individual, granular logins through an RBAC permission matrix (separate profiles for Sergeant, Instructor, Monitor and Rifleman), a mission system tracking extra-duty hours, weekly duty rosters, a disciplinary module, physical fitness evaluations, equipment and uniform management, consolidated reports, and automatic generation of official documents.",
-        "One non-technical requirement became a core architectural constraint: the infrastructure had to be 100% free to run, since Vitor wouldn't necessarily remain the one maintaining it the following year — the service is temporary. At the official inspection, the responsible colonel saw the system in action, praised the result, and expressed interest in rolling it out to every training unit in the country — for now it's actively used only at TG-05-003 (Londrina), with that expansion as an ongoing goal. Sergeants and the colonel both report that the system speeds up day-to-day operations considerably."
+        "MiliTrak is a management system for Tiro de Guerra units (Brazil's mandatory military training service), built to digitize the daily operation of a platoon. At its core is an RBAC access-control layer with four profiles (Sergeant, Instructor, Monitor, Rifleman), each with permissions configurable per tab, on top of daily roll call with individual logins. It also covers mission management with extra-duty hours, weekly duty rosters, a disciplinary module, physical fitness evaluation (TAF/TAT), equipment and uniform tracking, consolidated reporting, and automatic generation of official documents such as the CTSM and absence declarations.",
+        "The infrastructure runs entirely on free tiers — Supabase (database and auth) and Vercel (hosting) — an architectural constraint set from day one, since the system needs to keep running independent of ongoing maintenance. In production, it's actively used at unit TG-05-003 (Londrina), with expansion to other units as the next planned step."
       ],
       "stats": [
-        { "n": "230", "l": "Active users" },
-        { "n": "4 months", "l": "From kickoff to the colonel's inspection" },
-        { "n": "100%", "l": "Free-tier infrastructure (Supabase + Vercel)" }
+        { "n": "4", "l": "RBAC profiles with per-tab granular permissions" },
+        { "n": "100%", "l": "Free-tier infra — Supabase + Vercel" },
+        { "n": "Auto", "l": "Automatic generation of official documents (CTSM)" }
       ],
       "challenges": [
         "Granular permission matrix, configurable by role and by tab",
@@ -241,16 +240,38 @@
     "constria": {
       "name": "Constria",
       "tagline": "Operational intelligence for civil construction",
+      "screens": {
+        "login": "Login",
+        "cadastro": "Sign up",
+        "cadastro-step2": "Sign up — account details",
+        "dashboard": "Workspace",
+        "dashboard-obras": "Projects",
+        "dashboard-obras-novo": "New project",
+        "dashboard-diario": "Site log",
+        "dashboard-diario-novo": "New log entry",
+        "dashboard-equipes": "Teams",
+        "dashboard-equipes-novo": "New team",
+        "dashboard-equipamentos": "Equipment",
+        "dashboard-equipamentos-novo": "New equipment",
+        "dashboard-conta-perfil": "Account — profile",
+        "dashboard-conta-seguranca": "Account — security",
+        "dashboard-organizacao-geral": "Organization — general",
+        "dashboard-organizacao-membros": "Organization — members",
+        "dashboard-organizacao-plano": "Organization — plan",
+        "dashboard-organizacao-permissoes": "Organization — permissions",
+        "dashboard-organizacao-plano-alterar": "Plan — change",
+        "dashboard-organizacao-plano-cancelar": "Plan — cancel"
+      },
       "role": "Solo founder",
       "status": "Technical MVP ready — pre-launch",
       "summary": [
-        "The idea for Constria came out of an earlier job where Vitor built an internal construction-site management dashboard, custom-built for a single construction company. That experience gave him real knowledge of a job site's operational flow — and an insight that became the product's thesis: the market already has systems that record site data, but few that actually turn that data into smart decisions. From there, he decided to generalize the idea into his own product: a multi-tenant SaaS, no longer bespoke for one client, positioned as an operational-intelligence layer on top of site management — not \"yet another construction ERP\".",
-        "As solo founder, Vitor has already shipped the technical MVP: identity, sessions, permission control (RBAC by module, role and site), multi-tenant organization structure, and even a subscription billing model via Stripe with fully working webhooks. An AI copilot is planned — function calling over operational data, secured through RLS — to surface insights such as which employees and equipment spend the most time under maintenance, which types of projects tend to run late most often, or which part categories arrive defective most frequently, always paired with suggestions to fix each issue."
+        "Constria is a multi-tenant SaaS for operational intelligence in civil construction, built as an alternative to systems that only log site data without turning it into decisions. The architecture is multi-tenant, with data isolation between organizations enforced via Row-Level Security (RLS) at the database level, and granular RBAC by module, role and site.",
+        "The technical MVP already covers identity, sessions, RBAC, multi-tenant structure, and subscription billing via Stripe with fully working webhooks. The next planned layer is an AI copilot using function calling over operational data, secured by the same RLS layer, to surface insights like which equipment spends the most time under maintenance, which project types run late most often, or which part categories arrive defective most — always paired with a suggested fix."
       ],
       "stats": [
-        { "n": "MVP", "l": "Identity, sessions, RBAC and organization shipped" },
-        { "n": "Stripe", "l": "Recurring subscriptions + working webhooks" },
-        { "n": "2 repos", "l": "Backend and frontend kept separate" }
+        { "n": "RLS", "l": "Per-organization data isolation (multi-tenant)" },
+        { "n": "RBAC", "l": "Permissions by module, role and site" },
+        { "n": "Stripe", "l": "Recurring subscriptions with end-to-end webhooks" }
       ],
       "challenges": [
         "Row-Level Security (RLS) to isolate multiple organizations with real, not just on-paper, security",
@@ -265,13 +286,13 @@
       "role": "Backend + database on the team (v1) · solo rewrite (v2)",
       "status": "V1 delivered · V2 paused at ~70%",
       "summary": [
-        "Trabalho Amigo was the capstone project of a 5-person team on Vitor's technical high school track, built with a clear division of roles and a focus on performance — Vitor owned 100% of the backend and database, plus a good part of the frontend. The pitch: a platform connecting people who need a service to professionals who can provide it, with a review system for safer hiring. The first version (v1), in plain PHP with MySQL, was presented to the evaluation board and received the top grade along with excellent feedback.",
-        "After graduating — well outside of school — driven by personal challenge and a wish to go deeper, Vitor decided to rewrite the project solo: v2 recreates the same business domain with a far more robust architecture, a Laravel backend and a separate Next.js/TypeScript frontend. The rewrite is roughly 70% complete today and currently paused, but it's a project he plans to pick back up."
+        "Trabalho Amigo is a services marketplace connecting clients to independent professionals, with a review system to reduce the risk of bad hires. V1 was built in plain PHP with MySQL, with a complete backend, database design, and part of the frontend.",
+        "V2 is a full rewrite of the same business domain with a decoupled architecture: a Laravel backend and a separate Next.js/TypeScript frontend consuming it as an API. It's roughly 70% complete and currently paused, keeping the same client↔professional matching and provider-review model from v1."
       ],
       "stats": [
-        { "n": "Top grade", "l": "Capstone evaluation board score" },
-        { "n": "5 people", "l": "Team on the technical school track" },
-        { "n": "~70%", "l": "Solo rewrite (v2) complete" }
+        { "n": "PHP → Laravel", "l": "V1 in plain PHP/MySQL, v2 rewritten in Laravel" },
+        { "n": "~70%", "l": "Solo rewrite (v2) in Next.js/TypeScript" },
+        { "n": "2 stacks", "l": "Decoupled backend and frontend in v2" }
       ],
       "challenges": [
         "Team collaboration with a clear division of roles and a focus on performance (v1)",
@@ -286,13 +307,13 @@
       "role": "Personal product, solo",
       "status": "Paused — offline",
       "summary": [
-        "DubFlow started as a solo learning project but quickly grew product ambitions: the idea was to evolve it into a full SaaS for dubbing communities, letting them have their own identity, organize playlists by title/season/episode, publish audio and video, credit characters and voice actors, collaborate through an approval flow before publishing, and interact socially — all with real-time updates.",
-        "Vitor took the product live solo and validated the idea in practice: the platform stayed active for roughly 2 to 4 months, with a few dozen real users. The project was paused due to a mix of limited time, infrastructure cost, and the realization that, as it stood, it wasn't going to monetize. The idea isn't dead — Vitor plans to revisit it someday with a different strategy."
+        "DubFlow is a platform for dubbing communities to organize content by title, season and episode, publish audio and video, credit characters and voice actors, and run an editorial approval flow before publishing. Real-time communication — notifications, status updates, social interactions — runs over WebSockets, with its own JWT-based auth instead of a third-party provider.",
+        "The product ran in production for 2 to 4 months, with real usage from a few dozen accounts. It's currently paused, but the real-time architecture and the credit/collaboration model remain the base for a possible relaunch."
       ],
       "stats": [
-        { "n": "2–4 months", "l": "Active with real users" },
-        { "n": "Dozens", "l": "Of real users came to use it" },
-        { "n": "100%", "l": "Built solo" }
+        { "n": "Realtime", "l": "Live updates over WebSockets" },
+        { "n": "JWT", "l": "Own auth, no third-party provider" },
+        { "n": "Workflow", "l": "Media publishing with an editorial approval step" }
       ],
       "challenges": [
         "A large feature scope to sustain as a solo developer",
@@ -304,16 +325,22 @@
     "cybersec-lab": {
       "name": "CyberSec Lab",
       "tagline": "Incident-investigation simulator built around a Kali Linux desktop",
+      "screens": {
+        "desktop": "Desktop",
+        "terminal": "Terminal",
+        "files": "Investigation",
+        "tool": "Alert"
+      },
       "role": "Personal study project, solo",
       "status": "Live",
       "summary": [
-        "Built as a personal information-security study and as a way to help other people break into the field, CyberSec Lab simulates a full Kali Linux desktop entirely in plain JavaScript: top panel, app launcher, file manager, notes, and a terminal with over 30 SSH CLI commands implemented from scratch.",
-        "The scenario: the server goes through a sequence of effects indicating a compromise, and the player has to investigate the environment, gather IOCs (indicators of compromise), fix the problem, and finally name the type of attack — only then finding out whether they got it right. Difficulty ramps up progressively with each round."
+        "CyberSec Lab simulates a full Kali Linux desktop entirely in plain JavaScript, with no framework: top panel, app launcher, file manager, notes, and a terminal with over 30 SSH CLI commands implemented from scratch, with no real shell behind it.",
+        "The scenario: the simulated server shows a sequence of signs of compromise, and the player has to investigate the environment, gather IOCs (indicators of compromise) using the terminal's own commands, fix the problem, and name the type of attack. Difficulty ramps up progressively each round, with new attack scenarios."
       ],
       "stats": [
-        { "n": "30+", "l": "Simulated SSH terminal commands" },
-        { "n": "Progressive", "l": "Difficulty ramps up each round" },
-        { "n": "Real", "l": "Positive feedback from testers" }
+        { "n": "30+", "l": "SSH terminal commands built from scratch" },
+        { "n": "0 libs", "l": "Desktop UI in 100% plain JavaScript" },
+        { "n": "IOCs", "l": "Investigation driven by indicators of compromise" }
       ],
       "challenges": [
         "Implementing a believable, functional SSH CLI in plain JavaScript alone",
@@ -325,16 +352,22 @@
     "pett-love": {
       "name": "Pett-Love",
       "tagline": "Hiring-challenge answer key, and a personal frontend benchmark",
+      "screens": {
+        "home": "Home",
+        "pets-namorando": "Pets Dating",
+        "blog": "Blog",
+        "contato": "Contact"
+      },
       "role": "Author of the answer key (Clickweb) + personal rebuild",
       "status": "Completed",
       "summary": [
-        "This project started as the reference answer key Clickweb uses to evaluate front-end developer candidates. After joining the company, Vitor decided to rebuild the challenge on his own, in just 1 day, not to be evaluated but to measure his own current front-end level against the original Figma.",
-        "He deliberately shipped more pages and features than the brief asked for: beyond the base screens, he added a blog, contact page, login and integration with a public animal API — the kind of initiative he expects from a mid-level developer. The focus wasn't just matching the Figma, but code quality and UX within a fixed layout's constraints, with special attention to accessibility and animation. In the end, the exercise confirmed exactly what he set out to test: he's at the level he expects of himself."
+        "Pett-Love is a rebuild of a front-end hiring challenge (originally Clickweb's answer key for evaluating candidates), implemented in React + TypeScript with Vite, Tailwind CSS, and Motion for animation.",
+        "The implementation goes beyond the original Figma scope: besides the base screens, it includes a blog, contact page, login, and integration with a public animal API. The engineering focus was code quality and UX within a fixed layout's constraints, with specific attention to accessibility and performant animation, using Biome for lint and formatting."
       ],
       "stats": [
-        { "n": "1 day", "l": "Time spent on the personal rebuild" },
-        { "n": "+4 pages", "l": "Beyond the original Figma scope" },
-        { "n": "Mid-level", "l": "Confirmed by the exercise itself" }
+        { "n": "1 day", "l": "Time spent on the rebuild" },
+        { "n": "+4 pages", "l": "Beyond the Figma scope (blog, contact, login, animal API)" },
+        { "n": "Vite + Motion", "l": "Optimized build and performant animation" }
       ],
       "challenges": [
         "Shipping beyond the requested scope without losing quality, on a short timeline",
